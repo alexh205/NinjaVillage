@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authenticate } from './store/session';
-import Header from './components/header/Header'
+import Header from './components/Header/Header'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
