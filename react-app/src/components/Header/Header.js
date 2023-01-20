@@ -7,6 +7,7 @@ import {
 import "./Header.css";
 import logo from '../../Media/logo1.png'
 import { useHistory } from "react-router-dom";
+import cartReducer from "../../store/cartReducer";
 
 const Header = () => {
     const history = useHistory()
@@ -40,7 +41,10 @@ const Header = () => {
                 </div>
 
                 <div className="link relative flex items-center" onClick={()=>{history.push('/checkout')}}>
-                    <span className="absolute top-0 right-0 md:right-7 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">0</span>
+                    <span className="absolute top-0 right-0 md:right-7 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
+                        0
+                        {/* {cart.items.length} */}
+                    </span>
                     <ShoppingCartIcon className="h-10 "/>
                     <p className="hidden md:inline mt-2 font-extrabold md:text-sm ">Cart</p>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authenticate } from "./store/session";
+import { authenticate } from "./store/sessionReducer";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout/Checkout";
 
