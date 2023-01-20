@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
-import Header from "./components/Header/Header";
-import Banner from "./components/Banner/Banner";
-import ProductFeed from "./components/Product List/ProductFeed";
-import products from "./Media/products.json"
+import Home from "./components/Home";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         (async () => {
@@ -24,14 +21,29 @@ function App() {
     }
 
     return (
-        <div>
-            <Header />
-            <main className="max-w-screen-2xl mx-auto">
-                <Banner />
-
-                <ProductFeed products={products} />
-            </main>
-        </div>
+        <BrowserRouter>
+            {/* <NavBar /> */}
+            <Switch>
+                {/* <Route path="/login" exact={true}>
+                    <LoginForm />
+                </Route> */}
+                {/* <Route path="/sign-up" exact={true}>
+                    <SignUpForm />
+                </Route> */}
+                {/* <ProtectedRoute path="/users" exact={true}>
+                    <UsersList />
+                </ProtectedRoute> */}
+                {/* <ProtectedRoute path="/users/:userId" exact={true}>
+                    <User />
+                </ProtectedRoute> */}
+                <Route path="/checkout" exact={true}>
+                   <Checkout />
+                </Route>
+                <Route path="/" exact={true}>
+                    <Home />
+                </Route>
+            </Switch>
+        </BrowserRouter>
     );
 }
 
