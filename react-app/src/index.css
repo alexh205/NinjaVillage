@@ -1,4 +1,15 @@
 /* TODO Add site wide styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body{
     margin: 0;
+}
+
+
+@layer components{
+    .link {
+        @apply cursor-pointer hover:outline-double;
+    }
 }

@@ -6,7 +6,7 @@
     padding: 2px;
     padding-left: 4px;
     padding-right: 4px;
-
+    flex-grow: 1;
     position: sticky;
 }
 
@@ -16,12 +16,19 @@
     justify-content: center;
     margin-top: 4px;
     padding-bottom: 4px;
+    margin-right: 10px;
+    margin-left: 6px;
+    margin-bottom: 3px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 576px) {
     .img_container {
-        flex-grow: 0;
+        flex: content;
     }
+}
+
+.img_container:hover {
+    outline: 1.2px solid white
 }
 
 .logo_img {
@@ -34,7 +41,7 @@
 
 .search_header {
     display: none;
-    align-items: center;
+    align-items: flex-start;
     border-radius: 6px;
     cursor: pointer;
     background-color: rgb(250 204 21);
@@ -42,7 +49,7 @@
     flex-grow: 1;
 }
 
-@media (min-width: 540px) {
+@media (min-width: 576px) {
     .search_header {
         display: flex;
     }
@@ -79,30 +86,82 @@
     color: white;
     display: flex;
     align-items: center;
-    font-size: 0.75rem;
+    font-size: 1rem;
     line-height: 1rem;
     margin-left: 1rem;
     white-space: nowrap;
 }
 
-.nav_header div{
+@media (max-width: 450px) {
+    .nav_header {
+        flex-grow: 0;
+    }
+}
+
+.nav_header div {
     cursor: pointer;
     margin-left: 1rem;
     margin-right: 1rem;
-    padding:4px;
+    padding: 4px;
 }
-.nav_header div:hover{
-    text-decoration: underline ;
-    border: 1.5px solid white
+.nav_header div:hover {
+    border: 1.5px solid white;
 }
 
-.nav_header div p{
+.nav_header div p {
     margin: 0;
 }
 
+.basket_container {
+    position: relative;
+    align-items: center;
+    display: flex;
+}
 
-@media (min-width: 540px) {
-    .cart_txt {
-        display: none;
+.basket_container > span {
+    position: absolute;
+    top: 0;
+    right: 2.4rem;
+    height: 1rem;
+    width: 1rem;
+    background-color: rgb(240 136 4);
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    border-radius: 9999px;
+}
+@media (max-width: 576px) {
+    .basket_container span {
+        right: 0;
     }
+}
+
+.cart_txt {
+    display: none;
+    padding-left: 5px;
+    font-weight: bolder;
+    align-self: flex-end;
+}
+
+@media (min-width: 576px) {
+    .cart_txt {
+        display: inline;
+    }
+}
+
+.secondary_nav {
+    display: flex;
+    align-items: center;
+    background-color: rgb(35, 47, 62);
+    font-size: 1rem;
+    padding-left: 12px;
+    color: white;
+    cursor: pointer;
+}
+.secondary_nav *:hover {
+    outline: 1.2px solid white
+}
+.secondary_nav p {
+    margin-left: 0.75rem;
+    padding: 4px;
 } */
