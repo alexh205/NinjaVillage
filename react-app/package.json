@@ -45,7 +45,9 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "autoprefixer": "^10.4.13",
+    "install": "^0.13.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4"
   }

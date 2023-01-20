@@ -5,7 +5,7 @@ import amazon_banner_1 from '../../Media/Banner Images/amazon_banner_1.jpg'
 import amazon_banner_2 from '../../Media/Banner Images/amazon_banner_2.jpg'
 import amazon_banner_3 from '../../Media/Banner Images/amazon_banner_3.jpg'
 import amazon_banner_4 from '../../Media/Banner Images/amazon_banner_4.jpg'
-import amazon_banner_5 from '../../Media/Banner Images/amazon_banner_5.jpg'
+// import amazon_banner_5 from '../../Media/Banner Images/amazon_banner_5.jpg'
 import amazon_banner_6 from '../../Media/Banner Images/amazon_banner_6.jpg'
 import amazon_banner_7 from '../../Media/Banner Images/amazon_banner_7.jpg'
 
@@ -33,9 +33,9 @@ const Banner = () => {
                 <div>
                     <img loading="lazy" src={amazon_banner_4} alt="four banner" />
                 </div>
-                <div>
+                {/* <div>
                     <img loading="lazy" src={amazon_banner_5} alt="five banner" />
-                </div>
+                </div> */}
                 <div>
                     <img loading="lazy" src={amazon_banner_6} alt="six banner" />
                 </div>
