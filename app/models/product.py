@@ -15,6 +15,7 @@ class Product(db.Model):
     category= db.Column(db.String, nullable=False)
     description= db.Column(db.String, nullable=False)
     count = db.Column(db.Integer, nullable=False)
+    product_image = db.Column(db.String, nullable=False)
 
 
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
