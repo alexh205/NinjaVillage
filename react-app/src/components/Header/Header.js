@@ -25,7 +25,7 @@ const Header = () => {
             {/* top nav search */}
             <div className="hidden items-center h-10 rounded-md flex-grow cursor-pointer sm:flex bg-yellow-400 hover:bg-yellow-500 ">
                 <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
-                <MagnifyingGlassIcon className="h-12 p-4" />
+                <MagnifyingGlassIcon className="h-14 p-4" />
             </div>
             {/* top nav right side */}
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">

@@ -11,11 +11,11 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    brand= db.Column(db.String, nullable=False)
-    category= db.Column(db.String, nullable=False)
     description= db.Column(db.String, nullable=False)
+    category= db.Column(db.String, nullable=False)
+    brand= db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=False)
     count = db.Column(db.Integer, nullable=False)
-    product_image = db.Column(db.String, nullable=False)
 
 
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())

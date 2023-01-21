@@ -1,7 +1,5 @@
 from app.models import db, User, environment, SCHEMA
 
-
-# Adds a demo user, you can add other users here if you want
 def seed_users():
     users = [{"username": "Demo", "first_name": "John", "last_name": "Doe", "email": "demo@aa.io", "password": "password", "profile_img": "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1017&q=80"},
     {"username": "marnie", "first_name": "Marnie", "last_name": "Stark", "email": "marnie@aa.io", "password": "password",
