@@ -63,12 +63,14 @@ const Header = () => {
             <p className="link">Electronics</p>
             <p className="link hidden lg:inline-flex">Buy Again</p>
             <p className="link hidden lg:inline-flex">Books</p>
+            <p className="link hidden lg:inline-flex">Clothing, Shoes & Jewelry</p>
             <p className="link hidden lg:inline-flex">Groceries</p>
-            <p className="link hidden lg:inline-flex">Household</p>
+            <p className="link hidden lg:inline-flex">Health & Household</p>
             <p className="link hidden lg:inline-flex">Video Games</p>
-            <p className="link hidden lg:inline-flex">Health & Personal Care</p>
-            <p className="link hidden lg:inline-flex">Find a Gift</p>
+            <p className="link hidden lg:inline-flex">Beauty & Personal Care</p>
             <p className="link hidden lg:inline-flex">Pet Supplies</p>
+            <p className="link hidden lg:inline-flex">Electronics</p>
+            <p className="link hidden lg:inline-flex">Find a Gift</p>
         </div>
         </header>
     );

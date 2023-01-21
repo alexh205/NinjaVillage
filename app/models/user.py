@@ -12,13 +12,21 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
-    first_name = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String, nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_img = db.Column(db.String)
+    profile_img = db.Column(db.String(400))
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
+    #! Relationships
+    owned_carts = db.relationship("ShoppingCart", back_populates="carts_owned",cascade="all,delete")
+    owned_lists = db.relationship("WishList", back_populates="lists_owned", cascade="all,delete")
+    owned_products = db.relationship("Product", back_populates="products_owned", cascade="all,delete")
+    owned_reviews = db.relationship("Review", back_populates="reviews_owned", cascade="all,delete")
+    owned_images = db.relationship("Image", back_populates="images_owned", cascade="all,delete")
+
+    # ? Methods
     @property
     def password(self):
         return self.hashed_password
@@ -37,5 +45,10 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'email': self.email,
-            'profileImage': self.profile_img
+            'profileImage': self.profile_img,
+            'ownedCarts': [cart.to_dict()['id'] for cart in self.owned_carts],
+            'ownedLists': [list.to_dict()['id'] for list in self.owned_lists],
+            'ownedProducts': [product.to_dict()['id'] for product in self.owned_products],
+            'userReviews': [review.to_dict()['id'] for review in self.owned_reviews],
+            'userImages': [image.to_dict()['id'] for image in self.owned_images]
         }

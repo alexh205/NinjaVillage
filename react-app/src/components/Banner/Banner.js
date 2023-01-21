@@ -20,7 +20,7 @@ const Banner = () => {
                 showStatus={false}
                 showIndicators={false}
                 showThumbs={false}
-                interval={6000}>
+                interval={5000}>
                 <div>
                     <img loading="lazy" src={amazon_banner_1} alt="first banner" />
                 </div>
