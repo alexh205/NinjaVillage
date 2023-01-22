@@ -19,7 +19,7 @@ class Review(db.Model):
     #! Relationships
     reviews_owned = db.relationship("User", back_populates="owned_reviews")
     reviews_product = db.relationship("Product", back_populates="product_reviews")
-    review_images = db.relationship("Review", back_populates="images_review", cascade="all,delete")
+    review_images = db.relationship("Image", back_populates="images_review", cascade="all,delete")
 
     #? Methods
     def to_dict(self):

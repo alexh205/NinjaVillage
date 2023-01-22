@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
-from product_shopping_cart import product_shopping_cart
+from .product_cart import ProductCarts
 
 
 class ShoppingCart(db.Model):
@@ -18,7 +18,7 @@ class ShoppingCart(db.Model):
     # ! Relationships
     carts_owned = db.relationship("User", back_populates="owned_carts")
     carts_product = db.relationship(
-        "Product", secondary=product_shopping_cart, back_populates="product_carts")
+        "Product", secondary=ProductCarts, back_populates="product_carts")
 
     # ? Methods
     def to_dict(self):

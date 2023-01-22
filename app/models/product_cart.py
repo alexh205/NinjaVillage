@@ -1,11 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
-product_wish_list = db.Table(
-    "product_lists",
+ProductCarts = db.Table(
+    "product_carts",
     db.Model.metadata,
     db.Column('products', db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), primary_key=True, nullable=False),
-    db.Column('wish_lists', db.Integer, db.ForeignKey(add_prefix_for_prod('whish_lists.id')), primary_key=True, nullable=False)
+    db.Column('shopping_carts', db.Integer, db.ForeignKey(add_prefix_for_prod('shopping_carts.id')), primary_key=True, nullable=False)
 )
 
 if environment == "production":
-    product_wish_list.schema = SCHEMA
+    ProductCarts.schema = SCHEMA

@@ -1,7 +1,10 @@
 from flask.cli import AppGroup
 from .users_demo import seed_users, undo_users
 from .products_demo import seed_products, undo_products
+from .reviews_demo import seed_reviews, undo_reviews
 from .images_demo import seed_images, undo_images
+from .shopping_carts_demo import seed_shopping_carts, undo_shopping_carts
+from .wish_lists_demo import seed_wish_lists, undo_wish_lists
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -14,9 +17,9 @@ seed_commands = AppGroup('seed')
 def seed():
     if environment == 'production':
         db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
-        # db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
-        # db.session.execute(f"TRUNCATE table {SCHEMA}.wishing_lists RESTART IDENTITY CASCADE;")
-        # db.session.execute(f"TRUNCATE table {SCHEMA}.shopping_carts RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.wishing_lists RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.shopping_carts RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
 
@@ -24,17 +27,17 @@ def seed():
     else:
         undo_users()
         undo_products()
-        # undo_shopping_carts()
-        # undo_wish_lists()
-        # undo_reviews()
+        undo_shopping_carts()
+        undo_wish_lists()
+        undo_reviews()
         undo_images()
 
 
     seed_users()
     seed_products()
-    # seed_shopping_carts()
-    # seed_whish_lists()
-    # seed_reviews()
+    seed_shopping_carts()
+    seed_wish_lists()
+    seed_reviews()
     seed_images()
 
 
@@ -43,7 +46,7 @@ def seed():
 def undo():
     undo_users()
     undo_products()
-    # undo_shopping_carts()
-    # undo_wish_lists()
-    # undo_reviews()
+    undo_shopping_carts()
+    undo_wish_lists()
+    undo_reviews()
     undo_images()

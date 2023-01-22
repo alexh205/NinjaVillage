@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
-from product_wish_list import product_wish_list
+from .product_list import ProductLists
 
 class WishList(db.Model):
     __tablename__ = 'wish_lists'
@@ -15,7 +15,7 @@ class WishList(db.Model):
 
     # ! Relationships
     lists_owned = db.relationship("User", back_populates="owned_lists")
-    lists_product = db.relationship("Product", secondary=product_wish_list, back_populates="product_lists")
+    lists_product = db.relationship("Product", secondary=ProductLists, back_populates="product_lists")
 
     # ? Methods
     def to_dict(self):

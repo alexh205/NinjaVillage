@@ -1,8 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
-from product_shopping_cart import product_shopping_cart
-from product_wish_list import product_wish_list
-
+from .product_cart import ProductCarts
+from .product_list import ProductLists
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -25,9 +24,9 @@ class Product(db.Model):
     # ! Relationships
     products_owned = db.relationship("User", back_populates="owned_products")
     product_reviews = db.relationship("Review", back_populates="reviews_product")
-    product_carts = db.relationship("ShoppingCart", secondary=product_shopping_cart, back_populates="carts_product")
-    product_lists = db.relationship("WishList", secondary=product_wish_list, back_populates="lists_product")
-    product_images = db.relationship("Product", back_populates="images_product", cascade="all,delete")
+    product_carts = db.relationship("ShoppingCart", secondary=ProductCarts, back_populates="carts_product")
+    product_lists = db.relationship("WishList", secondary=ProductLists, back_populates="lists_product")
+    product_images = db.relationship("Image", back_populates="images_product", cascade="all,delete")
 
     # ? Methods
     def to_dict(self):
