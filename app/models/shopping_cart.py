@@ -26,5 +26,5 @@ class ShoppingCart(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'createdDate': self.created_date,
-            'cartProducts': [product.to_dict_basic()['id'] for product in self.carts_product]
+            'cartProducts': [product.to_dict_basic() for product in self.carts_product]
         }

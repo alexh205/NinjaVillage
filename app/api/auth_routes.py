@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, ShoppingCart
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -27,7 +27,7 @@ def authenticate():
         return current_user.to_dict()
     return {'errors': ['Unauthorized']}
 
-
+#* Login *****************************************************
 @auth_routes.route('/login', methods=['POST'])
 def login():
     """
@@ -45,6 +45,7 @@ def login():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+#* Logout *****************************************************
 @auth_routes.route('/logout')
 def logout():
     """
@@ -53,7 +54,7 @@ def logout():
     logout_user()
     return {'message': 'User logged out'}
 
-
+#* Signup New User *****************************************************
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     """
@@ -65,10 +66,21 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            profile_img=form.data['profile_img']
         )
         db.session.add(user)
         db.session.commit()
+
+        ''' addition of a new shopping cart to the newly created user'''
+        new_cart = ShoppingCart(
+            owner_id= user.id
+        )
+        db.session.add(new_cart)
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

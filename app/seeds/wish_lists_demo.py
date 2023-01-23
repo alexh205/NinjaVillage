@@ -13,6 +13,6 @@ def undo_wish_lists():
         db.session.execute(
             f"TRUNCATE table {SCHEMA}.wish_lists RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM users")
+        db.session.execute("DELETE FROM wish_lists")
 
     db.session.commit()

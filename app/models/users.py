@@ -46,9 +46,9 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'email': self.email,
             'profileImage': self.profile_img,
-            'ownedCarts': [cart.to_dict()['id'] for cart in self.owned_carts],
-            'ownedLists': [list.to_dict()['id'] for list in self.owned_lists],
-            'ownedProducts': [product.to_dict()['id'] for product in self.owned_products],
-            'userReviews': [review.to_dict()['id'] for review in self.owned_reviews],
-            'userImages': [image.to_dict()['id'] for image in self.owned_images]
+            'ownedCarts': [cart.to_dict() for cart in self.owned_carts],
+            'ownedLists': [list.to_dict() for list in self.owned_lists],
+            'ownedProducts': [product.to_dict() for product in self.owned_products],
+            'userReviews': [review.to_dict() for review in self.owned_reviews],
+            'userImages': [image.to_dict() for image in self.owned_images]
         }

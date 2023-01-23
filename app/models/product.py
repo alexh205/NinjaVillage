@@ -23,7 +23,7 @@ class Product(db.Model):
 
     # ! Relationships
     products_owned = db.relationship("User", back_populates="owned_products")
-    product_reviews = db.relationship("Review", back_populates="reviews_product")
+    product_reviews = db.relationship("Review", back_populates="reviews_product",cascade="all,delete")
     product_carts = db.relationship("ShoppingCart", secondary=ProductCarts, back_populates="carts_product")
     product_lists = db.relationship("WishList", secondary=ProductLists, back_populates="lists_product")
     product_images = db.relationship("Image", back_populates="images_product", cascade="all,delete")
@@ -40,7 +40,8 @@ class Product(db.Model):
             'image': self.image,
             'count': self.count,
             'ownerId': self.owner_id,
-            'productImages': [image.to_dict()['id'] for image in self.product_images]
+            'productImages': [image.to_dict() for image in self.product_images],
+            'productReviews': [review.to_dict() for review in self.product_reviews]
         }
 
     def to_dict_basic(self):
@@ -52,6 +53,5 @@ class Product(db.Model):
             'category': self.category,
             'brand': self.brand,
             'image': self.image,
-            # 'count': self.count,
             'ownerId': self.owner_id,
         }

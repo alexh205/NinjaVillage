@@ -14,6 +14,6 @@ def undo_shopping_carts():
         db.session.execute(
             f"TRUNCATE table {SCHEMA}.shopping_carts RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM users")
+        db.session.execute("DELETE FROM shopping_carts")
 
     db.session.commit()

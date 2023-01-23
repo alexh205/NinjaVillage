@@ -30,5 +30,5 @@ class Review(db.Model):
             'rating': self.rating,
             'ownerId': self.owner_id,
             'productId': self.product_id,
-            'reviewImages': [image.to_dict()['id'] for image in self.review_images]
+            'reviewImages': [image.to_dict() for image in self.review_images]
         }
