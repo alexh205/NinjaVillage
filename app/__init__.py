@@ -9,6 +9,8 @@ from .api.user_routes import user_routes
 from .api.product_routes import product_routes
 from .api.reviews_routes import review_routes
 from .api.images_routes import image_routes
+from .api.wish_list_routes import wish_list_routes
+from .api.shopping_cart_routes import shopping_cart_routes
 from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .config import Config
@@ -33,6 +35,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(product_routes, url_prefix='/api/products')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(image_routes, url_prefix='/api/images')
+app.register_blueprint(wish_list_routes, url_prefix='/api/wish_lists')
+app.register_blueprint(shopping_cart_routes, url_prefix='/api/shopping_carts')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 db.init_app(app)
 Migrate(app, db)

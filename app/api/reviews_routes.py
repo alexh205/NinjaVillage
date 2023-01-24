@@ -15,7 +15,6 @@ def review(id):
     review = Review.query.get_or_404(id)
     return review.to_dict()
 
-
 #* Delete Review *****************************************************
 @review_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
@@ -67,7 +66,6 @@ def review_create():
             db.session.add(new_image)
             db.session.commit()
         return new_review.to_dict()
-
 
 
 #* Edit Review *****************************************************

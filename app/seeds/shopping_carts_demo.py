@@ -1,6 +1,5 @@
 from app.models import db, ShoppingCart, environment, SCHEMA
 
-
 def seed_shopping_carts():
     carts = [{"owner_id": 1}, {"owner_id": 2}, {
         "owner_id": 3}, {"owner_id": 4}]

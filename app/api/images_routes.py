@@ -15,7 +15,6 @@ def image(id):
     return image.to_dict()
 
 
-
 #* Delete Image *****************************************************
 @image_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
@@ -51,7 +50,6 @@ def image_create():
     db.session.commit()
 
     return new_image.to_dict()
-
 
 
 #* Edit Image *****************************************************

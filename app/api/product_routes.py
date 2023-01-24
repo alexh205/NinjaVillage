@@ -7,8 +7,6 @@ from app.forms import ProductForm
 product_routes = Blueprint('products', __name__)
 auth_error = "User not authorized to complete this action"
 
-
-
 #* Get Product*****************************************************
 @product_routes.route('/<int:id>')
 def product(id):

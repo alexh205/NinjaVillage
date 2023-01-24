@@ -16,7 +16,6 @@ def user(id):
     user = User.query.get_or_404(id)
     return user.to_dict()
 
-
 #* Delete User *****************************************************
 @user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
