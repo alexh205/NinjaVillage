@@ -4,7 +4,7 @@ from app.models import User, db
 
 
 user_routes = Blueprint('users', __name__)
-auth_error = "You are not authorized to complete this action"
+auth_error = "User not authorized to complete this action"
 
 #* Get User *****************************************************
 @user_routes.route('/<int:id>')

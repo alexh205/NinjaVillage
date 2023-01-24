@@ -5,7 +5,7 @@ from app.forms import ProductForm
 
 
 product_routes = Blueprint('products', __name__)
-auth_error = "You are not authorized to complete this action"
+auth_error = "User not authorized to complete this action"
 
 
 
@@ -25,7 +25,7 @@ def product(id):
 @login_required
 def product_delete(id):
     """
-    Query for a product by id and delete product from database
+    Delete a product after checking for user ownership
     """
     queried_product = Product.query.get_or_404(id)
     queried_user = User.query.get_or_404(queried_product.owner_id)
@@ -70,7 +70,7 @@ def product_create():
 @login_required
 def product_edit(id):
     """
-    Update an existing product instance and then add changes to database
+    Update an existing product instance after checking for user ownership, and then add changes to database
     """
     queried_product = Product.query.get_or_404(id)
     queried_user = User.query.get_or_404(queried_product.owner_id)
@@ -82,5 +82,5 @@ def product_edit(id):
         for key, val in req_data.items():
             if key != None:
                 setattr(queried_product, key, val)
-                db.session.commit()
-                return queried_product.to_dict()
+        db.session.commit()
+        return queried_product.to_dict()
