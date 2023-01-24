@@ -33,7 +33,7 @@ def shopping_cart_delete(id, pod):
         if len(queried_shopping_cart.carts_product) > 0 and queried_product != None and queried_product in queried_shopping_cart.carts_product:
             queried_shopping_cart.carts_product.remove(queried_product)
             db.session.commit()
-            return {'message': 'Successfully deleted'}
+            return queried_shopping_cart.to_dict()
         if len(queried_shopping_cart.carts_product) < 1 and queried_product != None:
             return {'message': 'Shopping Cart is currently empty!'}
         if len(queried_shopping_cart.carts_product) > 0 and queried_product != None and queried_product not in queried_shopping_cart.carts_product:
