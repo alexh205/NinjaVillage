@@ -11,7 +11,6 @@ auth_error = "User not authorized to complete this action"
 
 #* Get Product*****************************************************
 @product_routes.route('/<int:id>')
-@login_required
 def product(id):
     """
     Query for a product by id and returns that product in a dictionary

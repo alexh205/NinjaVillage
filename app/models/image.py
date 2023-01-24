@@ -9,11 +9,11 @@ class Image(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(1000))
-    created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')))
     review_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('reviews.id')))
+    created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
+
 
     #! Relationships
     images_owned = db.relationship("User", back_populates="owned_images")

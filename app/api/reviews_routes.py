@@ -8,7 +8,6 @@ auth_error= "User is not authorized to complete this action"
 
 #* Get Review *****************************************************
 @review_routes.route('/<int:id>')
-@login_required
 def review(id):
     """
     Query for a review by id and returns that review in a dictionary
