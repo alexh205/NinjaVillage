@@ -13,12 +13,8 @@ def wish_list(id):
     Query for an wish_list by id and returns that review in a dictionary
     """
     wish_list = WishList.query.get_or_404(id)
-    lists= WishList.query.all()
-    print(lists)
-    if wish_list in lists:
-        return wish_list.to_dict()
-    if wish_list not in lists:
-        return {'message': 'List does not exist'}
+    return wish_list.to_dict()
+
 
 
 
