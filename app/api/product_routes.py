@@ -16,6 +16,15 @@ def product(id):
     product = Product.query.get_or_404(id)
     return product.to_dict()
 
+#* Get all Products *****************************************************
+@product_routes.route('/all', methods=['GET'])
+def all_product():
+    """
+    Query for a product by id and returns that product in a dictionary
+    """
+    products = Product.query.all()
+    return {'products': [product.to_dict() for product in products]}
+
 
 #* Delete Product *****************************************************
 @product_routes.route('/<int:id>', methods=['DELETE'])

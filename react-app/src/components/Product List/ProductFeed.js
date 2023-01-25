@@ -3,22 +3,22 @@ import Product from "../Product/Product";
 import amazon_banner_5 from '../../Media/Banner Images/amazon_banner_5.jpg'
 
 const ProductFeed = ({ products }) => {
-    console.log(products);
+
     return (
         <div className=" grid grid-flow-row-dense md:grid-cols-2 md:-mt-52 mx-auto lg:grid-cols-3 xl:grid-cols-4">
-            {products.slice(0, 4).map(product => (
-                <Product product={product} />
+            {Object.entries(products).slice(0, 4).map(product => (
+                <Product product={product[1]} />
             ))}
             <img className="md:col-span-full" src={amazon_banner_5}alt="" />
 
             <div className="md:col-span-2">
 
-                {products.slice(4, 5).map(product => (
-                    <Product product={product} />
+                {Object.entries(products).slice(4, 5).map(product => (
+                    <Product product={product[1]} />
                 ))}
             </div>
-            {products.slice(5, products.length).map(product => (
-                    <Product product={product} />
+            {Object.entries(products).slice(5, 15).map(product => (
+                    <Product product={product[1]} />
                 ))}
         </div>
     );
