@@ -70,7 +70,7 @@ export const logout = () => async dispatch => {
 };
 
 export const signUp =
-    (username, firstName, lastName, email, password, bio, profile_img) =>
+    (user) =>
     async dispatch => {
         const request = await fetch("/api/auth/signup", {
             method: "POST",
@@ -78,13 +78,12 @@ export const signUp =
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                user_name: username,
-                first_name: firstName,
-                last_name: lastName,
-                email,
-                password,
-                bio,
-                profile_img,
+                user_name: user.username,
+                first_name: user.firstName,
+                last_name: user.lastName,
+                email: user.email,
+                password: user.password,
+                profile_img: user.profile_img,
             }),
         });
 
@@ -120,8 +119,8 @@ export const editUserThunk = user => async dispatch => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            bio: user.bio,
             email: user.email,
+            password: user.password,
             first_name: user.first_name,
             last_name: user.last_name,
             profile_img: user.profile_img,
