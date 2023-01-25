@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from "react-redux"
 import Header from './Header/Header'
 import ProductFeed from './Product List/ProductFeed'
 import Banner from './Banner/Banner'
-// import products from "../Media/products.json"
 import { getAllProductThunk} from '../store/productReducer'
+
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -12,9 +12,11 @@ const Home = () => {
   useEffect(()=> {
 
     dispatch(getAllProductThunk())
+
   },[])
 
   const allProducts = useSelector(state => state.productStore.products)
+  const currentCart = useSelector(state => state.activeCart)
 
   return (
     <div>

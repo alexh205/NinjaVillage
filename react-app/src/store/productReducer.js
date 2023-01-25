@@ -11,34 +11,34 @@ const DELETE_PROD_DATA = "product/DELETE_PROD_DATA";
 const CLEAR_PROD_DATA = "product/CLEAR_PROD_DATA";
 
 // ACTION CREATORS
-export const populateProductData = productId => {
+const populateProductData = productId => {
     return {
         type: POPULATE_PROD_DATA,
         payload: productId,
     };
 };
 
-export const allProductData = allProducts => {
+const allProductData = allProducts => {
     return {
         type: POPULATE_ALL_PROD_DATA,
         payload: allProducts,
     };
 };
 
-export const addProduct = product => {
+const addProduct = product => {
     return {
         type: ADD_PROD_DATA,
         payload: product,
     };
 };
 
-export const editProduct = product => {
+const editProduct = product => {
     return {
         type: EDIT_PROD_DATA,
         payload: product,
     };
 };
-export const deleteProduct = productId => {
+const deleteProduct = productId => {
     return {
         type: DELETE_PROD_DATA,
         payload: productId,

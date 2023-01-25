@@ -75,6 +75,7 @@ def sign_up():
 
         ''' addition of a new shopping cart to the newly created user'''
         new_cart = ShoppingCart(
+            checked_out= False,
             owner_id= user.id
         )
         db.session.add(new_cart)

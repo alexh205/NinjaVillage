@@ -10,6 +10,7 @@ class ShoppingCart(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    checked_out= db.Column(db.Boolean, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
     created_date = db.Column(db.DateTime(
@@ -24,6 +25,7 @@ class ShoppingCart(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'checkedOut': self.checked_out,
             'ownerId': self.owner_id,
             'createdDate': self.created_date,
             'cartProducts': [product.to_dict_basic() for product in self.carts_product]

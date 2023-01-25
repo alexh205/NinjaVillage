@@ -1,19 +1,20 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: 92a840496722
+Revision ID: 76a6e03e8875
 Revises:
-Create Date: 2023-01-23 11:35:49.937864
+Create Date: 2023-01-25 13:22:04.846476
 
 """
 from alembic import op
 import sqlalchemy as sa
+
 
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '92a840496722'
+revision = '76a6e03e8875'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,7 +43,7 @@ def upgrade():
     sa.Column('category', sa.String(length=40), nullable=False),
     sa.Column('brand', sa.String(length=40), nullable=False),
     sa.Column('image', sa.String(length=400), nullable=False),
-    sa.Column('count', sa.Integer(), nullable=False),
+    sa.Column('count', sa.Integer(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
@@ -50,6 +51,7 @@ def upgrade():
     )
     op.create_table('shopping_carts',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('checked_out', sa.Boolean(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
@@ -92,10 +94,10 @@ def upgrade():
     op.create_table('images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=1000), nullable=True),
-    sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=True),
     sa.Column('review_id', sa.Integer(), nullable=True),
+    sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
