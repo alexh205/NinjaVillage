@@ -46,12 +46,12 @@ export const createCartThunk = () => async dispatch => {
     dispatch(setActiveCart(response));
 };
 
-export const addCartItemThunk = itemId => async dispatch => {
-    const request = await fetch(`/api/shopping_carts/${itemId}/${itemId}`, {
+export const addCartItemThunk = (product, cartId) => async dispatch => {
+    const request = await fetch(`/api/shopping_carts/${cartId}`, {
         method: "PUT",
         headers: { "Content-Type:": "application/json" },
         body: JSON.stringify({
-            productId: itemId,
+            product
         }),
     });
     const response = await request.json();

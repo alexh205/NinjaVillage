@@ -72,10 +72,14 @@ def shopping_cart_edit(id):
     if queried_user.id != current_user.id:
         return auth_error
     else:
-        if req_data['productId']:
-            new_product = Product.query.get_or_404(req_data['productId'])
-            queried_shopping_cart.carts_product.append(new_product)
-            db.session.commit()
+
+        if req_data['product']:
+            new_product = Product.query.get_or_404(req_data['product']['id'])
+            if new_product.count == 0:
+                return {"message", 'Item is no longer available'}, 404
+            else:
+                queried_shopping_cart.carts_product.append(new_product)
+                db.session.commit()
         return queried_shopping_cart.to_dict()
 
 #* Update Shopping Cart *****************************************************

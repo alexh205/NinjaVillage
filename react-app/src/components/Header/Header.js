@@ -7,10 +7,13 @@ import {
 import "./Header.css";
 import logo from '../../Media/logo1.png'
 import { useHistory } from "react-router-dom";
-import cartReducer from "../../store/cartReducer";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
+
     return (
         <header>
         <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
@@ -30,8 +33,8 @@ const Header = () => {
             {/* top nav right side */}
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
                 {/* user account & login */}
-                <div className="link">
-                    <p>Hello Alex Hunt</p>
+                <div className="link" onClick={()=>{history.push('/login')}}>
+                    <p>{user ? `Hello, ${user.Name}` : "Sign In"}</p>
                     <p className="font-extrabold md:text-sm">Account & Lists</p>
                 </div>
                 {/* list user's completed shopping carts */}

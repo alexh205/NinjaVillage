@@ -17,6 +17,7 @@ const Home = () => {
 
   const allProducts = useSelector(state => state.productStore.products)
   const currentCart = useSelector(state => state.activeCart)
+  const currentUser = useSelector(state => state.session.user)
 
   return (
     <div>
@@ -24,7 +25,7 @@ const Home = () => {
          <main className="max-w-screen-2xl mx-auto">
                 <Banner />
 
-                <ProductFeed products={allProducts} />
+                <ProductFeed products={allProducts} user={currentUser}/>
                 </main>
     </div>
   )

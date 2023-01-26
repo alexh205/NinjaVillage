@@ -12,8 +12,7 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
-    first_name = db.Column(db.String(30), nullable=False)
-    last_name = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_img = db.Column(db.String(400))
@@ -42,13 +41,12 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'firstName': self.first_name,
-            'lastName': self.last_name,
+            'Name': self.name,
             'email': self.email,
             'profileImage': self.profile_img,
             'ownedCarts': [cart.to_dict() for cart in self.owned_carts],
             'ownedLists': [list.to_dict() for list in self.owned_lists],
             'ownedProducts': [product.to_dict() for product in self.owned_products],
             'userReviews': [review.to_dict() for review in self.owned_reviews],
-            'userImages': [image.to_dict() for image in self.owned_images]
+            # 'userImages': [image.to_dict() for image in self.owned_images]
         }

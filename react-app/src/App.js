@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { authenticate } from "./store/sessionReducer";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout/Checkout";
+import LoginForm from "./components/auth/LoginForm";
+import SignUpForm from "./components/auth/SignUpForm";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -28,6 +30,12 @@ function App() {
                 </Route>
                 <Route path="/" exact={true}>
                     <Home />
+                </Route>
+                <Route path="/login" exact={true}>
+                    <LoginForm />
+                </Route>
+                <Route path="/signup" exact={true}>
+                    <SignUpForm />
                 </Route>
             </Switch>
         </BrowserRouter>
