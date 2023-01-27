@@ -58,7 +58,7 @@ def shopping_cart_create():
     return new_shopping_cart.to_dict()
 
 
-#* Edit Shopping Cart *****************************************************
+#* Add Item to Shopping Cart *****************************************************
 @shopping_cart_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def shopping_cart_edit(id):
@@ -72,30 +72,30 @@ def shopping_cart_edit(id):
     if queried_user.id != current_user.id:
         return auth_error
     else:
-
-        if req_data['product']:
-            new_product = Product.query.get_or_404(req_data['product']['id'])
+        if req_data['item']:
+            new_product = Product.query.get_or_404(req_data['item']['id'])
             if new_product.count == 0:
                 return {"message", 'Item is no longer available'}, 404
             else:
                 queried_shopping_cart.carts_product.append(new_product)
                 db.session.commit()
+
         return queried_shopping_cart.to_dict()
 
 #* Update Shopping Cart *****************************************************
-@shopping_cart_routes.route('/update/<int:id>', methods=['PUT'])
-@login_required
-def shopping_cart_update(id):
-    """
-    Update an existing shopping_cart instance after checking for user ownership, and then add changes to database
-    """
-    queried_shopping_cart = ShoppingCart.query.get_or_404(id)
-    queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
+# @shopping_cart_routes.route('/update/<int:id>', methods=['PUT'])
+# @login_required
+# def shopping_cart_update(id):
+#     """
+#     Update an existing shopping_cart instance after checking for user ownership, and then add changes to database
+#     """
+#     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
+#     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
 
 
-    if queried_user.id != current_user.id:
-        return auth_error
-    else:
-        queried_shopping_cart.checked_out = True
-        db.session.commit()
-        return queried_shopping_cart.to_dict()
+#     if queried_user.id != current_user.id:
+#         return auth_error
+#     else:
+#         queried_shopping_cart.checked_out = True
+#         db.session.commit()
+#         return queried_shopping_cart.to_dict()

@@ -3,9 +3,9 @@ import { useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
-import { addCartItemThunk } from "../../store/cartReducer";
+import { addCartItemThunk } from "../../store/sessionReducer";
 
-const Product = ({ product, user }) => {
+const Product = ({ product, user, userCart }) => {
     const MAX_RATING = 5;
     const MIN_RATING = 1;
 
@@ -14,9 +14,8 @@ const Product = ({ product, user }) => {
     ); // Randomizing the number of stars
 
     const dispatch = useDispatch();
-        
 
-    const addItemToBasket = () => {
+    const addItemToCart = () => {
         const item = {
             id: product.id,
             title: product.title,
@@ -27,7 +26,8 @@ const Product = ({ product, user }) => {
             image: product.image,
         }
 
-        dispatch(addCartItemThunk(item, ))
+
+        dispatch(addCartItemThunk(item, userCart.id))
     };
 
     return (
@@ -52,7 +52,7 @@ const Product = ({ product, user }) => {
             <div className="mb-5">
                 <Currency quantity={product.price} />
             </div>
-            <button className="mt-auto button" onClick={addItemToBasket}>
+            <button className="mt-auto button" onClick={addItemToCart}>
                 Add to Cart
             </button>
         </div>

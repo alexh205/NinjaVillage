@@ -1,12 +1,19 @@
 const initialState = {
     user: null,
+    activeCart: {},
 };
 
+// *************** User ****************************
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+// *************** Cart ****************************
+const SET_ACTIVE_CART = "cart/SET_ACTIVE_CART";
+const ADD_ITEM = "cart/ADD_ITEM";
+const REMOVE_ITEM = "cart/REMOVE_ITEM";
+const CART_CHECKOUT = "cart/CART_CHECKOUT";
 
 // ACTION CREATORS
-
+// *************** User ****************************
 const setUser = user => {
     return {
         type: SET_USER,
@@ -20,8 +27,35 @@ const removeUser = () => {
     };
 };
 
-// THUNKS
+// *************** Cart ****************************
 
+export const setActiveCart = cart => {
+    return {
+        type: SET_ACTIVE_CART,
+        payload: cart,
+    };
+};
+
+const addItem = items => {
+    return {
+        type: ADD_ITEM,
+        payload: items,
+    };
+};
+const removeItem = item => {
+    return {
+        type: REMOVE_ITEM,
+        payload: item,
+    };
+};
+const cartCheckout = () => {
+    return {
+        type: CART_CHECKOUT,
+    };
+};
+
+// THUNKS
+// *************** User ****************************
 export const authenticate = () => async dispatch => {
     const request = await fetch("/api/auth/", {
         headers: { "Content-Type": "application/json" },
@@ -69,38 +103,35 @@ export const logout = () => async dispatch => {
     if (request.ok) dispatch(removeUser());
 };
 
-export const signUp =
-    (user) =>
-    async dispatch => {
-        const request = await fetch("/api/auth/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                user_name: user.username,
-                first_name: user.firstName,
-                last_name: user.lastName,
-                email: user.email,
-                password: user.password,
-                profile_img: user.profile_img,
-            }),
-        });
+export const signUp = (username, name, email, password,  profileImage) => async dispatch => {
+    const request = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username,
+            name,
+            email,
+            password,
+            profile_img: profileImage,
+        }),
+    });
 
-        if (request.ok) {
-            const data = await request.json();
+    if (request.ok) {
+        const data = await request.json();
 
-            dispatch(setUser(data));
+        dispatch(setUser(data));
 
-            return null;
-        } else if (request.status < 500) {
-            const data = await request.json();
+        return null;
+    } else if (request.status < 500) {
+        const data = await request.json();
 
-            if (data.errors) return data.errors;
-        } else {
-            return ["An error occurred. Please try again."];
-        }
-    };
+        if (data.errors) return data.errors;
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
 
 export const getUserThunk = userId => async dispatch => {
     const request = await fetch(`/api/users/${userId}`, {
@@ -134,7 +165,53 @@ export const editUserThunk = user => async dispatch => {
     }
 };
 
+// *************** Cart ****************************
+
+export const createCartThunk = () => async dispatch => {
+    const request = await fetch("/api/shopping_carts/new", {
+        method: "POST",
+        headers: { "Content-Type:": "application/json" },
+    });
+    const response = await request.json();
+
+    dispatch(setActiveCart(response));
+};
+
+export const addCartItemThunk = (item, cartId) => async dispatch => {
+    const request = await fetch(`/api/shopping_carts/${cartId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({item}),
+    });
+    const response = await request.json();
+    console.log(response)
+    dispatch(addItem(response));
+};
+
+export const removeCartItemThunk = (cartId, itemId) => async dispatch => {
+    const request = await fetch(`/api/shopping_carts/${cartId}/${itemId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    });
+    const response = await request.json();
+
+    dispatch(removeItem(response));
+};
+
+export const cartCheckoutThunk = cartId => async dispatch => {
+    await fetch(`/api/shopping_carts/update/${cartId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+    });
+    // const response = await request.json();
+
+    dispatch(cartCheckout());
+};
+
+export const cartTotal = (state) => state.session.activeCart.cartProducts.reduce((total, item) => total + item.price, 0)
+
 // REDUCER
+
 
 const sessionReducer = (state = initialState, action) => {
     const currentState = { ...state };
@@ -148,6 +225,28 @@ const sessionReducer = (state = initialState, action) => {
 
         case REMOVE_USER:
             return initialState;
+
+        case SET_ACTIVE_CART: {
+            currentState.activeCart = {...action.payload[0]};
+
+            return currentState;
+        }
+
+        case ADD_ITEM: {
+            let cartArr = Object.keys(action.payload.cartProducts).reduce((acc, products) => {
+                return acc.concat(action.payload.cartProducts[products])
+            }, [])
+            currentState.activeCart.cartProducts = {...cartArr}
+            return currentState;
+        }
+
+        case REMOVE_ITEM: {
+            currentState.activeCart.cartProducts = action.payload.cartProducts;
+            return currentState;
+        }
+        case CART_CHECKOUT: {
+            return currentState.activeCart = {};
+        }
 
         default:
             return currentState;

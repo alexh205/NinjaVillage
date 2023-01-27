@@ -1,8 +1,8 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: 98aa8949e901
+Revision ID: 8e266e9aceb2
 Revises:
-Create Date: 2023-01-25 19:50:12.155598
+Create Date: 2023-01-26 19:41:27.713511
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '98aa8949e901'
+revision = '8e266e9aceb2'
 down_revision = None
 branch_labels = None
 depends_on = None

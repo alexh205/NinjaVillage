@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "./store/sessionReducer";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout/Checkout";
@@ -10,6 +10,8 @@ import SignUpForm from "./components/auth/SignUpForm";
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
+    const cartArr = useSelector(state => state.session.activeCart.cartProducts)
 
     useEffect(() => {
         (async () => {
@@ -26,7 +28,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route path="/checkout" exact={true}>
-                    <Checkout />
+                    <Checkout user={user} cart={cartArr}/>
                 </Route>
                 <Route path="/" exact={true}>
                     <Home />

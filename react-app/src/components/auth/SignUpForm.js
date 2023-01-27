@@ -3,53 +3,36 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/sessionReducer';
 import login_page from '../../Media/login_page.png'
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   ChevronRightIcon
 } from "@heroicons/react/24/solid";
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [profileImage, setProfileImage] = useState('');
+
+  const [errors, setErrors] = useState([]);
+  const [passError, setPassError] = useState('')
+
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, name, email, password,  profileImage));
       if (data) {
         setErrors(data)
       }
     }
+    if(password !== repeatPassword) setPassword("Both passwords must match.");
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateName = (e) => {
-    setName(e.target.value);
-  };
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-  const updateProfileImage = (e) => {
-    setProfileImage(e.target.value);
-  };
 
   if (user) {
     return <Redirect to='/' />;
@@ -62,11 +45,11 @@ const SignUpForm = () => {
       </Link>
       <div className='w-[350px] h-fit flex flex-col rounded-md border-[1px] border-gray-300 p-[20px]'>
         <h1 className='font-medium mb-4 text-[27px]'>Create Account</h1>
-    <form onSubmit={onSignUp}>
+    <form>
     <div className='text-[10px] text-red-600 mb-[4px]'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
-        ))}
+        ))}{passError.length > 0 && <div>{passError}</div>}
       </div>
       <div className='mb-[5px] flex flex-col'>
        <label className='font-semibold text-sm my-1'>User Name</label>
@@ -74,7 +57,7 @@ const SignUpForm = () => {
             className='border-[1px] border-gray-600 p-1'
           type='text'
           name='username'
-          onChange={updateUsername}
+          onChange={ e=> setUsername(e.target.value)}
           value={username}
           required={true}
         ></input>
@@ -86,7 +69,7 @@ const SignUpForm = () => {
           type='text'
           name='name'
           placeholder='First and Last name'
-          onChange={updateName}
+          onChange={e => setName(e.target.value)}
           value={name}
           required={true}
         ></input>
@@ -97,7 +80,7 @@ const SignUpForm = () => {
             className='border-[1px] border-gray-600 p-1'
           type='text'
           name='email'
-          onChange={updateEmail}
+          onChange={e=> setEmail(e.target.value)}
           value={email}
           required={true}
         ></input>
@@ -108,7 +91,7 @@ const SignUpForm = () => {
             className='border-[1px] border-gray-600 p-1'
           type='password'
           name='password'
-          onChange={updatePassword}
+          onChange={e=> setPassword(e.target.value)}
           value={password}
           required={true}
         ></input>
@@ -119,7 +102,7 @@ const SignUpForm = () => {
             className='border-[1px] border-gray-600'
           type='password'
           name='repeat_password'
-          onChange={updateRepeatPassword}
+          onChange={e=> setRepeatPassword(e.target.value)}
           value={repeatPassword}
           required={true}
         ></input>
@@ -131,11 +114,16 @@ const SignUpForm = () => {
           type='text'
           name='profileImage'
           placeholder='image url'
-          onChange={updateProfileImage}
+          onChange={e=> setProfileImage(e.target.value)}
           value={profileImage}
         ></input>
       </div>
-      <button className='my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]' type='submit'>Sign Up</button>
+      <button className='my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]' onClick={e => {
+        setErrors([])
+        setPassError('')
+
+        onSignUp(e)
+      }}>Sign Up</button>
     </form>
     <p className='text-[11px]'>By creating an account, you agree to Amazon's Conditions of Use and Privacy Notice.</p>
     <hr className='w-[60%] self-center my-4 drop-shadow-lg'></hr>
