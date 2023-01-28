@@ -1,8 +1,8 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: 8e266e9aceb2
+Revision ID: c717a378d3bc
 Revises:
-Create Date: 2023-01-26 19:41:27.713511
+Create Date: 2023-01-27 20:31:20.903044
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '8e266e9aceb2'
+revision = 'c717a378d3bc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +28,10 @@ def upgrade():
     sa.Column('name', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('street_address', sa.String(length=100), nullable=False),
+    sa.Column('city', sa.String(length=50), nullable=False),
+    sa.Column('state', sa.String(length=10), nullable=False),
+    sa.Column('zip_code', sa.Integer(), nullable=False),
     sa.Column('profile_img', sa.String(length=400), nullable=True),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.PrimaryKeyConstraint('id'),

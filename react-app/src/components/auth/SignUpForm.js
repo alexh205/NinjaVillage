@@ -15,6 +15,10 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [profileImage, setProfileImage] = useState('');
+  const [streetAddress, setStreetAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipCode] = useState('');
 
   const [errors, setErrors] = useState([]);
   const [passError, setPassError] = useState('')
@@ -25,7 +29,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, name, email, password,  profileImage));
+      const data = await dispatch(signUp(username, name, email, streetAddress,city, state,zipCode,password,  profileImage));
       if (data) {
         setErrors(data)
       }
@@ -116,6 +120,50 @@ const SignUpForm = () => {
           placeholder='image url'
           onChange={e=> setProfileImage(e.target.value)}
           value={profileImage}
+        ></input>
+      </div>
+      <div className='mb-[5px] flex flex-col'>
+       <label className='font-semibold text-sm my-1'>Street Address</label>
+        <input
+            className='border-[1px] border-gray-600 p-1'
+          type='text'
+          name='Street Address'
+          placeholder='ex. 1234 Main Street'
+          onChange={e=> setStreetAddress(e.target.value)}
+          value={streetAddress}
+        ></input>
+      </div>
+      <div className='mb-[5px] flex flex-col'>
+       <label className='font-semibold text-sm my-1'>City</label>
+        <input
+            className='border-[1px] border-gray-600 p-1'
+          type='text'
+          name='City'
+          placeholder='ex. New York'
+          onChange={e=> setCity(e.target.value)}
+          value={city}
+        ></input>
+      </div>
+      <div className='mb-[5px] flex flex-col'>
+       <label className='font-semibold text-sm my-1'>State</label>
+        <input
+            className='border-[1px] border-gray-600 p-1'
+          type='text'
+          name='State'
+          placeholder='AA'
+          onChange={e=> setState(e.target.value)}
+          value={state}
+        ></input>
+      </div>
+      <div className='mb-[5px] flex flex-col'>
+       <label className='font-semibold text-sm my-1'>Zip Code</label>
+        <input
+            className='border-[1px] border-gray-600 p-1'
+          type='text'
+          name='zipCode'
+          placeholder='Postal Code'
+          onChange={e=> setZipCode(e.target.value)}
+          value={zipCode}
         ></input>
       </div>
       <button className='my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]' onClick={e => {

@@ -15,6 +15,10 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    street_address = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(50), nullable=False)
+    state = db.Column(db.String(10), nullable=False)
+    zip_code = db.Column(db.Integer, nullable=False)
     profile_img = db.Column(db.String(400))
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
@@ -41,9 +45,13 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'Name': self.name,
+            'name': self.name,
             'email': self.email,
             'profileImage': self.profile_img,
+            'street_address':self.street_address,
+            'city':self.city,
+            'state':self.state,
+            'zip_code':self.zip_code,
             'ownedCarts': [cart.to_dict() for cart in self.owned_carts],
             'ownedLists': [list.to_dict() for list in self.owned_lists],
             'ownedProducts': [product.to_dict() for product in self.owned_products],

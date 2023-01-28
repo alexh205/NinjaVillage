@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
   productStore: productReducer
 });
 
+// export const cartTotal = (state) => state.session.activeCart.cartProducts.reduce((total, item) => total + item.price, 0)
 
 let enhancer;
 

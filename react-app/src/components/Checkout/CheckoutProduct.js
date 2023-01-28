@@ -1,46 +1,35 @@
-import React, { useState } from "react";
-import { StarIcon } from "@heroicons/react/24/solid";
+import React from "react";
 import Currency from "react-currency-formatter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeCartItemThunk } from "../../store/sessionReducer";
 
-const CheckoutProduct = ({ item, cart }) => {
-    const MAX_RATING = 5;
-    const MIN_RATING = 1;
-
+const CheckoutProduct = ({ product }) => {
     const dispatch =useDispatch()
+
+    const cart = useSelector(state => state.session.activeCart)
 
     const removeItemFromCart = () => {
 
-      dispatch(removeCartItemThunk(item.id, cart.id))
-  };
-
-    const [rating] = useState(
-        Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
-    );
+        dispatch(removeCartItemThunk(product.id, cart.id))
+    };
     return (
-        <div className="grid grid-cols-5">
+        <div className="flex flex-row ml-4 my-3">
             <img
-                src={item.image}
-                className="h-[200px] w-[200px] object-contain"
-            />
-            {/* middle section  */}
-            <div className="col-span-3 mx-5">
-                <p className="font-semibold text-lg">{item.title}</p>
+                src={product.image}
+                alt=""
+                className="object-contain h-20 w-16 mr-4"/>
+            <div>
+                <p className="text-sm font-bold">{product.title}</p>
+                <p className="text-sm font-bold text-orange-700">
+                    <Currency quantity={product.price} />
+                </p>
                 <div className="flex">
-                    {Array(rating)
-                        .fill()
-                        .map((_, i) => (
-                            <StarIcon className="h-5 text-yellow-500" />
-                        ))}
+                    <p className="text-xs text-gray-500">Sold by:</p>
+                    <p className="ml-1 text-xs text-gray-500">{product.brand}</p>
                 </div>
-                <p className="text-xs my-2 line-clamp-3">{item.description}</p>
-            <button className="button mt-3" onClick={removeItemFromCart}> Remove from Cart</button>
+                <button className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-yellow-200 to-yellow-400    border-yellow-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500 w-[120px] mr-4" onClick={removeItemFromCart}> Remove from Cart</button>
             </div>
-            {/* Right side to add and remove buttons */}
-            <div className="flex flex-col space-y-2 justify-self-end font-semibold text-lg self-start">
-                <Currency quantity={item.price} />
-            </div>
+
         </div>
     );
 };

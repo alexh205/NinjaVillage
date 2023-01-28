@@ -1,46 +1,18 @@
-import React,{useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux"
+import React from 'react'
+import {useSelector} from "react-redux"
 import Header from './Header/Header'
-import ProductFeed from './Product List/ProductFeed'
+import ProductFeed from './Product/ProductFeed'
 import Banner from './Banner/Banner'
-import { getAllProductThunk} from '../store/productReducer'
-import { setActiveCart } from '../store/sessionReducer'
+
 
 
 const Home = () => {
-  const dispatch = useDispatch()
 
   const allProducts = useSelector(state => state.productStore.products)
 
   const currentUser = useSelector(state => state.session.user)
   const userCart = useSelector(state => state.session.activeCart)
   const cartArr = useSelector(state => state.session.activeCart.cartProducts)
-
-  useEffect(()=> {
-
-    dispatch(getAllProductThunk())
-
-  },[])
-
-
-  useEffect(()=> {
-    if (currentUser && !currentUser.activeCart) {
-      let userCart = currentUser.ownedCarts.filter(
-           cart => cart.checkedOut === false
-       );
-       dispatch(setActiveCart(userCart))
-   }
-  }, [currentUser])
-  
-  useEffect(()=> {
-    if (currentUser && !currentUser.activeCart) {
-      let userCart = currentUser.ownedCarts.filter(
-           cart => cart.checkedOut === false
-       );
-       dispatch(setActiveCart(userCart))
-   }
-  }, [currentUser])
-
 
   return (
     <div>

@@ -35,17 +35,18 @@ const Product = ({ product, user, userCart }) => {
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
+            <a href={`/products/${product.id}`}>
             <img
                 className="object-contain h-[200px] w-[200px]"
                 src={product.image}
                 alt=""
-            />
+            /> </a>
             <h4>{product.title}</h4>
             <div className="flex">
                 {Array(rating)
                     .fill()
                     .map((_, i) => (
-                        <StarIcon className="h-5 text-yellow-500" />
+                        <StarIcon className="h-5 text-yellow-500" key={i}/>
                     ))}
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>

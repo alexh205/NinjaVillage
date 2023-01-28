@@ -2,7 +2,6 @@ import React from "react";
 import {
     MagnifyingGlassIcon,
     ShoppingCartIcon,
-    Bars3Icon,
 } from "@heroicons/react/24/outline";
 import "./Header.css";
 import logo from '../../Media/logo1.png'
@@ -10,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 
-const Header = ({cart}) => {
+const Header = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const userCart = useSelector(state => state.session.activeCart.cartProducts)
@@ -35,7 +34,7 @@ const Header = ({cart}) => {
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
                 {/* user account & login */}
                 <div className="link" onClick={()=>{history.push('/login')}}>
-                    <p>{user ? `Hello, ${user.Name}` : "Sign In"}</p>
+                    <p>{user ? `Hello, ${user.name}` : "Sign In"}</p>
                     <p className="font-extrabold md:text-sm">Account & Lists</p>
                 </div>
                 {/* list user's completed shopping carts */}
@@ -44,9 +43,8 @@ const Header = ({cart}) => {
                     <p className="font-extrabold md:text-sm">& Orders</p>
                 </div>
 
-                <div className="link relative flex items-center" onClick={()=>{history.push('/checkout')}}>
-                    <span className="absolute top-0 right-0 md:right-7 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
-                        {/* 0 */}
+                <div className="link relative flex items-center" onClick={()=>{history.push('/cart')}}>
+                    <span className="absolute top-0 right-0 text-xs md:right-7 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
                         {user && userCart ? userCart.length : 0}
                     </span>
                     <ShoppingCartIcon className="h-10 "/>
@@ -61,8 +59,7 @@ const Header = ({cart}) => {
                 <Bars3Icon  className="h-6 mr-1"/>
                 All
             </p> */}
-            {/* links to category queries */}
-            {/* <p className="link">Customer Service</p> */}
+
             <p className="link">Today's Deals</p>
             <p className="link">Buy Again</p>
             <p className="link ">Groceries</p>
@@ -73,7 +70,6 @@ const Header = ({cart}) => {
             <p className="link hidden lg:inline-flex">Video Games</p>
             <p className="link hidden lg:inline-flex">Beauty & Personal Care</p>
             <p className="link hidden lg:inline-flex">Pet Supplies</p>
-            {/* <p className="link hidden lg:inline-flex">Find a Gift</p> */}
         </div>
         </header>
     );

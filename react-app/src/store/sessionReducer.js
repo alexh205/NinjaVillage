@@ -103,7 +103,7 @@ export const logout = () => async dispatch => {
     if (request.ok) dispatch(removeUser());
 };
 
-export const signUp = (username, name, email, password,  profileImage) => async dispatch => {
+export const signUp = (username, name, email, streetAddress, city, state,zipCode, password,  profileImage) => async dispatch => {
     const request = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -113,6 +113,10 @@ export const signUp = (username, name, email, password,  profileImage) => async 
             username,
             name,
             email,
+            street_address: streetAddress,
+            city,
+            state,
+            zip_code: zipCode,
             password,
             profile_img: profileImage,
         }),
@@ -184,7 +188,7 @@ export const addCartItemThunk = (item, cartId) => async dispatch => {
         body: JSON.stringify({item}),
     });
     const response = await request.json();
-    console.log(response)
+
     dispatch(addItem(response));
 };
 
@@ -208,7 +212,6 @@ export const cartCheckoutThunk = cartId => async dispatch => {
     dispatch(cartCheckout());
 };
 
-export const cartTotal = (state) => state.session.activeCart.cartProducts.reduce((total, item) => total + item.price, 0)
 
 // REDUCER
 
