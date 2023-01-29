@@ -17,8 +17,8 @@ const CheckoutProduct = ({ product }) => {
             <img
                 src={product.image}
                 alt=""
-                className="object-contain h-20 w-16 mr-4"/>
-            <div>
+                className="object-contain h-40 w-20 mr-4"/>
+            <div className="flex flex-col mt-5">
                 <p className="text-sm font-bold">{product.title}</p>
                 <p className="text-sm font-bold text-orange-700">
                     <Currency quantity={product.price} />
@@ -27,7 +27,7 @@ const CheckoutProduct = ({ product }) => {
                     <p className="text-xs text-gray-500">Sold by:</p>
                     <p className="ml-1 text-xs text-gray-500">{product.brand}</p>
                 </div>
-                <button className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-yellow-200 to-yellow-400    border-yellow-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500 w-[120px] mr-4" onClick={removeItemFromCart}> Remove from Cart</button>
+                <button className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-yellow-200 to-yellow-400 border-yellow-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500 w-[100px] mr-4" onClick={removeItemFromCart}> Remove from Cart</button>
             </div>
 
         </div>

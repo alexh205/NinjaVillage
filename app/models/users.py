@@ -58,3 +58,11 @@ class User(db.Model, UserMixin):
             'userReviews': [review.to_dict() for review in self.owned_reviews],
             # 'userImages': [image.to_dict() for image in self.owned_images]
         }
+
+    def to_dict_basic(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'name': self.name,
+            'email': self.email
+        }

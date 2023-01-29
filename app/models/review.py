@@ -30,5 +30,6 @@ class Review(db.Model):
             'rating': self.rating,
             'ownerId': self.owner_id,
             'productId': self.product_id,
+            'created_date': self.created_date,
             'reviewImages': [image.to_dict() for image in self.review_images]
         }

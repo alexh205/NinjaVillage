@@ -17,15 +17,16 @@ def shopping_cart(id):
 
 
 #* Delete an item from Shopping Cart *****************************************************
-@shopping_cart_routes.route('/<int:id>/<int:podId>', methods=['DELETE'])
+@shopping_cart_routes.route('/remove/<int:id>', methods=['PUT'])
 @login_required
-def shopping_cart_delete(id, podId):
+def shopping_cart_delete(id):
     """
     Delete a product from a shopping_cart after checking for user ownership
     """
+    req_data= request.json
     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
-    queried_product = Product.query.get_or_404(podId)
+    queried_product = Product.query.get_or_404(req_data['productId'])
 
     if queried_user.id != current_user.id:
         return auth_error
@@ -41,21 +42,6 @@ def shopping_cart_delete(id, podId):
         else:
             return {'message': 'This product does not exist!'}
 
-#* Create Shopping Cart *****************************************************
-@shopping_cart_routes.route('/new', methods=['POST'])
-@login_required
-def shopping_cart_create():
-    """
-    Create a new shopping_cart instance, and then add to database
-    """
-    new_shopping_cart = ShoppingCart(
-        checked_out= False,
-        owner_id= current_user.id,
-    )
-    db.session.add(new_shopping_cart)
-    db.session.commit()
-
-    return new_shopping_cart.to_dict()
 
 
 #* Add Item to Shopping Cart *****************************************************
@@ -81,6 +67,22 @@ def shopping_cart_edit(id):
                 db.session.commit()
 
         return queried_shopping_cart.to_dict()
+
+#* Create Shopping Cart *****************************************************
+@shopping_cart_routes.route('/new', methods=['POST'])
+@login_required
+def shopping_cart_create():
+    """
+    Create a new shopping_cart instance, and then add to database
+    """
+    new_shopping_cart = ShoppingCart(
+        checked_out= False,
+        owner_id= current_user.id,
+    )
+    db.session.add(new_shopping_cart)
+    db.session.commit()
+
+    return new_shopping_cart.to_dict()
 
 #* Update Shopping Cart *****************************************************
 # @shopping_cart_routes.route('/update/<int:id>', methods=['PUT'])

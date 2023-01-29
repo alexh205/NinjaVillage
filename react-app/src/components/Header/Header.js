@@ -45,7 +45,7 @@ const Header = () => {
 
                 <div className="link relative flex items-center" onClick={()=>{history.push('/cart')}}>
                     <span className="absolute top-0 right-0 text-xs md:right-7 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
-                        {user && userCart ? userCart.length : 0}
+                        {user && userCart.length ? userCart.length : 0} 
                     </span>
                     <ShoppingCartIcon className="h-10 "/>
                     <p className="hidden md:inline mt-2 font-extrabold md:text-sm ">Cart</p>

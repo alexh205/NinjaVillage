@@ -9,10 +9,10 @@ import Banner from './Banner/Banner'
 const Home = () => {
 
   const allProducts = useSelector(state => state.productStore.products)
-
   const currentUser = useSelector(state => state.session.user)
   const userCart = useSelector(state => state.session.activeCart)
   const cartArr = useSelector(state => state.session.activeCart.cartProducts)
+
 
   return (
     <div>

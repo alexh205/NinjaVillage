@@ -6,13 +6,15 @@ import CartProduct from "./CartProduct";
 import Currency from "react-currency-formatter";
 import { useHistory } from "react-router-dom";
 
-const Cart = ({user, cart}) => {
-    // const total = useSelector(cartTotal)
-    const history = useHistory()
-    // const dispatch = useDispatch()
+const Cart = ({user}) => {
 
-    // useEffect(() => {})
-    const cartTotal = cart.reduce((total, item) => total + item.price, 0) //! Not rendering the cart when new item is added to the cart and the checkout component is rendered
+    const history = useHistory()
+    const cart = useSelector(state => state.session.activeCart.cartProducts)
+    let cartTotal;
+    if (user && cart) {
+
+        cartTotal = cart.reduce((total, item) => total + item.price, 0)}
+
 
     return (
         <div className="bg-gray-100">
@@ -31,18 +33,17 @@ const Cart = ({user, cart}) => {
                             Shopping Cart
                         </h1>
                         <h5 className="self-end mr-4 text-gray-600 "> Price</h5></div>
-                        {user && cart && (cart.map((product, i) => (
+                        {cart && (cart.map((product, i) => (
                             <CartProduct
                                 key={product.id}
                                 product={product}
-                                cart={cart}
                             />)
                         ))}
                     </div>
                 </div>
                 {/* right */}
                 <div className="flex flex-col bg-white p-10 shadow-md">
-                    {cart.length > 0 && (
+                    {user && cart  ? (
                         <>
                         <h2 className="whitespace-nowrap">Subtotal ({cart.length} items): {" "}
                         <span className="font-bold">
@@ -50,12 +51,21 @@ const Cart = ({user, cart}) => {
                             </span>
                             </h2>
                             <button
-                            disabled={!user}
                             className={`button mt-2 ${!user && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`} onClick={()=> history.push('/checkout')}>
-                                {!user ? "Sign in to checkout" : "Proceed to checkout"}
+                                {"Proceed to checkout"}
                             </button>
                         </>
-                     )}
+                     ): <>
+                        <h2 className="whitespace-nowrap">Subtotal (0 item): {" "}
+                        <span className="font-bold">
+                            <p>$0</p>
+                            </span>
+                            </h2>
+                            <button
+                            disabled={!user}
+                            className={`button mt-2 ${!user && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`}>
+                                {!user && "Sign in to checkout"}
+                            </button> </>}
                 </div>
             </main>
         </div>

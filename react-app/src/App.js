@@ -15,7 +15,6 @@ function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    const cartArr = useSelector(state => state.session.activeCart.cartProducts);
 
 
     useEffect(()=> {
@@ -51,7 +50,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route path="/cart" exact={true}>
-                    <Cart user={user} cart={cartArr} />
+                    <Cart user={user} />
                 </Route>
                 <Route path="/" exact={true}>
                     <Home />

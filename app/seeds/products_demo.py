@@ -10,7 +10,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Wolf House",
             "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 120
+            "owner_id": 1, "count": 120
         },
         {
             "title": "Mens Casual Premium Slim Fit T-Shirts ",
@@ -19,7 +19,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-            "owner_id": 7, "count": 259
+            "owner_id": 1, "count": 259
         },
         {
             "title": "Mens Cotton Jacket",
@@ -28,16 +28,16 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-            "owner_id": 7, "count": 500
+            "owner_id": 1, "count": 500
         },
         {
             "title": "Mens Casual Slim Fit",
             "price": 15.99,
-            "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+            "description": "The color could be slightly different between on the screen and in practice. Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-            "owner_id": 7, "count": 430
+            "owner_id": 1, "count": 430
         },
         {
             "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
@@ -46,7 +46,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Mountain Glow",
             "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-            "owner_id": 7, "count": 400
+            "owner_id": 1, "count": 400
         },
         {
             "title": "Solid Gold Petite Micropave ",

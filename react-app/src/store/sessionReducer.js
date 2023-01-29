@@ -1,6 +1,7 @@
 const initialState = {
     user: null,
     activeCart: {},
+
 };
 
 // *************** User ****************************
@@ -192,10 +193,11 @@ export const addCartItemThunk = (item, cartId) => async dispatch => {
     dispatch(addItem(response));
 };
 
-export const removeCartItemThunk = (cartId, itemId) => async dispatch => {
-    const request = await fetch(`/api/shopping_carts/${cartId}/${itemId}`, {
-        method: "DELETE",
+export const removeCartItemThunk = (productId, cartId) => async dispatch => {
+    const request = await fetch(`/api/shopping_carts/remove/${cartId}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({productId})
     });
     const response = await request.json();
 
@@ -207,7 +209,6 @@ export const cartCheckoutThunk = cartId => async dispatch => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
     });
-    // const response = await request.json();
 
     dispatch(cartCheckout());
 };
@@ -236,10 +237,7 @@ const sessionReducer = (state = initialState, action) => {
         }
 
         case ADD_ITEM: {
-            let cartArr = Object.keys(action.payload.cartProducts).reduce((acc, products) => {
-                return acc.concat(action.payload.cartProducts[products])
-            }, [])
-            currentState.activeCart.cartProducts = {...cartArr}
+            currentState.activeCart.cartProducts = action.payload.cartProducts;
             return currentState;
         }
 

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Currency from "react-currency-formatter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeCartItemThunk } from "../../store/sessionReducer";
 
-const CartProduct = ({ product, cart }) => {
+const CartProduct = ({ product }) => {
     const MAX_RATING = 5;
     const MIN_RATING = 1;
 
     const dispatch =useDispatch()
+    const cart = useSelector(state => state.session.activeCart)
 
     const removeItemFromCart = () => {
 
@@ -35,10 +36,10 @@ const CartProduct = ({ product, cart }) => {
                             <StarIcon className="h-5 text-yellow-500" key={i} />
                         ))}
                 </div>
+            {/* Right side to add and remove buttons */}
                 <p className="text-xs my-2 line-clamp-3">{product.description}</p>
             <button className="button mt-3" onClick={removeItemFromCart}> Remove from Cart</button>
             </div>
-            {/* Right side to add and remove buttons */}
             <div className="flex flex-col space-y-2 justify-self-end font-semibold text-lg self-start">
                 <Currency quantity={product.price} />
             </div>
