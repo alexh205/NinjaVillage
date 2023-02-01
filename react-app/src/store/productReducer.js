@@ -223,9 +223,9 @@ const productReducer = (state = initialState, action) => {
         }
 
         case EDIT_PROD_DATA: {
-            currentState.product.forEach((el, i) => {
+            currentState.products.forEach((el, i) => {
                 if (el.id === action.payload.id)
-                    currentState.product[i] = action.payload;
+                    currentState.products[i] = action.payload;
             });
             return currentState;
         }

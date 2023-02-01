@@ -55,7 +55,8 @@ const ProductDetail = () => {
 
                 await dispatch(deleteProductThunk(productId))
                 await dispatch(getAllProductThunk())
-                
+                history.push('/')
+
               }}>Delete listing</button></div>)
               :(!userSession) && (null)}
 
