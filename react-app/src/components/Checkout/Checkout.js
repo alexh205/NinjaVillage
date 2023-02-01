@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import logo from "../../Media/logo1.png";
+import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
 import { useHistory } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,27 +18,27 @@ const Payment = () => {
     return (
         <>
             {user && cartArr && (
-                <div className="flex items-center py-3 bg-gray-100 justify-between">
+                <div className="flex items-center py-3 bg-ninja_green justify-between">
                     <div
-                        className="flex ml-[160px] items-center  cursor-pointer bg-slate-600"
+                        className="flex ml-[160px] items-center  cursor-pointer"
                         onClick={() => {
                             history.push("/");
                         }}>
                         <img
                             className="w-[120px] h-[40px] object-contain cursor-pointer mt-2"
-                            src={logo}
+                            src={NinjaVillage_logo}
                         />
                     </div>
-                    <div className="flex font-semibold text-3xl items-center">
+                    <div className="flex font-semibold text-3xl text-white items-center">
                         Checkout (
-                        <p className="text-sky-600 text-2xl">
+                        <p className="text-amber-600 text-2xl">
                             {cartArr.length > 1
                                 ? `${cartArr.length} items`
                                 : `${cartArr.length} item`}
                         </p>
                         )
                     </div>
-                    <LockClosedIcon className="h-7 opacity-40 pr-14 cursor-pointer" />
+                    <LockClosedIcon className="h-7 opacity-80 pr-14 cursor-pointer text-white" />
                 </div>
             )}
             <div className="flex flex-row">
@@ -112,7 +112,7 @@ const Payment = () => {
                                     </div>
                                     {/* order + total  */}
                                     <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center">
-                                        <button className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-yellow-200 to-yellow-400 border-yellow-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500 w-[120px]">
+                                        <button className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]">
                                             Place your order
                                         </button>
                                         <div className="flex flex-col pl-2">
@@ -136,7 +136,7 @@ const Payment = () => {
                 </div>
                 <div className="border-[1px] rounded-lg mt-3 w-[290px] h-[378px] relative mr-14">
                     <div className="flex flex-col items-center">
-                        <button className=" cursor-pointer py-2 m-2 text-[12px] md:text-[14px] bg-gradient-to-b from-yellow-200 to-yellow-400  border-yellow-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500 w-[120px] flex-grow">
+                        <button className=" cursor-pointer py-2 m-2 text-[12px] md:text-[14px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow">
                         Place your order</button>
                         <p className="text-[10px] text-gray-500 text-center px-1"> By placing your order, you agree to NinjaVillage's privacy notice and conditions of use</p>
                         <hr className="w-[85%] mt-2"></hr>

@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import User, Review, Image, db
+from app.models import User, Review, Product, Image, db
 
 review_routes = Blueprint('reviews', __name__)
 auth_error= "User is not authorized to complete this action"
@@ -23,6 +23,7 @@ def review_delete(id):
     Delete a review after checking for user ownership
     """
     queried_review = Review.query.get_or_404(id)
+    queried_product = Product.query.get_or_404(queried_review.product_id)
     queried_user = User.query.get_or_404(queried_review.owner_id)
 
     if queried_user.id != current_user.id:
@@ -30,7 +31,7 @@ def review_delete(id):
     else:
         db.session.delete(queried_review)
         db.session.commit()
-        return {'message': 'Successfully deleted'}
+        return queried_product.to_dict()
 
 
 #* Create Review *****************************************************
@@ -51,22 +52,21 @@ def review_create():
     db.session.add(new_review)
     db.session.commit()
 
-    if req_data['images'] == None:
-        return new_review.to_dict()
-    else:
-        queried_review = Review.query.get_or_404(new_review.id)
+    queried_review = Review.query.get_or_404(new_review.id)
+    queried_product = Product.query.get_or_404(queried_review.owner_id)
+    # if len(req_data['images']) > 0:
+    #     for image in req_data['images']:
+    #         new_image = Image(
+    #             url= image,
+    #             owner_id= current_user.id,
+    #             product_id=req_data['product_id'],
+    #             review_id= queried_review.id
+    #         )
+    #         db.session.add(new_image)
+    #         db.session.commit()
+    #     return queried_product.to_dict()
 
-        for image in req_data['images']:
-            new_image = Image(
-                url= image,
-                owner_id= current_user.id,
-                product_id=req_data['product_id'],
-                review_id= queried_review.id
-            )
-            db.session.add(new_image)
-            db.session.commit()
-        return new_review.to_dict()
-
+    return queried_product.to_dict()
 
 #* Edit Review *****************************************************
 @review_routes.route('/<int:id>', methods=['PUT'])
@@ -76,6 +76,7 @@ def review_edit(id):
     Update an existing review instance after checking for user ownership, and then add changes to database
     """
     queried_review = Review.query.get_or_404(id)
+    queried_product = Product.query.get_or_404(queried_review.product_id)
     queried_user = User.query.get_or_404(queried_review.owner_id)
 
     if queried_user.id != current_user.id:
@@ -86,4 +87,4 @@ def review_edit(id):
             if key != None:
                 setattr(queried_review, key, val)
         db.session.commit()
-        return queried_review.to_dict()
+        return queried_product.to_dict()

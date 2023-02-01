@@ -1,5 +1,6 @@
 const initialState = {
     user: null,
+    reviewOwner: null,
     activeCart: {},
 
 };
@@ -223,7 +224,6 @@ const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER: {
             currentState.user = action.payload;
-
             return currentState;
         }
 

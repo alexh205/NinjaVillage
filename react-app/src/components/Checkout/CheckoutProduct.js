@@ -27,7 +27,7 @@ const CheckoutProduct = ({ product }) => {
                     <p className="text-xs text-gray-500">Sold by:</p>
                     <p className="ml-1 text-xs text-gray-500">{product.brand}</p>
                 </div>
-                <button className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-yellow-200 to-yellow-400 border-yellow-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500 w-[100px] mr-4" onClick={removeItemFromCart}> Remove from Cart</button>
+                <button className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px] mr-4" onClick={removeItemFromCart}> Remove from Cart</button>
             </div>
 
         </div>

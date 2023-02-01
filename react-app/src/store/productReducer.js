@@ -1,8 +1,9 @@
 const initialState = {
-    product: [],
     products: {},
+    //! remove the nested products key
 };
 
+// ******************** Product *****************************
 const POPULATE_PROD_DATA = "product/POPULATE_PROD_DATA";
 const POPULATE_ALL_PROD_DATA = "product/POPULATE_ALL_PROD_DATA";
 const ADD_PROD_DATA = "product/ADD_PROD_DATA";
@@ -10,11 +11,19 @@ const EDIT_PROD_DATA = "product/EDIT_PROD_DATA";
 const DELETE_PROD_DATA = "product/DELETE_PROD_DATA";
 const CLEAR_PROD_DATA = "product/CLEAR_PROD_DATA";
 
+// ******************** Review *****************************
+const ADD_REVIEW_DATA = "review/ADD_REVIEW_DATA";
+const EDIT_REVIEW_DATA = "review/EDIT_REVIEW_DATA";
+const DELETE_REVIEW_DATA = "review/DELETE_REVIEW_DATA";
+
+
 // ACTION CREATORS
-const populateProductData = productId => {
+
+// ************** Product********************
+const populateProductData = product => {
     return {
         type: POPULATE_PROD_DATA,
-        payload: productId,
+        payload: product,
     };
 };
 
@@ -51,12 +60,35 @@ export const clearProduct = () => {
     };
 };
 
+
+// ************** Review ********************
+const addReview = review => {
+    return {
+        type: ADD_REVIEW_DATA,
+        payload: review,
+    };
+};
+
+const editReview = review => {
+    return {
+        type: EDIT_REVIEW_DATA,
+        payload: review,
+    };
+};
+const deleteReview = reviewId => {
+    return {
+        type: DELETE_REVIEW_DATA,
+        payload: reviewId,
+    };
+};
+
 // THUNKS
 
+   // ************************* Product *****************************
 export const createProductThunk = product => async dispatch => {
     const request = await fetch("/api/products/new", {
         method: "POST",
-        headers: { "Content-Type:": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             title: product.title,
             price: product.price,
@@ -119,6 +151,51 @@ export const getProductThunk = prodId => async dispatch => {
     }
 };
 
+
+// ************************* Review *****************************
+
+export const createReviewThunk = (title, review, rating, owner_id, product_id) => async dispatch => {
+    const request = await fetch("/api/reviews/new", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            title,
+            review,
+            rating,
+            owner_id,
+            product_id,
+            // images: imagesArr
+        }),
+    });
+    const response = await request.json();
+
+    dispatch(addProduct(response));
+};
+
+export const editReviewThunk = (title, review, rating, reviewId) => async dispatch => {
+    const request = await fetch(`/api/reviews/${reviewId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            title,
+            review,
+            rating
+        }),
+    });
+    const response = await request.json();
+
+    dispatch(addProduct(response));
+};
+
+export const deleteReviewThunk = reviewId => async dispatch => {
+    const request = await fetch(`/api/reviews/${reviewId}`, {
+        method: "DELETE",
+    });
+
+    const response = await request.json()
+    dispatch(addProduct(response));
+};
+
 // REDUCER
 
 const productReducer = (state = initialState, action) => {
@@ -126,7 +203,7 @@ const productReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case POPULATE_PROD_DATA: {
-            currentState.product = action.payload;
+            currentState.product.push(action.payload);
             return currentState;
         }
 
@@ -141,7 +218,7 @@ const productReducer = (state = initialState, action) => {
         }
 
         case ADD_PROD_DATA: {
-            currentState.product.push(action.payload);
+            currentState.products[action.payload.id]= action.payload;
             return currentState;
         }
 
@@ -154,13 +231,14 @@ const productReducer = (state = initialState, action) => {
         }
 
         case DELETE_PROD_DATA: {
-            const productCopy = [...currentState.product];
 
-            for (let i = 0; i < productCopy.length; i++) {
-                productCopy.splice(i, 1);
-                currentState.product = productCopy;
+            for (let i = 0; i < currentState.products.length; i++) {
+                if (currentState.products[i] === action.payload.id) currentState.products.splice(i, 1);
+
                 return currentState;
-            }
+            };
+
+            return currentState;
         }
 
         case CLEAR_PROD_DATA: {

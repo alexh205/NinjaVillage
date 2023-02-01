@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/sessionReducer';
-import login_page from '../../Media/login_page.png'
+import NinjaVillage_logo from '../../Media/NinjaVillage_logo.png'
 import { Link } from 'react-router-dom';
 import {
   ChevronRightIcon
@@ -43,12 +43,12 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='bg-white h-[100vh] flex flex-col items-center'>
+    <div className='bg-ninja_green h-[100vh] flex flex-col items-center'>
       <Link to='/'>
-        <img className='object-contain my-[20px] mx-auto w-[100px]' src={login_page} alt='' />
+        <img className='object-contain my-[20px] mx-auto w-[100px]' src={NinjaVillage_logo} alt='' />
       </Link>
       <div className='w-[350px] h-fit flex flex-col rounded-md border-[1px] border-gray-300 p-[20px]'>
-        <h1 className='font-medium mb-4 text-[27px]'>Create Account</h1>
+        <h1 className='font-medium mb-4 text-[27px] text-white'>Create Account</h1>
     <form>
     <div className='text-[10px] text-red-600 mb-[4px]'>
         {errors.map((error, ind) => (
@@ -56,7 +56,7 @@ const SignUpForm = () => {
         ))}{passError.length > 0 && <div>{passError}</div>}
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>User Name</label>
+       <label className='font-semibold text-sm my-1 text-white'>User Name</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -67,7 +67,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Your Name</label>
+       <label className='font-semibold text-sm my-1 text-white'>Your Name</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -79,7 +79,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Email</label>
+       <label className='font-semibold text-sm my-1 text-white'>Email</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -90,7 +90,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Password</label>
+       <label className='font-semibold text-sm my-1 text-white'>Password</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='password'
@@ -101,7 +101,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Re-enter Password</label>
+       <label className='font-semibold text-sm my-1 text-white'>Re-enter Password</label>
         <input
             className='border-[1px] border-gray-600'
           type='password'
@@ -112,7 +112,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Profile Image</label>
+       <label className='font-semibold text-sm my-1 text-white'>Profile Image</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -123,7 +123,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Street Address</label>
+       <label className='font-semibold text-sm my-1 text-white'>Street Address</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -134,7 +134,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>City</label>
+       <label className='font-semibold text-sm my-1 text-white'>City</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -145,7 +145,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>State</label>
+       <label className='font-semibold text-sm my-1 text-white'>State</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -156,7 +156,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='mb-[5px] flex flex-col'>
-       <label className='font-semibold text-sm my-1'>Zip Code</label>
+       <label className='font-semibold text-sm my-1 text-white'>Zip Code</label>
         <input
             className='border-[1px] border-gray-600 p-1'
           type='text'
@@ -173,9 +173,9 @@ const SignUpForm = () => {
         onSignUp(e)
       }}>Sign Up</button>
     </form>
-    <p className='text-[11px]'>By creating an account, you agree to Amazon's Conditions of Use and Privacy Notice.</p>
+    <p className='text-[11px] text-white'>By creating an account, you agree to NinjaVillage's Conditions of Use and Privacy Notice.</p>
     <hr className='w-[60%] self-center my-4 drop-shadow-lg'></hr>
-   <div className='flex items-center'><p className='text-[12px] font-medium mr-1'>Already have an account? </p><a className='text-[12px] text-blue-600 flex flex-row items-center font-medium' href='/login'>Sign in <ChevronRightIcon className='h-[9px]'/></a></div>
+   <div className='flex items-center'><p className='text-[12px] font-medium mr-1 text-white'>Already have an account? </p><a className='text-[12px] text-violet-400 flex flex-row items-center font-medium' href='/login'>Sign in <ChevronRightIcon className='h-[9px]'/></a></div>
     </div>
     </div>
   );

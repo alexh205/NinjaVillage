@@ -43,7 +43,7 @@ const Cart = ({user}) => {
                 </div>
                 {/* right */}
                 <div className="flex flex-col bg-white p-10 shadow-md">
-                    {user && cart  ? (
+                    {user && cart && cart.length > 0 ? (
                         <>
                         <h2 className="whitespace-nowrap">Subtotal ({cart.length} items): {" "}
                         <span className="font-bold">
@@ -55,7 +55,18 @@ const Cart = ({user}) => {
                                 {"Proceed to checkout"}
                             </button>
                         </>
-                     ): <>
+                     ): user && cart && cart.length === 0 ?<>
+                     <h2 className="whitespace-nowrap">Subtotal ({cart.length} items): {" "}
+                     <span className="font-bold">
+                         <Currency quantity={cartTotal} />
+                         </span>
+                         </h2>
+                         <button
+                         disabled={cart.length < 1}
+                         className={`button mt-2 ${!user || cart.length < 1 &&  'from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed'}`} >
+                             {"Please add at least one item to proceed"}
+                         </button>
+                     </>: <>
                         <h2 className="whitespace-nowrap">Subtotal (0 item): {" "}
                         <span className="font-bold">
                             <p>$0</p>
@@ -63,7 +74,7 @@ const Cart = ({user}) => {
                             </h2>
                             <button
                             disabled={!user}
-                            className={`button mt-2 ${!user && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`}>
+                            className={`button mt-2 ${!user && 'from-gray-200 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`}>
                                 {!user && "Sign in to checkout"}
                             </button> </>}
                 </div>

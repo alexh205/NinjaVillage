@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import {FaStar} from 'react-icons/fa'
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
@@ -11,7 +10,7 @@ const Product = ({ product, userCart }) => {
     let ratingAvg;
 
     if (product && product.productReviews) {
-    product.productReviews.forEach(el => { ratingTotal += el.rating})
+    product.productReviews.forEach(el => { ratingTotal += Number(el.rating)})
     ratingAvg = (ratingTotal/product.productReviews.length)}
 
     const dispatch = useDispatch();
@@ -44,8 +43,9 @@ const Product = ({ product, userCart }) => {
             /> </a>
             <h4>{product.title}</h4>
             <div className="flex">
-            {ratingAvg ?[...Array(Math.floor(ratingAvg))].map((i)=> <FaStar size={23} className="text-yellow-500" key={i}/>): <FaStar size={23} color={"#e4e5e9"}/>}
+            {product && product.productReviews.length && ratingAvg ?[...Array(Math.floor(ratingAvg))].map((i)=> <FaStar size={23} className="text-yellow-500" key={i}/>): <FaStar size={23} color={"#e4e5e9"}/>}
             </div>
+            {/* <p>{product.productReviews.length} ratings</p> */}
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
             <div className="mb-5">
                 <Currency quantity={product.price} />

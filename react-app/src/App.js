@@ -10,6 +10,8 @@ import ProductDetail from "./components/Product/ProductDetail";
 import Checkout from "./components/Checkout/Checkout";
 import { getAllProductThunk} from './store/productReducer'
 import { setActiveCart } from './store/sessionReducer'
+import EditReview from "./components/Review/EditReview";
+import CreateReview from "./components/Review/CreateReview";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -63,6 +65,12 @@ function App() {
                 </Route>
                 <Route path="/products/:productId" exact={true}>
                     <ProductDetail />
+                </Route>
+                <Route path="/reviews/edit/:productId" exact={true}>
+                    <EditReview />
+                </Route>
+                <Route path="/reviews/:productId" exact={true}>
+                    <CreateReview />
                 </Route>
                 <Route path="/checkout" exact={true}>
                     <Checkout />

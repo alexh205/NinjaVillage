@@ -3,9 +3,9 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: { colors: {
-      amazon_blue: {
-        light: '#232F3E',
-        DEFAULT: '#131921'
+      ninja_green: {
+        light: '#1b2124',
+        DEFAULT: '#015f41'
       }
     }},
   },

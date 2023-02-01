@@ -8,8 +8,8 @@ class Review(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False)
-    review= db.Column(db.String, nullable=False)
+    title = db.Column(db.String(50), nullable=False)
+    review= db.Column(db.String(400), nullable=False)
     rating= db.Column(db.Integer, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
@@ -28,8 +28,9 @@ class Review(db.Model):
             'title': self.title,
             'review': self.review,
             'rating': self.rating,
-            'ownerId': self.owner_id,
+            # 'ownerId': self.owner_id,
             'productId': self.product_id,
             'created_date': self.created_date,
-            'reviewImages': [image.to_dict() for image in self.review_images]
+            'reviewImages': [image.to_dict() for image in self.review_images],
+            'owner': self.reviews_owned.to_dict_basic()
         }
