@@ -25,8 +25,6 @@ const Product = ({ product, userCart }) => {
             brand: product.brand,
             image: product.image,
         }
-
-
         await dispatch(addCartItemThunk(item, userCart.id))
     };
 

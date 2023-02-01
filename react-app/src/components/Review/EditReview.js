@@ -94,7 +94,7 @@ const EditReview = () => {
 
         <div className='border-b flex flex-col'>
           <label className='font-bold text-xl my-4'>Add a review</label>
-          <textarea className='mb-6 mx-42 border-[2px] p-2 rounded-sm' rows='6' maxLength='400'
+          <textarea className='mb-6 mx-42 border-[2px] p-2 rounded-sm' rows='5' maxLength='400'
           name='review' onChange={e => setReview(e.target.value)}
           value={review} required={true}
           placeholder='What did you use the product for? What did you like and dislike?'>

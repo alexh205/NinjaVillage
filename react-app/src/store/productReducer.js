@@ -104,18 +104,18 @@ export const createProductThunk = product => async dispatch => {
     dispatch(addProduct(response));
 };
 
-export const editProductThunk = product => async dispatch => {
-    const request = await fetch(`/api/products/${product.id}`, {
+export const editProductThunk = (title, price, description, category ,brand, image, count, productId) => async dispatch => {
+    const request = await fetch(`/api/products/${productId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            brand: product.brand,
-            image: product.image,
-            count: product.count,
+            title,
+            price,
+            description,
+            category,
+            brand,
+            image,
+            count,
         }),
     });
     const response = await request.json();
@@ -203,7 +203,7 @@ const productReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case POPULATE_PROD_DATA: {
-            currentState.product.push(action.payload);
+            currentState.products.push(action.payload);
             return currentState;
         }
 
@@ -223,10 +223,7 @@ const productReducer = (state = initialState, action) => {
         }
 
         case EDIT_PROD_DATA: {
-            currentState.products.forEach((el, i) => {
-                if (el.id === action.payload.id)
-                    currentState.products[i] = action.payload;
-            });
+            currentState.products[action.payload.id]= action.payload;
             return currentState;
         }
 

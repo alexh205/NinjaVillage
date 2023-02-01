@@ -12,6 +12,7 @@ import { getAllProductThunk} from './store/productReducer'
 import { setActiveCart } from './store/sessionReducer'
 import EditReview from "./components/Review/EditReview";
 import CreateReview from "./components/Review/CreateReview";
+import EditProduct from "./components/Product/EditProduct";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -65,6 +66,9 @@ function App() {
                 </Route>
                 <Route path="/products/:productId" exact={true}>
                     <ProductDetail />
+                </Route>
+                <Route path="/products/:productId/edit" exact={true}>
+                    <EditProduct />
                 </Route>
                 <Route path="/reviews/edit/:productId" exact={true}>
                     <EditReview />
