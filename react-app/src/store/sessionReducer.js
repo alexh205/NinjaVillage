@@ -1,6 +1,5 @@
 const initialState = {
     user: null,
-    reviewOwner: null,
     activeCart: {},
 
 };

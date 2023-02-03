@@ -6,8 +6,9 @@ import {
 import NinjaVillage_logo from '../../Media/NinjaVillage_logo.png'
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import DropDownMenu from "../DropDownMenu";
 
-// 015f41
+
 const Header = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
@@ -21,7 +22,7 @@ const Header = () => {
             history.push("/") }}>
                 <img
                     className="w-[140px] h-[40px] object-contain cursor-pointer mt-2"
-                    src={NinjaVillage_logo}
+                    src={NinjaVillage_logo} alt=''
                 />
             </div>
             {/* top nav search */}
@@ -31,11 +32,11 @@ const Header = () => {
             </div>
             {/* top nav right side */}
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
-                {/* user account & login */}
-                <div className="link" onClick={()=>{history.push('/login')}}>
+                    <DropDownMenu />
+                {/* <div className="link" onClick={()=>{history.push('/login')}}>
                     <p>{user ? `Hello, ${user.name}` : "Sign In"}</p>
                     <p className="font-extrabold md:text-sm">Account & Lists</p>
-                </div>
+                </div> */}
                 {/* list user's completed shopping carts */}
                 <div className="link">
                     <p>Returns</p>
@@ -59,16 +60,16 @@ const Header = () => {
                 All
             </p> */}
 
-            <p className="link">Today's Deals</p>
+            {/* <p className="link">Today's Deals</p> */}
             <p className="link">Buy Again</p>
+            <p className="link">Books</p>
             <p className="link ">Groceries</p>
-            <p className="link hidden lg:inline-flex">Electronics</p>
-            <p className="link hidden lg:inline-flex">Books</p>
-            <p className="link hidden lg:inline-flex">Clothing, Shoes & Jewelry</p>
-            <p className="link hidden lg:inline-flex">Health & Household</p>
-            <p className="link hidden lg:inline-flex">Video Games</p>
             <p className="link hidden lg:inline-flex">Beauty & Personal Care</p>
+            <p className="link hidden lg:inline-flex">Clothing, Shoes & Jewelry</p>
+            <p className="link hidden lg:inline-flex">Electronics</p>
+            <p className="link hidden lg:inline-flex">Health & Household</p>
             <p className="link hidden lg:inline-flex">Pet Supplies</p>
+            <p className="link hidden lg:inline-flex">Video Games</p>
         </div>
         </header>
     );

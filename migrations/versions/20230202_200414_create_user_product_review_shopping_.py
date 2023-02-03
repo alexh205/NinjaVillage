@@ -1,8 +1,8 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: c717a378d3bc
+Revision ID: a32e962d1adc
 Revises:
-Create Date: 2023-01-27 20:31:20.903044
+Create Date: 2023-02-02 20:04:14.774750
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'c717a378d3bc'
+revision = 'a32e962d1adc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -84,8 +84,8 @@ def upgrade():
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(), nullable=False),
-    sa.Column('review', sa.String(), nullable=False),
+    sa.Column('title', sa.String(length=50), nullable=False),
+    sa.Column('review', sa.String(length=400), nullable=False),
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),

@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import User, db, Product
-from app.forms import ProductForm
 
 
 product_routes = Blueprint('products', __name__)
@@ -51,24 +50,23 @@ def product_create():
     """
     Create a new product instance and add to database
     """
-    form = ProductForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+    req_data= request.json
 
-        new_product = Product(
-            title=form.data['title'],
-            price=form.data['price'],
-            description=form.data['description'],
-            category=form.data['category'],
-            brand=form.data['brand'],
-            image=form.data['image'],
-            count=form.data['count'],
-            owner_id= current_user.id
-        )
-        db.session.add(new_product)
-        db.session.commit()
+    new_product = Product(
+        title=req_data['title'],
+        price=req_data['price'],
+        description=req_data['description'],
+        category=req_data['category'],
+        brand=req_data['brand'],
+        image=req_data['image'],
+        count=req_data['count'],
+        owner_id= current_user.id
+    )
 
-        return new_product.to_dict_basic()
+    db.session.add(new_product)
+    db.session.commit()
+
+    return new_product.to_dict()
 
 
 #* Edit Product *****************************************************

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Header from "../Header/Header";
-import amazon_banner_checkout from "../../Media/Banner Images/amazon_banner_checkout.png";
+import checkout from "../../Media/checkout.png";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "./CartProduct";
 import Currency from "react-currency-formatter";
@@ -24,7 +24,7 @@ const Cart = ({user}) => {
                 <div className="flex-grow m-5 shadow-sm">
                     <img
                         className="w-[1020px] h-[250px] object-contain"
-                        src={amazon_banner_checkout}
+                        src={checkout}
                         alt=""
                     />
                     <div className="flex flex-col p-5 space-y-10 bg-white">

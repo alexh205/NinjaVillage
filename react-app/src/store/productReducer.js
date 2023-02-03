@@ -16,7 +16,6 @@ const ADD_REVIEW_DATA = "review/ADD_REVIEW_DATA";
 const EDIT_REVIEW_DATA = "review/EDIT_REVIEW_DATA";
 const DELETE_REVIEW_DATA = "review/DELETE_REVIEW_DATA";
 
-
 // ACTION CREATORS
 
 // ************** Product********************
@@ -60,7 +59,6 @@ export const clearProduct = () => {
     };
 };
 
-
 // ************** Review ********************
 const addReview = review => {
     return {
@@ -84,44 +82,49 @@ const deleteReview = reviewId => {
 
 // THUNKS
 
-   // ************************* Product *****************************
-export const createProductThunk = product => async dispatch => {
-    const request = await fetch("/api/products/new", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            brand: product.brand,
-            image: product.image,
-            count: product.count,
-        }),
-    });
-    const response = await request.json();
+// ************************* Product *****************************
+export const createProductThunk =
+    (title, price, description, category, brand, image, count) =>
+    async dispatch => {
+        const request = await fetch("/api/products/new", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                title,
+                price,
+                description,
+                category,
+                brand,
+                image,
+                count,
+            }),
+        });
+        const response = await request.json();
 
-    dispatch(addProduct(response));
-};
 
-export const editProductThunk = (title, price, description, category ,brand, image, count, productId) => async dispatch => {
-    const request = await fetch(`/api/products/${productId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            title,
-            price,
-            description,
-            category,
-            brand,
-            image,
-            count,
-        }),
-    });
-    const response = await request.json();
+        dispatch(addProduct(response));
+    };
 
-    dispatch(editProduct(response));
-};
+export const editProductThunk =
+    (title, price, description, category, brand, image, count, productId) =>
+    async dispatch => {
+        const request = await fetch(`/api/products/${productId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                title,
+                price,
+                description,
+                category,
+                brand,
+                image,
+                count,
+            }),
+        });
+        const response = await request.json();
+
+        dispatch(editProduct(response));
+    };
 
 export const deleteProductThunk = productId => async dispatch => {
     await fetch(`/api/products/${productId}`, {
@@ -151,48 +154,49 @@ export const getProductThunk = prodId => async dispatch => {
     }
 };
 
-
 // ************************* Review *****************************
 
-export const createReviewThunk = (title, review, rating, owner_id, product_id) => async dispatch => {
-    const request = await fetch("/api/reviews/new", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            title,
-            review,
-            rating,
-            owner_id,
-            product_id,
-            // images: imagesArr
-        }),
-    });
-    const response = await request.json();
+export const createReviewThunk =
+    (title, review, rating, owner_id, product_id) => async dispatch => {
+        const request = await fetch("/api/reviews/new", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                title,
+                review,
+                rating,
+                owner_id,
+                product_id,
+                // images: imagesArr
+            }),
+        });
+        const response = await request.json();
 
-    dispatch(addProduct(response));
-};
+        dispatch(addProduct(response));
+    };
 
-export const editReviewThunk = (title, review, rating, reviewId) => async dispatch => {
-    const request = await fetch(`/api/reviews/${reviewId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            title,
-            review,
-            rating
-        }),
-    });
-    const response = await request.json();
+export const editReviewThunk =
+    (title, review, rating, reviewId) => async dispatch => {
+        const request = await fetch(`/api/reviews/${reviewId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                title,
+                review,
+                rating,
+            }),
+        });
+        const response = await request.json();
 
-    dispatch(addProduct(response));
-};
+        dispatch(addProduct(response));
+    };
 
 export const deleteReviewThunk = reviewId => async dispatch => {
     const request = await fetch(`/api/reviews/${reviewId}`, {
         method: "DELETE",
     });
 
-    const response = await request.json()
+    const response = await request.json();
     dispatch(addProduct(response));
 };
 
@@ -218,22 +222,22 @@ const productReducer = (state = initialState, action) => {
         }
 
         case ADD_PROD_DATA: {
-            currentState.products[action.payload.id]= action.payload;
+            currentState.products[action.payload.id] = action.payload;
             return currentState;
         }
 
         case EDIT_PROD_DATA: {
-            currentState.products[action.payload.id]= action.payload;
+            currentState.products[action.payload.id] = action.payload;
             return currentState;
         }
 
         case DELETE_PROD_DATA: {
-
             for (let i = 0; i < currentState.products.length; i++) {
-                if (currentState.products[i] === action.payload.id) currentState.products.splice(i, 1);
+                if (currentState.products[i] === action.payload.id)
+                    currentState.products.splice(i, 1);
 
                 return currentState;
-            };
+            }
 
             return currentState;
         }

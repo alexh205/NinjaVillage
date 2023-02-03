@@ -23,9 +23,9 @@ const ReviewContainer = ({product, user}) => {
                 <div className='text-2xl font-bold'>Customer reviews</div>
                 <div className='flex flex-row mt-1'>
                     <div className='mr-3 flex flex-row items-center'>
-                        {ratingAvg ? [...Array(Math.floor(ratingAvg))].map((i)=> <FaStar size={23} className="text-yellow-500" key={i}/>) : <FaStar size={23} color={"#e4e5e9"}/>}
+                        {ratingAvg ? [...Array(Math.floor(ratingAvg))].map((star,i)=> <FaStar size={23} className="text-yellow-500" key={i}/>) : <FaStar size={23} color={"#e4e5e9"}/>}
                     </div>
-                    {ratingAvg && ratingAvg !== NaN ? <div className='text-lg'>{ratingAvg.toFixed(1)} out of 5.0</div> : !ratingAvg && <div>0 out of 5.0</div>}
+                    {ratingAvg ? <div className='text-lg'>{ratingAvg.toFixed(1)} out of 5.0</div> : !ratingAvg && <div>0 out of 5.0</div>}
                 </div>
                 {product && product.productReviews.length === 1 ? <div className='text-sm text-gray-500 mt-1'>{product.productReviews.length} rating</div> : product && product.productReviews.length > 1 ? <div className='text-sm text-gray-500 mt-1'>{product.productReviews.length} ratings </div>: <div className='text-sm text-gray-500 mt-1'>0 rating</div>}
             </div>

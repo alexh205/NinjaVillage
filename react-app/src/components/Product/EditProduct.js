@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -11,37 +11,49 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector(
-      state => state.productStore?.products[productId]
-  );
-
-  const [title, setTitle] = useState(product?.title);
-  const [price, setPrice] = useState(product?.price);
-  const [description, setDescription] = useState(product?.description);
-  const [category, setCategory] = useState(product?.category);
-  const [brand, setBrand] = useState(product?.brand);
-  const [image, setImage] = useState(product?.image);
-  const [count, setCount] = useState(product?.count);
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [brand, setBrand] = useState('');
+  const [image, setImage] = useState('');
+  const [count, setCount] = useState('');
 
   const [errors, setErrors] = useState([]);
 
-  const onProductEdit = async e => {
-      e.preventDefault();
+  const product = useSelector(
+      state => state.productStore.products[productId]
+  );
 
-      await dispatch(
-          editProductThunk(title, price, description, category ,brand, image, count, productId)
-      );
 
-      await dispatch(getAllProductThunk());
-  };
   if(product)
-  return (
+{
+   if(!title) {
+    setTitle(product.title)
+    setPrice(product.price)
+    setDescription(product.description)
+    setCategory(product.category)
+    setBrand(product.brand)
+    setImage(product.image)
+    setCount(product.count)}
+
+    const onProductEdit = async e => {
+        e.preventDefault();
+
+        await dispatch(
+            editProductThunk(title, price, description, category ,brand, image, count, productId)
+            );
+
+            await dispatch(getAllProductThunk());
+          };
+
+    return (
       <div>
           <Header />
           <div className='flex flex-col mt-6 mx-10 border-b'>
         <h1 className='font-bold text-3xl'>Edit Listing</h1>
         {product && (<div className='flex flex-row items-center my-5'>
-         <img src={product.image} className="w-[60px] h-[70px] mr-4"></img>
+         <img src={product.image} alt='' className="w-[60px] h-[70px] mr-4"></img>
           <div className='sm:line-clamp-4'>{product.title}</div>
           </div>)}
 
@@ -62,6 +74,7 @@ const EditProduct = () => {
                       required={true}
                       ></input>
               </div>
+
               <div className="mt-3 flex flex-col border-b">
                   <label className="font-bold text-xl my-1">
                       Price
@@ -77,16 +90,18 @@ const EditProduct = () => {
                       required={true}
                      ></input>
               </div>
+
               <div className="mt-3 flex flex-col border-b">
                   <label className="font-bold text-xl my-1">
                       Description
                   </label>
                   <textarea
-                      className='mb-6 border-[2px] p-2 rounded-sm' rows='5' maxLength='300'
+                      className='mb-6 border-[2px] p-2 rounded-sm' rows='4' maxLength='300'
                       name='description' onChange={e => setDescription(e.target.value)}
                       value={description}
                       ></textarea>
               </div>
+
               <div className="mt-3 flex flex-col border-b">
                   <label className="font-bold text-xl my-1">
                       Category
@@ -108,6 +123,7 @@ const EditProduct = () => {
                         <option>Video Games</option>
                       </select>
               </div>
+
               <div className="mt-3 flex flex-col border-b">
                   <label className="font-bold text-xl my-1">
                       Brand
@@ -123,6 +139,7 @@ const EditProduct = () => {
                       required={true}
                       ></input>
               </div>
+
               <div className="mt-3 flex flex-col border-b">
                   <label className="font-bold text-xl my-1">
                       Image
@@ -138,6 +155,7 @@ const EditProduct = () => {
                       required={true}
                       ></input>
               </div>
+
               <div className="mt-3 flex flex-col border-b">
                   <label className="font-bold text-xl my-1">
                       Inventory
@@ -152,6 +170,7 @@ const EditProduct = () => {
                       required={true}
                       ></input>
               </div>
+
               <div className="flex flex-row mt-5 justify-end">
                   <button
                       className="button"
@@ -173,7 +192,10 @@ const EditProduct = () => {
           </form>
 
       </div>
-  );
+  )}
+  else {
+    return ("Loading...")
+  }
 };
 
 export default EditProduct;

@@ -14,6 +14,10 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const demoLogin = async () => {
+        await dispatch(login("demo@aa.io", "password"));
+    };
+
 
     const onLogin = async e => {
         e.preventDefault();
@@ -49,7 +53,9 @@ const LoginForm = () => {
                 />
             </Link>
             <div className="w-[350px] h-fit flex flex-col rounded-md border-[1px] border-gray-300 py-[20px] px-[30px]">
-                <h1 className="font-medium mb-4 text-[27px] text-white"> Sign in</h1>
+                <div className="flex flex-row justify-between items-center">
+                <h1 className="font-medium text-[27px] text-white"> Sign in</h1>
+                <button onClick={demoLogin} className='cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-light'>Demo Login</button></div>
                 <form onSubmit={onLogin}>
                     <div className="text-[14px] text-red-600 mb-[4px]">
                         {errors.map((error, ind) => (
@@ -94,9 +100,9 @@ const LoginForm = () => {
                 </p>
             </div>
             <div className="flex flex-col items-center mt-5 w-[350px]">
-                <p className="text-[11px] text-violet-300 mb-2">New to NinjaVillage?</p>
+                <p className="text-[11px] text-violet-300 font-bold mb-2">New to NinjaVillage?</p>
                 <button
-                    className="cursor-pointer p-[5px] text-xs text-semibold md:text-sm rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[100%] border-[1px] border-ninja_green-light"
+                    className="cursor-pointer p-[5px] text-xs font-semibold md:text-sm rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[100%] border-[1px] border-ninja_green-light"
                     type="button "
                     onClick={() => {
                         history.push("/signup");

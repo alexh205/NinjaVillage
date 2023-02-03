@@ -17,10 +17,10 @@ const EditReview = () => {
   const reviewObj = product?.productReviews.find(review => review.owner.id === user.id )
 
 
-  const [title, setTitle] = useState(reviewObj?.title)
-  const [review, setReview] = useState(reviewObj?.review)
-  const [rating, setRating] = useState(reviewObj?.rating)
-  const [hover, setHover] = useState(reviewObj?.rating)
+  const [title, setTitle] = useState('')
+  const [review, setReview] = useState('')
+  const [rating, setRating] = useState('')
+  const [hover, setHover] = useState('')
 
   const [errors, setErrors] = useState([])
 
@@ -36,14 +36,22 @@ const EditReview = () => {
     await dispatch(getAllProductThunk())
   }
 
-  return (
+  if(product&& reviewObj && user)
+  {
+    if(!title){
+      setTitle(reviewObj.title)
+      setReview(reviewObj.review)
+      setRating(reviewObj.rating)
+      setHover(reviewObj.rating)
+      }
+    return (
     <>
     <Header />
     <div className='inline-flex flex-col mr-[610px] lg:flex  ml-[80px]'>
       <div className='flex flex-col mt-8 border-b'>
-        <h1 className='font-bold text-3xl'>Create a Review</h1>
+        <h1 className='font-bold text-3xl'>Edit Review</h1>
         {product && (<div className='flex flex-row items-center my-5'>
-         <img src={product.image} className="w-[60px] h-[70px] mr-4"></img>
+         <img src={product.image} alt='' className="w-[60px] h-[70px] mr-4"></img>
           <div className='sm:line-clamp-4'>{product.title}</div>
           </div>)}
 
@@ -66,7 +74,7 @@ const EditReview = () => {
           <div className='flex flex-row mb-5'>
           {[...Array(5)].map((star, i)=> {
             const ratingValue = i + 1;
-            return( <label>
+            return( <label key={i}>
               <input
               className='hidden'
               type='radio'
@@ -116,7 +124,9 @@ const EditReview = () => {
       </form>
     </div>
     </>
-  )
+  )} else {
+    return ('loading...')
+  }
 }
 
 export default EditReview

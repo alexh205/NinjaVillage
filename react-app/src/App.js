@@ -13,11 +13,14 @@ import { setActiveCart } from './store/sessionReducer'
 import EditReview from "./components/Review/EditReview";
 import CreateReview from "./components/Review/CreateReview";
 import EditProduct from "./components/Product/EditProduct";
+import Profile from "./components/Profile/Profile";
+import CreateProduct from "./components/Product/CreateProduct";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const store = useSelector(state=> state.productStore.products)
 
 
     useEffect(()=> {
@@ -64,10 +67,16 @@ function App() {
                 <Route path="/signup" exact={true}>
                     <SignUpForm />
                 </Route>
+                <Route path="/users/:userId" exact={true}>
+                    <Profile />
+                </Route>
+                <Route path="/products/new" exact={true}>
+                    <CreateProduct />
+                </Route>
                 <Route path="/products/:productId" exact={true}>
                     <ProductDetail />
                 </Route>
-                <Route path="/products/:productId/edit" exact={true}>
+                <Route path="/products/:productId/edit" exact={true} store={store}>
                     <EditProduct />
                 </Route>
                 <Route path="/reviews/edit/:productId" exact={true}>

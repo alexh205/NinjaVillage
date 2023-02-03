@@ -175,7 +175,7 @@ const SignUpForm = () => {
     </form>
     <p className='text-[11px] text-white'>By creating an account, you agree to NinjaVillage's Conditions of Use and Privacy Notice.</p>
     <hr className='w-[60%] self-center my-4 drop-shadow-lg'></hr>
-   <div className='flex items-center'><p className='text-[12px] font-medium mr-1 text-white'>Already have an account? </p><a className='text-[12px] text-violet-400 flex flex-row items-center font-medium' href='/login'>Sign in <ChevronRightIcon className='h-[9px]'/></a></div>
+   <div className='flex items-center'><p className='text-[12px] font-medium mr-1 text-white'>Already have an account? </p><a className='text-[12px] text-violet-400 font-bold flex flex-row items-center font-medium' href='/login'>Sign in <ChevronRightIcon className='h-[9px]'/></a></div>
     </div>
     </div>
   );

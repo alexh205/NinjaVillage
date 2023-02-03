@@ -1,6 +1,6 @@
 import React from "react";
 import Product from "./Product";
-import amazon_banner_5 from '../../Media/Banner Images/amazon_banner_5.jpg'
+import ninjas from '../../Media/Banner Images/ninjas.jpg'
 
 const ProductFeed = ({ products, user, userCart }) => {
 
@@ -9,7 +9,7 @@ const ProductFeed = ({ products, user, userCart }) => {
             {Object.entries(products).slice(0, 4).map(product => (
                 <Product product={product[1]} user={user} userCart={userCart} key={product[1].id}/>
             ))}
-            <img className="md:col-span-full" src={amazon_banner_5}alt="" />
+            <img className="md:col-span-full" src={ninjas}alt="" />
 
             <div className="md:col-span-2">
 

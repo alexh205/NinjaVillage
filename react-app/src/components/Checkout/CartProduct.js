@@ -23,7 +23,7 @@ const CartProduct = ({ product }) => {
         <div className="grid grid-cols-5">
              <a href={`/products/${product.id}`}>
             <img
-                src={product.image}
+                src={product.image} alt=''
                 className="h-[200px] w-[200px] object-contain"
             /></a>
             {/* middle section  */}

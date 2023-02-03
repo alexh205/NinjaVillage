@@ -74,7 +74,7 @@ const ProductDetail = () => {
 
             <div className='flex flex-row items-center mb-2'>
               <div className='flex flex-row items-center my-2 mr-4'>
-              {ratingAvg ?[...Array(Math.floor(ratingAvg))].map((i)=> <FaStar size={17} className="text-yellow-500" key={i}/>): <FaStar size={20} color={"#e4e5e9"}/>}
+              {ratingAvg ?[...Array(Math.floor(ratingAvg))].map((star,i)=> <FaStar size={17} className="text-yellow-500" key={i}/>): <FaStar size={20} color={"#e4e5e9"}/>}
               </div>
 
                 <div>{product && product.productReviews.length === 1 ? <div className='text-sm text-sky-600'>{product.productReviews.length} rating</div> : product && product.productReviews.length > 1 ? <div className='text-sm text-sky-600 '>{product.productReviews.length} ratings </div>: <div className='text-sm text-sky-600'>0 rating</div>}</div>
@@ -113,7 +113,7 @@ const ProductDetail = () => {
           <div className='border-b border-1'></div>
         </div>
         <div>
-          <button className="mt-auto button" onClick={()=> {if (!user) {history.push('/login')} else {addItemToCart()}
+          <button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={()=> {if (!user) {history.push('/login')} else {addItemToCart()}
           }}>
                 {!user ? 'Sign in to add item' : 'Add to Cart'}
             </button>
@@ -128,3 +128,4 @@ const ProductDetail = () => {
 }
 
 export default ProductDetail
+
