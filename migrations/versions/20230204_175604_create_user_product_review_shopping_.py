@@ -40,10 +40,10 @@ def upgrade():
     )
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=150), nullable=False),
+    sa.Column('title', sa.String(length=160), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
-    sa.Column('category', sa.String(length=50), nullable=False),
+    sa.Column('category', sa.String(length=70), nullable=False),
     sa.Column('brand', sa.String(length=70), nullable=False),
     sa.Column('image', sa.String(length=500), nullable=False),
     sa.Column('count', sa.Integer(), nullable=True),
