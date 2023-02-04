@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
-import Currency from "react-currency-formatter";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCartItemThunk } from "../../store/sessionReducer";
 
@@ -41,7 +40,7 @@ const CartProduct = ({ product }) => {
             <button className="button mt-3" onClick={removeItemFromCart}> Remove from Cart</button>
             </div>
             <div className="flex flex-col space-y-2 justify-self-end font-semibold text-lg self-start">
-                <Currency quantity={product.price} />
+                <p>${product.price} </p>
             </div>
         </div>
     );

@@ -3,7 +3,6 @@ import Header from "../Header/Header";
 import checkout from "../../Media/checkout.png";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "./CartProduct";
-import Currency from "react-currency-formatter";
 import { useHistory } from "react-router-dom";
 
 const Cart = ({user}) => {
@@ -47,7 +46,7 @@ const Cart = ({user}) => {
                         <>
                         <h2 className="whitespace-nowrap">Subtotal ({cart.length} items): {" "}
                         <span className="font-bold">
-                            <Currency quantity={cartTotal} />
+                            <p>${cartTotal}</p>
                             </span>
                             </h2>
                             <button
@@ -58,7 +57,7 @@ const Cart = ({user}) => {
                      ): user && cart && cart.length === 0 ?<>
                      <h2 className="whitespace-nowrap">Subtotal ({cart.length} items): {" "}
                      <span className="font-bold">
-                         <Currency quantity={cartTotal} />
+                     <p>${cartTotal}</p>
                          </span>
                          </h2>
                          <button

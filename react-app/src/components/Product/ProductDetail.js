@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
-import Currency from "react-currency-formatter";
 import { addCartItemThunk } from '../../store/sessionReducer';
 import {FaStar} from 'react-icons/fa'
 import ReviewContainer from '../Review/ReviewContainer';
@@ -44,7 +43,7 @@ const ProductDetail = () => {
     <>
     <Header />
     <div className='flex flex-col mt-6 mx-4'>
-      {product && (<div className='flex flex-row mb-5'>
+      {product &&  (<div className='flex flex-row mb-5'>
         <div className='flex flex-row '>
           <div className='flex flex-col '>
             {user &&
@@ -62,7 +61,7 @@ const ProductDetail = () => {
               }}>Delete listing</button></div>)
               :(!user) && (null)}
 
-            <img className='w-[300px] h-[340px] object-contain' src={product.image} alt=''/>
+            <img className='sm:min-w-[300px] min-w-[250px] sm:min-h-[280px] max-h-[300px] object-contain' src={product.image} alt=''/>
             {/* <p className='text-center text-sm text-gray-500'>Roll over image to zoom in</p> */}
           </div>
 
@@ -87,7 +86,7 @@ const ProductDetail = () => {
             </div>
             <div className='flex flex-row'>
               <p className='mr-2 my-2'>Price: </p>
-              <p className='text-orange-700 text-lg my-2'><Currency quantity={product.price}/></p>
+              <p className='text-orange-700 text-lg my-2'>${product.price}</p>
               </div>
               <div className='border-b border-1'>
               </div>
@@ -113,10 +112,10 @@ const ProductDetail = () => {
           <div className='border-b border-1'></div>
         </div>
         <div>
-          <button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={()=> {if (!user) {history.push('/login')} else {addItemToCart()}
+          {user && (<button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={()=> {if (!user) {history.push('/login')} else {addItemToCart()}
           }}>
                 {!user ? 'Sign in to add item' : 'Add to Cart'}
-            </button>
+            </button>)}
             </div>
       </div>)}
     <div>

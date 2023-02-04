@@ -1,5 +1,4 @@
 import React from "react";
-import Currency from "react-currency-formatter";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCartItemThunk } from "../../store/sessionReducer";
 
@@ -21,7 +20,8 @@ const CheckoutProduct = ({ product }) => {
             <div className="flex flex-col mt-5">
                 <p className="text-sm font-bold">{product.title}</p>
                 <p className="text-sm font-bold text-orange-700">
-                    <Currency quantity={product.price} />
+
+                    <p>$ {product.price}</p>
                 </p>
                 <div className="flex">
                     <p className="text-xs text-gray-500">Sold by:</p>

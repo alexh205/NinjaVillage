@@ -1,6 +1,5 @@
 import React from "react";
 import {FaStar} from 'react-icons/fa'
-import Currency from "react-currency-formatter";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItemThunk } from "../../store/sessionReducer";
 
@@ -30,7 +29,7 @@ const Product = ({ product, userCart }) => {
     };
 
     return (
-        <div className="relative flex flex-col m-5 bg-white z-30 p-10">
+        <div className="relative flex flex-col m-5 bg-white z-30 p-10 border-4 border-double rounded-2xl ">
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
@@ -46,7 +45,8 @@ const Product = ({ product, userCart }) => {
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
             <div className="mb-5">
-                <Currency quantity={product.price} />
+            
+                <p>${product.price}</p>
             </div>
             {user && (<button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={addItemToCart}>
                 Add to Cart

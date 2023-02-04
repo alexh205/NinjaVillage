@@ -5,7 +5,6 @@ import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutProduct from "./CheckoutProduct";
 import checkoutImg from "../../Media/checkoutImg.png";
-import Currency from "react-currency-formatter";
 
 const Payment = () => {
     const history = useHistory();
@@ -119,7 +118,8 @@ const Payment = () => {
                                             <div className=" flex text-md text-orange-700 p-0 m-0">
                                                 Order total:
                                                 <p className="ml-2">
-                                                    <Currency quantity={cartTotal}/>
+                                                    <p>${cartTotal}</p>
+
                                                 </p>
                                             </div>
                                             <p className="text-[10px] text-gray-500 p-0 m-0">
@@ -145,7 +145,7 @@ const Payment = () => {
                         <div className="font-semibold text-lg ml-4 mt-2">Order Summary</div>
                         <div className="flex flex-row justify-between mx-4 text-xs mt-4">
                             <p>Items:</p>
-                            <p><Currency quantity={cartTotal}/> </p>
+                            <p>${cartTotal}</p>
                         </div>
                         <div className="flex flex-row justify-between mx-4 text-xs mt-1">
                             <p>Shipping & handling:</p>
