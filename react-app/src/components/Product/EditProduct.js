@@ -109,18 +109,18 @@ const EditProduct = () => {
                   <select
                       className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                       name="category"
-
                       onChange={e => setCategory(e.target.value)}
                       value={category}
                       >
-                        <option>Beauty & Personal Care</option>
-                        <option>Books</option>
-                        <option>Clothing, Shoes & Jewelry</option>
-                        <option>Electronics</option>
-                        <option>Groceries</option>
-                        <option>Health & Household</option>
-                        <option>Pet Supplies</option>
-                        <option>Video Games</option>
+                        <option value="">--Please choose a category--</option>
+                        <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+                        <option value="Books">Books</option>
+                        <option value="Clothing, Shoes & Jewelry">Clothing, Shoes & Jewelry</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Health & Household">Health & Household</option>
+                        <option value="Pet Supplies">Pet Supplies</option>
+                        <option value="Video Games">Video Games</option>
                       </select>
               </div>
 

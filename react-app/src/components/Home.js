@@ -13,7 +13,6 @@ const Home = () => {
   const userCart = useSelector(state => state.session.activeCart)
   const cartArr = useSelector(state => state.session.activeCart.cartProducts)
 
-
   return (
     <div>
       <Header cart={cartArr && cartArr.length && currentUser ? cartArr.length : 0}/>

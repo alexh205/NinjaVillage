@@ -148,19 +148,22 @@ export const getUserThunk = userId => async dispatch => {
     dispatch(setUser(response));
 };
 
-export const editUserThunk = user => async dispatch => {
-    const request = await fetch(`/api/users/${user.userId}`, {
+export const editUserThunk = (username, email, name, streetAddress, city, state, zipCode, profileImg, password, userId) => async dispatch => {
+    const request = await fetch(`/api/users/${userId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            email: user.email,
-            password: user.password,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            profile_img: user.profile_img,
-            user_name: user.username,
+            username,
+            email,
+            password,
+            name,
+            street_address: streetAddress,
+            city,
+            state,
+            zip_code: zipCode,
+            profile_img: profileImg,
         }),
     });
 

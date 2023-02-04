@@ -188,7 +188,6 @@ const CreateProduct = () => {
                     <button
                         className="button ml-10"
                         onClick={e => {
-
                             onProductCreate(e);
                             // history.push(`/products/${product.id}`);
                         }}>

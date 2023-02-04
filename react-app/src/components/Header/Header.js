@@ -32,12 +32,8 @@ const Header = () => {
             </div>
             {/* top nav right side */}
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
-                    <DropDownMenu />
-                {/* <div className="link" onClick={()=>{history.push('/login')}}>
-                    <p>{user ? `Hello, ${user.name}` : "Sign In"}</p>
-                    <p className="font-extrabold md:text-sm">Account & Lists</p>
-                </div> */}
-                {/* list user's completed shopping carts */}
+                <DropDownMenu />
+
                 <div className="link">
                     <p>Returns</p>
                     <p className="font-extrabold md:text-sm">& Orders</p>
@@ -50,6 +46,7 @@ const Header = () => {
                     <ShoppingCartIcon className="h-10 "/>
                     <p className="hidden md:inline mt-2 font-extrabold md:text-sm ">Cart</p>
                 </div>
+                
             </div>
         </div>
         {/* lower nav */}

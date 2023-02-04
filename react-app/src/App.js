@@ -14,6 +14,7 @@ import EditReview from "./components/Review/EditReview";
 import CreateReview from "./components/Review/CreateReview";
 import EditProduct from "./components/Product/EditProduct";
 import Profile from "./components/Profile/Profile";
+import EditProfile from "./components/Profile/EditProfile";
 import CreateProduct from "./components/Product/CreateProduct";
 
 function App() {
@@ -67,7 +68,10 @@ function App() {
                 <Route path="/signup" exact={true}>
                     <SignUpForm />
                 </Route>
-                <Route path="/users/:userId" exact={true}>
+                <Route path="/users/edit/:userId/" exact={true}>
+                    <EditProfile />
+                </Route>
+                <Route path="/profile/:userId" exact={true}>
                     <Profile />
                 </Route>
                 <Route path="/products/new" exact={true}>
@@ -76,10 +80,10 @@ function App() {
                 <Route path="/products/:productId" exact={true}>
                     <ProductDetail />
                 </Route>
-                <Route path="/products/:productId/edit" exact={true} store={store}>
+                <Route path="/products/:productId/edit" user={user} exact={true} >
                     <EditProduct />
                 </Route>
-                <Route path="/reviews/edit/:productId" exact={true}>
+                <Route path="/reviews/:productId/edit" exact={true}>
                     <EditReview />
                 </Route>
                 <Route path="/reviews/:productId" exact={true}>

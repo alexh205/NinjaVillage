@@ -39,7 +39,7 @@ const DropDownMenu = () => {
                             <Menu.Item className='flex flex-row my-1 pb-2 px-[26px] items-center border-b-[2px] border-black'>
                                 <a
                                     className="text-black text-[17px] font-bold"
-                                    href={`/users/${user.id}`}> <RiUserSettingsLine className="text-ninja_green text-2xl mr-1"/>
+                                    href={`/profile/${user.id}`}> <RiUserSettingsLine className="text-ninja_green text-2xl mr-1"/>
                                     Profile </a>
                             </Menu.Item>
 
@@ -56,8 +56,6 @@ const DropDownMenu = () => {
                                     href="/account-settings"><ClipboardDocumentListIcon className="text-ninja_green h-6 mr-1"/>
                                     Wish Lists </a>
                             </Menu.Item>
-
-
 
                             <Menu.Button
                                 className='text-black text-[16px] font-bold mr-2 flex flex-row my-1 pb-2 items-center'

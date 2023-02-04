@@ -1,42 +1,43 @@
-import React, {useState} from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { editUserThunk, getUserThunk } from '../../store/sessionReducer'
+import React, {useState} from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Header from "../Header/Header";
+import EditProfile from "./EditProfile";
+import UserProducts from "../Product/UserProducts";
+import UserReviews from "../Review/UserReviews";
 
 const Profile = () => {
-    const {userId} = useParams()
     const user = useSelector(state => state.session.user);
+    const history = useHistory();
 
-    const dispatch = useDispatch()
-    const history = useHistory()
+    return (
+        <div>
+            <Header />
+            <div className="mt-5 justify-center flex">
+                <div className="flex flex-col  border-[2px] justify-center items-center max-h-[320px] max-w-[500px] px-[110px] pb-2">
+                    <img
+                        className="rounded-full max-h-[160px] max-w-[120px] mt-2"
+                        src={user.profileImage} alt=''></img>
 
-    const [username, setUsername] = useState(user.username)
-    const [email, setEmail] = useState(user.email)
-    const [name, setName] = useState(user.Name)
-    const [streetAddress, setStreetAddress] = useState(user.street_address)
-    const [city, setCity] = useState(user.city)
-    const [state, setState] = useState(user.state)
-    const [zipCode, setZipCode] = useState(user.zip_code)
-    const [profileImg, setProfileImg] = useState(user.profile_img)
-    const [password, setPassword] = useState(user.password)
-    const [repeatPassword, setRepeatPassword] = useState('')
+                    <div className="flex flex-row items-center mb-1">
+                        <label className="text-lg font-semibold mr-3">
+                            Username:
+                        </label>
+                        <p>{user.username}</p>
+                    </div>
 
+                    <div className="flex flex-row items-center mb-2">
+                        <label className="text-lg font-semibold mr-3">
+                            Email:
+                        </label>
+                        <p>{user.email}</p>
+                    </div>
+                    {/* <div onClick={}> <EditProfile /></div> */}
+                </div>
+                <div></div>
+            </div>
+        </div>
+    );
+};
 
-    const onProfileEdit = async e => {
-        e.preventDefault();
-
-        await dispatch(
-            editUserThunk(username,email, name, streetAddress, city, state, zipCode,profileImg, password, userId)
-        );
-
-        
-    };
-  return (
-    <div>
-        <div></div>
-        <div></div>
-    </div>
-  )
-}
-
-export default Profile
+export default Profile;
