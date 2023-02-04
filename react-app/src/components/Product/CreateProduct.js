@@ -63,7 +63,7 @@ const CreateProduct = () => {
         setImage('')
         setCount('')
         setValidateErrors([])
-   
+
         history.push(`/products/${product.id}`);
     };
 
@@ -88,7 +88,7 @@ const CreateProduct = () => {
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="text"
                         size="57"
-                        maxLength="50"
+                        maxLength="90"
                         name="title"
                         onChange={e => setTitle(e.target.value)}
                         value={title}
@@ -101,7 +101,6 @@ const CreateProduct = () => {
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="text"
                         size="57"
-                        maxLength="50"
                         name="price"
                         onChange={e => setPrice(e.target.value)}
                         value={price}
@@ -115,7 +114,7 @@ const CreateProduct = () => {
                     <textarea
                         className="mb-6 border-[2px] p-2 rounded-sm"
                         rows="4"
-                        maxLength="300"
+                        maxLength="1000"
                         name="description"
                         onChange={e => setDescription(e.target.value)}
                         value={description}></textarea>
@@ -146,7 +145,7 @@ const CreateProduct = () => {
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="text"
                         size="57"
-                        maxLength="50"
+                        maxLength="60"
                         name="brand"
                         onChange={e => setBrand(e.target.value)}
                         value={brand}
@@ -159,7 +158,7 @@ const CreateProduct = () => {
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="url"
                         size="80"
-                        maxLength="50"
+                        maxLength="500"
                         name="image"
                         onChange={e => setImage(e.target.value)}
                         value={image}

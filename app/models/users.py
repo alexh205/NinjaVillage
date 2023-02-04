@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(10), nullable=False)
     zip_code = db.Column(db.Integer, nullable=False)
-    profile_img = db.Column(db.String(400))
+    profile_img = db.Column(db.String(500))
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
     #! Relationships

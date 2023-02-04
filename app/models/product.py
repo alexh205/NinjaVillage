@@ -10,12 +10,12 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(90), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(600), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
     category = db.Column(db.String(40), nullable=False)
-    brand = db.Column(db.String(40), nullable=False)
-    image = db.Column(db.String(400), nullable=False)
+    brand = db.Column(db.String(60), nullable=False)
+    image = db.Column(db.String(500), nullable=False)
     count = db.Column(db.Integer)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
