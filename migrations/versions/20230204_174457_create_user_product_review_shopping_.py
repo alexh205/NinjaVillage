@@ -1,12 +1,13 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: a32e962d1adc
+Revision ID: a699d8ff7bfb
 Revises:
-Create Date: 2023-02-02 20:04:14.774750
+Create Date: 2023-02-04 17:44:57.333396
 
 """
 from alembic import op
 import sqlalchemy as sa
+
 
 import os
 environment = os.getenv("FLASK_ENV")
@@ -14,7 +15,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'a32e962d1adc'
+revision = 'a699d8ff7bfb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,7 +33,7 @@ def upgrade():
     sa.Column('city', sa.String(length=50), nullable=False),
     sa.Column('state', sa.String(length=10), nullable=False),
     sa.Column('zip_code', sa.Integer(), nullable=False),
-    sa.Column('profile_img', sa.String(length=400), nullable=True),
+    sa.Column('profile_img', sa.String(length=500), nullable=True),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
@@ -40,12 +41,12 @@ def upgrade():
     )
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('title', sa.String(length=90), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('description', sa.String(length=600), nullable=False),
+    sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('category', sa.String(length=40), nullable=False),
-    sa.Column('brand', sa.String(length=40), nullable=False),
-    sa.Column('image', sa.String(length=400), nullable=False),
+    sa.Column('brand', sa.String(length=60), nullable=False),
+    sa.Column('image', sa.String(length=500), nullable=False),
     sa.Column('count', sa.Integer(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
@@ -106,6 +107,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
