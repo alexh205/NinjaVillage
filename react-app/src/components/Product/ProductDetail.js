@@ -45,7 +45,7 @@ const ProductDetail = () => {
     <div className='flex flex-col mt-6 mx-4'>
       {product &&  (<div className='flex flex-row mb-5'>
         <div className='flex flex-row '>
-          <div className='flex flex-col '>
+          <div className='flex flex-col justify-center'>
             {user &&
             (product.ownerId === user.id) ? (<div className='flex flex-row items-center justify-center my-4'>
               <button className='mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3' onClick={e => {
