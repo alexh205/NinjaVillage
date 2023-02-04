@@ -22,34 +22,73 @@ const EditReview = () => {
   const [rating, setRating] = useState('')
   const [hover, setHover] = useState('')
 
-  const [errors, setErrors] = useState([])
+  const [valid, setValid] = useState(false)
+  const [validateErrors, setValidateErrors] = useState([]);
 
 
+  if(product&& reviewObj && user)
+  {
+    if(!valid){
+      setTitle(reviewObj.title)
+      setReview(reviewObj.review)
+      setRating(reviewObj.rating)
+      setHover(reviewObj.rating)
+      setValid(true)
+      }
+
+  const validate = () => {
+    const errors = [];
+
+    if (!title) errors.push("Please provide a 'Title'");
+    if (!review) errors.push("Please provide a 'Review'");
+    if (!rating) errors.push("Please provide a 'Rating'");
+
+    return errors;
+  }
 
   const onReviewEdit = async (e) => {
     e.preventDefault();
+
+    const errors = validate();
+    if (errors.length > 0) return setValidateErrors(errors);
+
 
     const reviewId = reviewObj.id
 
     await dispatch(editReviewThunk(title, review, rating, reviewId))
 
     await dispatch(getAllProductThunk())
+
+    setTitle('')
+    setReview('')
+    setRating(0)
+    setHover(0)
+    setValid(false)
+
+    setValidateErrors([])
+
+    history.push(`/products/${productId}`)
   }
 
-  if(product&& reviewObj && user)
-  {
-    if(!title){
-      setTitle(reviewObj.title)
-      setReview(reviewObj.review)
-      setRating(reviewObj.rating)
-      setHover(reviewObj.rating)
-      }
+
     return (
     <>
     <Header />
     <div className='inline-flex flex-col mr-[610px] lg:flex  ml-[80px]'>
       <div className='flex flex-col mt-8 border-b'>
         <h1 className='font-bold text-3xl'>Edit Review</h1>
+        {validateErrors.length > 0 && (
+                        <div className="my-2 ml-2">
+                            <h3 className="font-bold text-[16px] ">
+                                The following errors were found:
+                            </h3>
+                            <ul className="text-red-600 text-[13px] font-semibold ml-2">
+                                {validateErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
         {product && (<div className='flex flex-row items-center my-5'>
          <img src={product.image} alt='' className="w-[60px] h-[70px] mr-4"></img>
           <div className='sm:line-clamp-4'>{product.title}</div>
@@ -57,16 +96,12 @@ const EditReview = () => {
 
         </div>
       <form className='mt-6'>
-        <div>
-          {errors.map((error, i) => (
-            <div key={i}>{error}</div>
-          ))}
-        </div>
+
         <div className='flex flex-row items-center justify-between mb-3 ml-1'>
           <h1 className='font-bold text-xl '>Overall Rating</h1>
           <p className=' cursor-pointer text-teal-700 text-sm' onClick={() => {
-             setRating(1)
-             setHover(1)
+             setRating(0)
+             setHover(0)
           }}>Clear</p>
         </div>
 
@@ -112,13 +147,14 @@ const EditReview = () => {
           <button className='button' onClick={e => {
             setTitle('')
             setReview('')
-            setRating(1)
+            setRating(0)
+            setHover(0)
+            setValid(false)
             history.push(`/products/${productId}`)
             }}>Cancel</button>
           <button className='button ml-10' onClick={e => {
-            setErrors([])
+
             onReviewEdit(e)
-            history.push(`/products/${productId}`)
           }}>Submit</button>
         </div>
       </form>

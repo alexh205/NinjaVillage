@@ -50,7 +50,7 @@ const ProductDetail = () => {
             {user &&
             (product.ownerId === user.id) ? (<div className='flex flex-row items-center justify-center my-4'>
               <button className='mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3' onClick={e => {
-                history.push(`/products/${productId}/edit`)
+                history.push(`/products/edit/${productId}`)
               }}>Edit listing</button>
 
               <button className='mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800   font-semibold px-5 border border-gray-400 rounded shadow' onClick={ async (e) => {
@@ -128,4 +128,3 @@ const ProductDetail = () => {
 }
 
 export default ProductDetail
-

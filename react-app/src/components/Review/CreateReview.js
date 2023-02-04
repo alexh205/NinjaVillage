@@ -25,7 +25,7 @@ const CreateReview = () => {
 
         if (!title) errors.push("Please provide a 'Title'");
         if (!review) errors.push("Please provide a 'Review'");
-        // if (!rating) errors.push("Please provide a 'Rating'");
+        if (!rating) errors.push("Please provide a 'Rating'");
 
         return errors;
       }
@@ -48,9 +48,11 @@ const CreateReview = () => {
 
     setTitle('')
     setReview('')
-    // setRating(0)
-    // setHover(0)
+    setRating(0)
+    setHover(0)
     setValidateErrors([])
+
+    history.push(`/products/${productId}`)
   }
 
   return (
@@ -79,8 +81,8 @@ const CreateReview = () => {
         <div className='flex flex-row items-center justify-between mb-3 ml-1'>
           <h1 className='font-bold text-xl '>Overall Rating</h1>
           <p className=' cursor-pointer text-teal-700 text-sm' onClick={() => {
-             setRating(1)
-             setHover(1)
+             setRating(0)
+             setHover(0)
           }}>Clear</p>
         </div>
 
@@ -128,11 +130,12 @@ const CreateReview = () => {
             setTitle('')
             setReview('')
             setRating(0)
+            setHover(0)
             history.push(`/products/${productId}`)
             }}>Cancel</button>
           <button className='button ml-10' onClick={e => {
             onReviewCreation(e)
-            // history.push(`/products/${productId}`)
+
           }}>Submit</button>
         </div>
       </form>

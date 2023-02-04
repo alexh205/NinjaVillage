@@ -87,6 +87,7 @@ const EditProfile = () => {
   return (
       <div>
         <Header />
+        {console.log('test')}
         <div className="flex flex-col mt-6 mx-10 border-b">
                 <h1 className="font-bold text-3xl">Edit Profile</h1>
                 {validateErrors.length > 0 && (

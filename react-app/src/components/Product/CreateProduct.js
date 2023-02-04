@@ -41,7 +41,7 @@ const CreateProduct = () => {
 
         if (errors.length > 0) return setValidateErrors(errors);
 
-        await dispatch(
+       const product= await dispatch(
             createProductThunk(
                 title,
                 price,
@@ -63,7 +63,8 @@ const CreateProduct = () => {
         setImage('')
         setCount('')
         setValidateErrors([])
-
+   
+        history.push(`/products/${product.id}`);
     };
 
     return (
@@ -170,7 +171,7 @@ const CreateProduct = () => {
                     <input
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="number"
-                        //   size="4"
+
                         name="count"
                         onChange={e => setCount(e.target.value)}
                         value={count}
@@ -189,7 +190,7 @@ const CreateProduct = () => {
                         className="button ml-10"
                         onClick={e => {
                             onProductCreate(e);
-                            // history.push(`/products/${product.id}`);
+
                         }}>
                         Submit
                     </button>

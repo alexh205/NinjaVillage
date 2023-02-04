@@ -103,6 +103,8 @@ export const createProductThunk =
 
 
         dispatch(addProduct(response));
+
+        return response
     };
 
 export const editProductThunk =
@@ -124,6 +126,7 @@ export const editProductThunk =
         const response = await request.json();
 
         dispatch(editProduct(response));
+        return response
     };
 
 export const deleteProductThunk = productId => async dispatch => {
@@ -173,6 +176,7 @@ export const createReviewThunk =
         const response = await request.json();
 
         dispatch(addProduct(response));
+        
     };
 
 export const editReviewThunk =
