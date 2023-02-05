@@ -70,8 +70,9 @@ const CreateProduct = () => {
     return (
         <div>
             <Header />
+            <div className="mx-4 md:mx-40">
             <div className="flex flex-col mt-6 mx-10 border-b">
-                <h1 className="font-bold text-3xl">Create a Listing</h1>
+                <h1 className="font-bold text-4xl text-ninja_green mb-2">Create a Listing</h1>
                 {validateErrors.length > 0 && (
                 <div className="my-2 ml-2">
                 <h3 className="font-bold text-[16px] ">The following errors were found:</h3>
@@ -87,7 +88,7 @@ const CreateProduct = () => {
                     <input
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="text"
-                        size="57"
+                        size="40"
                         maxLength="90"
                         name="title"
                         onChange={e => setTitle(e.target.value)}
@@ -100,7 +101,7 @@ const CreateProduct = () => {
                     <input
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="text"
-                        size="57"
+                        size="20"
                         name="price"
                         onChange={e => setPrice(e.target.value)}
                         value={price}
@@ -144,7 +145,7 @@ const CreateProduct = () => {
                     <input
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="text"
-                        size="57"
+                        size="30"
                         maxLength="60"
                         name="brand"
                         onChange={e => setBrand(e.target.value)}
@@ -157,7 +158,7 @@ const CreateProduct = () => {
                     <input
                         className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                         type="url"
-                        size="80"
+                        size="50"
                         maxLength="500"
                         name="image"
                         onChange={e => setImage(e.target.value)}
@@ -177,7 +178,7 @@ const CreateProduct = () => {
                         required={true}></input>
                 </div>
 
-                <div className="flex flex-row mt-5 justify-end">
+                <div className="flex flex-row mt-5 mb-4 justify-end">
                     <button
                         className="button"
                         onClick={e => {
@@ -195,6 +196,7 @@ const CreateProduct = () => {
                     </button>
                 </div>
             </form>
+            </div>
         </div>
     );
 };

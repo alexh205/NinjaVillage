@@ -68,9 +68,9 @@ function App() {
                 <Route path="/signup" exact={true}>
                     <SignUpForm />
                 </Route>
-                <Route path="/users/edit/:userId" exact={true}>
+                {/* <Route path="/users/edit/:userId" exact={true}>
                     <EditProfile />
-                </Route>
+                </Route> */}
                 <Route path="/profile/:userId" exact={true}>
                     <Profile />
                 </Route>

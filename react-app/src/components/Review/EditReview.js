@@ -74,9 +74,9 @@ const EditReview = () => {
     return (
     <>
     <Header />
-    <div className='inline-flex flex-col mr-[610px] lg:flex  ml-[80px]'>
+    <div className='inline-flex flex-col  lg:flex  mx-5 md:mx-40'>
       <div className='flex flex-col mt-8 border-b'>
-        <h1 className='font-bold text-3xl'>Edit Review</h1>
+        <h1 className='font-bold text-4xl text-ninja_green'>Edit Review</h1>
         {validateErrors.length > 0 && (
                         <div className="my-2 ml-2">
                             <h3 className="font-bold text-[16px] ">
@@ -126,7 +126,7 @@ const EditReview = () => {
             })}
             </div>
         </div>
-        <div className='mt-3 flex flex-col border-b'>
+        <div className='mt-3 flex flex-col border-b '>
           <label className='font-bold text-xl my-4'>Add a title</label>
           <input className='flex self-start mb-6 p-1 text-left border-[2px] rounded-sm' type='text' size='57' maxLength='50'
           name='title' onChange={e => setTitle(e.target.value)}

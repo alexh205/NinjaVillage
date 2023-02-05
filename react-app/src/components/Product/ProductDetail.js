@@ -42,7 +42,7 @@ const ProductDetail = () => {
   return (
     <>
     <Header />
-    <div className='flex flex-col mt-6 mx-4'>
+    <div className='flex flex-col mt-6 mx-3 '>
       {product &&  (<div className='flex flex-row mb-5'>
         <div className='flex flex-row '>
           <div className='flex flex-col justify-center'>
@@ -52,7 +52,7 @@ const ProductDetail = () => {
                 history.push(`/products/edit/${productId}`)
               }}>Edit listing</button>
 
-              <button className='mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800   font-semibold px-5 border border-gray-400 rounded shadow' onClick={ async (e) => {
+              <button className='mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow' onClick={ async (e) => {
                 e.preventDefault()
 
                 await dispatch(deleteProductThunk(productId))
@@ -61,12 +61,12 @@ const ProductDetail = () => {
               }}>Delete listing</button></div>)
               :(!user) && (null)}
 
-            <img className='sm:min-w-[300px] min-w-[250px] sm:min-h-[280px] max-h-[300px] object-contain' src={product.image} alt=''/>
+            <img className='hidden md:flex md:min-w-[300px] min-w-[250px] md:min-h-[280px] max-h-[300px] object-contain' src={product.image} alt=''/>
             {/* <p className='text-center text-sm text-gray-500'>Roll over image to zoom in</p> */}
           </div>
 
-          <div className='flex flex-col ml-8'>
-            <div className='text-[28px] font-semibold'>{product.title}
+          <div className='flex flex-col ml-7'>
+            <div className='md:text-[28px] text-[22px] font-semibold'>{product.title}
             </div>
 
             <div className='text-sm cursor-pointer text-sky-600 text-semibold'>Visit {product.brand}</div>
@@ -95,24 +95,24 @@ const ProductDetail = () => {
           <p className='my-2 text-lg font-medium'>About this item:</p>
           <div>
             <p className='text-md mb-1 ml-2 text-teal-600'>Description: </p>
-            <p className='text-sm block ml-7'>{product.description}</p>
+            <p className='text-sm block ml-5'>{product.description}</p>
             </div>
 
           <div>
             <p className='text-md my-1 ml-2 text-teal-600'>Brand: </p>
-            <p className='text-sm block ml-7'>{product.brand}</p>
+            <p className='text-sm block ml-5'>{product.brand}</p>
             </div>
           <div>
             <p className='text-md my-1 ml-2 text-teal-600'>Category: </p>
-            <p className='text-sm block ml-7'>{product.category}</p>
+            <p className='text-sm block ml-5'>{product.category}</p>
             </div>
 
           </div>
           </div>
           <div className='border-b border-1'></div>
         </div>
-        <div>
-          {user && (<button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={()=> {if (!user) {history.push('/login')} else {addItemToCart()}
+        <div className='flex flex-row justify-end self-start md:w-[140px] md:min-w-[140px] min-w-[80px] w-[80px] md:text-[10px] text-[14px]'>
+          {user && (<button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'button'}`} onClick={()=> {if (!user) {history.push('/login')} else {addItemToCart()}
           }}>
                 {!user ? 'Sign in to add item' : 'Add to Cart'}
             </button>)}
