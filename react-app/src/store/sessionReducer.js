@@ -172,6 +172,10 @@ export const editUserThunk = (username, email, name, streetAddress, city, state,
         dispatch(setUser(data));
     }
 };
+export const deleteUserThunk = userId => async dispatch => {
+    const request = await fetch(`/api/users/${userId}`, {
+        method: "DELETE",
+}); dispatch(removeUser());}
 
 // *************** Cart ****************************
 

@@ -12,17 +12,17 @@ const CheckoutProduct = ({ product }) => {
         dispatch(removeCartItemThunk(product.id, cart.id))
     };
     return (
-        <div className="flex flex-row ml-4 my-3">
+        <div className="flex flex-row ml-4 my-2">
             <img
                 src={product.image}
                 alt=""
-                className="object-contain h-40 w-20 mr-4"/>
+                className="object-contain h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4"/>
             <div className="flex flex-col mt-5">
-                <p className="text-sm font-bold">{product.title}</p>
-                <p className="text-sm font-bold text-orange-700">
+                <div className="text-[12px] md:text-sm font-bold">{product.title}</div>
+                <div className="text-sm font-bold text-orange-700">
 
-                    <p>$ {product.price}</p>
-                </p>
+                    <p>${product.price}</p>
+                </div>
                 <div className="flex">
                     <p className="text-xs text-gray-500">Sold by:</p>
                     <p className="ml-1 text-xs text-gray-500">{product.brand}</p>

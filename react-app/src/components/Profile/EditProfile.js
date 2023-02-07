@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { editUserThunk, getUserThunk } from "../../store/sessionReducer";
+import { useDispatch } from "react-redux";
+import { editUserThunk, deleteUserThunk } from "../../store/sessionReducer";
 // import { XCircleIcon } from "@heroicons/react/24/outline";
-import states from "../../Media/states.json";
+import stateTaxes from "../../Media/stateTaxes.json";
 
 const EditProfile = ({ user, showProfile }) => {
     const { userId } = useParams();
@@ -25,9 +25,7 @@ const EditProfile = ({ user, showProfile }) => {
     const [valid, setValid] = useState(false);
 
     const [validateErrors, setValidateErrors] = useState([]);
-    if (user.username === 'Demo'){
-        history.push('/')
-    }
+
     if (user) {
         if (!valid) {
             setUsername(user.username);
@@ -90,9 +88,28 @@ const EditProfile = ({ user, showProfile }) => {
                 )
             );
         };
+        const onProfileDelete = async e => {
+            setUsername("");
+            setEmail("");
+            setName("");
+            setStreetAddress("");
+            setCity("");
+            setState("");
+            setZipCode("");
+            setProfileImg("");
+            setPassword("");
+            setRepeatPassword("");
+            setValidateErrors([]);
+
+            await dispatch(
+                deleteUserThunk(
+                    userId
+                )
+            );
+        };
 
         return (
-            <div className=" justify-center flex flex-col mx-4 md:mx-40">
+            <div className=" justify-center flex flex-col mx-2 md:mx-40">
                 {/* <Header /> */}
                 <div className="flex flex-col mt-6 mx-10 border-b ">
                     <div className="flex flex-row justify-between">
@@ -117,12 +134,12 @@ const EditProfile = ({ user, showProfile }) => {
                 <form className="mt-4 mx-10 justify-center  flex flex-col">
                     <div className="mt-3 flex flex-row border-b">
                         <label className="font-bold text-xl mr-4  my-1">
-                            UserName:
+                            Username:
                         </label>
                         <input
                             className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                             type="text"
-                            size="30"
+                            size="25"
                             maxLength="50"
                             name="username"
                             onChange={e => setUsername(e.target.value)}
@@ -131,12 +148,12 @@ const EditProfile = ({ user, showProfile }) => {
 
                     <div className="mt-3 flex flex-row border-b">
                         <label className="font-bold text-xl mr-4 my-1">
-                            name:
+                            Name:
                         </label>
                         <input
                             className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                             type="text"
-                            size="30"
+                            size="25"
                             maxLength="50"
                             name="name"
                             onChange={e => setName(e.target.value)}
@@ -150,7 +167,7 @@ const EditProfile = ({ user, showProfile }) => {
                         <input
                             className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                             type="text"
-                            size="30"
+                            size="25"
                             maxLength="50"
                             name="email"
                             onChange={e => setEmail(e.target.value)}
@@ -164,7 +181,7 @@ const EditProfile = ({ user, showProfile }) => {
                         <input
                             className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                             type="text"
-                            size="30"
+                            size="25"
                             maxLength="50"
                             name="streetAddress"
                             onChange={e => setStreetAddress(e.target.value)}
@@ -178,7 +195,7 @@ const EditProfile = ({ user, showProfile }) => {
                         <input
                             className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
                             type="text"
-                            size="30"
+                            size="25"
                             maxLength="50"
                             name="city"
                             onChange={e => setCity(e.target.value)}
@@ -195,7 +212,7 @@ const EditProfile = ({ user, showProfile }) => {
                             onChange={e => setState(e.target.value)}
                             value={state}>
                             <option value="">--Please choose a State--</option>
-                            {states.map((state, i) => (
+                            {Object.keys(stateTaxes).map((state, i) => (
                                 <option key={i} value={state} className="">
                                     {state}
                                 </option>
@@ -231,9 +248,18 @@ const EditProfile = ({ user, showProfile }) => {
                             value={profileImg}></input>
                     </div>
 
-                    <div className="flex flex-row mt-5 justify-end">
+                    <div className="flex md:flex-row flex-col mt-5 justify-between">
+                                <div className="flex mb-3 md:mb-0">
+                            <button className="cursor-pointer text-white p-2 font-bold text-[9px] md:text-sm bg-gradient-to-b from-red-500 to-red-700 border-red-600 rounded-sm  focus:outline-none focus:ring-2 focus:ring-red-800 active:from-red-800"
+                            onClick={e => {
+                                onProfileDelete(e);
+                                history.push('/')
+                            }}>
+                            Delete Account</button>
+                            </div>
+                        <div>
                         <button
-                            className="button"
+                            className="button mr-2"
                             onClick={e => {
                                 setUsername("");
                                 setEmail("");
@@ -252,13 +278,14 @@ const EditProfile = ({ user, showProfile }) => {
                             Cancel
                         </button>
                         <button
-                            className="button ml-10"
+                            className="button ml-0 md:ml-6 mt-2 md:mt-0"
                             onClick={e => {
                                 onProfileEdit(e);
                                 showProfile(false);
                             }}>
                             Submit
                         </button>
+                        </div>
                     </div>
                 </form>
             </div>

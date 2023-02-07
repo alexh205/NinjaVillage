@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     MagnifyingGlassIcon,
     ShoppingCartIcon,
@@ -13,8 +13,12 @@ const Header = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const userCart = useSelector(state => state.session.activeCart.cartProducts)
+    const products = useSelector(state => state.productStore.products)
+    const [input, setInput] = useState('')
+    const [filterTerm, setFilterTerm] = useState('')
 
     return (
+
         <header>
         <div className="flex items-center bg-ninja_green p-1 flex-grow py-2">
             {/* top nav logo */}
@@ -26,10 +30,16 @@ const Header = () => {
                 />
             </div>
             {/* top nav search */}
-            <div className="hidden items-center h-10 rounded-md flex-grow cursor-pointer sm:flex bg-amber-500 hover:bg-amber-600 ">
-                <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
+            {products && <div className="hidden items-center h-10 rounded-md flex-grow cursor-pointer sm:flex bg-amber-500 hover:bg-amber-600 ">
+                <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" autoComplete='off'
+                placeholder={`Search for a product by name...`}
+                onChange={e => setInput(e.target.value)}
+                // onClick={() => setClicked(true)}
+                value={input}></input>
                 <MagnifyingGlassIcon className="h-14 p-4" />
-            </div>
+
+            </div> }
+
             {/* top nav right side */}
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
                 <DropDownMenu />
@@ -46,7 +56,6 @@ const Header = () => {
                     <ShoppingCartIcon className="h-10 "/>
                     <p className="hidden md:inline mt-2 font-extrabold md:text-sm ">Cart</p>
                 </div>
-                
             </div>
         </div>
         {/* lower nav */}
@@ -59,16 +68,17 @@ const Header = () => {
 
             {/* <p className="link">Today's Deals</p> */}
             <p className="link">Buy Again</p>
-            <p className="link">Books</p>
-            <p className="link ">Groceries</p>
-            <p className="link hidden lg:inline-flex">Beauty & Personal Care</p>
-            <p className="link hidden lg:inline-flex">Clothing, Shoes & Jewelry</p>
-            <p className="link hidden lg:inline-flex">Electronics</p>
-            <p className="link hidden lg:inline-flex">Health & Household</p>
-            <p className="link hidden lg:inline-flex">Pet Supplies</p>
-            <p className="link hidden lg:inline-flex">Video Games</p>
+            <p className="link" onClick={(e) => {setFilterTerm('Books')}}>Books</p>
+            <p className="link" onClick={(e) => {setFilterTerm('Groceries')}}>Groceries</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Beauty & Personal Care')}}>Beauty & Personal Care</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Clothing, Shoes & Jewelry')}}>Clothing, Shoes & Jewelry</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Electronics')}}>Electronics</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Health & Household')}}>Health & Household</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Supplies')}}>Pet Supplies</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Video Games')}}>Video Games</p>
         </div>
         </header>
+
     );
 };
 

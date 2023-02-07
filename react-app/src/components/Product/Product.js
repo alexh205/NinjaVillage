@@ -45,7 +45,7 @@ const Product = ({ product, userCart }) => {
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
             <div className="mb-5">
-            
+
                 <p>${product.price}</p>
             </div>
             {user && (<button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={addItemToCart}>

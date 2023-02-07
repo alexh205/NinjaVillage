@@ -176,7 +176,7 @@ export const createReviewThunk =
         const response = await request.json();
 
         dispatch(addProduct(response));
-        
+
     };
 
 export const editReviewThunk =

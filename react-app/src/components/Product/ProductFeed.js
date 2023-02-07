@@ -5,11 +5,11 @@ import ninjas from '../../Media/Banner Images/ninjas.jpg'
 const ProductFeed = ({ products, user, userCart }) => {
 
     return (
-        <div className=" grid grid-flow-row-dense md:grid-cols-2 md:-mt-[290px] mx-auto lg:grid-cols-3 xl:grid-cols-4">
+        <div className=" grid grid-flow-row-dense md:grid-cols-2 md:-mt-[450px] mx-auto lg:grid-cols-3 xl:grid-cols-4">
             {Object.entries(products).slice(0, 4).map(product => (
-                <Product product={product[1]} user={user} userCart={userCart} key={product[1].id}/>
+                <Product product={product[1]} user={user} userCart={userCart} key={product[1].id} />
             ))}
-            <img className="md:col-span-full" src={ninjas}alt="" />
+            <img className=" flex justify-self-center md:col-span-full h-[600px] w-[1400px] mt-[14px]" src={ninjas}alt="" />
 
             <div className="md:col-span-2">
 
