@@ -2,17 +2,31 @@ import React from "react";
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
 import { useHistory } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CheckoutProduct from "./CheckoutProduct";
 import checkoutImg from "../../Media/checkoutImg.png";
 import stateTaxes from "../../Media/stateTaxes.json";
+import { cartCheckout} from "../../store/sessionReducer";
+
 
 const Checkout = () => {
     const history = useHistory();
+    const dispatch = useDispatch()
+
+    const handleCheckout = async (e) => {
+        e.preventDefault()
+
+        await dispatch(cartCheckout())
+
+        history.push('/')
+
+
+    }
+
 
     const user = useSelector(state => state.session.user);
     const cartArr = useSelector(state => state.session.activeCart.cartProducts);
-    const cartTotal = Math.round(((cartArr.reduce((total, item) => total + item.price, 0)) + Number.EPSILON) * 100) / 100
+    const cartTotal = Math.round(((cartArr.reduce((total, item) => total + (item.price * item.quantity), 0)) + Number.EPSILON) * 100) / 100
     const preTax_total = Math.round(((cartTotal + 10) + Number.EPSILON) * 100) / 100
     const tax = Math.round(((preTax_total * Number((Object.entries(stateTaxes).reduce((accum, current)=> {
         const [key, value] =current
@@ -24,6 +38,8 @@ const Checkout = () => {
         }
         return [...accum]
     }, []))).toString()) + Number.EPSILON) * 100) / 100
+
+
 
     return (
         <>
@@ -122,7 +138,7 @@ const Checkout = () => {
                                     </div>
                                     {/* order + total  */}
                                     <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center">
-                                        <button className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]">
+                                        <button className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]" onClick={(e) => handleCheckout(e)}>
                                             Place your order
                                         </button>
                                         <div className="flex flex-col pl-2">
@@ -146,7 +162,7 @@ const Checkout = () => {
                 </div>
                 <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative ">
                     <div className="flex flex-col items-center">
-                        <button className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow">
+                        <button className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow" onClick={(e) => handleCheckout(e)}>
                         Place your order</button>
                         <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1"> By placing your order, you agree to NinjaVillage's privacy notice and conditions of use</p>
                         <hr className="w-[85%] mt-2"></hr>

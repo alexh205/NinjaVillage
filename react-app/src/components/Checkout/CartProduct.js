@@ -7,8 +7,8 @@ const CartProduct = ({ product }) => {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.session.activeCart);
 
-    const removeItemFromCart = () => {
-        dispatch(removeCartItemThunk(product.id, cart.id));
+    const removeItemFromCart = async () => {
+        await dispatch(removeCartItemThunk(product.id, cart.id));
     };
 
     let ratingTotal = 0;
@@ -38,10 +38,15 @@ const CartProduct = ({ product }) => {
                 <p className="text-xs my-2 line-clamp-3">
                     {product.description}
                 </p>
+                <div className="flex flex-row justify-between items-center">
+                    <div className="flex flex-row">
+                        <p className="font-bold mr-3">Quantity: </p>
+                        <p>{product.quantity}</p></div>
                 <button className="button mt-3" onClick={removeItemFromCart}>
                     {" "}
                     Remove from Cart
                 </button>
+                </div>
             </div>
             <div className="flex flex-col space-y-2 justify-self-end font-semibold text-lg self-start">
                 <p>${product.price} </p>

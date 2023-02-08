@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Header from "../Header/Header";
 import checkout from "../../Media/checkout.png";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import CartProduct from "./CartProduct";
 import { useHistory } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const Cart = ({user}) => {
     let cartTotal;
     if (user && cart) {
 
-        cartTotal = cart.reduce((total, item) => total + item.price, 0)}
+        cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0)}
 
 
     return (
@@ -41,13 +41,11 @@ const Cart = ({user}) => {
                     </div>
                 </div>
                 {/* right */}
-                <div className="flex flex-col bg-white p-10 shadow-md">
+                <div className="flex flex-col bg-white p-9 shadow-md">
                     {user && cart && cart.length > 0 ? (
                         <>
-                        <h2 className="whitespace-nowrap">Subtotal ({cart.length} items): {" "}
-                        <span className="font-bold">
-                            <p>${cartTotal}</p>
-                            </span>
+                        <h2 className="whitespace-nowrap font-bold text-lg static">Subtotal ({cart.length} items): {" "}
+                            {cartTotal > 0 ? <p>${Math.round(((cartTotal) + Number.EPSILON) * 100) / 100}</p>: <p>$0</p>}
                             </h2>
                             <button
                             className={`button mt-2 ${!user && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`} onClick={()=> history.push('/checkout')}>

@@ -1,20 +1,20 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: 94cdb12e5ea8
+Revision ID: e477d2644042
 Revises:
-Create Date: 2023-02-04 17:56:04.267566
+Create Date: 2023-02-07 16:16:29.576228
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '94cdb12e5ea8'
+revision = 'e477d2644042'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,6 +46,7 @@ def upgrade():
     sa.Column('category', sa.String(length=70), nullable=False),
     sa.Column('brand', sa.String(length=70), nullable=False),
     sa.Column('image', sa.String(length=500), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=True),
     sa.Column('count', sa.Integer(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),

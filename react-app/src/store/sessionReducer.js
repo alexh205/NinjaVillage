@@ -15,7 +15,7 @@ const CART_CHECKOUT = "cart/CART_CHECKOUT";
 
 // ACTION CREATORS
 // *************** User ****************************
-const setUser = user => {
+export const setUser = user => {
     return {
         type: SET_USER,
         payload: user,
@@ -49,7 +49,7 @@ const removeItem = item => {
         payload: item,
     };
 };
-const cartCheckout = () => {
+export const cartCheckout = () => {
     return {
         type: CART_CHECKOUT,
     };
@@ -243,16 +243,48 @@ const sessionReducer = (state = initialState, action) => {
         }
 
         case ADD_ITEM: {
-            currentState.activeCart.cartProducts = action.payload.cartProducts;
+            const addProd = [...currentState.activeCart.cartProducts]
+            for (let i=0; i < addProd.length; i++) {
+
+                console.log(action.payload)
+                if(addProd[i].id === action.payload.id){
+                   addProd[i].quantity += 1
+                   currentState.activeCart.cartProducts = addProd
+                    return currentState
+                }
+                // if(addProd[i].id !== action.payload.id){
+                //     addProd.push(action.payload)
+                //     currentState.activeCart.cartProducts = addProd
+                //     return currentState
+                // }
+
+            }
+
             return currentState;
         }
 
         case REMOVE_ITEM: {
-            currentState.activeCart.cartProducts = action.payload.cartProducts;
+            const removedProd = [...currentState.activeCart.cartProducts]
+           for (let i = 0; i< removedProd.length; i++) {
+            if (removedProd[i].id === action.payload.id && removedProd[i].quantity > 0) {
+                removedProd[i].quantity = removedProd[i].quantity -1
+                currentState.activeCart.cartProducts = removedProd
+                return currentState
+            } if(removedProd[i].id === action.payload.id && removedProd[i].quantity === 0){
+                removedProd.splice(i, 1)
+                currentState.activeCart.cartProducts = removedProd
+                return currentState
+            }
+        }
             return currentState;
         }
+
+
+
         case CART_CHECKOUT: {
-            return currentState.activeCart = {};
+            currentState.activeCart.checkedOut = true;
+            currentState.activeCart = {}
+            return currentState
         }
 
         default:

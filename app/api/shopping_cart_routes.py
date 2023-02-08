@@ -34,7 +34,8 @@ def shopping_cart_delete(id):
         if len(queried_shopping_cart.carts_product) > 0 and queried_product != None and queried_product in queried_shopping_cart.carts_product:
             queried_shopping_cart.carts_product.remove(queried_product)
             db.session.commit()
-            return queried_shopping_cart.to_dict()
+
+            return queried_product.to_dict()
         if len(queried_shopping_cart.carts_product) < 1 and queried_product != None:
             return {'message': 'Shopping Cart is currently empty!'}
         if len(queried_shopping_cart.carts_product) > 0 and queried_product != None and queried_product not in queried_shopping_cart.carts_product:
@@ -63,10 +64,14 @@ def shopping_cart_edit(id):
             if new_product.count == 0:
                 return {"message", 'Item is no longer available'}, 404
             else:
-                queried_shopping_cart.carts_product.append(new_product)
-                db.session.commit()
-
-        return queried_shopping_cart.to_dict()
+                for product in queried_shopping_cart.carts_product:
+                    if product.id == new_product.id:
+                        product.quantity = product.quantity + 1
+                        db.session.commit()
+                    if product.id != new_product.id:
+                        queried_shopping_cart.carts_product.append(new_product)
+                        db.session.commit()
+        return new_product.to_dict()
 
 #* Create Shopping Cart *****************************************************
 @shopping_cart_routes.route('/new', methods=['POST'])
@@ -83,21 +88,3 @@ def shopping_cart_create():
     db.session.commit()
 
     return new_shopping_cart.to_dict()
-
-#* Update Shopping Cart *****************************************************
-# @shopping_cart_routes.route('/update/<int:id>', methods=['PUT'])
-# @login_required
-# def shopping_cart_update(id):
-#     """
-#     Update an existing shopping_cart instance after checking for user ownership, and then add changes to database
-#     """
-#     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
-#     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
-
-
-#     if queried_user.id != current_user.id:
-#         return auth_error
-#     else:
-#         queried_shopping_cart.checked_out = True
-#         db.session.commit()
-#         return queried_shopping_cart.to_dict()

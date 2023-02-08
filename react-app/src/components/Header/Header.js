@@ -15,8 +15,8 @@ const Header = () => {
     const userCart = useSelector(state => state.session.activeCart.cartProducts)
     const products = useSelector(state => state.productStore.products)
     const [input, setInput] = useState('')
-    const [filterTerm, setFilterTerm] = useState('')
 
+//   console.log(input)
     return (
 
         <header>
@@ -66,16 +66,16 @@ const Header = () => {
                 All
             </p> */}
 
-            {/* <p className="link">Today's Deals</p> */}
+            <p className="link" onClick={(e) => {history.push(`/filters/${'All'}`)}}>All</p>
             <p className="link">Buy Again</p>
-            <p className="link" onClick={(e) => {setFilterTerm('Books')}}>Books</p>
-            <p className="link" onClick={(e) => {setFilterTerm('Groceries')}}>Groceries</p>
-            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Beauty & Personal Care')}}>Beauty & Personal Care</p>
-            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Clothing, Shoes & Jewelry')}}>Clothing, Shoes & Jewelry</p>
-            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Electronics')}}>Electronics</p>
-            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Health & Household')}}>Health & Household</p>
-            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Supplies')}}>Pet Supplies</p>
-            <p className="link hidden lg:inline-flex" onClick={(e) => {setFilterTerm('Video Games')}}>Video Games</p>
+            <p className="link" onClick={(e) => {history.push(`/filters/${'Books'}`)}}>Books</p>
+            <p className="link" onClick={(e) => {history.push(`/filters/${'Groceries'}`)}}>Groceries</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {history.push(`/filters/${'Beauty & Personal Care'}`)}}>Beauty & Personal Care</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {history.push(`/filters/${'Clothing, Shoes & Jewelry'}`)}}>Clothing, Shoes & Jewelry</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {history.push(`/filters/${'Electronics'}`)}}>Electronics</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {history.push(`/filters/${'Health & Household'}`)}}>Health & Household</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {history.push(`/filters/${'Pet Supplies'}`)}}>Pet Supplies</p>
+            <p className="link hidden lg:inline-flex" onClick={(e) => {history.push(`/filters/${'Video Games'}`)}}>Video Games</p>
         </div>
         </header>
 
