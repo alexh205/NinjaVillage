@@ -16,9 +16,9 @@ const Checkout = () => {
     const handleCheckout = async (e) => {
         e.preventDefault()
 
-        await dispatch(cartCheckout())
+        // await dispatch(cartCheckout())
 
-        history.push('/')
+        // history.push('/')
 
 
     }
@@ -26,7 +26,7 @@ const Checkout = () => {
 
     const user = useSelector(state => state.session.user);
     const cartArr = useSelector(state => state.session.activeCart.cartProducts);
-    const cartTotal = Math.round(((cartArr.reduce((total, item) => total + (item.price * item.quantity), 0)) + Number.EPSILON) * 100) / 100
+    const cartTotal = Math.round(((cartArr.reduce((total, item) => total + item.price, 0)) + Number.EPSILON) * 100) / 100
     const preTax_total = Math.round(((cartTotal + 10) + Number.EPSILON) * 100) / 100
     const tax = Math.round(((preTax_total * Number((Object.entries(stateTaxes).reduce((accum, current)=> {
         const [key, value] =current

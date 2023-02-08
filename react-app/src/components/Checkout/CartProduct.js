@@ -39,9 +39,7 @@ const CartProduct = ({ product }) => {
                     {product.description}
                 </p>
                 <div className="flex flex-row justify-between items-center">
-                    <div className="flex flex-row">
-                        <p className="font-bold mr-3">Quantity: </p>
-                        <p>{product.quantity}</p></div>
+                    
                 <button className="button mt-3" onClick={removeItemFromCart}>
                     {" "}
                     Remove from Cart

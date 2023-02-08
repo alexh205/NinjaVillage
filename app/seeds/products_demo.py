@@ -9,7 +9,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Wolf House",
             "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            "owner_id": 1, "count": 120
+            "owner_id": 1, 
         },
         {
             "title": "Mens Casual Premium Slim Fit T-Shirts ",
@@ -18,7 +18,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-            "owner_id": 1, "count": 259
+            "owner_id": 1,
         },
         {
             "title": "Mens Cotton Jacket",
@@ -27,7 +27,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-            "owner_id": 1, "count": 500
+            "owner_id": 1,
         },
         {
             "title": "Mens Casual Slim Fit",
@@ -36,7 +36,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-            "owner_id": 1, "count": 430
+            "owner_id": 1,
         },
         {
             "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
@@ -45,7 +45,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Mountain Glow",
             "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-            "owner_id": 1, "count": 400
+            "owner_id": 1,
         },
         {
             "title": "Solid Gold Petite Micropave ",
@@ -54,7 +54,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Mountain Glow",
             "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-            "owner_id": 7, "count": 70
+            "owner_id": 7,
         },
         {
             "title": "White Gold Plated Princess",
@@ -63,7 +63,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Mountain Glow",
             "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-            "owner_id": 7, "count": 400
+            "owner_id": 7,
         },
         {
             "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
@@ -72,7 +72,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Mountain Glow",
             "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-            "owner_id": 7, "count": 100
+            "owner_id": 7,
         },
         {
             "title": "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
@@ -81,7 +81,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "ElectroHut",
             "image": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-            "owner_id": 7, "count": 203
+            "owner_id": 7,
         },
         {
             "title": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
@@ -90,7 +90,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "ElectroHut",
             "image": "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
-            "owner_id": 7, "count": 470
+            "owner_id": 7,
         },
         {
             "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
@@ -99,7 +99,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "ElectroHut",
             "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
-            "owner_id": 7, "count": 319
+            "owner_id": 7,
         },
         {
             "title": "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
@@ -108,7 +108,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "ElectroHut",
             "image": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
-            "owner_id": 7, "count": 400
+            "owner_id": 7,
         },
         {
             "title": "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
@@ -117,7 +117,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "ElectroHut",
             "image": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
-            "owner_id": 7, "count": 250
+            "owner_id": 7,
         },
         {
             "title": "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ",
@@ -126,7 +126,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "ElectroHut",
             "image": "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
-            "owner_id": 7, "count": 140
+            "owner_id": 7,
         },
         {
             "title": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
@@ -135,7 +135,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
-            "owner_id": 7, "count": 235
+            "owner_id": 7,
         },
         {
             "title": "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
@@ -144,7 +144,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
-            "owner_id": 7, "count": 340
+            "owner_id": 7,
         },
         {
             "title": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
@@ -153,7 +153,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
-            "owner_id": 7, "count": 679
+            "owner_id": 7,
         },
         {
             "title": "MBJ Women's Solid Short Sleeve Boat Neck V ",
@@ -162,7 +162,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
-            "owner_id": 7, "count": 130
+            "owner_id": 7,
         },
         {
             "title": "Opna Women's Short Sleeve Moisture",
@@ -171,7 +171,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
-            "owner_id": 7, "count": 146
+            "owner_id": 7,
         },
         {
             "title": "DANVOUY Womens T Shirt Casual Cotton Short",
@@ -180,7 +180,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
-            "owner_id": 7, "count": 145
+            "owner_id": 7,
         },
         {
             "title": "Lettuce - Sea / Sea Asparagus",
@@ -189,7 +189,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "S-pone",
             "image": "https://m.media-amazon.com/images/I/71w5QLOqkCL._AC_SL1257_.jpg",
-            "owner_id": 7, "count": 20
+            "owner_id": 7,
         },
         {
             "title": "Soup - Bumble Bee  - The Run Chipotle Chicken Salad with Crackers Kit",
@@ -198,7 +198,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Bumble Bee",
             "image": "https://m.media-amazon.com/images/I/81Yff31G6oS._SL1500_.jpg",
-            "owner_id": 7, "count": 34
+            "owner_id": 7,
         },
         {
             "title": "Purina - Digestive Health Large Breed Dry Dog Food, Chicken and Rice Formula",
@@ -207,7 +207,7 @@ def seed_products():
             "category": "Pet Supplies",
             "brand": "Digestive Health Large Breed Dry Dog Food, Chicken and Rice Formula",
             "image": "https://m.media-amazon.com/images/I/81fDDyMvhkL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 15
+            "owner_id": 7,
         },
         {
             "title": "Beer - Sleeman Fine Porter",
@@ -216,7 +216,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Sleeman Fine Porter",
             "image": "https://products3.imgix.drizly.com/ci-sleeman-light-070be94284dbc51a.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20",
-            "owner_id": 7, "count": 45
+            "owner_id": 7,
         },
         {
             "title": "Nescafe - Frothy French Vanilla",
@@ -225,7 +225,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Nescafe",
             "image": "https://m.media-amazon.com/images/I/81jRbldvVbL._SL1500_.jpg",
-            "owner_id": 7, "count": 98
+            "owner_id": 7,
         },
         {
             "title": "Beggin'- Purina Strips Bacon Dog Treats Made in USA Facilities Adult Dog Training Treats",
@@ -234,7 +234,7 @@ def seed_products():
             "category": "Pet Supplies",
             "brand": "Beggin'",
             "image": "https://m.media-amazon.com/images/I/818Q+9mjDUL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 102
+            "owner_id": 7,
         },
         {
             "title": "Friskies Purina -  Made in USA Facilities Cat Treats, Party Mix Beachside Crunch",
@@ -243,7 +243,7 @@ def seed_products():
             "category": "Pet Supplies",
             "brand": "Purina",
             "image": "https://m.media-amazon.com/images/I/81yr9g90dqL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 200
+            "owner_id": 7,
         },
         {
             "title": "Purina - Pro Plan Weight Control Dry Cat Food, Chicken and Rice Formula ",
@@ -252,7 +252,7 @@ def seed_products():
             "category": "Pet Supplies",
             "brand": "Purina",
             "image": "https://m.media-amazon.com/images/I/71Nu7MkUEOL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 98
+            "owner_id": 7,
         },
         {
             "title": "Gain - Aroma Boost Laundry Detergent Liquid Soap, Moonlight Breeze Scent",
@@ -261,7 +261,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Gain",
             "image": "https://m.media-amazon.com/images/I/81rff0UVJBL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 54
+            "owner_id": 7,
         },
         {
             "title": "Charmin - Ultra Gentle Toilet Paper, 18 Mega Rolls = 72 Regular Rolls",
@@ -270,7 +270,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Charmin",
             "image": "https://m.media-amazon.com/images/I/81lm8f9Y5tL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 22
+            "owner_id": 7,
         },
         {
             "title": "Pampers- Diapers Newborn/Size 1 (8-14 lb), 32 Count - Pampers Pure Protection Disposable Baby Diapers",
@@ -279,7 +279,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Pampers",
             "image": "https://m.media-amazon.com/images/I/61HV4bi3EFL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 10
+            "owner_id": 7,
         },
         {
             "title": "Tylenol- Extra Strength Caplets with 500 mg Acetaminophen, Pain Reliever & Fever Reducer",
@@ -288,7 +288,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Tylenol",
             "image": "https://m.media-amazon.com/images/I/71Psf+JrdQL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 76
+            "owner_id": 7,
         },
         {
             "title": "Bell & Evans - Bone In Split Chicken Breast",
@@ -297,7 +297,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Bell & Evans",
             "image": "https://m.media-amazon.com/images/I/81t7Rarmt3L._SL1500_.jpg",
-            "owner_id": 7, "count": 55
+            "owner_id": 7,
         },
         {
             "title": "7UP - Diet Lemon Lime Soda, Naturally Flavored, Zero Calories and Caffeine Free, 12 Fl Oz (pack of 8)",
@@ -306,7 +306,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "7UP",
             "image": "https://m.media-amazon.com/images/I/81yAJk9YdUL._SL1500_.jpg",
-            "owner_id": 7, "count": 300
+            "owner_id": 7,
         },
         {
             "title": "Orangina - French Imported Orange Pulp Soda Tall Cans (12 Pack, Total of 138oz)",
@@ -315,7 +315,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Orangina",
             "image": "https://m.media-amazon.com/images/I/71w-UeHBjjS._SL1500_.jpg",
-            "owner_id": 7, "count": 18
+            "owner_id": 7,
         },
         {
             "title": "Post- Honey Bunches of Oats with Almonds, Heart Healthy, Low Fat, made with Whole Grain Cereal, 18 Ounce Box",
@@ -324,7 +324,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Post",
             "image": "https://m.media-amazon.com/images/I/81q6yl0jLkL._SL1500_.jpg",
-            "owner_id": 7, "count": 65
+            "owner_id": 7,
         },
         {
             "title": "The Complete Human Body, 2nd Edition: The Definitive Visual Guide",
@@ -333,7 +333,7 @@ def seed_products():
             "category": "Books",
             "brand": "Dr. Alice Roberts",
             "image": "https://m.media-amazon.com/images/I/91TtYBEH9hL.jpg",
-            "owner_id": 7, "count": 43
+            "owner_id": 7,
         },
         {
             "title": "Storyworthy: Engage, Teach, Persuade, and Change Your Life through the Power of Storytelling Paperback",
@@ -342,7 +342,7 @@ def seed_products():
             "category": "Books",
             "brand": "Matthew Dicks",
             "image": "https://m.media-amazon.com/images/I/71psHRXrnqL.jpg",
-            "owner_id": 7, "count": 104
+            "owner_id": 7,
         },
         {
             "title": "So Good They Can't Ignore You Paperback",
@@ -351,7 +351,7 @@ def seed_products():
             "category": "Books",
             "brand": "Cal Newport",
             "image": "https://m.media-amazon.com/images/I/41T9ornqs5L.jpg",
-            "owner_id": 7, "count": 23
+            "owner_id": 7,
         },
         {
             "title": "Make Time: How to Focus on What Matters Every Day Hardcover",
@@ -360,7 +360,7 @@ def seed_products():
             "category": "Books",
             "brand": "John Zeratsky, Jake Knapp",
             "image": "https://m.media-amazon.com/images/I/81LXfBoLlCL.jpg",
-            "owner_id": 7, "count": 145
+            "owner_id": 7,
         },
         {
             "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones Hardcover",
@@ -369,7 +369,7 @@ def seed_products():
             "category": "Books",
             "brand": "James Clear",
             "image": "https://m.media-amazon.com/images/I/81wgcld4wxL.jpg",
-            "owner_id": 7, "count": 87
+            "owner_id": 7,
         },
         {
             "title": "Tropicana- Cranberry Cocktail Juice, 10 Ounce (Pack of 24)",
@@ -378,7 +378,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Tropicana",
             "image": "https://m.media-amazon.com/images/I/81w5zqdYpeL._SL1500_.jpg",
-            "owner_id": 7, "count": 77
+            "owner_id": 7,
         },
         {
             "title": "Metene - Shower Brush with Soft and Stiff Bristles, Bath Dual-Sided Long Handle Back Scrubber Body Exfoliator for Wet or Dry Brushing",
@@ -387,7 +387,7 @@ def seed_products():
             "category": "Beauty & Personal Care",
             "brand": "Metene",
             "image": "https://m.media-amazon.com/images/I/61gHENr6geS._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 27
+            "owner_id": 7,
         },
         {
             "title": "Pepperidge Farm - Trio Variety Crackers, 10 oz. Box",
@@ -396,7 +396,7 @@ def seed_products():
             "category": "Groceries",
             "brand": "Pepperidge Farm",
             "image": "https://m.media-amazon.com/images/I/81Pqvqfo8CL._SL1500_.jpg",
-            "owner_id": 7, "count": 187
+            "owner_id": 7,
         },
         {
             "title": "A Simple Guide For New Yoga Teachers: Complete With Tips, Poses, and Outlines For Planning Classes Paperback",
@@ -405,7 +405,7 @@ def seed_products():
             "category": "Books",
             "brand": "Nina Hunt",
             "image": "https://m.media-amazon.com/images/I/61-dqBMLoYL.jpg",
-            "owner_id": 7, "count": 23
+            "owner_id": 7,
         },
         {
             "title": "LETSQK - Dog Coat, Waterproof and Windproof Dog Jacket, Reflective Safety Dog Vest, Thick Padded Warm Comfortable",
@@ -414,7 +414,7 @@ def seed_products():
             "category": "Pet Supplies",
             "brand": "LETSQK",
             "image": "https://m.media-amazon.com/images/I/61PJA8Nt8LL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 64
+            "owner_id": 7,
         },
         {
             "title": "First Aid Only - 298 Piece All-Purpose First Aid Emergency Kit",
@@ -423,7 +423,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "First Aid Only",
             "image": "https://m.media-amazon.com/images/I/612v2BWjs3L._SL1500_.jpg",
-            "owner_id": 7, "count": 92
+            "owner_id": 7,
         },
         {
             "title": "Nintendo Switch™ with Neon Blue and Neon Red Joy/Con",
@@ -432,7 +432,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "Nintendo",
             "image": "https://m.media-amazon.com/images/I/61nfFrm5NcL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 100
+            "owner_id": 7,
         },
         {
             "title": "PlayStation PS5 Console God of War Ragnarök Bundle",
@@ -441,7 +441,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "Sony",
             "image": "https://m.media-amazon.com/images/I/61SUJDrCTLL._SL1500_.jpg",
-            "owner_id": 7, "count": 509
+            "owner_id": 7,
         },
         {
             "title": "Fire Emblem Engage - Nintendo Switch",
@@ -450,7 +450,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "Nintendo",
             "image": "https://m.media-amazon.com/images/I/81JJ-9rB0vL._SL1500_.jpg",
-            "owner_id": 7, "count": 110
+            "owner_id": 7,
         },
         {
             "title": "Pokémon Scarlet - Nintendo Switch",
@@ -459,7 +459,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "Nintendo",
             "image": "https://m.media-amazon.com/images/I/81EyjDeArUL._SL1500_.jpg",
-            "owner_id": 7, "count": 62
+            "owner_id": 7,
         },
         {
             "title": "Logitech G735 Wireless Gaming Headset, Customizable LIGHTSYNC RGB Lighting, Bluetooth, 3.5 MM Aux",
@@ -468,7 +468,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "Logitech",
             "image": "https://m.media-amazon.com/images/I/61gnGTGkPkL._AC_SL1500_.jpg",
-            "owner_id": 7, "count": 145
+            "owner_id": 7,
         },
         {
             "title": "2K - Mafia: Trilogy - Steam PC",
@@ -477,7 +477,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "2K",
             "image": "https://m.media-amazon.com/images/I/81t5iIkpXxL._SL1500_.jpg",
-            "owner_id": 7, "count": 151
+            "owner_id": 7,
         },
         {
             "title": "Battlefield 2042 - Steam PC",
@@ -486,7 +486,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "Electronic Arts",
             "image": "https://m.media-amazon.com/images/I/71QQb8slaiS._SL1302_.jpg",
-            "owner_id": 7, "count": 82
+            "owner_id": 7,
         },
         {
             "title": "The Sims 4 - Luxury Party Stuff - Origin PC",
@@ -495,7 +495,7 @@ def seed_products():
             "category": "Video Games",
             "brand": "Electronic Arts",
             "image": "https://m.media-amazon.com/images/I/81qUdMrX-HL._SL1500_.jpg",
-            "owner_id": 7, "count": 84
+            "owner_id": 7,
         },
         {
             "title": "LAURA GELLER NEW YORK - 2022 Annual Party in a Palette Set of 4 Curated Full Face Makeup Palettes",
@@ -504,7 +504,7 @@ def seed_products():
             "category": "Beauty & Personal Care",
             "brand": "LAURA GELLER NEW YORK",
             "image": "https://m.media-amazon.com/images/I/714du3GpyGL._SL1500_.jpg",
-            "owner_id": 7, "count": 34
+            "owner_id": 7,
         },
         {
             "title": "CeraVe - Moisturizing Cream | Body and Face Moisturizer for Dry Skin",
@@ -513,7 +513,7 @@ def seed_products():
             "category": "Beauty & Personal Care",
             "brand": "CeraVe",
             "image": "https://m.media-amazon.com/images/I/61pP5gObVXL._SL1000_.jpg",
-            "owner_id": 7, "count": 69
+            "owner_id": 7,
         },
         {
             "title": "Burt's Bees Lip Balm, Moisturizing Lip Care, 100% Natural, Original Beeswax with Vitamin E",
@@ -522,7 +522,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Burts",
             "image": "https://m.media-amazon.com/images/I/81gl-3aulYL._SL1500_.jpg",
-            "owner_id": 7, "count": 453
+            "owner_id": 7,
         },
         {
             "title": "Nautica - Voyage Eau De Toilette for Men - Fresh, Romantic, Fruity Scent - Woody, Aquatic Notes of Apple",
@@ -531,7 +531,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Nautica",
             "image": "https://m.media-amazon.com/images/I/61gm2yDGyyL._SL1500_.jpg",
-            "owner_id": 7, "count": 156
+            "owner_id": 7,
         },
         {
             "title": "Philips Norelco - OneBlade Hybrid Electric Trimmer and Shaver",
@@ -540,7 +540,7 @@ def seed_products():
             "category": "Health & Household",
             "brand": "Philips Norelco",
             "image": "https://m.media-amazon.com/images/I/61ST2yRX2VL._SL1500_.jpg",
-            "owner_id": 7, "count": 145
+            "owner_id": 7,
         }
     ]
 

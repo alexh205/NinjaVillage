@@ -12,7 +12,7 @@ const Cart = ({user}) => {
     let cartTotal;
     if (user && cart) {
 
-        cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0)}
+        cartTotal = cart.reduce((total, item) => total + item.price, 0)}
 
 
     return (

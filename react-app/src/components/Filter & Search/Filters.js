@@ -26,7 +26,7 @@ const Filters = () => {
     <><Header />
     <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 my-7'>
 
-      {filteredProd && filteredProd.map((product,i)=> (<div className='w-max-[9vw] h-max-[10vh] w-min-[9vw] h-min-[10vh]' key={i} >
+      {filteredProd && filteredProd.map((product,i)=> (<div className='w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]' key={i} >
         <FilteredProd product={product} user={user} userCart={userCart}   />
         </div>))}
     </div>

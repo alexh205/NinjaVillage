@@ -17,7 +17,6 @@ const CreateProduct = () => {
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
     const [image, setImage] = useState("");
-    const [count, setCount] = useState('');
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -30,7 +29,6 @@ const CreateProduct = () => {
         if (!category) errors.push("Please select a 'Category'");
         if (!brand) errors.push("Please provide a 'Brand'");
         if (!image) errors.push("Please provide a 'Image'");
-        if (!count) errors.push("Please provide a starting 'Inventory' number");
 
         return errors;
       }
@@ -49,7 +47,6 @@ const CreateProduct = () => {
                 category,
                 brand,
                 image,
-                count
             )
         );
 
@@ -61,7 +58,6 @@ const CreateProduct = () => {
         setCategory('')
         setBrand('')
         setImage('')
-        setCount('')
         setValidateErrors([])
 
         history.push(`/products/${product.id}`);
@@ -165,19 +161,7 @@ const CreateProduct = () => {
                         value={image}
                         required={true}></input>
                 </div>
-
-                <div className="mt-3 flex flex-col border-b">
-                    <label className="font-bold text-xl my-1">Inventory</label>
-                    <input
-                        className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
-                        type="number"
-
-                        name="count"
-                        onChange={e => setCount(e.target.value)}
-                        value={count}
-                        required={true}></input>
-                </div>
-
+                
                 <div className="flex flex-row mt-5 mb-4 justify-end">
                     <button
                         className="button"

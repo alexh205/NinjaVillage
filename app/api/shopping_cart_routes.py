@@ -28,21 +28,19 @@ def shopping_cart_delete(id):
     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
     queried_product = Product.query.get_or_404(req_data['productId'])
 
+    queried_shopping_cart = ShoppingCart.query.get_or_404(id)
+    queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
+    queried_product = Product.query.get_or_404(req_data['productId'])
+
     if queried_user.id != current_user.id:
         return auth_error
     else:
-        if len(queried_shopping_cart.carts_product) > 0 and queried_product != None and queried_product in queried_shopping_cart.carts_product:
+        if len(queried_shopping_cart.carts_product) > 0 and queried_product in queried_shopping_cart.carts_product:
             queried_shopping_cart.carts_product.remove(queried_product)
             db.session.commit()
-
-            return queried_product.to_dict()
-        if len(queried_shopping_cart.carts_product) < 1 and queried_product != None:
+            return queried_shopping_cart.to_dict()
+        if len(queried_shopping_cart.carts_product) < 1:
             return {'message': 'Shopping Cart is currently empty!'}
-        if len(queried_shopping_cart.carts_product) > 0 and queried_product != None and queried_product not in queried_shopping_cart.carts_product:
-            return {'message': 'Can not delete a product that is not currently in the cart'}
-        else:
-            return {'message': 'This product does not exist!'}
-
 
 
 #* Add Item to Shopping Cart *****************************************************
@@ -52,26 +50,32 @@ def shopping_cart_edit(id):
     """
     Update an existing shopping_cart instance after checking for user ownership, and then add changes to database
     """
+    req_data = request.json
+
     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
+    new_product = Product.query.get_or_404(req_data['item']['id'])
 
-    req_data = request.json
     if queried_user.id != current_user.id:
         return auth_error
     else:
         if req_data['item']:
-            new_product = Product.query.get_or_404(req_data['item']['id'])
-            if new_product.count == 0:
-                return {"message", 'Item is no longer available'}, 404
-            else:
-                for product in queried_shopping_cart.carts_product:
-                    if product.id == new_product.id:
-                        product.quantity = product.quantity + 1
-                        db.session.commit()
-                    if product.id != new_product.id:
-                        queried_shopping_cart.carts_product.append(new_product)
-                        db.session.commit()
-        return new_product.to_dict()
+            queried_shopping_cart.carts_product.append(new_product)
+            db.session.commit()
+
+    return queried_shopping_cart.to_dict()
+            # if len(queried_shopping_cart.carts_product) == 0:
+            #     queried_shopping_cart.carts_product.append(new_product)
+            #     db.session.commit()
+            # if len(queried_shopping_cart.carts_product) > 0:
+            #     for product in queried_shopping_cart.carts_product:
+            #         if product.id == new_product.id:
+            #             product.quantity = product.quantity + 1
+            #             db.session.commit()
+            #         if product.id != new_product.id:
+            #              queried_shopping_cart.carts_product.append(new_product)
+            #     db.session.commit()
+        # return new_product.to_dict()
 
 #* Create Shopping Cart *****************************************************
 @shopping_cart_routes.route('/new', methods=['POST'])

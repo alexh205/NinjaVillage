@@ -19,7 +19,6 @@ const EditProduct = () => {
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
     const [image, setImage] = useState("");
-    const [count, setCount] = useState("");
     const [valid, setValid] = useState(false);
 
     const [validateErrors, setValidateErrors] = useState([]);
@@ -37,7 +36,7 @@ const EditProduct = () => {
         if (!category) errors.push("Please select a 'Category'");
         if (!brand) errors.push("Please provide a 'Brand'");
         if (!image) errors.push("Please provide a 'Image'");
-        if (!count) errors.push("Please provide a starting 'Inventory' number");
+
 
         return errors;
     };
@@ -50,7 +49,6 @@ const EditProduct = () => {
             setCategory(product.category);
             setBrand(product.brand);
             setImage(product.image);
-            setCount(product.count);
             setValid(true);
         }
 
@@ -69,7 +67,6 @@ const EditProduct = () => {
                     category,
                     brand,
                     image,
-                    count,
                     productId
                 )
             );
@@ -82,7 +79,6 @@ const EditProduct = () => {
             setCategory("");
             setBrand("");
             setImage("");
-            setCount("");
             setValid(false);
             setValidateErrors([]);
 
@@ -213,21 +209,7 @@ const EditProduct = () => {
                             required={true}></input>
                     </div>
 
-                    <div className="mt-3 flex flex-col border-b">
-                        <label className="font-bold text-xl my-1">
-                            Inventory
-                        </label>
-                        <input
-                            className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
-                            type="number"
-                            //   size="4"
-                            name="count"
-                            onChange={e => setCount(e.target.value)}
-                            value={count}
-                            required={true}></input>
-                    </div>
-
-                    <div className="flex flex-row mt-5 justify-end">
+                    <div className="flex flex-row mt-5 justify-end mb-6 mr-20">
                         <button
                             className="button"
                             onClick={e => {
@@ -239,7 +221,7 @@ const EditProduct = () => {
                             className="button ml-10"
                             onClick={e => {
                                 onProductEdit(e);
-                                //   history.push(`/products/${productId}`);
+
                             }}>
                             Submit
                         </button>

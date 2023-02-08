@@ -84,7 +84,7 @@ const deleteReview = reviewId => {
 
 // ************************* Product *****************************
 export const createProductThunk =
-    (title, price, description, category, brand, image, count) =>
+    (title, price, description, category, brand, image) =>
     async dispatch => {
         const request = await fetch("/api/products/new", {
             method: "POST",
@@ -96,7 +96,6 @@ export const createProductThunk =
                 category,
                 brand,
                 image,
-                count,
             }),
         });
         const response = await request.json();
@@ -108,7 +107,7 @@ export const createProductThunk =
     };
 
 export const editProductThunk =
-    (title, price, description, category, brand, image, count, productId) =>
+    (title, price, description, category, brand, image, productId) =>
     async dispatch => {
         const request = await fetch(`/api/products/${productId}`, {
             method: "PUT",
@@ -120,7 +119,6 @@ export const editProductThunk =
                 category,
                 brand,
                 image,
-                count,
             }),
         });
         const response = await request.json();

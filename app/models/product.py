@@ -16,8 +16,6 @@ class Product(db.Model):
     category = db.Column(db.String(70), nullable=False)
     brand = db.Column(db.String(70), nullable=False)
     image = db.Column(db.String(500), nullable=False)
-    quantity = db.Column(db.Integer, default=1)
-    count = db.Column(db.Integer)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
@@ -39,8 +37,6 @@ class Product(db.Model):
             'category': self.category,
             'brand': self.brand,
             'image': self.image,
-            'quantity': self.quantity,
-            'count': self.count,
             'ownerId': self.owner_id,
             'productImages': [image.to_dict() for image in self.product_images],
             'productReviews': [review.to_dict() for review in self.product_reviews]
@@ -55,6 +51,4 @@ class Product(db.Model):
             'category': self.category,
             'brand': self.brand,
             'image': self.image,
-            'quantity': self.quantity
-            # 'ownerId': self.owner_id,
         }

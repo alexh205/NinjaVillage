@@ -29,9 +29,7 @@ const CheckoutProduct = ({ product }) => {
                 </div>
                 <div className="flex flex-row items-center">
                 <button className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px] mr-4" onClick={removeItemFromCart}> Remove from Cart</button>
-                <div className="flex flex-row ml-4">
-                <p className="text-[14px] mr-3">Quantity: </p>
-                        <p className="text-[14px]">{product.quantity}</p></div></div>
+               </div>
             </div>
 
         </div>

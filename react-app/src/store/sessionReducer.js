@@ -1,7 +1,6 @@
 const initialState = {
     user: null,
     activeCart: {},
-
 };
 
 // *************** User ****************************
@@ -242,42 +241,52 @@ const sessionReducer = (state = initialState, action) => {
             return currentState;
         }
 
-        case ADD_ITEM: {
-            const addProd = [...currentState.activeCart.cartProducts]
-            for (let i=0; i < addProd.length; i++) {
-
-                console.log(action.payload)
-                if(addProd[i].id === action.payload.id){
-                   addProd[i].quantity += 1
-                   currentState.activeCart.cartProducts = addProd
-                    return currentState
-                }
-                // if(addProd[i].id !== action.payload.id){
-                //     addProd.push(action.payload)
-                //     currentState.activeCart.cartProducts = addProd
-                //     return currentState
-                // }
-
-            }
-
+         case ADD_ITEM: {
+            currentState.activeCart.cartProducts = action.payload.cartProducts;
             return currentState;
         }
 
         case REMOVE_ITEM: {
-            const removedProd = [...currentState.activeCart.cartProducts]
-           for (let i = 0; i< removedProd.length; i++) {
-            if (removedProd[i].id === action.payload.id && removedProd[i].quantity > 0) {
-                removedProd[i].quantity = removedProd[i].quantity -1
-                currentState.activeCart.cartProducts = removedProd
-                return currentState
-            } if(removedProd[i].id === action.payload.id && removedProd[i].quantity === 0){
-                removedProd.splice(i, 1)
-                currentState.activeCart.cartProducts = removedProd
-                return currentState
-            }
-        }
+            currentState.activeCart.cartProducts = action.payload.cartProducts;
             return currentState;
         }
+
+        // case ADD_ITEM: {
+        //     const addProd = [...currentState.activeCart.cartProducts]
+        //     for (let i=0; i < addProd.length; i++) {
+
+        //         console.log(action.payload)
+        //         if(addProd[i].id === action.payload.id){
+        //            addProd[i].quantity = addProd[i].quantity + 1
+        //            currentState.activeCart.cartProducts = addProd
+        //             return currentState
+        //         }
+        //         // if(addProd[i].id !== action.payload.id){
+        //         //     addProd.push(action.payload)
+        //         //     currentState.activeCart.cartProducts = addProd
+        //         //     return currentState
+        //         // }
+
+        //     }
+
+        //     return currentState;
+        // }
+
+        // case REMOVE_ITEM: {
+        //     const removedProd = [...currentState.activeCart.cartProducts]
+        //    for (let i = 0; i< removedProd.length; i++) {
+        //     if (removedProd[i].id === action.payload.id && removedProd[i].quantity > 0) {
+        //         removedProd[i].quantity = removedProd[i].quantity -1
+        //         currentState.activeCart.cartProducts = removedProd
+        //         return currentState
+        //     } if(removedProd[i].id === action.payload.id && removedProd[i].quantity === 0){
+        //         removedProd.splice(i, 1)
+        //         currentState.activeCart.cartProducts = removedProd
+        //         return currentState
+        //     }
+        // }
+        //     return currentState;
+        // }
 
 
 

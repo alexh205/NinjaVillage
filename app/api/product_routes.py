@@ -59,7 +59,6 @@ def product_create():
         category=req_data['category'],
         brand=req_data['brand'],
         image=req_data['image'],
-        count=req_data['count'],
         owner_id= current_user.id
     )
 

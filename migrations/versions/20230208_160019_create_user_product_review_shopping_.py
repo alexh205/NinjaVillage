@@ -1,8 +1,8 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: e477d2644042
+Revision ID: b1bac64e059f
 Revises:
-Create Date: 2023-02-07 16:16:29.576228
+Create Date: 2023-02-08 16:00:19.218290
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'e477d2644042'
+revision = 'b1bac64e059f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,8 +46,6 @@ def upgrade():
     sa.Column('category', sa.String(length=70), nullable=False),
     sa.Column('brand', sa.String(length=70), nullable=False),
     sa.Column('image', sa.String(length=500), nullable=False),
-    sa.Column('quantity', sa.Integer(), nullable=True),
-    sa.Column('count', sa.Integer(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
@@ -55,6 +53,7 @@ def upgrade():
     )
     op.create_table('shopping_carts',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('total', sa.Integer(), nullable=True),
     sa.Column('checked_out', sa.Boolean(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
@@ -107,8 +106,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")

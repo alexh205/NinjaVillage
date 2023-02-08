@@ -6,7 +6,8 @@ from app.models import User, db
 user_routes = Blueprint('users', __name__)
 auth_error = "User not authorized to complete this action"
 
-#* Get User *****************************************************
+
+# * Get User *****************************************************
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
@@ -16,7 +17,9 @@ def user(id):
     user = User.query.get_or_404(id)
     return user.to_dict()
 
-#* Delete User *****************************************************
+# * Delete User *****************************************************
+
+
 @user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def user_delete(id):
@@ -33,7 +36,7 @@ def user_delete(id):
         return {'message': 'Successfully deleted'}
 
 
-#* Edit User *****************************************************
+# * Edit User *****************************************************
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def user_edit(id):
