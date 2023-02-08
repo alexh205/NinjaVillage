@@ -26,7 +26,7 @@ const Filters = () => {
     <><Header />
     <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 my-7'>
 
-      {filteredProd && filteredProd.map((product,i)=> (<div className='w-max-[10vw] h-max-[12vh] w-min-[9vw] h-min-[11vh]' key={i} >
+      {filteredProd && filteredProd.map((product,i)=> (<div className='w-max-[9vw] h-max-[10vh] w-min-[9vw] h-min-[10vh]' key={i} >
         <FilteredProd product={product} user={user} userCart={userCart}   />
         </div>))}
     </div>
@@ -37,4 +37,3 @@ const Filters = () => {
 }
 
 export default Filters
-

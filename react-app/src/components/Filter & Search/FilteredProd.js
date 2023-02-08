@@ -32,11 +32,11 @@ export const FilteredProd = ({ product, userCart }) => {
 
 
     return (
-        <div className="flex flex-col m-4 bg-white p-3 border-4 border-double rounded-2xl w-full h-full ">
-            
+        <div className="flex flex-col m-3 mb-2 bg-white p-3 border-4 border-double rounded-2xl w-full h-full ">
+
             <a href={`/products/${product.id}`} className="flex items-center justify-center">
                 <img
-                    className="object-contain h-[200px] w-[200px]"
+                    className="object-contain h-[200px] w-[200px] my-3"
                     src={product.image}
                     alt=""
                 />{" "}
@@ -52,8 +52,8 @@ export const FilteredProd = ({ product, userCart }) => {
                 )}
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
-            <div className="mb-5">
-                <p>${product.price}</p>
+            <div >
+                <p className="mt-2">${product.price}</p>
             </div>
             {user && (
                 <button
