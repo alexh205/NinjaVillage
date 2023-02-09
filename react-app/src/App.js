@@ -14,14 +14,12 @@ import CreateReview from "./components/Review/CreateReview";
 import EditProduct from "./components/Product/EditProduct";
 import Profile from "./components/Profile/Profile";
 import CreateProduct from "./components/Product/CreateProduct";
-import Filters from "./components/Filter & Search/Filters"
-import Search from "./components/Filter & Search/Search";
+import Filters from "./components/Filter/Filters"
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    const store = useSelector(state=> state.productStore.products)
 
 
     useEffect(()=> {
@@ -95,10 +93,6 @@ function App() {
                 <Route path="/filters/:filterId" exact={true}>
                     <Filters />
                 </Route>
-                <Route path="/search/:searchId" exact={true}>
-                    <Search />
-                </Route>
-
             </Switch>
         </BrowserRouter>
     );

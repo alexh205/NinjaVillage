@@ -11,8 +11,9 @@ const Filters = () => {
 
   const userCart = useSelector(state => state.session.activeCart)
   const user = useSelector(state => state.session.user)
+
   let filteredProd= []
-   Object.values(products).map((product, i) => {
+  Object.values(products).map((product) => {
       if(product.category === filterId){
       filteredProd.push(product)}
       if(filterId === 'All'){
@@ -33,7 +34,6 @@ const Filters = () => {
     </>
   )}
 
-  // if()
 }
 
 export default Filters

@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {
     MagnifyingGlassIcon,
-    ShoppingCartIcon,
+    ShoppingCartIcon, XMarkIcon
 } from "@heroicons/react/24/outline";
 import NinjaVillage_logo from '../../Media/NinjaVillage_logo.png'
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DropDownMenu from "../DropDownMenu";
+
 
 
 const Header = () => {
@@ -15,10 +16,41 @@ const Header = () => {
     const userCart = useSelector(state => state.session.activeCart.cartProducts)
     const products = useSelector(state => state.productStore.products)
     const [input, setInput] = useState('')
+    const [filteredData, setFilteredData] = useState([])
 
-//   console.log(input)
+    const handleChange = (e) => {
+       const searchTerm = e.target.value
+       setInput(searchTerm)
+       const filteredProducts = Object.values(products).filter(
+        product => {
+          return (
+            product
+            .title
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+            product
+            .category
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+            product
+            .description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
+          );
+        }
+      );
+      if(searchTerm === ''){
+        setFilteredData([])
+      } else{
+        setFilteredData(filteredProducts)}
+    }
+
+    const clearInput = () =>{
+        setFilteredData([])
+        setInput('')
+    }
+
     return (
-
         <header>
         <div className="flex items-center bg-ninja_green p-1 flex-grow py-2">
             {/* top nav logo */}
@@ -30,15 +62,33 @@ const Header = () => {
                 />
             </div>
             {/* top nav search */}
-            {products && <div className="hidden items-center h-10 rounded-md flex-grow cursor-pointer sm:flex bg-amber-500 hover:bg-amber-600 ">
-                <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" autoComplete='off'
-                placeholder={`Search for a product by name...`}
-                onChange={e => setInput(e.target.value)}
-                // onClick={() => setClicked(true)}
-                value={input}></input>
-                <MagnifyingGlassIcon className="h-14 p-4" />
+            {products && <div className="flex-grow flex flex-col sm:flex">
+                <div className="hidden items-center h-10 rounded-md cursor-pointer sm:flex bg-amber-500 hover:bg-amber-600">
+                    <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
+                    type="text" autoComplete='off'
+                    placeholder={`Search for a product by name or category...`}
+                    onChange={handleChange}
+                    value={input}>
+                    </input>
 
-            </div> }
+                    {filteredData.length === 0  ? <MagnifyingGlassIcon className="h-14 p-4" />: <XMarkIcon  className="h-14 p-4" onClick={clearInput}/> }
+                </div>
+
+                {filteredData.length != 0 &&
+                    <div className='absolute top-[57px] z-10 cursor-pointer bg-white overflow-hidden overflow-y-auto w-auto'>
+
+                        {filteredData.slice(0,12).map((product, i) => {
+                            return (
+                            <div key={i} onClick={() => {clearInput();
+                            history.push(`/products/${product.id}`)}} className='flex items-center text-black'>
+                                <p className="ml-[10px]">{product.title}</p>
+                            </div>)}
+                            )
+                        }
+                    </div>
+                    }
+                </div >
+                }
 
             {/* top nav right side */}
             <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
@@ -60,11 +110,7 @@ const Header = () => {
         </div>
         {/* lower nav */}
         <div className="flex items-center space-x-3 p-2 pl-6 bg-ninja_green-light text-white text-sm ">
-            {/* vertical menu */}
-            {/* <p className="link flex items-center">
-                <Bars3Icon  className="h-6 mr-1"/>
-                All
-            </p> */}
+
 
             <p className="link" onClick={(e) => {history.push(`/filters/${'All'}`)}}>All</p>
             <p className="link">Buy Again</p>
