@@ -1,18 +1,51 @@
 const initialState = {
+    id: null,
     items: [],
     addedItems: [],
     total: 0,
+    checkedOut: null,
 };
 
-// ACTION CREATORS
 // *************** Cart ****************************
 const SET_ACTIVE_CART = "cart/SET_ACTIVE_CART";
 const ADD_TO_CART = "cart/ADD_ITEM";
 const REMOVE_ITEM = "cart/REMOVE_ITEM";
 const CART_CHECKOUT = "cart/CART_CHECKOUT";
 
-// THUNK
+//? ACTION CREATORS
 
+// set active cart
+export const setActiveCart = cart => {
+    return {
+        type: SET_ACTIVE_CART,
+        payload: cart,
+    };
+};
+
+// add product to cart
+export const addToCart = prod => {
+    return {
+        type: ADD_TO_CART,
+        payload: prod,
+    };
+};
+// remove product from cart
+export const removeItem = prod => {
+    return {
+        type: REMOVE_ITEM,
+        payload: prod,
+    };
+};
+
+// process cart for checkout
+export const cartCheckout = cart => {
+    return {
+        type: CART_CHECKOUT,
+        payload: cart,
+    };
+};
+
+//? THUNK
 // *************** Cart ****************************
 
 const createCartThunk = () => async dispatch => {
@@ -23,28 +56,6 @@ const createCartThunk = () => async dispatch => {
     const response = await request.json();
 
     dispatch(setActiveCart(response));
-};
-
-const addCartItemThunk = (item, cartId) => async dispatch => {
-    const request = await fetch(`/api/shopping_carts/${cartId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ item }),
-    });
-    const response = await request.json();
-
-    dispatch(addItem(response));
-};
-
-const removeCartItemThunk = (productId, cartId) => async dispatch => {
-    const request = await fetch(`/api/shopping_carts/remove/${cartId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
-    });
-    const response = await request.json();
-
-    dispatch(removeItem(response));
 };
 
 const cartCheckoutThunk = cartId => async dispatch => {
@@ -62,27 +73,32 @@ const cartReducer = (state = initialState, action) => {
     const currentState = { ...state };
     switch (action.type) {
         case SET_ACTIVE_CART: {
-            currentState.activeCart = { ...action.payload[0] };
-
-            return currentState;
+            return {
+                ...currentState,
+                id: action.payload[0].id,
+                checkedOut: action.payload[0].checkedOut,
+            };
         }
 
-        // NON-CART ACTIONS
         case ADD_TO_CART: {
+            let new_item;
             let addedItem = currentState.items.find(
-                item => item.id === action.id
+                item => item.id === action.payload.id
             );
 
             let existed_item = currentState.addedItems.find(
-                item => action.id === item.id
+                item => action.payload.id === item.id
             );
+            if (!addedItem && !existed_item) {
+                new_item = action.payload;
+            }
             if (existed_item) {
-                addedItem.quantity += 1;
+                existed_item.quantity += 1;
                 return {
                     ...currentState,
-                    total: currentState.total + addedItem.price,
+                    total: currentState.total + existed_item.price,
                 };
-            } else {
+            } else if (addedItem) {
                 addedItem.quantity = 1;
 
                 let newTotal = currentState.total + addedItem.price;
@@ -92,63 +108,45 @@ const cartReducer = (state = initialState, action) => {
                     addedItems: [...currentState.addedItems, addedItem],
                     total: newTotal,
                 };
+            } else {
+                new_item.quantity = 1;
+
+                let newTotal = currentState.total + new_item.price;
+
+                return {
+                    ...state,
+                    addedItems: [...currentState.addedItems, new_item],
+                    total: newTotal,
+                };
             }
         }
 
         case REMOVE_ITEM: {
             let itemToRemove = currentState.addedItems.find(
-                item => action.id === item.id
+                item => action.payload.id === item.id
             );
             let new_items = currentState.addedItems.filter(
-                item => action.id !== item.id
+                item => action.payload.id !== item.id
             );
 
-            let newTotal =
-                currentState.total - itemToRemove.price * itemToRemove.quantity;
-            console.log(itemToRemove);
-            return {
-                ...currentState,
-                addedItems: new_items,
-                total: newTotal,
-            };
-        }
-
-        //CART ACTION
-        case ADD_QUANTITY: {
-            let addedItem = currentState.items.find(
-                item => item.id === action.id
-            );
-            addedItem.quantity += 1;
-            let newTotal = currentState.total + addedItem.price;
-            return {
-                ...currentState,
-                total: newTotal,
-            };
-        }
-        case REMOVE_QUANTITY: {
-            let addedItem = currentState.items.find(
-                item => item.id === action.id
-            );
-
-            if (addedItem.quantity === 1) {
-                let new_items = currentState.addedItems.filter(
-                    item => item.id !== action.id
-                );
-                let newTotal = currentState.total - addedItem.price;
+            if (itemToRemove.quantity > 1) {
+                itemToRemove.quantity -= 1;
+                let newTotal = currentState.total - itemToRemove.price;
+                new_items.push(itemToRemove);
+                return {
+                    ...currentState,
+                    total: newTotal,
+                };
+            } else {
+                let newTotal = currentState.total - itemToRemove.price;
                 return {
                     ...currentState,
                     addedItems: new_items,
                     total: newTotal,
                 };
-            } else {
-                addedItem.quantity -= 1;
-                let newTotal = currentState.total - addedItem.price;
-                return {
-                    ...currentState,
-                    total: newTotal,
-                };
             }
         }
+
         default:
             return currentState;
     }

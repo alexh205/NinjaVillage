@@ -1,7 +1,7 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addCartItemThunk } from "../../store/sessionReducer";
+import { addToCart} from "../../store/cartReducer";
 
 export const FilteredProd = ({ product, userCart }) => {
     let ratingTotal = 0;
@@ -27,7 +27,7 @@ export const FilteredProd = ({ product, userCart }) => {
             brand: product.brand,
             image: product.image,
         }
-        await dispatch(addCartItemThunk(item, userCart.id))
+        await dispatch(addToCart(item))
     };
 
 

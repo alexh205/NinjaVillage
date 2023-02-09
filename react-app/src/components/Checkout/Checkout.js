@@ -25,7 +25,7 @@ const Checkout = () => {
 
 
     const user = useSelector(state => state.session.user);
-    const cartArr = useSelector(state => state.session.activeCart.cartProducts);
+    const cartArr = useSelector(state => state.cartStore.addedItems);
     const cartTotal = Math.round(((cartArr.reduce((total, item) => total + item.price, 0)) + Number.EPSILON) * 100) / 100
     const preTax_total = Math.round(((cartTotal + 10) + Number.EPSILON) * 100) / 100
     const tax = Math.round(((preTax_total * Number((Object.entries(stateTaxes).reduce((accum, current)=> {

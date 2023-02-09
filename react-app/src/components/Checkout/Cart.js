@@ -8,12 +8,8 @@ import { useHistory } from "react-router-dom";
 const Cart = ({user}) => {
 
     const history = useHistory()
-    const cart = useSelector(state => state.session.activeCart.cartProducts)
-    let cartTotal;
-    if (user && cart) {
-
-        cartTotal = cart.reduce((total, item) => total + item.price, 0)}
-
+    const cart = useSelector(state => state.cartStore.addedItems)
+    const cartTotal = useSelector(state => state.cartStore.total)
 
     return (
         <div className="bg-gray-100">
@@ -34,7 +30,7 @@ const Cart = ({user}) => {
                         <h5 className="self-end mr-4 text-gray-600 "> Price</h5></div>
                         {cart && (cart.map((product, i) => (
                             <CartProduct
-                                key={product.id}
+                                key={i}
                                 product={product}
                             />)
                         ))}

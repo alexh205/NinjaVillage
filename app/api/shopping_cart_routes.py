@@ -16,31 +16,31 @@ def shopping_cart(id):
     return shopping_cart.to_dict()
 
 
-#* Delete an item from Shopping Cart *****************************************************
-@shopping_cart_routes.route('/remove/<int:id>', methods=['PUT'])
-@login_required
-def shopping_cart_delete(id):
-    """
-    Delete a product from a shopping_cart after checking for user ownership
-    """
-    req_data= request.json
-    queried_shopping_cart = ShoppingCart.query.get_or_404(id)
-    queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
-    queried_product = Product.query.get_or_404(req_data['productId'])
+# #* Delete an item from Shopping Cart *****************************************************
+# @shopping_cart_routes.route('/remove/<int:id>', methods=['PUT'])
+# @login_required
+# def shopping_cart_delete(id):
+#     """
+#     Delete a product from a shopping_cart after checking for user ownership
+#     """
+#     req_data= request.json
+#     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
+#     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
+#     queried_product = Product.query.get_or_404(req_data['productId'])
 
-    queried_shopping_cart = ShoppingCart.query.get_or_404(id)
-    queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
-    queried_product = Product.query.get_or_404(req_data['productId'])
+#     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
+#     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
+#     queried_product = Product.query.get_or_404(req_data['productId'])
 
-    if queried_user.id != current_user.id:
-        return auth_error
-    else:
-        if len(queried_shopping_cart.carts_product) > 0 and queried_product in queried_shopping_cart.carts_product:
-            queried_shopping_cart.carts_product.remove(queried_product)
-            db.session.commit()
-            return queried_shopping_cart.to_dict()
-        if len(queried_shopping_cart.carts_product) < 1:
-            return {'message': 'Shopping Cart is currently empty!'}
+#     if queried_user.id != current_user.id:
+#         return auth_error
+#     else:
+#         if len(queried_shopping_cart.carts_product) > 0 and queried_product in queried_shopping_cart.carts_product:
+#             queried_shopping_cart.carts_product.remove(queried_product)
+#             db.session.commit()
+#             return queried_shopping_cart.to_dict()
+#         if len(queried_shopping_cart.carts_product) < 1:
+#             return {'message': 'Shopping Cart is currently empty!'}
 
 
 #* Add Item to Shopping Cart *****************************************************
@@ -54,28 +54,19 @@ def shopping_cart_edit(id):
 
     queried_shopping_cart = ShoppingCart.query.get_or_404(id)
     queried_user = User.query.get_or_404(queried_shopping_cart.owner_id)
-    new_product = Product.query.get_or_404(req_data['item']['id'])
+    # new_product = Product.query.get_or_404(req_data['itemId'])
 
     if queried_user.id != current_user.id:
         return auth_error
-    else:
-        if req_data['item']:
-            queried_shopping_cart.carts_product.append(new_product)
-            db.session.commit()
+    # else:
+    #     if new_product not in queried_shopping_cart.carts_product:
+    #         queried_shopping_cart.carts_product.append(new_product)
+    #         db.session.commit()
+    #     else:
+    #         return {'message': 'item is already in cart'}
 
-    return queried_shopping_cart.to_dict()
-            # if len(queried_shopping_cart.carts_product) == 0:
-            #     queried_shopping_cart.carts_product.append(new_product)
-            #     db.session.commit()
-            # if len(queried_shopping_cart.carts_product) > 0:
-            #     for product in queried_shopping_cart.carts_product:
-            #         if product.id == new_product.id:
-            #             product.quantity = product.quantity + 1
-            #             db.session.commit()
-            #         if product.id != new_product.id:
-            #              queried_shopping_cart.carts_product.append(new_product)
-            #     db.session.commit()
-        # return new_product.to_dict()
+    # return new_product.to_dict()
+
 
 #* Create Shopping Cart *****************************************************
 @shopping_cart_routes.route('/new', methods=['POST'])

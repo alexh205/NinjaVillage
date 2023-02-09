@@ -1,15 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCartItemThunk } from "../../store/sessionReducer";
+import { addToCart, removeItem } from "../../store/cartReducer";
 
 const CheckoutProduct = ({ product }) => {
     const dispatch =useDispatch()
 
-    const cart = useSelector(state => state.session.activeCart)
+    const cart = useSelector(state => state.cartStore.addedItems)
 
     const removeItemFromCart = () => {
-
-        dispatch(removeCartItemThunk(product.id, cart.id))
+        dispatch(removeItem(product));
     };
     return (
         <div className="flex flex-row ml-4 my-2">

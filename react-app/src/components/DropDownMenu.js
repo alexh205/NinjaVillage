@@ -34,7 +34,7 @@ const DropDownMenu = () => {
 
                         <Menu.Items
                             as="section"
-                            className="absolute justify-center flex flex-col z-10 items-center right-[170px] md:right-[194px] h-[175px] w-[138px] mt-[2px] rounded-xl bg-gray-100 border-2 border-black">
+                            className="absolute justify-center flex flex-col z-10 items-center right-[170px] md:right-[194px] h-[135px] w-[138px] mt-[2px] rounded-xl bg-gray-100 border-2 border-black">
 
                             <Menu.Item className='flex flex-row my-1 pb-2 px-[26px] items-center border-b-[2px] border-black'>
                                 <a
@@ -50,12 +50,12 @@ const DropDownMenu = () => {
                                     New Listing </a>
                             </Menu.Item>
 
-                            <Menu.Item className='flex flex-row my-1 pb-2 px-[11px] items-center border-b-[2px] border-black'>
+                            {/* <Menu.Item className='flex flex-row my-1 pb-2 px-[11px] items-center border-b-[2px] border-black'>
                                 <a
                                     className="text-black text-[17px] font-bold"
                                     href="/account-settings"><ClipboardDocumentListIcon className="text-ninja_green h-6 mr-1"/>
                                     Wish Lists </a>
-                            </Menu.Item>
+                            </Menu.Item> */}
 
                             <Menu.Button
                                 className='text-black text-[16px] font-bold mr-2 flex flex-row my-1 pb-2 items-center'

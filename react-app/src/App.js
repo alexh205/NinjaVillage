@@ -1,36 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authenticate,setActiveCart } from "./store/sessionReducer";
+import { authenticate} from "./store/sessionReducer";
+import {setActiveCart } from "./store/cartReducer"
+import { getAllProductThunk} from './store/productReducer'
 import Home from "./components/Home";
 import Cart from "./components/Checkout/Cart";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProductDetail from "./components/Product/ProductDetail";
 import Checkout from "./components/Checkout/Checkout";
-import { getAllProductThunk} from './store/productReducer'
 import EditReview from "./components/Review/EditReview";
 import CreateReview from "./components/Review/CreateReview";
 import EditProduct from "./components/Product/EditProduct";
 import Profile from "./components/Profile/Profile";
 import CreateProduct from "./components/Product/CreateProduct";
 import Filters from "./components/Filter/Filters"
+import WishList from "./components/WishList/WishList";
+import Order from "./components/Orders/Order";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-
+    const cartStore = useSelector(state => state.cartStore)
 
     useEffect(()=> {
-
         dispatch(getAllProductThunk())
-
+        
       },[])
 
 
       useEffect(()=> {
-        if (user && !user.activeCart) {
+        if (user && !cartStore.id) {
           let userCart = user.ownedCarts.filter(
                cart => cart.checkedOut === false
            );
@@ -92,6 +94,12 @@ function App() {
                 </Route>
                 <Route path="/filters/:filterId" exact={true}>
                     <Filters />
+                </Route>
+                <Route path="/wishLists/:listId" exact={true}>
+                    <WishList />
+                </Route>
+                <Route path="/orders/:orderId" exact={true}>
+                    <Order />
                 </Route>
             </Switch>
         </BrowserRouter>

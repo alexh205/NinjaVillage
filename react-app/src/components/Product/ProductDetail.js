@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
-import { addCartItemThunk } from '../../store/sessionReducer';
+import { addToCart} from "../../store/cartReducer";
 import {FaStar} from 'react-icons/fa'
 import ReviewContainer from '../Review/ReviewContainer';
 import { getAllProductThunk, deleteProductThunk } from '../../store/productReducer';
@@ -25,19 +25,18 @@ const ProductDetail = () => {
     })
     ratingAvg = (ratingTotal/product.productReviews.length)}
 
-  const addItemToCart = async () => {
-    const item = {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        description: product.description,
-        category: product.category,
-        brand: product.brand,
-        image: product.image,
-    }
-
-    await dispatch(addCartItemThunk(item, userCart.id))
-};
+    const addItemToCart = async () => {
+      const item = {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          description: product.description,
+          category: product.category,
+          brand: product.brand,
+          image: product.image,
+      }
+      await dispatch(addToCart(item))
+  };
 
   return (
     <>

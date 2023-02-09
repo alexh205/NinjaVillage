@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import Header from "../Header/Header";
 import EditProfile from "./EditProfile";
 import UserProducts from "../Product/UserProducts";
-import UserReviews from "../Review/UserReviews";
+import WishListContainer from "../WishList/WishListContainer";
+
 
 const Profile = () => {
     const user = useSelector(state => state.session.user);
+
     const history = useHistory();
 
     const [clicked, setClicked] = useState(false);
@@ -22,7 +24,8 @@ const Profile = () => {
     return (
         <>
             <Header />
-                {user && !clicked && <div className="flex flex-col md:max-w-[580px] max-w-[420px] md:justify-center justify-start md:ml-[30%] ml-[5%]  flex-grow mt-6 border-2 p-1 ">
+                {user && !clicked && <div className="flex flex-col">
+                <div className="flex flex-col md:max-w-[580px] max-w-[420px] md:justify-center justify-start md:ml-[30%] ml-[5%]  flex-grow mt-6 border-2 p-1 ">
                 <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                     About Me
                 </h1>
@@ -123,6 +126,11 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            {/* <div className='container mx-auto grid grid-cols-2 gap-5 my-7'>
+                <div> Listings</div>
+                <div><WishListContainer /></div>
+            </div> */}
             </div>}
 
             {user && clicked && <EditProfile user={user} showProfile={showProfile}/>}

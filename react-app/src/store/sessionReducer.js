@@ -1,18 +1,13 @@
 const initialState = {
     user: null,
-    activeCart: {},
 };
 
 // *************** User ****************************
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
-// *************** Cart ****************************
-const SET_ACTIVE_CART = "cart/SET_ACTIVE_CART";
-const ADD_ITEM = "cart/ADD_ITEM";
-const REMOVE_ITEM = "cart/REMOVE_ITEM";
-const CART_CHECKOUT = "cart/CART_CHECKOUT";
 
-// ACTION CREATORS
+
+//? ACTION CREATORS
 // *************** User ****************************
 export const setUser = user => {
     return {
@@ -27,34 +22,7 @@ const removeUser = () => {
     };
 };
 
-// *************** Cart ****************************
-
-export const setActiveCart = cart => {
-    return {
-        type: SET_ACTIVE_CART,
-        payload: cart,
-    };
-};
-
-const addItem = items => {
-    return {
-        type: ADD_ITEM,
-        payload: items,
-    };
-};
-const removeItem = item => {
-    return {
-        type: REMOVE_ITEM,
-        payload: item,
-    };
-};
-export const cartCheckout = () => {
-    return {
-        type: CART_CHECKOUT,
-    };
-};
-
-// THUNKS
+//? THUNKS
 // *************** User ****************************
 export const authenticate = () => async dispatch => {
     const request = await fetch("/api/auth/", {
@@ -176,52 +144,9 @@ export const deleteUserThunk = userId => async dispatch => {
         method: "DELETE",
 }); dispatch(removeUser());}
 
-// *************** Cart ****************************
-
-export const createCartThunk = () => async dispatch => {
-    const request = await fetch("/api/shopping_carts/new", {
-        method: "POST",
-        headers: { "Content-Type:": "application/json" },
-    });
-    const response = await request.json();
-
-    dispatch(setActiveCart(response));
-};
-
-export const addCartItemThunk = (item, cartId) => async dispatch => {
-    const request = await fetch(`/api/shopping_carts/${cartId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({item}),
-    });
-    const response = await request.json();
-
-    dispatch(addItem(response));
-};
-
-export const removeCartItemThunk = (productId, cartId) => async dispatch => {
-    const request = await fetch(`/api/shopping_carts/remove/${cartId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({productId})
-    });
-    const response = await request.json();
-
-    dispatch(removeItem(response));
-};
-
-export const cartCheckoutThunk = cartId => async dispatch => {
-    await fetch(`/api/shopping_carts/update/${cartId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-    });
-
-    dispatch(cartCheckout());
-};
 
 
-// REDUCER
-
+//? REDUCER
 
 const sessionReducer = (state = initialState, action) => {
     const currentState = { ...state };
@@ -234,67 +159,6 @@ const sessionReducer = (state = initialState, action) => {
 
         case REMOVE_USER:
             return initialState;
-
-        case SET_ACTIVE_CART: {
-            currentState.activeCart = {...action.payload[0]};
-
-            return currentState;
-        }
-
-         case ADD_ITEM: {
-            currentState.activeCart.cartProducts = action.payload.cartProducts;
-            return currentState;
-        }
-
-        case REMOVE_ITEM: {
-            currentState.activeCart.cartProducts = action.payload.cartProducts;
-            return currentState;
-        }
-
-        // case ADD_ITEM: {
-        //     const addProd = [...currentState.activeCart.cartProducts]
-        //     for (let i=0; i < addProd.length; i++) {
-
-        //         console.log(action.payload)
-        //         if(addProd[i].id === action.payload.id){
-        //            addProd[i].quantity = addProd[i].quantity + 1
-        //            currentState.activeCart.cartProducts = addProd
-        //             return currentState
-        //         }
-        //         // if(addProd[i].id !== action.payload.id){
-        //         //     addProd.push(action.payload)
-        //         //     currentState.activeCart.cartProducts = addProd
-        //         //     return currentState
-        //         // }
-
-        //     }
-
-        //     return currentState;
-        // }
-
-        // case REMOVE_ITEM: {
-        //     const removedProd = [...currentState.activeCart.cartProducts]
-        //    for (let i = 0; i< removedProd.length; i++) {
-        //     if (removedProd[i].id === action.payload.id && removedProd[i].quantity > 0) {
-        //         removedProd[i].quantity = removedProd[i].quantity -1
-        //         currentState.activeCart.cartProducts = removedProd
-        //         return currentState
-        //     } if(removedProd[i].id === action.payload.id && removedProd[i].quantity === 0){
-        //         removedProd.splice(i, 1)
-        //         currentState.activeCart.cartProducts = removedProd
-        //         return currentState
-        //     }
-        // }
-        //     return currentState;
-        // }
-
-
-
-        case CART_CHECKOUT: {
-            currentState.activeCart.checkedOut = true;
-            currentState.activeCart = {}
-            return currentState
-        }
 
         default:
             return currentState;

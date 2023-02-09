@@ -1,10 +1,10 @@
 import React from "react";
 import {FaStar} from 'react-icons/fa'
 import { useDispatch, useSelector } from "react-redux";
-import { addCartItemThunk } from "../../store/sessionReducer";
+import { addToCart } from "../../store/cartReducer";
 
 
-const Product = ({ product, userCart }) => {
+const Product = ({ product}) => {
     let ratingTotal = 0
     let ratingAvg;
 
@@ -25,7 +25,7 @@ const Product = ({ product, userCart }) => {
             brand: product.brand,
             image: product.image,
         }
-        await dispatch(addCartItemThunk(item, userCart.id))
+        await dispatch(addToCart(item))
     };
 
     return (
