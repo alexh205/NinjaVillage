@@ -66,7 +66,7 @@ const LoginForm = () => {
                         </h1>
                         <button
                             onClick={demoLogin}
-                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-light">
+                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
                             Demo Login
                         </button>
                     </div>
@@ -84,7 +84,7 @@ const LoginForm = () => {
                             Email
                         </label>
                         <input
-                            className="border-[1px] border-ninja_green-light py-1 placeholder:pl-1"
+                            className="border-[1px] border-ninja_green-dark py-1 placeholder:pl-1"
                             name="email"
                             type="text"
                             placeholder='Email'
@@ -99,7 +99,7 @@ const LoginForm = () => {
                             Password
                         </label>
                         <input
-                            className="border-[1px] border-ninja_green-light py-1 placeholder:pl-1"
+                            className="border-[1px] border-ninja_green-dark py-1 placeholder:pl-1"
                             name="password"
                             type="password"
                             placeholder='Password'
@@ -107,7 +107,7 @@ const LoginForm = () => {
                             onChange={(e)=> setPassword(e.target.value)}
                         />
                         <button
-                            className="my-3 button p-[5px] border-[1px] border-ninja_green-light"
+                            className="my-3 button p-[5px] border-[1px] border-ninja_green-dark"
                             type="submit">
                             Login
                         </button>
@@ -123,7 +123,7 @@ const LoginForm = () => {
                     New to NinjaVillage?
                 </p>
                 <button
-                    className="cursor-pointer p-[5px] text-xs font-semibold md:text-sm rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[100%] border-[1px] border-ninja_green-light"
+                    className="cursor-pointer p-[5px] text-xs font-semibold md:text-sm rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[100%] border-[1px] border-ninja_green-dark"
                     type="button "
                     onClick={() => {
                         history.push("/signup");

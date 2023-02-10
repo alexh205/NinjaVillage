@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: { colors: {
       ninja_green: {
-        light: '#1b2124',
+        dark: '#1b2124',
         DEFAULT: '#015f41'
       }
     }},

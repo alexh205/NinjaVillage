@@ -137,7 +137,7 @@ const Header = () => {
                 </div>
             </div>
             {/* lower nav */}
-            <div className="flex items-center space-x-3 p-2 pl-6 bg-ninja_green-light text-white text-sm ">
+            <div className="flex items-center space-x-3 p-2 pl-6 bg-ninja_green-dark text-white text-sm ">
                 <p
                     className="link"
                     onClick={e => {
