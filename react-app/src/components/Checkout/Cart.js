@@ -16,9 +16,9 @@ const Cart = ({user}) => {
             <Header />
             <main className="lg:flex max-w-screen-2xl mx-auto">
                 {/* left */}
-                <div className="flex-grow m-5 shadow-sm">
+                <div className="flex-grow m-4 shadow-sm">
                     <img
-                        className="w-[1020px] h-[250px] object-contain"
+                        className="w-[100%] h-[250px] mb-3 border-[2px]"
                         src={checkout}
                         alt=""
                     />

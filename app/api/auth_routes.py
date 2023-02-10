@@ -103,11 +103,11 @@ def sign_up():
             email=form.data['email'],
             password=form.data['password'],
             name=form.data['name'],
-            street_address=form.data['street_address'],
+            street_address=form.data['streetAddress'],
             city=form.data['city'],
             state=form.data['state'],
-            zip_code=form.data['zip_code'],
-            profile_img=form.data['profile_img']
+            zip_code=form.data['zipCode'],
+            profile_img=form.data['profileImage']
         )
         db.session.add(user)
         db.session.commit()

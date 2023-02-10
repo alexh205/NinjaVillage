@@ -86,7 +86,7 @@ const Header = () => {
                             )}
                         </div>
                         {filteredData.length != 0 && (
-                            <div className="absolute top-[57px] z-20 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md w-[1999px]">
+                            <div className="absolute top-[57px] z-50 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md w-[40%] lg:w-[50%]">
                                 {filteredData.slice(0, 12).map((product, i) => {
                                     return (
                                         <div
@@ -98,9 +98,12 @@ const Header = () => {
                                                 );
                                             }}
                                             className="flex items-center text-black hover:bg-gray-200 hover:text-ninja_green hover:font-bold">
-                                            <p className="ml-[10px]">
+                                                <div className="flex flex-row m-1">
+                                                    <img className="w-8" src={product.image}/>
+                                                    <p className="ml-[10px]">
                                                 {product.title}
-                                            </p>
+                                            </p></div>
+
                                         </div>
                                     );
                                 })}
@@ -142,7 +145,7 @@ const Header = () => {
                     }}>
                     All
                 </p>
-                <p className="link">Buy Again</p>
+                {/* <p className="link">Buy Again</p> */}
                 <p
                     className="link"
                     onClick={e => {

@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import sessionReducer from './sessionReducer';
 import productReducer from './productReducer';
 import cartReducer from './cartReducer';
+import wishListReducer from './wishListReducer'
 
 // Global store
 const rootReducer = combineReducers({
   session: sessionReducer,
   productStore: productReducer,
-  cartStore: cartReducer
+  cartStore: cartReducer,
+  listStore: wishListReducer
 });
 
 // export const cartTotal = (state) => state.session.activeCart.cartProducts.reduce((total, item) => total + item.price, 0)

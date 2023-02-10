@@ -16,8 +16,8 @@ const CartProduct = ({ product }) => {
             category: product.category,
             brand: product.brand,
             image: product.image,
-        }
-        await dispatch(addToCart(item))
+        };
+        await dispatch(addToCart(item));
     };
 
     const removeItemFromCart = () => {
@@ -66,15 +66,25 @@ const CartProduct = ({ product }) => {
                 <div className="flex flex-row justify-between items-center">
                     <div className="flex flex-row items-center">
                         <p className="mr-2">Quantity:</p>
-                        <p className="font-semibold text-red-700">{product.quantity}</p>
+                        <p className="font-semibold text-red-700">
+                            {product.quantity}
+                        </p>
                     </div>
 
-                    <button
-                        className="button mt-3"
-                        onClick={removeItemFromCart}>
-                        {" "}
-                        Remove from Cart
-                    </button>
+                    <div className="flex flex-row items-center">
+                        <button
+                            className="mt-auto button mr-4"
+                            onClick={addItemToCart}>
+                            Add to Cart
+                        </button>
+
+                        <button
+                            className="button mt-3"
+                            onClick={removeItemFromCart}>
+                            {" "}
+                            Remove from Cart
+                        </button>
+                    </div>
                 </div>
             </div>
             <div className="flex flex-col space-y-2 justify-self-end font-semibold text-lg self-start">

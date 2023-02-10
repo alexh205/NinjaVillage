@@ -81,12 +81,12 @@ export const signUp = (username, name, email, streetAddress, city, state,zipCode
             username,
             name,
             email,
-            street_address: streetAddress,
+            streetAddress,
             city,
             state,
-            zip_code: zipCode,
+            zipCode,
             password,
-            profile_img: profileImage,
+            profileImage,
         }),
     });
 

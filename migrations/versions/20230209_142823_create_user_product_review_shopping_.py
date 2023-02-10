@@ -1,8 +1,8 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: b1bac64e059f
+Revision ID: e24169d789a0
 Revises:
-Create Date: 2023-02-08 16:00:19.218290
+Create Date: 2023-02-09 14:28:23.202933
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'b1bac64e059f'
+revision = 'e24169d789a0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -106,6 +106,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
@@ -115,6 +116,7 @@ def upgrade():
         op.execute(f"ALTER TABLE product_lists SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 

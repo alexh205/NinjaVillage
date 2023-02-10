@@ -18,6 +18,7 @@ import CreateProduct from "./components/Product/CreateProduct";
 import Filters from "./components/Filter/Filters"
 import WishList from "./components/WishList/WishList";
 import Order from "./components/Orders/Order";
+import OrdersContainer from "./components/Orders/OrdersContainer";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -27,7 +28,7 @@ function App() {
 
     useEffect(()=> {
         dispatch(getAllProductThunk())
-        
+
       },[])
 
 
@@ -70,7 +71,6 @@ function App() {
                 <Route path="/signup" exact={true}>
                     <SignUpForm />
                 </Route>
-
                 <Route path="/profile/:userId" exact={true}>
                     <Profile />
                 </Route>
@@ -100,6 +100,9 @@ function App() {
                 </Route>
                 <Route path="/orders/:orderId" exact={true}>
                     <Order />
+                </Route>
+                <Route path="/orders" exact={true}>
+                    <OrdersContainer />
                 </Route>
             </Switch>
         </BrowserRouter>

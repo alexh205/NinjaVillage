@@ -1,16 +1,14 @@
 const initialState = {
     id: null,
-    items: [],
     addedItems: [],
     total: 0,
     checkedOut: null,
 };
 
-// *************** Cart ****************************
 const SET_ACTIVE_CART = "cart/SET_ACTIVE_CART";
 const ADD_TO_CART = "cart/ADD_ITEM";
 const REMOVE_ITEM = "cart/REMOVE_ITEM";
-const CART_CHECKOUT = "cart/CART_CHECKOUT";
+const SET_CART_CHECKOUT = "cart/SET_CART_CHECKOUT"
 
 //? ACTION CREATORS
 
@@ -18,6 +16,13 @@ const CART_CHECKOUT = "cart/CART_CHECKOUT";
 export const setActiveCart = cart => {
     return {
         type: SET_ACTIVE_CART,
+        payload: cart,
+    };
+};
+
+export const setCartCheckOut = cart => {
+    return {
+        type: SET_CART_CHECKOUT,
         payload: cart,
     };
 };
@@ -37,18 +42,9 @@ export const removeItem = prod => {
     };
 };
 
-// process cart for checkout
-export const cartCheckout = cart => {
-    return {
-        type: CART_CHECKOUT,
-        payload: cart,
-    };
-};
-
 //? THUNK
-// *************** Cart ****************************
 
-const createCartThunk = () => async dispatch => {
+export const createCartThunk = () => async dispatch => {
     const request = await fetch("/api/shopping_carts/new", {
         method: "POST",
         headers: { "Content-Type:": "application/json" },
@@ -58,16 +54,23 @@ const createCartThunk = () => async dispatch => {
     dispatch(setActiveCart(response));
 };
 
-const cartCheckoutThunk = cartId => async dispatch => {
-    await fetch(`/api/shopping_carts/update/${cartId}`, {
+export const cartCheckoutThunk = cartObj => async dispatch => {
+    const request = await fetch(`/api/shopping_carts/${cartObj.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            id: cartObj.id,
+            total: cartObj.total,
+            checkedOut: cartObj.checkedOut,
+            products: cartObj.products,
+        }),
     });
+    const response = await request.json();
 
-    dispatch(cartCheckout());
+    dispatch(setCartCheckOut(response));
 };
 
-// REDUCER
+//? REDUCER
 
 const cartReducer = (state = initialState, action) => {
     const currentState = { ...state };
@@ -80,17 +83,21 @@ const cartReducer = (state = initialState, action) => {
             };
         }
 
-        case ADD_TO_CART: {
-            let new_item;
-            let addedItem = currentState.items.find(
-                item => item.id === action.payload.id
-            );
+        case SET_CART_CHECKOUT: {
 
+            return {
+                ...initialState,
+                id: action.payload.id,
+                checkedOut: action.payload.checkedOut,
+            };
+        }
+        case ADD_TO_CART: {
+            let addedItem;
             let existed_item = currentState.addedItems.find(
                 item => action.payload.id === item.id
             );
-            if (!addedItem && !existed_item) {
-                new_item = action.payload;
+            if (!existed_item) {
+                addedItem = action.payload;
             }
             if (existed_item) {
                 existed_item.quantity += 1;
@@ -98,24 +105,14 @@ const cartReducer = (state = initialState, action) => {
                     ...currentState,
                     total: currentState.total + existed_item.price,
                 };
-            } else if (addedItem) {
+            } else {
                 addedItem.quantity = 1;
 
                 let newTotal = currentState.total + addedItem.price;
 
                 return {
-                    ...state,
+                    ...currentState,
                     addedItems: [...currentState.addedItems, addedItem],
-                    total: newTotal,
-                };
-            } else {
-                new_item.quantity = 1;
-
-                let newTotal = currentState.total + new_item.price;
-
-                return {
-                    ...state,
-                    addedItems: [...currentState.addedItems, new_item],
                     total: newTotal,
                 };
             }
@@ -138,12 +135,20 @@ const cartReducer = (state = initialState, action) => {
                     total: newTotal,
                 };
             } else {
-                let newTotal = currentState.total - itemToRemove.price;
-                return {
-                    ...currentState,
-                    addedItems: new_items,
-                    total: newTotal,
-                };
+                if (currentState.total !== itemToRemove.price) {
+                    let newTotal = currentState.total - itemToRemove.price;
+                    return {
+                        ...currentState,
+                        addedItems: new_items,
+                        total: newTotal,
+                    };
+                } else {
+                    return {
+                        ...currentState,
+                        addedItems: new_items,
+                        total: 0,
+                    };
+                }
             }
         }
 

@@ -56,7 +56,7 @@ const LoginForm = () => {
                 <h1 className="font-medium text-[27px] text-white"> Sign in</h1>
                 <button onClick={demoLogin} className='cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-light'>Demo Login</button></div>
                 <form onSubmit={onLogin}>
-                    <div className="text-[14px] text-red-600 mb-[4px]">
+                    <div className="text-[14px] text-yellow-400 mb-[4px]">
                         {errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
                         ))}

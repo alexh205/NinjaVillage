@@ -127,10 +127,10 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className='container mx-auto grid grid-cols-2 gap-5 my-7'>
+            <div className='container mx-auto grid grid-cols-2 gap-5 my-7'>
                 <div> Listings</div>
                 <div><WishListContainer /></div>
-            </div> */}
+            </div>
             </div>}
 
             {user && clicked && <EditProfile user={user} showProfile={showProfile}/>}

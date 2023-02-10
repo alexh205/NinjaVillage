@@ -6,28 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import CheckoutProduct from "./CheckoutProduct";
 import checkoutImg from "../../Media/checkoutImg.png";
 import stateTaxes from "../../Media/stateTaxes.json";
-import { cartCheckout} from "../../store/sessionReducer";
+import { cartCheckoutThunk} from "../../store/cartReducer";
+import { getUserThunk } from "../../store/sessionReducer";
 
 
 const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch()
 
-    const handleCheckout = async (e) => {
-        e.preventDefault()
-
-        // await dispatch(cartCheckout())
-
-        // history.push('/')
-
-
-    }
-
-
     const user = useSelector(state => state.session.user);
+    const cart = useSelector(state=>state.cartStore)
     const cartArr = useSelector(state => state.cartStore.addedItems);
-    const cartTotal = Math.round(((cartArr.reduce((total, item) => total + item.price, 0)) + Number.EPSILON) * 100) / 100
-    const preTax_total = Math.round(((cartTotal + 10) + Number.EPSILON) * 100) / 100
+    const total = useSelector(state=>state.cartStore.total)
+
+    const preTax_total = Math.round(((total + 10) + Number.EPSILON) * 100) / 100
+
     const tax = Math.round(((preTax_total * Number((Object.entries(stateTaxes).reduce((accum, current)=> {
         const [key, value] =current
         if (key === user.state){
@@ -39,6 +32,23 @@ const Checkout = () => {
         return [...accum]
     }, []))).toString()) + Number.EPSILON) * 100) / 100
 
+    const handleCheckout = async () => {
+       const cartObj = {
+            id: cart.id,
+            total:cart.total,
+            checkedOut:true,
+            products: cart.addedItems
+       }
+        await dispatch(cartCheckoutThunk(cartObj))
+
+       await dispatch(getUserThunk(user.id))
+       
+        history.push('/')
+    }
+
+    if(total === 0){
+        history.push('/')
+    }
 
 
     return (
@@ -145,7 +155,7 @@ const Checkout = () => {
                                             <div className=" flex text-md text-orange-700 p-0 m-0">
                                                 Order total:
                                                 <div className="ml-2">
-                                                {cartTotal > 0 ? <p>${Math.round(((preTax_total + tax) + Number.EPSILON) * 100) / 100}</p>: <p>$0</p>}
+                                                {total > 0 ? <p>${Math.round(((preTax_total + tax) + Number.EPSILON) * 100) / 100}</p>: <p>$0</p>}
                                                 </div>
                                             </div>
                                             <p className="text-[10px] text-gray-500 p-0 m-0">
@@ -162,7 +172,7 @@ const Checkout = () => {
                 </div>
                 <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative ">
                     <div className="flex flex-col items-center">
-                        <button className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow" onClick={(e) => handleCheckout(e)}>
+                        <button className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow" onClick={handleCheckout}>
                         Place your order</button>
                         <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1"> By placing your order, you agree to NinjaVillage's privacy notice and conditions of use</p>
                         <hr className="w-[85%] mt-2"></hr>
@@ -171,12 +181,12 @@ const Checkout = () => {
                         <div className="font-semibold text-md md:text-lg ml-4 mt-2">Order Summary</div>
                         <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs mt-4">
                             <p>Items:</p>
-                            <p>${cartTotal}</p>
+                            <p>${Math.round((total  + Number.EPSILON) * 100) / 100}</p>
                         </div>
                         <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
                             <p>Shipping & handling:</p>
                             <div>
-                                {cartTotal > 0 ? <p>$10.00</p> :  <p>$0</p>}
+                                {total > 0 ? <p>$10.00</p> :  <p>$0</p>}
 
                                 <hr className="w-[100%] mt-2"></hr>
                             </div>
@@ -184,15 +194,15 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
                         <p>Total before tax:</p>
-                        {cartTotal > 0 ? <p>${preTax_total}</p> : <p>$0</p>}
+                        {total > 0 ? <p>${preTax_total}</p> : <p>$0</p>}
                     </div>
                     <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2 border-b pb-1">
                         <p>Estimated tax to be collected:</p>
-                        {cartTotal > 0 ? <p>${tax}</p> :  <p>$0</p>}
+                        {total > 0 ? <p>${tax}</p> :  <p>$0</p>}
                     </div>
-                    <div className="font-semibold sm:text-md md:text-xl lg:text-2xl ml-2 md:ml-5 my-3 md:my-4 lg:my-6 sm:mx-2 md:mx-3 lg:mx-6 text-orange-700 flex flex-row justify-between items-center">
+                    <div className="font-semibold sm:text-md md:text-lg lg:text-xl ml-2 md:ml-5 my-3 md:my-4 lg:my-6 sm:mx-2 md:mx-3 lg:mx-6 text-orange-700 flex flex-row justify-between items-center">
                         <p className="mr-[2px]">Order total:</p>
-                        {cartTotal > 0 ? <p>${Math.round(((preTax_total + tax) + Number.EPSILON) * 100) / 100}</p>: <p>$0</p>}
+                        {total > 0 ? <p>${Math.round(((preTax_total + tax) + Number.EPSILON) * 100) / 100}</p>: <p>$0</p>}
                     </div>
                 </div>
             </div>
