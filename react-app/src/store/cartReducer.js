@@ -55,6 +55,7 @@ export const createCartThunk = () => async dispatch => {
 };
 
 export const cartCheckoutThunk = cartObj => async dispatch => {
+    console.log(cartObj.products)
     const request = await fetch(`/api/shopping_carts/${cartObj.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

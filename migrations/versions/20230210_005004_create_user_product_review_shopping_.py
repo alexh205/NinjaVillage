@@ -1,20 +1,20 @@
 """create user, product, review, shopping_cart, whish_list, images tables
 
-Revision ID: e24169d789a0
+Revision ID: 678dc5b94a75
 Revises:
-Create Date: 2023-02-09 14:28:23.202933
+Create Date: 2023-02-10 00:50:04.016767
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
-revision = 'e24169d789a0'
+revision = '678dc5b94a75'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,6 +46,7 @@ def upgrade():
     sa.Column('category', sa.String(length=70), nullable=False),
     sa.Column('brand', sa.String(length=70), nullable=False),
     sa.Column('image', sa.String(length=500), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('created_date', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
@@ -116,7 +117,6 @@ def upgrade():
         op.execute(f"ALTER TABLE product_lists SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 

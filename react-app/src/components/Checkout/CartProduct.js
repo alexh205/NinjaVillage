@@ -2,10 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { addToCart, removeItem } from "../../store/cartReducer";
+import { useHistory } from "react-router-dom";
 
 const CartProduct = ({ product }) => {
     const dispatch = useDispatch();
-    const cart = useSelector(state => state.cartStore.addedItems);
+    const history = useHistory()
+
 
     const addItemToCart = async () => {
         const item = {
@@ -36,13 +38,13 @@ const CartProduct = ({ product }) => {
 
     return (
         <div className="grid grid-cols-5">
-            <a href={`/products/${product.id}`}>
+            <div className="cursor-pointer" onClick={()=> history.push(`/products/${product.id}`)}>
                 <img
                     src={product.image}
                     alt=""
                     className="h-[200px] w-[200px] object-contain"
                 />
-            </a>
+            </div>
             {/* middle section  */}
             <div className="col-span-3 mx-5">
                 <p className="font-semibold text-lg">{product.title}</p>

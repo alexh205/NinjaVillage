@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/sessionReducer";
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 const SignUpForm = () => {
@@ -17,17 +16,38 @@ const SignUpForm = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
-
-    const [errors, setErrors] = useState([]);
-    const [passError, setPassError] = useState("");
+    const [validateErrors, setValidateErrors] = useState([]);
 
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    const validate = () => {
+        const errors = [];
+
+        if (!username) errors.push("Please provide a 'Username'");
+        if (!name) errors.push("Please provide a 'Name'");
+        if (!email) errors.push("Please provide a 'Email'");
+        if (!password) errors.push("Please provide a 'Password'");
+        if (!repeatPassword) errors.push("Please provide a 'Repeat Password'");
+        if (!profileImage) errors.push("Please provide a 'Profile Image'");
+        if (!streetAddress) errors.push("Please provide a 'Street Address'");
+        if (!city) errors.push("Please provide a 'City'");
+        if (!state) errors.push("Please provide a 'State'");
+        if (!zipCode) errors.push("Please provide a 'Zip Code'");
+        if (password !== repeatPassword)
+            errors.push("Both passwords must match");
+        return errors;
+    };
 
     const onSignUp = async e => {
         e.preventDefault();
+        const errors = validate();
+
+        if (errors.length > 0) return setValidateErrors(errors);
+
         if (password === repeatPassword) {
-            const data = await dispatch(
+            await dispatch(
                 signUp(
                     username,
                     name,
@@ -40,38 +60,47 @@ const SignUpForm = () => {
                     profileImage
                 )
             );
-            if (data) {
-                setErrors(data);
-            }
         }
-        if (password !== repeatPassword)
-            setPassword("Both passwords must match.");
+
+        setUsername("");
+        setName("");
+        setEmail("");
+        setPassword("");
+        setRepeatPassword("");
+        setProfileImage("");
+        setStreetAddress("");
+        setCity("");
+        setState("");
+        setZipCode("");
     };
 
     if (user) {
-        return <Redirect to="/" />;
+        history.push("/");
     }
 
     return (
-        <div className="bg-ninja_green flex flex-col items-center h-[100vh]">
-            <Link to="/">
-                <img
-                    className="object-contain my-[20px] mx-auto w-[100px]"
-                    src={NinjaVillage_logo}
-                    alt=""
-                />
-            </Link>
-            <div className="w-[350px] h-fit flex flex-col rounded-md border-[1px] border-gray-300 p-[20px]">
-                <h1 className="font-medium mb-2 text-[27px] text-white">
-                    Create Account
-                </h1>
+        <div className="flex flex-col items-center top-[0px] bottom-[0px]">
+            <div className="w-[500px] flex flex-col rounded-md border-[1px] border-gray-300 p-[30px] bg-ninja_green">
+                <div>
+                    <h1 className="font-medium mb-2 text-[27px] text-white">
+                        Create Account
+                    </h1>
+                    <Link to="/">
+                        <img
+                            className="object-contain my-[20px] mx-auto w-[100px]"
+                            src={NinjaVillage_logo}
+                            alt=""
+                        />
+                    </Link>
+                </div>
+
                 <form>
-                    <div className="text-[12px] font-semibold text-yellow-400 mb-[2px]">
-                        {errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
+                    <ul className="text-yellow-500 text-[13px] font-semibold ml-2">
+                        {validateErrors.map(error => (
+                            <li key={error}>{error}</li>
                         ))}
-                        {passError.length > 0 && <div>{passError}</div>}
-                    </div>
+                    </ul>
+
                     <div className="mb-[5px] flex flex-col">
                         <label className="font-semibold text-sm my-1 text-white">
                             User Name
@@ -196,9 +225,6 @@ const SignUpForm = () => {
                     <button
                         className="my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]"
                         onClick={e => {
-                            setErrors([]);
-                            setPassError("");
-
                             onSignUp(e);
                         }}>
                         Sign Up
@@ -209,15 +235,15 @@ const SignUpForm = () => {
                     Conditions of Use and Privacy Notice.
                 </p>
                 <hr className="w-[60%] self-center my-4 drop-shadow-lg"></hr>
-                <div className="flex items-center">
+                <div className="flex justify-center items-center">
                     <p className="text-[12px] font-medium mr-1 text-white">
                         Already have an account?{" "}
                     </p>
-                    <a
-                        className="text-[12px] text-violet-400 font-bold flex flex-row items-center"
-                        href="/login">
+                    <div
+                        className="text-[12px] text-yellow-400 font-bold flex flex-row items-center cursor-pointer"
+                        onClick={() => history.push("/login")}>
                         Sign in <ChevronRightIcon className="h-[9px]" />
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>

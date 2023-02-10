@@ -1,6 +1,7 @@
 import React from "react";
 import {FaStar} from 'react-icons/fa'
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { addToCart } from "../../store/cartReducer";
 
 
@@ -14,6 +15,7 @@ const Product = ({ product}) => {
 
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch();
+    const history = useHistory()
 
     const addItemToCart = async () => {
         const item = {
@@ -33,12 +35,12 @@ const Product = ({ product}) => {
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
-            <a href={`/products/${product.id}`}>
+            <div className="cursor-pointer" onClick={()=> history.push(`/products/${product.id}`)}>
             <img
                 className="object-contain h-[200px] w-[200px]"
                 src={product.image}
                 alt=""
-            /> </a>
+            /> </div>
             <h4>{product.title}</h4>
             <div className="flex">
             {product && product.productReviews.length && ratingAvg ?[...Array(Math.floor(ratingAvg))].map((star,i)=> <FaStar size={23} className="text-yellow-500" key={i}/>): <FaStar size={23} color={"#e4e5e9"}/>}

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { editUserThunk, deleteUserThunk } from "../../store/sessionReducer";
-// import { XCircleIcon } from "@heroicons/react/24/outline";
 import stateTaxes from "../../Media/stateTaxes.json";
 
 const EditProfile = ({ user, showProfile }) => {
@@ -116,7 +115,7 @@ const EditProfile = ({ user, showProfile }) => {
                         <h1 className="font-bold text-4xl mb-2 text-ninja_green">
                             Edit Profile
                         </h1>
-                        {/* <XCircleIcon className='h-6 cursor-pointer' onClick={()=>{ showProfile(false)}}/> */}
+                       
                     </div>
                     {validateErrors.length > 0 && (
                         <div className="my-2 ml-2">

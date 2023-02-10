@@ -32,18 +32,20 @@ const Checkout = () => {
         return [...accum]
     }, []))).toString()) + Number.EPSILON) * 100) / 100
 
+    const cartTotal = Math.round(((preTax_total + tax) + Number.EPSILON) * 100) / 100
+
     const handleCheckout = async () => {
        const cartObj = {
             id: cart.id,
-            total:cart.total,
+            total:cartTotal,
             checkedOut:true,
             products: cart.addedItems
        }
         await dispatch(cartCheckoutThunk(cartObj))
 
        await dispatch(getUserThunk(user.id))
-       
-        history.push('/')
+
+        // history.push('/')
     }
 
     if(total === 0){

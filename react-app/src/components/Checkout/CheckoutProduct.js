@@ -47,6 +47,7 @@ const CheckoutProduct = ({ product }) => {
                     <div className="flex flex-row items-center text-sm ml-1">
                         <p className="mr-2">Quantity:</p>
                         <p className="font-bold text-orange-700">
+                            {console.log(typeof(product.quantity))}
                             {product.quantity}
                         </p>
                     </div>
