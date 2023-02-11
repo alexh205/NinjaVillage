@@ -100,16 +100,20 @@
 # Images
 
 ### Splash Page
+
 ![main_page](https://user-images.githubusercontent.com/95322089/218265391-576f139a-c7da-4caf-a9bf-8cd54015202a.png)
 
 
 ### Product Page
+
 ![product_page](https://user-images.githubusercontent.com/95322089/218265408-7843256c-d458-467d-aadb-24014994c752.png)
 
 ### Cart Page
+
 ![cart](https://user-images.githubusercontent.com/95322089/218265454-c1477f79-c629-426c-a0e3-1d98e25811c9.png)
 
 ### Past Order Page
+
 ![orders](https://user-images.githubusercontent.com/95322089/218265429-23612be5-67b2-4775-94fa-ee7043488c1d.png)
 
 
