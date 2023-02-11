@@ -57,7 +57,6 @@ const CreateProduct = () => {
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
 
-
         setTitle("");
         setPrice("");
         setDescription("");
@@ -198,7 +197,7 @@ const CreateProduct = () => {
                         <button
                             className="button ml-10"
                             disabled={hasClicked === true}
-                            onClick={ e => {
+                            onClick={e => {
                                 setHasClicked(true);
                                 onProductCreate(e);
                             }}>

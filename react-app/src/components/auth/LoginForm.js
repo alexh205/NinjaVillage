@@ -10,7 +10,6 @@ const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [hasClicked, setHasClicked] = useState(false);
     const [hasClickedDemo, setHasClickedDemo] = useState(false);
     const user = useSelector(state => state.session.user);
 
@@ -28,7 +27,6 @@ const LoginForm = () => {
         if (data) {
             setErrors(data);
         }
-        setHasClicked(false);
     };
 
     if (user) {
@@ -55,7 +53,6 @@ const LoginForm = () => {
                             onClick={() => {
                                 setHasClickedDemo(true);
                                 demoLogin();
-
                             }}
                             className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
                             {hasClickedDemo ? <Loading /> : "Demo Login"}
@@ -102,13 +99,10 @@ const LoginForm = () => {
                         <button
                             className="my-3 button p-[5px] border-[1px] border-ninja_green-dark"
                             type="button"
-                            disabled={hasClicked === true}
                             onClick={e => {
-                                setHasClicked(true);
                                 onLogin(e);
-
                             }}>
-                            {hasClicked ? <Loading /> : "Login"}
+                            Login
                         </button>
                     </div>
                 </form>
