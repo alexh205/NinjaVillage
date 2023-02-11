@@ -86,7 +86,7 @@ const Header = () => {
                             )}
                         </div>
                         {filteredData.length !== 0 && (
-                            <div className="absolute top-[57px] z-50 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md w-[40%] lg:w-[50%]">
+                            <div className="hidden sm:block absolute top-[44px] z-50 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md sm:w-[80%] lg:w-[91%]">
                                 {filteredData.slice(0, 12).map((product, i) => {
                                     return (
                                         <div

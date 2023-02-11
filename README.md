@@ -22,13 +22,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/alexh205/Ninja_e-commerce">
-    <img src="https://user-images.githubusercontent.com/95322089/212524348-81d51735-1a6c-49ef-b744-b50c27b5a0ce.png" alt="Logo" width="80" height="80">
+    <img width="120" alt="NinjaVillage_logo" src="https://user-images.githubusercontent.com/95322089/218267851-e7b9af4e-5686-4a1a-8965-fa5685a78459.png">
   </a>
 
-  <h3 align="center">Buzz (Slack Clone)</h3>
+  <h3 align="center">NinjaVillage (Amazon Clone)</h3>
 
   <p align="center">
-    This is a spin-off of the popular business messaging application <a href="Slack.com">Slack</a>. Users on Slack can share messages, images, setup communication channels for group collaboration, and take part in audio sessions within their organizations.
+    This is a spin-off of the popular e-commerce site <a href="amazon.com">Amazon</a>. Users can search, sell, purchase, and review products.
     <br />
     <br />
     <br />
@@ -78,17 +78,21 @@
 * [![Javascript][Javascript]][Javascript-url]
 * [![HTML5][HTML5]][HTML-url]
 * [![CSS][CSS]][CSS-url]
+* ![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=for-the-badge)
 * [![React][React.js]][React-url]
 * ![React Router Badge](https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=fff&style=for-the-badge)
 * ![Redux Badge](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=fff&style=for-the-badge)
 * [![Node.js][Node.js]][Node-url]
 * [![NPM][NPM]][NPM-url]
+* ![Yarn Badge](https://img.shields.io/badge/Yarn-2C8EBB?logo=yarn&logoColor=fff&style=for-the-badge)
 * [![Python][Python]][Python-url]
 * [![Flask][Flask]][Flask-url]
 * ![Sequelize Badge](https://img.shields.io/badge/Sequelize-52B0E7?logo=sequelize&logoColor=fff&style=for-the-badge)
 * ![.ENV Badge](https://img.shields.io/badge/.ENV-ECD53F?logo=dotenv&logoColor=000&style=for-the-badge)
 * [![Git][Git]][Git-url]
 * [![Github][Github]][Github-url]
+* ![Render Badge](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=000&style=for-the-badge)
+<!-- * ![Amazon AWS Badge](https://img.shields.io/badge/Amazon%20AWS-232F3E?logo=amazonaws&logoColor=fff&style=for-the-badge) -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -96,11 +100,17 @@
 # Images
 
 ### Splash Page
-![image](https://user-images.githubusercontent.com/95946808/213333941-2f64a1c6-b157-48bc-8a6d-092eb3798d3a.png)
+![main_page](https://user-images.githubusercontent.com/95322089/218265391-576f139a-c7da-4caf-a9bf-8cd54015202a.png)
 
 
-### Base Messaging Container
-![image](https://user-images.githubusercontent.com/95946808/213333994-91155222-6ef0-43f0-b114-6c2d870c9913.png)
+### Product Page
+![product_page](https://user-images.githubusercontent.com/95322089/218265408-7843256c-d458-467d-aadb-24014994c752.png)
+
+### Cart Page
+![cart](https://user-images.githubusercontent.com/95322089/218265454-c1477f79-c629-426c-a0e3-1d98e25811c9.png)
+
+### Past Order Page
+![orders](https://user-images.githubusercontent.com/95322089/218265429-23612be5-67b2-4775-94fa-ee7043488c1d.png)
 
 
 <!-- GETTING STARTED -->
@@ -190,24 +200,24 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Features
 
-- [x] Create, edit, delete organizations (servers)
-- [x] Sign Up, Login users to the 'Buzz' app
-- [x] Create, edit, and delete messaging channels
-- [x] Add and remove user from messaging channels (as an owner)
-- [x] Send direct messages to users
-- [x] Attach images to messages
-- [x] Reply to other users direct messages or channel messages
-- [x] Search for users within an organization (server)
-- [x] Edit user profile (Bio, username, password, profile Image, etc..)
+- [x] Sign Up, Login users to the 'NinjaVillage' app
+- [x] Edit user profiles
 - [x] Demo login user
+- [x] Create, edit, and delete Products
+- [x] Search for products by name, description, and category
+- [x] filter product listings by categories (Books, Groceries, Clothing, Shoes & Jewelry,...)
+- [x] View user product stores
+- [x] Add products to shopping cart
+- [x] checkout carts
+- [x] View past orders
 
 
 ## Goals
 
-- [ ] User Mentions
-- [ ] Messaging Emojis
-- [ ] Pinning images/messages to channels
-- [ ] Upload files/media messages
+- [ ] Add images to reviews
+- [ ] Add secondary images to products
+- [ ] Implement wish lists
+- [ ] Implement a payment system
 - [ ] Multi-language Support
 - [ ] Implement AWS to handle media storage
 
@@ -274,9 +284,9 @@ Use this space to list resources you find helpful and would like to give credit 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/AaronPBishop/Buzz/network/members
+[forks-url]: https://github.com/alexh205/Ninja_e-commerce/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/AaronPBishop/Buzz/stargazers
+[stars-url]: https://github.com/alexh205/Ninja_e-commerce/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/othneildrew/Best-README-Template/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
@@ -350,109 +360,3 @@ This is the starter for the Flask React project.
    ```
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-
-## Deployment through Render.com
-
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
-
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
-
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
-
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
-
-### Part A: Configure the Start and Build Commands
-
-Start by giving your application a name.
-
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
