@@ -98,12 +98,16 @@ const Header = () => {
                                                 );
                                             }}
                                             className="flex items-center text-black hover:bg-gray-200 hover:text-ninja_green hover:font-bold">
-                                                <div className="flex flex-row m-1">
-                                                    <img className="w-8" src={product.image} alt='product'/>
-                                                    <p className="ml-[10px]">
-                                                {product.title}
-                                            </p></div>
-
+                                            <div className="flex flex-row m-1">
+                                                <img
+                                                    className="w-8"
+                                                    src={product.image}
+                                                    alt="product"
+                                                />
+                                                <p className="ml-[10px]">
+                                                    {product.title}
+                                                </p>
+                                            </div>
                                         </div>
                                     );
                                 })}
@@ -116,10 +120,21 @@ const Header = () => {
                 <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
                     <DropDownMenu />
 
-                    <div className="link" onClick={()=> history.push('/orders')}>
-                        <p>Past</p>
-                        <p className="font-extrabold md:text-sm">Orders</p>
-                    </div>
+                    {!user ? (
+                        <div
+                            className="link"
+                            onClick={() => history.push("/login")}>
+                            <p>Past</p>
+                            <p className="font-extrabold md:text-sm">Orders</p>
+                        </div>
+                    ) : (
+                        <div
+                            className="link"
+                            onClick={() => history.push("/orders")}>
+                            <p>Past</p>
+                            <p className="font-extrabold md:text-sm">Orders</p>
+                        </div>
+                    )}
 
                     <div
                         className="link relative flex items-center"

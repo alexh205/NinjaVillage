@@ -34,11 +34,9 @@ const Filters = () => {
                     {filteredProd &&
                         filteredProd.map((product, i) => (
                             <div
-                                className={`${
-                                    user && product.ownerId === user.id
-                                        ? "hidden"
-                                        : "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"
-                                }`}
+                                className={
+                                    "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"
+                                }
                                 key={i}>
                                 <FilteredProd
                                     product={product}
@@ -54,3 +52,10 @@ const Filters = () => {
 };
 
 export default Filters;
+
+
+// className={`${
+//     user && product.ownerId === user.id
+//         ? "hidden"
+//         : "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"
+// }`}

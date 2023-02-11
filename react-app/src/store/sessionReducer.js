@@ -90,12 +90,12 @@ export const signUp = (username, name, email, streetAddress, city, state,zipCode
             username,
             name,
             email,
-            streetAddress,
+            street_address: streetAddress,
             city,
             state,
-            zipCode,
+            zip_code:zipCode,
             password,
-            profileImage,
+            profile_img:profileImage,
         }),
     });
 

@@ -112,8 +112,7 @@
 
 ![cart](https://user-images.githubusercontent.com/95322089/218265454-c1477f79-c629-426c-a0e3-1d98e25811c9.png)
 
-### Past Order Page
-
+### Past Orders Page
 ![orders](https://user-images.githubusercontent.com/95322089/218265429-23612be5-67b2-4775-94fa-ee7043488c1d.png)
 
 
@@ -219,9 +218,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Goals
 
 - [ ] Add images to reviews
+- [ ] Add an image carousel to view both product and review images
 - [ ] Add secondary images to products
 - [ ] Implement wish lists
-- [ ] Implement a payment system
+- [ ] Implement a payment system + confirmation page
 - [ ] Multi-language Support
 - [ ] Implement AWS to handle media storage
 
