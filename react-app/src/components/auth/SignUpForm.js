@@ -4,6 +4,7 @@ import { signUp } from "../../store/sessionReducer";
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import Loading from "../Loading";
 
 const SignUpForm = () => {
     const [username, setUsername] = useState("");
@@ -17,6 +18,7 @@ const SignUpForm = () => {
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [validateErrors, setValidateErrors] = useState([]);
+    const [hasClicked, setHasClicked] = useState(false);
 
     const validateEmail = email => {
         const check =
@@ -246,10 +248,14 @@ const SignUpForm = () => {
                     </div>
                     <button
                         className="my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]"
+                        disabled={hasClicked=== true}
                         onClick={e => {
+                            setHasClicked(true)
                             onSignUp(e);
+                            setHasClicked(false)
                         }}>
-                        Sign Up
+                            {hasClicked ? <Loading /> : "Sign Up"}
+
                     </button>
                 </form>
                 <p className="text-[11px] text-white">

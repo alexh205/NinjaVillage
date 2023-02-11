@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import ReviewImages from "../Images/ReviewImages";
 import {
@@ -7,6 +7,7 @@ import {
 } from "../../store/productReducer";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import Loading from "../Loading";
 
 const Review = ({ review, product, user }) => {
     const dispatch = useDispatch();
@@ -16,6 +17,15 @@ const Review = ({ review, product, user }) => {
     if (review && review.rating) {
         rating = review.rating;
     }
+
+    const [hasClickedEdit, setHasClickedEdit] = useState(false);
+    const [hasClickedDelete, setHasClickedDelete] = useState(false);
+
+    const deleteReview = async e => {
+        e.preventDefault();
+        await dispatch(deleteReviewThunk(review.id));
+        await dispatch(getAllProductThunk());
+    };
 
     return (
         <div className="ml-4 border-b">
@@ -34,21 +44,23 @@ const Review = ({ review, product, user }) => {
                 <div className="flex flex-row items-center my-2">
                     <button
                         className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                        disabled={hasClickedEdit === true}
                         onClick={async e => {
-                            e.preventDefault();
+                            setHasClickedEdit(true);
                             history.push(`/reviews/edit/${product.id}`);
+                            setHasClickedEdit(false);
                         }}>
-                        Edit review
+                        {hasClickedEdit ? <Loading /> : "Edit review"}
                     </button>
                     <button
                         className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+                        disabled={hasClickedDelete === true}
                         onClick={async e => {
-                            e.preventDefault();
-
-                            await dispatch(deleteReviewThunk(review.id));
-                            await dispatch(getAllProductThunk());
+                            setHasClickedDelete(true);
+                            deleteReview(e);
+                            setHasClickedDelete(false);
                         }}>
-                        Delete review
+                        {hasClickedDelete ? <Loading /> : "Delete review"}
                     </button>
                 </div>
             ) : (

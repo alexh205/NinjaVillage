@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Product from "../Product/Product";
 import WishListProd from "./WishListProd";
+import Loading from "../Loading";
 
 const WishList = () => {
     const { listId } = useParams();
@@ -25,7 +26,7 @@ const WishList = () => {
             </>
         );
     } else {
-        return "...Loading";
+        return <Loading />
     }
 };
 

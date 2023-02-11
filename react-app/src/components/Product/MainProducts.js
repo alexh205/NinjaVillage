@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addToCart } from "../../store/cartReducer";
+import Loading from "../Loading";
 
 const MainProducts = ({ product }) => {
+    const [hasClicked, setHasClicked] = useState(false);
+
     let ratingTotal = 0;
     let ratingAvg;
 
@@ -39,12 +42,21 @@ const MainProducts = ({ product }) => {
             </p>
             <div
                 className="cursor-pointer"
-                onClick={() => history.push(`/products/${product.id}`)}>
-                <img
-                    className="object-contain h-[200px] w-[200px] mb-2"
-                    src={product.image}
-                    alt="product"
-                />{" "}
+                disabled={hasClicked === true}
+                onClick={() => {
+                    setHasClicked(true);
+                    history.push(`/products/${product.id}`);
+                    setHasClicked(false)
+                }}>
+                {hasClicked ? (
+                    <Loading />
+                ) : (
+                    <img
+                        className="object-contain h-[200px] w-[200px] mb-2"
+                        src={product.image}
+                        alt="product"
+                    />
+                )}
             </div>
             <h4>{product.title}</h4>
             <div className="flex">

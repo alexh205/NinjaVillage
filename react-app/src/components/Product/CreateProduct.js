@@ -4,8 +4,10 @@ import {
     getAllProductThunk,
     createProductThunk,
 } from "../../store/productReducer";
+import { authenticate } from "../../store/sessionReducer";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Loading from "../Loading";
 
 const CreateProduct = () => {
     const dispatch = useDispatch();
@@ -51,7 +53,9 @@ const CreateProduct = () => {
                 image
             )
         );
+
         await dispatch(getAllProductThunk());
+        await dispatch(authenticate());
 
         setTitle("");
         setPrice("");
@@ -191,16 +195,13 @@ const CreateProduct = () => {
                         </button>
                         <button
                             className="button ml-10"
-                            disabled={hasClicked}
+                            disabled={hasClicked === true}
                             onClick={e => {
-                                if (!hasClicked) {
-                                    setHasClicked(true)
-                                    onProductCreate(e);
-                                }
-
+                                setHasClicked(true);
+                                onProductCreate(e);
                                 setHasClicked(false);
                             }}>
-                            Submit
+                            {hasClicked ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>

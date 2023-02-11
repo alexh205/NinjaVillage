@@ -8,6 +8,7 @@ import {
     getAllProductThunk,
 } from "../../store/productReducer";
 import { authenticate } from "../../store/sessionReducer";
+import Loading from "../Loading";
 
 const CreateReview = () => {
     const { productId } = useParams();
@@ -186,15 +187,13 @@ const CreateReview = () => {
                         </button>
                         <button
                             className="button ml-10"
-                            disabled={hasClicked}
+                            disabled={hasClicked === true}
                             onClick={e => {
-                                if (!hasClicked) {
-                                    setHasClicked(true);
-                                    onReviewCreation(e);
-                                }
+                                setHasClicked(true);
+                                onReviewCreation(e);
                                 setHasClicked(false);
                             }}>
-                            Submit
+                            {hasClicked ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>

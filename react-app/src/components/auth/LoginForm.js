@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../store/sessionReducer";
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
-import { useHistory, Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
+import Loading from "../Loading";
+
 const LoginForm = () => {
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [hasClicked, setHasClicked] = useState(false);
+    const [hasClickedDemo, setHasClickedDemo] = useState(false);
     const user = useSelector(state => state.session.user);
 
     const dispatch = useDispatch();
@@ -25,19 +29,9 @@ const LoginForm = () => {
         }
     };
 
-    const updateEmail = e => {
-        setEmail(e.target.value);
-    };
-
-    const updatePassword = e => {
-        setPassword(e.target.value);
-    };
-
-
     if (user) {
         return <Redirect to="/" />;
     }
-
 
     return (
         <div className="flex flex-col items-center mt-20">
@@ -55,15 +49,24 @@ const LoginForm = () => {
                             Sign in
                         </h1>
                         <button
-                            onClick={demoLogin}
+                            disabled={hasClickedDemo === true}
+                            onClick={() => {
+                                setHasClickedDemo(true);
+                                demoLogin();
+                                setHasClickedDemo(false);
+                            }}
                             className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
-                            Demo Login
+                            {hasClickedDemo ? <Loading /> : "Demo Login"}
                         </button>
                     </div>
                 </div>
-                <form onSubmit={onLogin}>
+                <form>
                     {errors.map((error, ind) => (
-                        <div className="text-yellow-500 text-[14px] font-semibold my-1" key={ind}>{error}</div>
+                        <div
+                            className="text-yellow-500 text-[14px] font-semibold my-1"
+                            key={ind}>
+                            {error}
+                        </div>
                     ))}
                     <div className="mb-[5px] flex flex-col">
                         <label
@@ -96,8 +99,14 @@ const LoginForm = () => {
                         />
                         <button
                             className="my-3 button p-[5px] border-[1px] border-ninja_green-dark"
-                            type="submit">
-                            Login
+                            type="button"
+                            disabled={hasClicked === true}
+                            onClick={e => {
+                                setHasClicked(true);
+                                onLogin(e);
+                                setHasClicked(false);
+                            }}>
+                            {hasClicked ? <Loading /> : "Login"}
                         </button>
                     </div>
                 </form>

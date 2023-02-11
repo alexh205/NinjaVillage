@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Header from "../Header/Header";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,16 +10,21 @@ import {
     deleteProductThunk,
 } from "../../store/productReducer";
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
+import Loading from "../Loading";
 
 const ProductDetail = () => {
+    const [hasClickedEdit, setHasClickedEdit] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
     const { productId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const product = useSelector(state => state.productStore.products[productId]);
+    const product = useSelector(
+        state => state.productStore.products[productId]
+    );
 
-    if (!product){
-        history.push('/')
+    if (!product) {
+        history.push("/");
     }
     const user = useSelector(state => state.session.user);
 
@@ -29,7 +34,7 @@ const ProductDetail = () => {
         })();
     }, [dispatch]);
 
-    const owner = useSelector(state => state.session.productOwner)
+    const owner = useSelector(state => state.session.productOwner);
 
     let ratingTotal = 0;
     let ratingAvg;
@@ -54,6 +59,15 @@ const ProductDetail = () => {
         await dispatch(addToCart(item));
     };
 
+    const deleteItem = async e => {
+        e.preventDefault();
+
+        await dispatch(deleteProductThunk(productId));
+        await dispatch(getAllProductThunk());
+        await dispatch(authenticate());
+        history.push("/");
+    };
+
     return (
         <>
             <Header />
@@ -66,31 +80,34 @@ const ProductDetail = () => {
                                     <div className="flex flex-row items-center justify-center my-4">
                                         <button
                                             className="mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3"
+                                            disabled={hasClickedEdit === true}
                                             onClick={e => {
+                                                setHasClickedEdit(true);
                                                 history.push(
                                                     `/products/edit/${productId}`
                                                 );
+                                                setHasClickedEdit(false);
                                             }}>
-                                            Edit listing
+                                            {hasClickedEdit ? (
+                                                <Loading />
+                                            ) : (
+                                                "Edit listing"
+                                            )}
                                         </button>
 
                                         <button
                                             className="mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow"
+                                            disabled={hasClicked === true}
                                             onClick={async e => {
-                                                e.preventDefault();
-
-                                                await dispatch(
-                                                    deleteProductThunk(
-                                                        productId
-                                                    )
-                                                );
-                                                await dispatch(
-                                                    getAllProductThunk()
-                                                );
-                                                await dispatch(authenticate())
-                                                history.push("/");
+                                                setHasClicked(true);
+                                                deleteItem(e);
+                                                setHasClicked(false);
                                             }}>
-                                            Delete listing
+                                            {hasClicked ? (
+                                                <Loading />
+                                            ) : (
+                                                "Delete listing"
+                                            )}
                                         </button>
                                     </div>
                                 ) : (
@@ -102,7 +119,6 @@ const ProductDetail = () => {
                                     src={product.image}
                                     alt="product"
                                 />
-
                             </div>
 
                             <div className="flex flex-col ml-7">
@@ -110,7 +126,9 @@ const ProductDetail = () => {
                                     {product.title}
                                 </div>
 
-                                <div className="text-sm cursor-pointer text-sky-600 text-semibold" onClick={()=> history.push('/listings')}>
+                                <div
+                                    className="text-sm cursor-pointer text-sky-600 text-semibold"
+                                    onClick={() => history.push("/listings")}>
                                     Visit {owner.name}'s store
                                 </div>
 

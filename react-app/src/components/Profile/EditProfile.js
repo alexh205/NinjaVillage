@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { editUserThunk, deleteUserThunk } from "../../store/sessionReducer";
 import stateTaxes from "../../Media/stateTaxes.json";
+import Loading from "../Loading";
 
 const EditProfile = ({ user, showProfile }) => {
     const { userId } = useParams();
@@ -10,6 +11,7 @@ const EditProfile = ({ user, showProfile }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [hasClicked, setHasClicked] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -100,11 +102,7 @@ const EditProfile = ({ user, showProfile }) => {
             setRepeatPassword("");
             setValidateErrors([]);
 
-            await dispatch(
-                deleteUserThunk(
-                    userId
-                )
-            );
+            await dispatch(deleteUserThunk(userId));
         };
 
         return (
@@ -115,7 +113,6 @@ const EditProfile = ({ user, showProfile }) => {
                         <h1 className="font-bold text-4xl mb-2 text-ninja_green">
                             Edit Profile
                         </h1>
-
                     </div>
                     {validateErrors.length > 0 && (
                         <div className="my-2 ml-2">
@@ -123,7 +120,7 @@ const EditProfile = ({ user, showProfile }) => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map((error,i) => (
+                                {validateErrors.map((error, i) => (
                                     <li key={i}>{error}</li>
                                 ))}
                             </ul>
@@ -248,49 +245,54 @@ const EditProfile = ({ user, showProfile }) => {
                     </div>
 
                     <div className="flex md:flex-row flex-col mt-5 justify-between">
-                                <div className="flex mb-3 md:mb-0">
-                            <button className="cursor-pointer text-white p-2 font-bold text-[9px] md:text-sm bg-gradient-to-b from-red-500 to-red-700 border-red-600 rounded-sm  focus:outline-none focus:ring-2 focus:ring-red-800 active:from-red-800"
-                            onClick={e => {
-                                onProfileDelete(e);
-                                history.push('/')
-                            }}>
-                            Delete Account</button>
-                            </div>
+                        <div className="flex mb-3 md:mb-0">
+                            <button
+                                className="cursor-pointer text-white p-2 font-bold text-[9px] md:text-sm bg-gradient-to-b from-red-500 to-red-700 border-red-600 rounded-sm  focus:outline-none focus:ring-2 focus:ring-red-800 active:from-red-800"
+                                onClick={e => {
+                                    onProfileDelete(e);
+                                    history.push("/");
+                                }}>
+                                Delete Account
+                            </button>
+                        </div>
                         <div>
-                        <button
-                            className="button mr-2"
-                            onClick={e => {
-                                setUsername("");
-                                setEmail("");
-                                setName("");
-                                setStreetAddress("");
-                                setCity("");
-                                setState("");
-                                setZipCode("");
-                                setProfileImg("");
-                                setPassword("");
-                                setRepeatPassword("");
-                                setValidateErrors([]);
+                            <button
+                                className="button mr-2"
+                                onClick={e => {
+                                    setUsername("");
+                                    setEmail("");
+                                    setName("");
+                                    setStreetAddress("");
+                                    setCity("");
+                                    setState("");
+                                    setZipCode("");
+                                    setProfileImg("");
+                                    setPassword("");
+                                    setRepeatPassword("");
+                                    setValidateErrors([]);
 
-                                showProfile(false);
-                            }}>
-                            Cancel
-                        </button>
-                        <button
-                            className="button ml-0 md:ml-6 mt-2 md:mt-0"
-                            onClick={e => {
-                                onProfileEdit(e);
-                                showProfile(false);
-                            }}>
-                            Submit
-                        </button>
+                                    showProfile(false);
+                                }}>
+                                Cancel
+                            </button>
+                            <button
+                                className="button ml-0 md:ml-6 mt-2 md:mt-0"
+                                disabled={hasClicked === true}
+                                onClick={e => {
+                                    setHasClicked(true);
+                                    onProfileEdit(e);
+                                    showProfile(false);
+                                    setHasClicked(false);
+                                }}>
+                                {hasClicked ? <Loading /> : "Submit"}
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
         );
     } else {
-        return "..loading";
+        return <Loading />;
     }
 };
 

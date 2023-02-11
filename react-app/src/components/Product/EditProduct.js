@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -6,7 +6,7 @@ import {
     getAllProductThunk,
     editProductThunk,
 } from "../../store/productReducer";
-
+import Loading from "../Loading";
 
 const EditProduct = () => {
     const { productId } = useParams();
@@ -38,7 +38,6 @@ const EditProduct = () => {
         if (!category) errors.push("Please select a 'Category'");
         if (!brand) errors.push("Please provide a 'Brand'");
         if (!image) errors.push("Please provide a 'Image'");
-
 
         return errors;
     };
@@ -75,7 +74,6 @@ const EditProduct = () => {
 
             await dispatch(getAllProductThunk());
 
-
             setTitle("");
             setPrice("");
             setDescription("");
@@ -99,7 +97,7 @@ const EditProduct = () => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map((error,i) => (
+                                {validateErrors.map((error, i) => (
                                     <li key={i}>{error}</li>
                                 ))}
                             </ul>
@@ -222,23 +220,20 @@ const EditProduct = () => {
                         </button>
                         <button
                             className="button ml-10"
-                            disabled={hasClicked}
+                            disabled={hasClicked === true}
                             onClick={e => {
-                                 if (!hasClicked) {
-                                    setHasClicked(true)
-                                    onProductEdit(e);
-                                }
-                                setHasClicked(false)
-
+                                setHasClicked(true);
+                                onProductEdit(e);
+                                setHasClicked(false);
                             }}>
-                            Submit
+                           {hasClicked ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>
             </div>
         );
     } else {
-        return "Loading...";
+        return <Loading />;
     }
 };
 
