@@ -24,12 +24,12 @@ const ProductDetail = () => {
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
-      (async () => {
-          await dispatch(getUserThunk(product.ownerId));
-      })();
-  }, [product.ownerId, dispatch]);
+        (async () => {
+            await dispatch(getUserThunk(product.ownerId));
+        })();
+    }, [dispatch]);
 
-  const owner = useSelector(state => state.session.productOwner)
+    const owner = useSelector(state => state.session.productOwner)
 
     let ratingTotal = 0;
     let ratingAvg;
@@ -102,7 +102,7 @@ const ProductDetail = () => {
                                     src={product.image}
                                     alt="product"
                                 />
-                                {/* <p className='text-center text-sm text-gray-500'>Roll over image to zoom in</p> */}
+
                             </div>
 
                             <div className="flex flex-col ml-7">

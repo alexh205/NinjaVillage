@@ -6,7 +6,6 @@ import {
 } from "../../store/productReducer";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { authenticate } from "../../store/sessionReducer";
 
 const CreateProduct = () => {
     const dispatch = useDispatch();
@@ -18,6 +17,7 @@ const CreateProduct = () => {
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
     const [image, setImage] = useState("");
+    const [hasClicked, setHasClicked] = useState(false);
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -36,6 +36,7 @@ const CreateProduct = () => {
 
     const onProductCreate = async e => {
         e.preventDefault();
+
         const errors = validate();
 
         if (errors.length > 0) return setValidateErrors(errors);
@@ -51,8 +52,6 @@ const CreateProduct = () => {
             )
         );
         await dispatch(getAllProductThunk());
-        await dispatch(authenticate())
-
 
         setTitle("");
         setPrice("");
@@ -61,7 +60,6 @@ const CreateProduct = () => {
         setBrand("");
         setImage("");
         setValidateErrors([]);
-
 
         history.push(`/products/${product.id}`);
     };
@@ -80,7 +78,7 @@ const CreateProduct = () => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map((error,i) => (
+                                {validateErrors.map((error, i) => (
                                     <li key={i}>{error}</li>
                                 ))}
                             </ul>
@@ -193,8 +191,14 @@ const CreateProduct = () => {
                         </button>
                         <button
                             className="button ml-10"
+                            disabled={hasClicked}
                             onClick={e => {
-                                onProductCreate(e);
+                                if (!hasClicked) {
+                                    setHasClicked(true)
+                                    onProductCreate(e);
+                                }
+
+                                setHasClicked(false);
                             }}>
                             Submit
                         </button>

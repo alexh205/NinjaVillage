@@ -3,65 +3,41 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../store/sessionReducer";
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
 import { useHistory, Link } from "react-router-dom";
-
+import { Redirect } from "react-router-dom";
 const LoginForm = () => {
+    const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [validateErrors, setValidateErrors] = useState([]);
-
     const user = useSelector(state => state.session.user);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const validateEmail = email => {
-        const check =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return check.test(email.toLowerCase());
-    };
-
-    const validate = () => {
-        const errors = [];
-        const emailVal = validateEmail(email);
-
-        if (!email) errors.push("Please provide an 'Email'");
-        if (email && !emailVal)
-            errors.push(
-                "Please provide a valid email syntax 'thisemail@ninjaVillage.com'"
-            );
-        if (!password) errors.push("Please provide a 'Password'");
-
-        return errors;
-    };
-
     const demoLogin = async () => {
         await dispatch(login("demo@aa.io", "password"));
     };
-
     const onLogin = async e => {
         e.preventDefault();
-
-        const errors = validate();
-
-        if (errors.length > 0) return setValidateErrors(errors);
-
         const data = await dispatch(login(email, password));
 
-        if (data && validateErrors.length === 0) {
+        if (data) {
             setErrors(data);
         }
-
-
-        setEmail("");
-        setPassword("");
-        setValidateErrors([]);
-
     };
 
+    const updateEmail = e => {
+        setEmail(e.target.value);
+    };
+
+    const updatePassword = e => {
+        setPassword(e.target.value);
+    };
+
+
     if (user) {
-        history.push("/");
+        return <Redirect to="/" />;
     }
+
 
     return (
         <div className="flex flex-col items-center mt-20">
@@ -86,12 +62,6 @@ const LoginForm = () => {
                     </div>
                 </div>
                 <form onSubmit={onLogin}>
-
-                    <ul className="text-yellow-500 text-[14px] font-semibold my-1">
-                        {validateErrors.map((error, i) => (
-                            <li key={i}>{error}</li>
-                        ))}
-                    </ul>
                     {errors.map((error, ind) => (
                         <div className="text-yellow-500 text-[14px] font-semibold my-1" key={ind}>{error}</div>
                     ))}

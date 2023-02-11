@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp } from "../../store/sessionReducer";
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 const SignUpForm = () => {
@@ -16,7 +16,6 @@ const SignUpForm = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
-    const [errors, setErrors] = useState([]);
     const [validateErrors, setValidateErrors] = useState([]);
 
     const validateEmail = email => {
@@ -63,7 +62,7 @@ const SignUpForm = () => {
         if (errors.length > 0) return setValidateErrors(errors);
 
         if (password === repeatPassword) {
-            const data = await dispatch(
+            await dispatch(
                 signUp(
                     username,
                     name,
@@ -77,9 +76,7 @@ const SignUpForm = () => {
                 )
             );
 
-            if (data && validateErrors.length === 0) {
-                setErrors(data);
-            }
+
         }
 
         setUsername("");
@@ -96,8 +93,8 @@ const SignUpForm = () => {
     };
 
     if (user) {
-        history.push("/");
-    }
+        return <Redirect to="/" />;
+      }
 
     return (
         <div className="flex flex-col items-center mt-8">
@@ -116,9 +113,6 @@ const SignUpForm = () => {
                 </div>
 
                 <form>
-                    {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
                     <ul className="text-yellow-500 text-[13px] font-semibold ml-2">
                         {validateErrors.map((error, i) => (
                             <li key={i}>{error}</li>

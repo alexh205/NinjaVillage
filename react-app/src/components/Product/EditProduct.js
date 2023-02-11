@@ -6,7 +6,7 @@ import {
     getAllProductThunk,
     editProductThunk,
 } from "../../store/productReducer";
-import { authenticate } from "../../store/sessionReducer";
+
 
 const EditProduct = () => {
     const { productId } = useParams();
@@ -21,6 +21,7 @@ const EditProduct = () => {
     const [brand, setBrand] = useState("");
     const [image, setImage] = useState("");
     const [valid, setValid] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -73,7 +74,7 @@ const EditProduct = () => {
             );
 
             await dispatch(getAllProductThunk());
-            await dispatch(authenticate())
+
 
             setTitle("");
             setPrice("");
@@ -221,8 +222,13 @@ const EditProduct = () => {
                         </button>
                         <button
                             className="button ml-10"
+                            disabled={hasClicked}
                             onClick={e => {
-                                onProductEdit(e);
+                                 if (!hasClicked) {
+                                    setHasClicked(true)
+                                    onProductEdit(e);
+                                }
+                                setHasClicked(false)
 
                             }}>
                             Submit

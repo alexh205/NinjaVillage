@@ -25,6 +25,7 @@ const EditReview = () => {
 
   const [valid, setValid] = useState(false)
   const [validateErrors, setValidateErrors] = useState([]);
+  const [hasClicked, setHasClicked] = useState(false);
 
 
   if(product&& reviewObj && user)
@@ -154,9 +155,13 @@ const EditReview = () => {
             setValid(false)
             history.push(`/products/${productId}`)
             }}>Cancel</button>
-          <button className='button ml-10' onClick={e => {
-
-            onReviewEdit(e)
+          <button className='button ml-10' disabled={hasClicked} onClick={e => {
+             if (!hasClicked) {
+              setHasClicked(true)
+              onReviewEdit(e)
+          }
+          setHasClicked(false)
+          
           }}>Submit</button>
         </div>
       </form>
