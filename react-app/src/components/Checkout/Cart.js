@@ -20,7 +20,7 @@ const Cart = ({user}) => {
                     <img
                         className="w-[100%] h-[250px] mb-3 border-[2px]"
                         src={checkout}
-                        alt=""
+                        alt="checkout register"
                     />
                     <div className="flex flex-col p-5 space-y-10 bg-white">
                         <div className="flex border-b pb-4 justify-between ">
@@ -56,7 +56,7 @@ const Cart = ({user}) => {
                          </h2>
                          <button
                          disabled={cart.length < 1}
-                         className={`button mt-2 ${!user || cart.length < 1 &&  'from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed'}`} >
+                         className={`button mt-2 ${(!user || cart.length < 1) &&  'from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed'}`} >
                              {"Please add at least one item to proceed"}
                          </button>
                      </>: <>

@@ -6,6 +6,7 @@ import {
     getAllProductThunk,
     editProductThunk,
 } from "../../store/productReducer";
+import { authenticate } from "../../store/sessionReducer";
 
 const EditProduct = () => {
     const { productId } = useParams();
@@ -72,6 +73,7 @@ const EditProduct = () => {
             );
 
             await dispatch(getAllProductThunk());
+            await dispatch(authenticate())
 
             setTitle("");
             setPrice("");
@@ -96,8 +98,8 @@ const EditProduct = () => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map(error => (
-                                    <li key={error}>{error}</li>
+                                {validateErrors.map((error,i) => (
+                                    <li key={i}>{error}</li>
                                 ))}
                             </ul>
                         </div>
@@ -106,7 +108,7 @@ const EditProduct = () => {
                         <div className="flex flex-row items-center my-5">
                             <img
                                 src={product.image}
-                                alt=""
+                                alt="product"
                                 className="w-[60px] h-[70px] mr-4"></img>
                             <div className="sm:line-clamp-4">
                                 {product.title}

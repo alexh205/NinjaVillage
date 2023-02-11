@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { logout } from "../store/sessionReducer";
+import { logout } from "../../store/sessionReducer";
 import {
     ClipboardDocumentListIcon,
     ShoppingBagIcon,
@@ -46,7 +46,7 @@ const DropDownMenu = () => {
                         </div>
 
                         {clicked && (
-                            <div className="absolute justify-center flex flex-col z-10 items-center right-[170px] md:right-[194px] h-[170px] w-[138px] mt-[2px] rounded-xl bg-gray-100 border-2 border-black">
+                            <div className="absolute justify-center flex flex-col z-10 items-center right-[170px] md:right-[194px] h-[130px] w-[138px] mt-[2px] rounded-xl bg-gray-100 border-2 border-black">
                                 <div className="flex flex-row my-1 pb-2 px-[26px] items-center border-b-[2px] border-black">
                                     <div
                                         className="text-black text-[17px] font-bold flex flex-row cursor-pointer items-center"
@@ -69,17 +69,17 @@ const DropDownMenu = () => {
                                     </div>
                                 </div>
 
-                                <div
-                                    className="text-black text-[16px] font-bold px-[14px] border-b-[2px] border-black flex flex-row my-1 pb-2 items-center cursor-pointer items-center"
+                                {/* <div
+                                    className="text-black text-[16px] font-bold px-[14px] border-b-[2px] border-black flex flex-row my-1 pb-2 items-center cursor-pointer"
                                     onClick={() => {
                                         showDropDown(false);
                                         history.push("/");
                                     }}>
                                     <ClipboardDocumentListIcon className="text-ninja_green h-6 mr-1" />
                                     Wish Lists
-                                </div>
+                                </div> */}
                                 <div
-                                    className="text-black text-[16px] font-bold mr-2 flex flex-row my-1 pb-2 items-center cursor-pointer items-center"
+                                    className="text-black text-[16px] font-bold mr-2 flex flex-row my-1 pb-2 items-center cursor-pointer"
                                     onClick={async () => {
                                         showDropDown(false);
                                         await dispatch(logout());

@@ -9,7 +9,7 @@ auth_error = "User not authorized to complete this action"
 
 # * Get User *****************************************************
 @user_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user(id):
     """
     Query for a user by id and returns that user in a dictionary
@@ -18,7 +18,6 @@ def user(id):
     return user.to_dict()
 
 # * Delete User *****************************************************
-
 
 @user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required

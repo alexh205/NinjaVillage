@@ -14,6 +14,7 @@ class ShoppingCart(db.Model):
     checked_out= db.Column(db.Boolean, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
+    order_placed = db.Column(db.String,default=None)
     created_date = db.Column(db.DateTime(
         timezone=True), server_default=func.now())
 
@@ -30,6 +31,7 @@ class ShoppingCart(db.Model):
             'checkedOut': self.checked_out,
             'ownerId': self.owner_id,
             'createdDate': self.created_date,
-            'cartProducts': [product.to_dict_basic() for product in self.carts_product],
+            'orderPlaced': self.order_placed,
+            'cartProducts': [product.to_dict() for product in self.carts_product],
             'total': self.total
         }

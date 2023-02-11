@@ -16,7 +16,14 @@ const SignUpForm = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
+    const [errors, setErrors] = useState([]);
     const [validateErrors, setValidateErrors] = useState([]);
+
+    const validateEmail = email => {
+        const check =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return check.test(email.toLowerCase());
+    };
 
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -24,17 +31,26 @@ const SignUpForm = () => {
 
     const validate = () => {
         const errors = [];
+        const emailVal = validateEmail(email);
 
         if (!username) errors.push("Please provide a 'Username'");
         if (!name) errors.push("Please provide a 'Name'");
-        if (!email) errors.push("Please provide a 'Email'");
+        if (!email) errors.push("Please provide an 'Email'");
+        if (email && !emailVal)
+            errors.push(
+                "Please provide a valid email syntax 'thisemail@ninjaVillage.com'"
+            );
         if (!password) errors.push("Please provide a 'Password'");
         if (!repeatPassword) errors.push("Please provide a 'Repeat Password'");
         if (!profileImage) errors.push("Please provide a 'Profile Image'");
         if (!streetAddress) errors.push("Please provide a 'Street Address'");
         if (!city) errors.push("Please provide a 'City'");
         if (!state) errors.push("Please provide a 'State'");
+        if (state.length > 2)
+            errors.push("Please provide a two letter abbreviation");
         if (!zipCode) errors.push("Please provide a 'Zip Code'");
+        if (!Number(zipCode) && zipCode)
+            errors.push("Please only use numbers for the 'Zip Code' field");
         if (password !== repeatPassword)
             errors.push("Both passwords must match");
         return errors;
@@ -47,7 +63,7 @@ const SignUpForm = () => {
         if (errors.length > 0) return setValidateErrors(errors);
 
         if (password === repeatPassword) {
-            await dispatch(
+            const data = await dispatch(
                 signUp(
                     username,
                     name,
@@ -60,6 +76,10 @@ const SignUpForm = () => {
                     profileImage
                 )
             );
+
+            if (data && validateErrors.length === 0) {
+                setErrors(data);
+            }
         }
 
         setUsername("");
@@ -72,6 +92,7 @@ const SignUpForm = () => {
         setCity("");
         setState("");
         setZipCode("");
+        setValidateErrors([]);
     };
 
     if (user) {
@@ -79,7 +100,7 @@ const SignUpForm = () => {
     }
 
     return (
-        <div className="flex flex-col items-center top-[0px] bottom-[0px]">
+        <div className="flex flex-col items-center mt-8">
             <div className="w-[500px] flex flex-col rounded-md border-[1px] border-gray-300 p-[30px] bg-ninja_green">
                 <div>
                     <h1 className="font-medium mb-2 text-[27px] text-white">
@@ -89,15 +110,18 @@ const SignUpForm = () => {
                         <img
                             className="object-contain my-[20px] mx-auto w-[100px]"
                             src={NinjaVillage_logo}
-                            alt=""
+                            alt="ninja Village logo"
                         />
                     </Link>
                 </div>
 
                 <form>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
                     <ul className="text-yellow-500 text-[13px] font-semibold ml-2">
-                        {validateErrors.map(error => (
-                            <li key={error}>{error}</li>
+                        {validateErrors.map((error, i) => (
+                            <li key={i}>{error}</li>
                         ))}
                     </ul>
 
@@ -109,6 +133,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="text"
                             name="username"
+                            placeholder="Username"
                             onChange={e => setUsername(e.target.value)}
                             value={username}
                             required={true}></input>
@@ -134,6 +159,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="text"
                             name="email"
+                            placeholder="user01@ninjaVillage.com"
                             onChange={e => setEmail(e.target.value)}
                             value={email}
                             required={true}></input>
@@ -146,6 +172,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="password"
                             name="password"
+                            placeholder="password"
                             onChange={e => setPassword(e.target.value)}
                             value={password}
                             required={true}></input>
@@ -155,9 +182,10 @@ const SignUpForm = () => {
                             Re-enter Password
                         </label>
                         <input
-                            className="border-[1px] border-gray-600"
+                            className="border-[1px] border-gray-600 p-1"
                             type="password"
                             name="repeat_password"
+                            placeholder="password"
                             onChange={e => setRepeatPassword(e.target.value)}
                             value={repeatPassword}
                             required={true}></input>
@@ -182,7 +210,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="text"
                             name="Street Address"
-                            placeholder="ex. 1234 Main Street"
+                            placeholder="1234 Main Street"
                             onChange={e => setStreetAddress(e.target.value)}
                             value={streetAddress}></input>
                     </div>
@@ -194,7 +222,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="text"
                             name="City"
-                            placeholder="ex. New York"
+                            placeholder="New York"
                             onChange={e => setCity(e.target.value)}
                             value={city}></input>
                     </div>
@@ -206,7 +234,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="text"
                             name="State"
-                            placeholder="AA"
+                            placeholder="NY"
                             onChange={e => setState(e.target.value)}
                             value={state}></input>
                     </div>
@@ -218,7 +246,7 @@ const SignUpForm = () => {
                             className="border-[1px] border-gray-600 p-1"
                             type="text"
                             name="zipCode"
-                            placeholder="Postal Code"
+                            placeholder="1234"
                             onChange={e => setZipCode(e.target.value)}
                             value={zipCode}></input>
                     </div>

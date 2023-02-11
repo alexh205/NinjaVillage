@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { addToCart, removeItem } from "../../store/cartReducer";
 import { useHistory } from "react-router-dom";
@@ -41,7 +41,7 @@ const CartProduct = ({ product }) => {
             <div className="cursor-pointer" onClick={()=> history.push(`/products/${product.id}`)}>
                 <img
                     src={product.image}
-                    alt=""
+                    alt="product"
                     className="h-[200px] w-[200px] object-contain"
                 />
             </div>

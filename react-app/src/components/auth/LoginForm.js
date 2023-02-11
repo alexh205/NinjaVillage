@@ -7,18 +7,29 @@ import { useHistory, Link } from "react-router-dom";
 const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-     const [validateErrors, setValidateErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
+    const [validateErrors, setValidateErrors] = useState([]);
 
     const user = useSelector(state => state.session.user);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const validateEmail = email => {
+        const check =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return check.test(email.toLowerCase());
+    };
 
-     const validate = () => {
+    const validate = () => {
         const errors = [];
+        const emailVal = validateEmail(email);
 
-        if (!email) errors.push("Please provide a 'Email'");
+        if (!email) errors.push("Please provide an 'Email'");
+        if (email && !emailVal)
+            errors.push(
+                "Please provide a valid email syntax 'thisemail@ninjaVillage.com'"
+            );
         if (!password) errors.push("Please provide a 'Password'");
 
         return errors;
@@ -31,19 +42,22 @@ const LoginForm = () => {
     const onLogin = async e => {
         e.preventDefault();
 
-
-         const errors = validate();
+        const errors = validate();
 
         if (errors.length > 0) return setValidateErrors(errors);
 
         const data = await dispatch(login(email, password));
 
+        if (data && validateErrors.length === 0) {
+            setErrors(data);
+        }
+
+
         setEmail("");
         setPassword("");
+        setValidateErrors([]);
 
     };
-
-
 
     if (user) {
         history.push("/");
@@ -57,7 +71,7 @@ const LoginForm = () => {
                         <img
                             className="object-contain mb-3 w-[100px]"
                             src={NinjaVillage_logo}
-                            alt=""
+                            alt="ninja village logo"
                         />
                     </Link>
                     <div className="flex flex-row items-center">
@@ -72,11 +86,15 @@ const LoginForm = () => {
                     </div>
                 </div>
                 <form onSubmit={onLogin}>
-                    <ul className="text-yellow-500 text-[13px] font-semibold ml-2">
-                        {validateErrors.map(error => (
-                            <li key={error}>{error}</li>
+
+                    <ul className="text-yellow-500 text-[14px] font-semibold my-1">
+                        {validateErrors.map((error, i) => (
+                            <li key={i}>{error}</li>
                         ))}
                     </ul>
+                    {errors.map((error, ind) => (
+                        <div className="text-yellow-500 text-[14px] font-semibold my-1" key={ind}>{error}</div>
+                    ))}
                     <div className="mb-[5px] flex flex-col">
                         <label
                             className="font-medium text-white"
@@ -87,9 +105,9 @@ const LoginForm = () => {
                             className="border-[1px] border-ninja_green-dark py-1 placeholder:pl-1"
                             name="email"
                             type="text"
-                            placeholder='Email'
+                            placeholder="Email"
                             value={email}
-                            onChange={(e)=> setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="mb-[5px] flex flex-col">
@@ -102,9 +120,9 @@ const LoginForm = () => {
                             className="border-[1px] border-ninja_green-dark py-1 placeholder:pl-1"
                             name="password"
                             type="password"
-                            placeholder='Password'
+                            placeholder="Password"
                             value={password}
-                            onChange={(e)=> setPassword(e.target.value)}
+                            onChange={e => setPassword(e.target.value)}
                         />
                         <button
                             className="my-3 button p-[5px] border-[1px] border-ninja_green-dark"

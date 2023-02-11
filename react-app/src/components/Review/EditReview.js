@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
 import { editReviewThunk,getAllProductThunk } from '../../store/productReducer'
+import { authenticate } from '../../store/sessionReducer'
 
 const EditReview = () => {
   const {productId} = useParams()
@@ -58,6 +59,7 @@ const EditReview = () => {
     await dispatch(editReviewThunk(title, review, rating, reviewId))
 
     await dispatch(getAllProductThunk())
+    await dispatch(authenticate())
 
     setTitle('')
     setReview('')
@@ -83,14 +85,14 @@ const EditReview = () => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map(error => (
-                                    <li key={error}>{error}</li>
+                                {validateErrors.map((error,i) => (
+                                    <li key={i}>{error}</li>
                                 ))}
                             </ul>
                         </div>
                     )}
         {product && (<div className='flex flex-row items-center my-5'>
-         <img src={product.image} alt='' className="w-[60px] h-[70px] mr-4"></img>
+         <img src={product.image} alt='product' className="w-[60px] h-[70px] mr-4"></img>
           <div className='sm:line-clamp-4'>{product.title}</div>
           </div>)}
 

@@ -115,7 +115,7 @@ const EditProfile = ({ user, showProfile }) => {
                         <h1 className="font-bold text-4xl mb-2 text-ninja_green">
                             Edit Profile
                         </h1>
-                       
+
                     </div>
                     {validateErrors.length > 0 && (
                         <div className="my-2 ml-2">
@@ -123,8 +123,8 @@ const EditProfile = ({ user, showProfile }) => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map(error => (
-                                    <li key={error}>{error}</li>
+                                {validateErrors.map((error,i) => (
+                                    <li key={i}>{error}</li>
                                 ))}
                             </ul>
                         </div>

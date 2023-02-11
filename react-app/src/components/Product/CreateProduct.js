@@ -6,6 +6,7 @@ import {
 } from "../../store/productReducer";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { authenticate } from "../../store/sessionReducer";
 
 const CreateProduct = () => {
     const dispatch = useDispatch();
@@ -49,8 +50,9 @@ const CreateProduct = () => {
                 image
             )
         );
-
         await dispatch(getAllProductThunk());
+        await dispatch(authenticate())
+
 
         setTitle("");
         setPrice("");
@@ -59,6 +61,7 @@ const CreateProduct = () => {
         setBrand("");
         setImage("");
         setValidateErrors([]);
+
 
         history.push(`/products/${product.id}`);
     };
@@ -77,8 +80,8 @@ const CreateProduct = () => {
                                 The following errors were found:
                             </h3>
                             <ul className="text-red-600 text-[13px] font-semibold ml-2">
-                                {validateErrors.map(error => (
-                                    <li key={error}>{error}</li>
+                                {validateErrors.map((error,i) => (
+                                    <li key={i}>{error}</li>
                                 ))}
                             </ul>
                         </div>

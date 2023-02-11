@@ -16,8 +16,6 @@ def wish_list(id):
     return wish_list.to_dict()
 
 
-
-
 #* Delete a Wish List *****************************************************
 @wish_list_routes.route('/<int:id>', methods=['DELETE'])
 @login_required

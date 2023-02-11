@@ -40,7 +40,7 @@ export const FilteredProd = ({ product, userCart }) => {
                 <img
                     className="object-contain h-[200px] w-[200px] my-4"
                     src={product.image}
-                    alt=""
+                    alt="product"
                 />{" "}
             </div>
             <h4>{product.title}</h4>

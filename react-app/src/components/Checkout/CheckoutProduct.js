@@ -1,11 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addToCart, removeItem } from "../../store/cartReducer";
 
 const CheckoutProduct = ({ product }) => {
     const dispatch = useDispatch();
-
-    const cart = useSelector(state => state.cartStore.addedItems);
 
     const addItemToCart = async () => {
         const item = {
@@ -27,7 +25,7 @@ const CheckoutProduct = ({ product }) => {
         <div className="flex flex-row ml-4 my-2">
             <img
                 src={product.image}
-                alt=""
+                alt="product"
                 className="object-contain h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4 shadow-black"
             />
             <div className="flex flex-col mt-5">
@@ -47,7 +45,6 @@ const CheckoutProduct = ({ product }) => {
                     <div className="flex flex-row items-center text-sm ml-1">
                         <p className="mr-2">Quantity:</p>
                         <p className="font-bold text-orange-700">
-                            {console.log(typeof(product.quantity))}
                             {product.quantity}
                         </p>
                     </div>

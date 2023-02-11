@@ -7,7 +7,7 @@ import CheckoutProduct from "./CheckoutProduct";
 import checkoutImg from "../../Media/checkoutImg.png";
 import stateTaxes from "../../Media/stateTaxes.json";
 import { cartCheckoutThunk} from "../../store/cartReducer";
-import { getUserThunk } from "../../store/sessionReducer";
+import { authenticate } from "../../store/sessionReducer";
 
 
 const Checkout = () => {
@@ -43,9 +43,8 @@ const Checkout = () => {
        }
         await dispatch(cartCheckoutThunk(cartObj))
 
-       await dispatch(getUserThunk(user.id))
+       await dispatch(authenticate())
 
-        // history.push('/')
     }
 
     if(total === 0){
@@ -64,7 +63,7 @@ const Checkout = () => {
                         }}>
                         <img
                             className="w-[120px] h-[40px] object-contain cursor-pointer mt-2 "
-                            src={NinjaVillage_logo}
+                            src={NinjaVillage_logo} alt='ninja village logo'
                         />
                     </div>
                     <div className="flex font-semibold text-xl md:text-3xl text-white items-center ">
@@ -135,7 +134,7 @@ const Checkout = () => {
                                     <div className="border-[1px] p-3 rounded-lg flex flex-col mt-2 object-contain">
                                         <img
                                             src={checkoutImg}
-                                            alt=""
+                                            alt="trees"
                                             className=" object-contain w-[100%] border-2"/>
                                         <div className="text-orange-700 ml-2">
                                             Estimated delivery: May. 20, 2045 -

@@ -8,6 +8,7 @@ import { addToCart } from "../../store/cartReducer";
 const Product = ({ product}) => {
     let ratingTotal = 0
     let ratingAvg;
+ 
 
     if (product && product.productReviews) {
     product.productReviews.forEach(el => { ratingTotal += Number(el.rating)})
@@ -31,15 +32,15 @@ const Product = ({ product}) => {
     };
 
     return (
-        <div className="relative flex flex-col m-5 bg-white z-30 p-10 border-4 border-double rounded-2xl ">
+        <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-double rounded-2xl ">
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
             <div className="cursor-pointer" onClick={()=> history.push(`/products/${product.id}`)}>
             <img
-                className="object-contain h-[200px] w-[200px]"
+                className="object-contain h-[200px] w-[200px] mb-2"
                 src={product.image}
-                alt=""
+                alt="product"
             /> </div>
             <h4>{product.title}</h4>
             <div className="flex">
@@ -48,7 +49,7 @@ const Product = ({ product}) => {
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
             <div className="mb-5">
 
-                <p>${product.price}</p>
+                <p className=" text-amber-700 font-semibold">${product.price}</p>
             </div>
             {user && (<button disabled={user.id === product.ownerId} className={`${user.id=== product.ownerId ? 'hidden cursor-not-allowed':'mt-auto button'}`} onClick={addItemToCart}>
                 Add to Cart

@@ -55,7 +55,7 @@ export const createCartThunk = () => async dispatch => {
 };
 
 export const cartCheckoutThunk = cartObj => async dispatch => {
-    console.log(cartObj.products)
+
     const request = await fetch(`/api/shopping_carts/${cartObj.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -63,6 +63,7 @@ export const cartCheckoutThunk = cartObj => async dispatch => {
             id: cartObj.id,
             total: cartObj.total,
             checkedOut: cartObj.checkedOut,
+            orderPlaced: Date(),
             products: cartObj.products,
         }),
     });
@@ -78,7 +79,7 @@ const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ACTIVE_CART: {
             return {
-                ...currentState,
+                ...initialState,
                 id: action.payload[0].id,
                 checkedOut: action.payload[0].checkedOut,
             };
@@ -136,7 +137,7 @@ const cartReducer = (state = initialState, action) => {
                     total: newTotal,
                 };
             } else {
-                if (currentState.total !== itemToRemove.price) {
+                if (currentState.total > itemToRemove.price) {
                     let newTotal = currentState.total - itemToRemove.price;
                     return {
                         ...currentState,

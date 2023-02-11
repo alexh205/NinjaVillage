@@ -4,6 +4,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
 import Header from '../Header/Header'
 import { createReviewThunk,getAllProductThunk } from '../../store/productReducer'
+import { authenticate } from '../../store/sessionReducer'
 
 const CreateReview = () => {
   const {productId} = useParams()
@@ -44,6 +45,7 @@ const CreateReview = () => {
     await dispatch(createReviewThunk(title, review, rating, owner_id, product_id))
 
     await dispatch(getAllProductThunk())
+    await dispatch(authenticate())
 
 
     setTitle('')
@@ -66,12 +68,12 @@ const CreateReview = () => {
                 <div className="my-2 ml-2">
                   <h3 className="font-bold text-[16px] ">The following errors were found:</h3>
                   <ul className='text-red-600 text-[13px] font-semibold ml-2'>
-                    {validateErrors.map(error => <li key={error}>{error}</li>)}
+                    {validateErrors.map((error,i) => <li key={i}>{error}</li>)}
                   </ul>
                 </div>
                 )}
         {product && (<div className='flex flex-row items-center my-5'>
-         <img src={product.image} alt='' className="w-[60px] h-[70px] mr-4"></img>
+         <img src={product.image} alt='product' className="w-[60px] h-[70px] mr-4"></img>
           <div className='sm:line-clamp-4'>{product.title}</div>
           </div>)}
 

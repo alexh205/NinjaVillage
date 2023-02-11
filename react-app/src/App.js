@@ -5,7 +5,7 @@ import { authenticate } from "./store/sessionReducer";
 import { setActiveCart } from "./store/cartReducer";
 import { getAllProductThunk } from "./store/productReducer";
 import Home from "./components/Home";
-import Loading from "./components/Loading/Loading";
+import Loading from "./components/Loading";
 import Cart from "./components/Checkout/Cart";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -20,6 +20,7 @@ import Filters from "./components/Filter/Filters";
 import WishList from "./components/WishList/WishList";
 import Order from "./components/Orders/Order";
 import OrdersContainer from "./components/Orders/OrdersContainer";
+import UserProducts from "./components/Product/UserProducts";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -30,7 +31,7 @@ function App() {
 
     useEffect(() => {
         dispatch(getAllProductThunk());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (user && !cartStore.id) {
@@ -39,7 +40,7 @@ function App() {
             );
             dispatch(setActiveCart(userCart));
         }
-    }, [user]);
+    }, [user, cartStore, dispatch]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -79,6 +80,9 @@ function App() {
                         </Route>
                         <Route path="/profile/:userId" exact={true}>
                             <Profile />
+                        </Route>
+                        <Route path="/listings" exact={true}>
+                            <UserProducts />
                         </Route>
                         <Route path="/products/new" exact={true}>
                             <CreateProduct />

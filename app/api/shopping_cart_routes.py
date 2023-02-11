@@ -55,12 +55,16 @@ def shopping_cart_edit(id):
                     queried_product = Product.query.get_or_404(product['id'])
                     queried_product.quantity = product['quantity']
                     queried_shopping_cart.carts_product.append(queried_product)
+                    db.session.commit()
             if key != 'products' and key == 'total':
                 queried_shopping_cart.total = val
+                db.session.commit()
             if key != 'products' and key == 'checkedOut':
                 queried_shopping_cart.checked_out = val
-
-        db.session.commit()
+                db.session.commit()
+            if key != 'products' and key == 'orderPlaced':
+                queried_shopping_cart.order_placed = val
+                db.session.commit()
 
         new_shopping_cart = ShoppingCart(
             checked_out= False,

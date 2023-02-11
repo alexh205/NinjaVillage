@@ -7,7 +7,7 @@ import {
 import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import DropDownMenu from "../DropDownMenu";
+import DropDownMenu from "../DropDownMenu/DropDownMenu";
 
 const Header = () => {
     const history = useHistory();
@@ -61,7 +61,7 @@ const Header = () => {
                     <img
                         className="w-[140px] h-[40px] object-contain cursor-pointer mt-2"
                         src={NinjaVillage_logo}
-                        alt=""
+                        alt="ninja village logo"
                     />
                 </div>
                 {/* top nav search */}
@@ -85,7 +85,7 @@ const Header = () => {
                                 />
                             )}
                         </div>
-                        {filteredData.length != 0 && (
+                        {filteredData.length !== 0 && (
                             <div className="absolute top-[57px] z-50 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md w-[40%] lg:w-[50%]">
                                 {filteredData.slice(0, 12).map((product, i) => {
                                     return (
@@ -99,7 +99,7 @@ const Header = () => {
                                             }}
                                             className="flex items-center text-black hover:bg-gray-200 hover:text-ninja_green hover:font-bold">
                                                 <div className="flex flex-row m-1">
-                                                    <img className="w-8" src={product.image}/>
+                                                    <img className="w-8" src={product.image} alt='product'/>
                                                     <p className="ml-[10px]">
                                                 {product.title}
                                             </p></div>
@@ -116,9 +116,9 @@ const Header = () => {
                 <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-nowrap">
                     <DropDownMenu />
 
-                    <div className="link">
-                        <p>Returns</p>
-                        <p className="font-extrabold md:text-sm">& Orders</p>
+                    <div className="link" onClick={()=> history.push('/orders')}>
+                        <p>Past</p>
+                        <p className="font-extrabold md:text-sm">Orders</p>
                     </div>
 
                     <div

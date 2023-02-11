@@ -3,6 +3,7 @@ import {useSelector} from "react-redux"
 import Header from './Header/Header'
 import ProductFeed from './Product/ProductFeed'
 import Banner from './Banner/Banner'
+import Footer from './Footer/Footer'
 
 
 
@@ -20,6 +21,7 @@ const Home = () => {
           <Banner />
           <ProductFeed products={products} user={currentUser}/>
         </main>
+        <Footer />
     </div>
   )
 }

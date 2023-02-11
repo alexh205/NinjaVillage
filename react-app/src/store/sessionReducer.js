@@ -1,9 +1,11 @@
 const initialState = {
     user: null,
+    productOwner: null
 };
 
 // *************** User ****************************
 const SET_USER = "session/SET_USER";
+const SET_PROD_OWNER = "session/SET_PROD_OWNER";
 const REMOVE_USER = "session/REMOVE_USER";
 
 
@@ -15,6 +17,13 @@ export const setUser = user => {
         payload: user,
     };
 };
+
+const setProdOwner = user => {
+    return {
+        type: SET_PROD_OWNER,
+        payload: user
+    }
+}
 
 const removeUser = () => {
     return {
@@ -112,7 +121,7 @@ export const getUserThunk = userId => async dispatch => {
 
     const response = await request.json();
 
-    dispatch(setUser(response));
+    dispatch(setProdOwner(response))
 };
 
 export const editUserThunk = (username, email, name, streetAddress, city, state, zipCode, profileImg, password, userId) => async dispatch => {
@@ -140,7 +149,7 @@ export const editUserThunk = (username, email, name, streetAddress, city, state,
     }
 };
 export const deleteUserThunk = userId => async dispatch => {
-    const request = await fetch(`/api/users/${userId}`, {
+    await fetch(`/api/users/${userId}`, {
         method: "DELETE",
 }); dispatch(removeUser());}
 
@@ -159,6 +168,11 @@ const sessionReducer = (state = initialState, action) => {
 
         case REMOVE_USER:
             return initialState;
+
+        case SET_PROD_OWNER:{
+            currentState.productOwner = action.payload;
+            return currentState
+        }
 
         default:
             return currentState;

@@ -3,15 +3,21 @@ import { useHistory} from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../Header/Header";
 import EditProfile from "./EditProfile";
-import UserProducts from "../Product/UserProducts";
-import WishListContainer from "../WishList/WishListContainer";
+import Product from "../Product/Product";
+import Review from "../Review/Review"
 
 
 const Profile = () => {
+    const history = useHistory();
     const user = useSelector(state => state.session.user);
 
-    const history = useHistory();
+    let userProducts;
+    let userReviews;
 
+    if(user){
+    userProducts = user.ownedProducts
+    userReviews = user.userReviews
+}
     const [clicked, setClicked] = useState(false);
     const showProfile = (boolean) => setClicked(boolean)
 
@@ -25,7 +31,7 @@ const Profile = () => {
         <>
             <Header />
                 {user && !clicked && <div className="flex flex-col">
-                <div className="flex flex-col md:max-w-[580px] max-w-[420px] md:justify-center justify-start md:ml-[30%] ml-[5%]  flex-grow mt-6 border-2 p-1 ">
+                <div className="flex flex-col md:max-w-[580px] max-w-[420px] justify-center  md:ml-[40%] ml-[15%] flex-grow mt-6 border-2 p-1 ">
                 <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                     About Me
                 </h1>
@@ -34,7 +40,7 @@ const Profile = () => {
                     <img
                         className="hidden md:flex rounded-full max-h-[175px] mr-3"
                         src={user.profileImage}
-                        alt=""></img>
+                        alt="user"></img>
                     <div className="flex flex-row items-center justify-center">
                         <div className="">
                             <div className="flex flex-row items-center mb-1">
@@ -78,7 +84,7 @@ const Profile = () => {
                         <div className="items-center ml-6">
                             <div className="flex flex-row items-center mb-2">
                                 <label className="text-sm md:text-lg font-semibold mr-3 text-amber-700">
-                                    Listing #:
+                                    Listings:
                                 </label>
                                 {user && user.ownedProducts && (
                                     <p className="text-xs md:text-[14px] text-green-800">
@@ -88,7 +94,7 @@ const Profile = () => {
                             </div>
                             <div className="flex flex-row items-center mb-2">
                                 <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
-                                    Review total:
+                                    Reviews:
                                 </label>
                                 {user && user.userReviews && (
                                     <p className="text-xs md:text-[14px] text-green-800">
@@ -98,7 +104,7 @@ const Profile = () => {
                             </div>
                             <div className="flex flex-row items-center mb-2">
                                 <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
-                                    Wish List #:
+                                    Wish Lists:
                                 </label>
                                 {user && user.ownedLists && (
                                     <p className="text-xs md:text-[14px] text-green-800">
@@ -108,7 +114,7 @@ const Profile = () => {
                             </div>
                             <div className="flex flex-row items-center mb-2">
                                 <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
-                                    Total Orders:
+                                    Orders:
                                 </label>
                                 {user && user.ownedCarts && (
                                     <p className="text-xs md:text-[14px] text-green-800">
@@ -127,11 +133,21 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className='container mx-auto grid grid-cols-2 gap-5 my-7'>
-                <div> Listings</div>
-                <div><WishListContainer /></div>
+            <div className='grid grid-cols-2 items-start justify-start mt-6 ml-1'>
+                <div>
+                    <h2 className="text-2xl font-bold flex justify-center mb-4">User Reviews</h2>
+                    <div className="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 ">
+                        {user && userReviews && userReviews.map((review, i) => <div key={i}     className='cursor-pointer border-2 m-3 flex items-center' onClick={()=> history.push(`/products/${review.productId}`)}><Review key={i} review={review} /></div>)}
+                    </div>
+                </div>
+                <div>
+                    <h2 className="text-2xl font-bold flex justify-center">User Listings</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1">
+                        {user && userProducts && userProducts.map((product, i) => <Product key={i} product={product}/>)}
+                    </div>
+                </div>
             </div>
-            </div>}
+        </div>}
 
             {user && clicked && <EditProfile user={user} showProfile={showProfile}/>}
         </>
