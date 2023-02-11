@@ -25,6 +25,7 @@ const Review = ({ review, product, user }) => {
         e.preventDefault();
         await dispatch(deleteReviewThunk(review.id));
         await dispatch(getAllProductThunk());
+        setHasClickedDelete(false);
     };
 
     return (
@@ -58,7 +59,7 @@ const Review = ({ review, product, user }) => {
                         onClick={async e => {
                             setHasClickedDelete(true);
                             deleteReview(e);
-                            setHasClickedDelete(false);
+
                         }}>
                         {hasClickedDelete ? <Loading /> : "Delete review"}
                     </button>

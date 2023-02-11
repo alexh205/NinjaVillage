@@ -59,6 +59,7 @@ const CreateReview = () => {
         setRating(0);
         setHover(0);
         setValidateErrors([]);
+        setHasClicked(false);
 
         history.push(`/products/${productId}`);
     };
@@ -191,7 +192,7 @@ const CreateReview = () => {
                             onClick={e => {
                                 setHasClicked(true);
                                 onReviewCreation(e);
-                                setHasClicked(false);
+
                             }}>
                             {hasClicked ? <Loading /> : "Submit"}
                         </button>

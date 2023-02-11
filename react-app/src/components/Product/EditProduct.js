@@ -82,6 +82,7 @@ const EditProduct = () => {
             setImage("");
             setValid(false);
             setValidateErrors([]);
+            setHasClicked(false);
 
             history.push(`/products/${updatedProduct.id}`);
         };
@@ -224,7 +225,7 @@ const EditProduct = () => {
                             onClick={e => {
                                 setHasClicked(true);
                                 onProductEdit(e);
-                                setHasClicked(false);
+
                             }}>
                            {hasClicked ? <Loading /> : "Submit"}
                         </button>

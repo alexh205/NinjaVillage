@@ -19,6 +19,7 @@ const LoginForm = () => {
 
     const demoLogin = async () => {
         await dispatch(login("demo@aa.io", "password"));
+        setHasClickedDemo(false);
     };
     const onLogin = async e => {
         e.preventDefault();
@@ -27,6 +28,7 @@ const LoginForm = () => {
         if (data) {
             setErrors(data);
         }
+        setHasClicked(false);
     };
 
     if (user) {
@@ -53,7 +55,7 @@ const LoginForm = () => {
                             onClick={() => {
                                 setHasClickedDemo(true);
                                 demoLogin();
-                                setHasClickedDemo(false);
+
                             }}
                             className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
                             {hasClickedDemo ? <Loading /> : "Demo Login"}
@@ -104,7 +106,7 @@ const LoginForm = () => {
                             onClick={e => {
                                 setHasClicked(true);
                                 onLogin(e);
-                                setHasClicked(false);
+
                             }}>
                             {hasClicked ? <Loading /> : "Login"}
                         </button>

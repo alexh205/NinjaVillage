@@ -88,6 +88,7 @@ const EditProfile = ({ user, showProfile }) => {
                     userId
                 )
             );
+            setHasClicked(false);
         };
         const onProfileDelete = async e => {
             setUsername("");
@@ -282,7 +283,7 @@ const EditProfile = ({ user, showProfile }) => {
                                     setHasClicked(true);
                                     onProfileEdit(e);
                                     showProfile(false);
-                                    setHasClicked(false);
+
                                 }}>
                                 {hasClicked ? <Loading /> : "Submit"}
                             </button>

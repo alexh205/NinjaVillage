@@ -65,6 +65,7 @@ const ProductDetail = () => {
         await dispatch(deleteProductThunk(productId));
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
+        setHasClicked(false);
         history.push("/");
     };
 
@@ -101,7 +102,7 @@ const ProductDetail = () => {
                                             onClick={async e => {
                                                 setHasClicked(true);
                                                 deleteItem(e);
-                                                setHasClicked(false);
+
                                             }}>
                                             {hasClicked ? (
                                                 <Loading />

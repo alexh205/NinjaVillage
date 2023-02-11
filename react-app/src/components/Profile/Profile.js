@@ -25,6 +25,7 @@ const Profile = () => {
     const handleClickProfileImage = e => {
         e.preventDefault();
         setClicked(!clicked);
+        setHasClicked(false);
     };
 
     return (
@@ -136,7 +137,6 @@ const Profile = () => {
                                             onClick={e => {
                                                 setHasClicked(true);
                                                 handleClickProfileImage(e);
-                                                setHasClicked(false);
                                             }}>
                                             {hasClicked ? (
                                                 <Loading />

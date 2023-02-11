@@ -72,6 +72,7 @@ const EditReview = () => {
             setValid(false);
 
             setValidateErrors([]);
+            setHasClicked(false);
 
             history.push(`/products/${productId}`);
         };
@@ -209,7 +210,7 @@ const EditReview = () => {
                                     setHasClicked(true);
                                     {<Loading />}
                                     onReviewEdit(e);
-                                    setHasClicked(false);
+
                                 }}>
                                 {hasClicked ? <Loading /> : "Submit"}
                             </button>

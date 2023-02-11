@@ -92,6 +92,7 @@ const SignUpForm = () => {
         setState("");
         setZipCode("");
         setValidateErrors([]);
+        setHasClicked(false)
     };
 
     if (user) {
@@ -252,7 +253,7 @@ const SignUpForm = () => {
                         onClick={e => {
                             setHasClicked(true)
                             onSignUp(e);
-                            setHasClicked(false)
+
                         }}>
                             {hasClicked ? <Loading /> : "Sign Up"}
 
