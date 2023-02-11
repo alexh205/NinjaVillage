@@ -118,7 +118,7 @@ const Profile = () => {
                                 </label>
                                 {user && user.ownedCarts && (
                                     <p className="text-xs md:text-[14px] text-green-800">
-                                        {user.ownedCarts.length}
+                                        {user.ownedCarts.length > 0 ? user.ownedCarts.length - 1 : 0 }
                                     </p>
                                 )}
                             </div>
@@ -140,9 +140,9 @@ const Profile = () => {
                         {user && userReviews && userReviews.map((review, i) => <div key={i}     className='cursor-pointer border-2 m-3 flex items-center' onClick={()=> history.push(`/products/${review.productId}`)}><Review key={i} review={review} /></div>)}
                     </div>
                 </div>
-                <div>
-                    <h2 className="text-2xl font-bold flex justify-center">User Listings</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1">
+                <div className="mr-6">
+                    <h2 className="text-2xl font-bold flex justify-center ">User Listings</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {user && userProducts && userProducts.map((product, i) => <Product key={i} product={product}/>)}
                     </div>
                 </div>

@@ -63,7 +63,7 @@ export const cartCheckoutThunk = cartObj => async dispatch => {
             id: cartObj.id,
             total: cartObj.total,
             checkedOut: cartObj.checkedOut,
-            orderPlaced: Date(),
+            orderPlaced: new Date(),
             products: cartObj.products,
         }),
     });

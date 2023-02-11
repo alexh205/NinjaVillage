@@ -66,8 +66,8 @@ const Header = () => {
                 </div>
                 {/* top nav search */}
                 {products && (
-                    <div className="flex-grow flex flex-col">
-                        <div className="hidden placeholder:pl-1 items-center h-10 rounded-md cursor-pointer sm:flex bg-amber-500 hover:bg-amber-600 ">
+                    <div className="flex-grow flex flex-col relative ">
+                        <div className="hidden sm:flex placeholder:pl-1 items-center h-10 rounded-md cursor-pointer  bg-amber-500 hover:bg-amber-600 ">
                             <input
                                 className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
                                 type="text"

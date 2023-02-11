@@ -21,7 +21,7 @@ const OrdersContainer = () => {
             <Header />
             {user && userOrders && (
                 <div className="flex flex-col items-center mt-5 mx-3">
-                    <p className="mb-2 font-bold text-xl md:text-3xl">Your Orders</p>
+                    <p className="mb-2 font-bold text-xl md:text-3xl">Your Orders ({userOrders.length})</p>
                     <div>
                         <div className="grid grid-rows-1 gap-y-4 ">
                             {userOrders.map((cart, i) => (

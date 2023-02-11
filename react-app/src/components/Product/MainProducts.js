@@ -1,8 +1,10 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { addToCart } from "../../store/cartReducer";
 
-const OrderProduct = ({ product}) => {
+const MainProducts = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
 
@@ -13,13 +15,25 @@ const OrderProduct = ({ product}) => {
         ratingAvg = ratingTotal / product.productReviews.length;
     }
 
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
     const history = useHistory();
 
-    if (!product) {
-        history.push("/");
-    }
+    const addItemToCart = async () => {
+        const item = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            description: product.description,
+            category: product.category,
+            brand: product.brand,
+            image: product.image,
+        };
+        await dispatch(addToCart(item));
+    };
+
     return (
-        <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-dotted rounded-2xl ">
+        <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-double rounded-2xl ">
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
@@ -43,17 +57,25 @@ const OrderProduct = ({ product}) => {
                 )}
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
-            <div className="mb-5 flex flex-row justify-between" >
+            <div className="mb-5">
                 <p className=" text-amber-700 font-semibold">
                     ${product.price}
                 </p>
-                <div className="flex flex-row items-center mr-4">
-                    <p className="mr-2">Quantity:</p>
-                    <p>{product.quantity}</p>
-                </div>
             </div>
+            {user && (
+                <button
+                    disabled={user.id === product.ownerId}
+                    className={`${
+                        user.id === product.ownerId
+                            ? "hidden cursor-not-allowed"
+                            : "mt-auto button"
+                    }`}
+                    onClick={addItemToCart}>
+                    Add to Cart
+                </button>
+            )}
         </div>
     );
 };
 
-export default OrderProduct;
+export default MainProducts;

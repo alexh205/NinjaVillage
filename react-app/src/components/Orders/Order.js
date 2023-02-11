@@ -2,6 +2,12 @@ import React from "react";
 import OrderProduct from "./OrderProduct";
 
 const Order = ({ cart }) => {
+    const date = new Date(cart.orderPlaced);
+    const f = new Intl.DateTimeFormat("en-us", {
+        dateStyle: "medium",
+    });
+    const orderDate = f.format(date);
+
     return (
         <>
             {cart && cart.cartProducts && (
@@ -9,11 +15,15 @@ const Order = ({ cart }) => {
                     <div className="flex flex-row justify-center md:justify-evenly border-b-2 border-solid bg-gray-500 text-white text-[15px] ">
                         <div className="flex flex-col items-center">
                             <p className="mr-2">Order Placed</p>
-                            <p className="text-sm md:text-md font-bold">{cart.orderPlaced}</p>
+                            <p className="text-sm md:text-md font-bold">
+                                {orderDate}
+                            </p>
                         </div>
                         <div className="flex flex-col items-center ml-1 md:ml-3">
                             <p className="mr-2">Total:</p>
-                            <p className="font-bold text-sm md:text-md">$ {cart.total}</p>
+                            <p className="font-bold text-sm md:text-md">
+                                $ {cart.total}
+                            </p>
                         </div>
                         <div className="hidden md:flex flex-col items-center">
                             <p className="mr-2">Order #</p>

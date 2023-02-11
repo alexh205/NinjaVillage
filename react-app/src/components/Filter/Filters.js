@@ -25,9 +25,9 @@ const Filters = () => {
   if(filteredProd){
   return (
     <><Header />
-    <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 my-7'>
+    <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7'>
 
-      {filteredProd && filteredProd.map((product,i)=> (<div className='w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]' key={i} >
+      {filteredProd && filteredProd.map((product,i)=> (<div className={`${product.ownerId === user.id ? 'hidden' : 'w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]' }`}  key={i} >
         <FilteredProd product={product} user={user} userCart={userCart}   />
         </div>))}
     </div>

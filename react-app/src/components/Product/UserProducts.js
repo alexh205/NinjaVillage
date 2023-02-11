@@ -28,12 +28,12 @@ const UserProducts = () => {
                 </div>
 
                 <div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-start justify-start mt-6 ml-1">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  mx-7 gap-5 my-7">
                         {storeOwner &&
                             storeProducts &&
                             storeProducts.length > 0 &&
                             storeProducts.map((product, i) => (
-                                <div key={i} className="flex items-s">
+                                <div  key={i} >
                                     <Product product={product} />
                                 </div>
                             ))}
