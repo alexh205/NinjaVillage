@@ -188,7 +188,7 @@ const CreateReview = () => {
                             }}>
                             Cancel
                         </button>
-                            
+                        {hasClicked && <Loading />}
                         <button
                             className={"flex button ml-2 sm:ml-10"}
                             disabled={hasClicked}
