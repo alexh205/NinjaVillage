@@ -5,7 +5,6 @@ import Header from "../Header/Header";
 import EditProfile from "./EditProfile";
 import Product from "../Product/Product";
 import Review from "../Review/Review";
-import Loading from "../Loading";
 
 const Profile = () => {
     const history = useHistory();
@@ -18,14 +17,14 @@ const Profile = () => {
         userProducts = user.ownedProducts;
         userReviews = user.userReviews;
     }
-    const [hasClicked, setHasClicked] = useState(false);
+
     const [clicked, setClicked] = useState(false);
     const showProfile = boolean => setClicked(boolean);
 
     const handleClickProfileImage = e => {
         e.preventDefault();
         setClicked(!clicked);
-        setHasClicked(false);
+
     };
 
     return (
@@ -133,16 +132,12 @@ const Profile = () => {
                                     <div className="mt-2 ml-14">
                                         <button
                                             className="text-sky-600 text-sm cursor-pointer font-bold"
-                                            disabled={hasClicked === true}
+
                                             onClick={e => {
-                                                setHasClicked(true);
+
                                                 handleClickProfileImage(e);
                                             }}>
-                                            {hasClicked ? (
-                                                <Loading />
-                                            ) : (
-                                                "Edit profile"
-                                            )}
+                                            Edit profile
                                         </button>
                                     </div>
                                 </div>

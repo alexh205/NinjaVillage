@@ -18,7 +18,7 @@ const SignUpForm = () => {
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [validateErrors, setValidateErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [hasClicked, setHasClicked] = useState(false);
 
     const validateEmail = email => {
         const check =
@@ -62,7 +62,7 @@ const SignUpForm = () => {
         const errors = validate();
 
         if (errors.length > 0) return setValidateErrors(errors);
-        setIsLoading(true)
+        setHasClicked(true);
 
         if (password === repeatPassword) {
             await dispatch(
@@ -91,7 +91,7 @@ const SignUpForm = () => {
         setState("");
         setZipCode("");
         setValidateErrors([]);
-        setIsLoading(false)
+        setHasClicked(false);
     };
 
     if (user) {
@@ -246,13 +246,14 @@ const SignUpForm = () => {
                             onChange={e => setZipCode(e.target.value)}
                             value={zipCode}></input>
                     </div>
+                    {hasClicked && <Loading />}
                     <button
                         className="my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]"
-
+                        
                         onClick={e => {
                             onSignUp(e);
                         }}>
-                        {isLoading ? <Loading /> : "Sign Up"}
+                        Sign Up
                     </button>
                 </form>
                 <p className="text-[11px] text-white">

@@ -198,16 +198,14 @@ const CreateProduct = () => {
                             }}>
                             Cancel
                         </button>
+                        {hasClicked && <Loading />}
                         <button
-                            className={`${
-                                hasClicked === true
-                                    ? "hidden"
-                                    : "flex button ml-2 sm:ml-10"
-                            }`}
+                            className="button ml-2 sm:ml-10"
+                            disabled={hasClicked}
                             onClick={e => {
                                 onProductCreate(e);
                             }}>
-                            {hasClicked ? <Loading /> : "Submit"}
+                            Submit
                         </button>
                     </div>
                 </form>

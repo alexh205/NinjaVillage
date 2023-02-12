@@ -7,8 +7,6 @@ import Loading from "../Loading";
 
 const MainProducts = ({ product }) => {
     const [hasClicked, setHasClicked] = useState(false);
-    const [isLoading, setIsLoading] = useState(false)
-    const [isLoadingAdd, setIsLoadingAdd] = useState(false)
 
     let ratingTotal = 0;
     let ratingAvg;
@@ -35,9 +33,9 @@ const MainProducts = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-        setIsLoadingAdd(true)
+
         await dispatch(addToCart(item));
-        setIsLoadingAdd(false)
+
     };
 
     return (
@@ -45,25 +43,24 @@ const MainProducts = ({ product }) => {
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
+            {hasClicked && <Loading />}
             <div
                 className="cursor-pointer"
-                disabled={hasClicked === true}
+                disabled={hasClicked}
                 onClick={() => {
                     setHasClicked(true);
-                    setIsLoading(true)
+
                     history.push(`/products/${product.id}`);
-                    setIsLoading(false)
+
                     setHasClicked(false)
                 }}>
-                {isLoading ? (
-                    <Loading />
-                ) : (
+
                     <img
                         className="object-contain h-[200px] w-[200px] mb-2"
                         src={product.image}
                         alt="product"
                     />
-                )}
+
             </div>
             <h4>{product.title}</h4>
             <div className="flex">
@@ -81,6 +78,7 @@ const MainProducts = ({ product }) => {
                     ${product.price}
                 </p>
             </div>
+            {hasClicked && <Loading />}
             {user && (
                 <button
                     disabled={user.id === product.ownerId}
@@ -90,7 +88,7 @@ const MainProducts = ({ product }) => {
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    {isLoadingAdd ? <Loading /> : "Add to Cart"}
+                    Add to Cart
                 </button>
             )}
         </div>

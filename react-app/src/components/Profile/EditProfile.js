@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { editUserThunk, deleteUserThunk, authenticate } from "../../store/sessionReducer";
+import {
+    editUserThunk,
+    deleteUserThunk,
+    authenticate,
+} from "../../store/sessionReducer";
 import stateTaxes from "../../Media/stateTaxes.json";
 import Loading from "../Loading";
 
@@ -12,6 +16,7 @@ const EditProfile = ({ user, showProfile }) => {
     const history = useHistory();
 
     const [hasClicked, setHasClicked] = useState(false);
+    const [hasClickedDelete, setHasClickedDelete] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -24,8 +29,6 @@ const EditProfile = ({ user, showProfile }) => {
     const [repeatPassword, setRepeatPassword] = useState("");
 
     const [valid, setValid] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -63,8 +66,6 @@ const EditProfile = ({ user, showProfile }) => {
             const errors = validate();
 
             if (errors.length > 0) return setValidateErrors(errors);
-            setHasClicked(true)
-            setIsLoading(true)
 
             setUsername("");
             setEmail("");
@@ -77,6 +78,7 @@ const EditProfile = ({ user, showProfile }) => {
             setPassword("");
             setRepeatPassword("");
             setValidateErrors([]);
+            setHasClicked(true);
 
             await dispatch(
                 editUserThunk(
@@ -92,7 +94,7 @@ const EditProfile = ({ user, showProfile }) => {
                     userId
                 )
             );
-            setIsLoading(false)
+
             setHasClicked(false);
         };
         const onProfileDelete = async e => {
@@ -107,10 +109,12 @@ const EditProfile = ({ user, showProfile }) => {
             setPassword("");
             setRepeatPassword("");
             setValidateErrors([]);
-            
+            setHasClickedDelete(true);
+
             await dispatch(deleteUserThunk(userId));
             await dispatch(authenticate());
-
+            setHasClickedDelete(false);
+            history.push("/");
         };
 
         return (
@@ -254,11 +258,12 @@ const EditProfile = ({ user, showProfile }) => {
 
                     <div className="flex md:flex-row flex-col mt-5 justify-between">
                         <div className="flex mb-3 md:mb-0">
+                            {hasClickedDelete && <Loading />}
                             <button
                                 className="cursor-pointer text-white p-2 font-bold text-[9px] md:text-sm bg-gradient-to-b from-red-500 to-red-700 border-red-600 rounded-sm  focus:outline-none focus:ring-2 focus:ring-red-800 active:from-red-800"
+                                disabled={hasClickedDelete}
                                 onClick={e => {
                                     onProfileDelete(e);
-                                    history.push("/");
                                 }}>
                                 Delete Account
                             </button>
@@ -283,19 +288,15 @@ const EditProfile = ({ user, showProfile }) => {
                                 }}>
                                 Cancel
                             </button>
+                            {hasClicked && <Loading />}
                             <button
-                                className={`${
-                                    hasClicked === true
-                                        ? "hidden"
-                                        : "button ml-0 md:ml-6 mt-2 md:mt-0"}`}
-
+                                className="button ml-0 md:ml-6 mt-2 md:mt-0"
+                                disabled={hasClicked}
                                 onClick={e => {
-                                    ;
                                     onProfileEdit(e);
                                     showProfile(false);
-
                                 }}>
-                                {isLoading ? <Loading /> : "Submit"}
+                                Submit
                             </button>
                         </div>
                     </div>

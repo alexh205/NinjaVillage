@@ -22,7 +22,6 @@ const EditProduct = () => {
     const [image, setImage] = useState("");
     const [valid, setValid] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
-    const [isLoading, setIsLoading] = useState(false)
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -61,7 +60,6 @@ const EditProduct = () => {
 
             if (errors.length > 0) return setValidateErrors(errors);
 
-
             setTitle("");
             setPrice("");
             setDescription("");
@@ -70,7 +68,6 @@ const EditProduct = () => {
             setImage("");
             setValid(false);
             setValidateErrors([]);
-            setIsLoading(true)
             setHasClicked(true);
 
             const updatedProduct = await dispatch(
@@ -87,9 +84,7 @@ const EditProduct = () => {
 
             await dispatch(getAllProductThunk());
 
-
             setHasClicked(false);
-            setIsLoading(false)
 
             history.push(`/products/${updatedProduct.id}`);
         };
@@ -226,17 +221,14 @@ const EditProduct = () => {
                             }}>
                             Cancel
                         </button>
+                        {hasClicked && <Loading />}
                         <button
-                            className={`${
-                                hasClicked === true
-                                    ? "hidden"
-                                    : "flex button ml-2 sm:ml-10"
-                            }`}
+                            className="button ml-2 sm:ml-10"
+                            disabled={hasClicked}
                             onClick={e => {
                                 onProductEdit(e);
-
                             }}>
-                            {isLoading ? <Loading /> : "Submit"}
+                            Submit
                         </button>
                     </div>
                 </form>

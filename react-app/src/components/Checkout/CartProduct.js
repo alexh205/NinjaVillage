@@ -8,8 +8,8 @@ import Loading from "../Loading";
 const CartProduct = ({ product }) => {
     const dispatch = useDispatch();
     const history = useHistory()
-    const [isLoading, setIsLoading] = useState(false)
-    const [isLoadingRemoved, setIsLoadingRemoved] = useState(false)
+    const [hasClicked, setHasClicked] = useState(false)
+    const [hasClickedRemove, setHasClickedRemove] = useState(false)
 
 
     const addItemToCart = async () => {
@@ -22,15 +22,16 @@ const CartProduct = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-        setIsLoading(true)
+        setHasClicked(true)
         await dispatch(addToCart(item));
-        setIsLoading(false)
+        setHasClicked(false)
     };
 
     const removeItemFromCart =  () => {
-        setIsLoadingRemoved(true)
+        setHasClickedRemove(true)
         dispatch(removeItem(product));
-        setIsLoadingRemoved(false)
+        setHasClickedRemove(false)
+
     };
 
     let ratingTotal = 0;
@@ -81,16 +82,19 @@ const CartProduct = ({ product }) => {
                     </div>
 
                     <div className="flex flex-row items-center">
+                    {hasClicked && <Loading />}
                         <button
                             className="mt-auto button mr-4"
+                            disabled={hasClicked}
                             onClick={addItemToCart}>
-                                {isLoading ? <Loading /> : "Add to Cart"}
+                                Add to Cart
                         </button>
-
+                        {hasClickedRemove && <Loading />}
                         <button
                             className="button mt-3"
+                            disabled={hasClickedRemove}
                             onClick={removeItemFromCart}>
-                            {isLoadingRemoved ? <Loading /> : "Remove from Cart"}
+                            Remove from Cart
 
                         </button>
                     </div>

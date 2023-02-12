@@ -9,9 +9,8 @@ const LoginForm = () => {
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [hasClickedDemo, setHasClickedDemo] = useState(false)
-    const [isLoadingDemo, setIsLoadingDemo] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const [hasClickedDemo, setHasClickedDemo] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
 
     const user = useSelector(state => state.session.user);
 
@@ -19,26 +18,24 @@ const LoginForm = () => {
     const history = useHistory();
 
     const demoLogin = async () => {
-        setHasClickedDemo(true)
-        setIsLoadingDemo(true)
-        await dispatch(login("demo@aa.io", "password"));
-        setIsLoadingDemo(false)
-        setHasClickedDemo(false)
+        setHasClickedDemo(true);
 
+        await dispatch(login("demo@aa.io", "password"));
+
+        setHasClickedDemo(false);
     };
     const onLogin = async e => {
         e.preventDefault();
-        setIsLoading(true)
+        setHasClicked(true);
         const data = await dispatch(login(email, password));
 
         if (data) {
             setErrors(data);
         }
-        setIsLoading(false)
+        setHasClicked(false);
     };
 
     if (user) {
-
         return <Redirect to="/" />;
     }
 
@@ -57,17 +54,14 @@ const LoginForm = () => {
                         <h1 className="font-medium text-[27px] text-white mr-32">
                             Sign in
                         </h1>
+                        {hasClickedDemo && <Loading />}
                         <button
-
+                            disabled={hasClickedDemo}
                             onClick={() => {
-
                                 demoLogin();
                             }}
-                            className={`${
-                                hasClickedDemo === true
-                                    ? "hidden"
-                                    :"cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark"}`}>
-                            {isLoadingDemo ? <Loading /> : "Demo Login"}
+                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
+                            Demo Login
                         </button>
                     </div>
                 </div>
@@ -108,14 +102,15 @@ const LoginForm = () => {
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
+                        {hasClicked && <Loading />}
                         <button
+                            disabled={hasClicked}
                             className="my-3 button p-[5px] border-[1px] border-ninja_green-dark"
                             type="button"
                             onClick={e => {
                                 onLogin(e);
                             }}>
-                                {isLoading ? <Loading /> : "Login"}
-
+                            Login
                         </button>
                     </div>
                 </form>

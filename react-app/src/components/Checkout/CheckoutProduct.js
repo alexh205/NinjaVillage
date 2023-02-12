@@ -5,8 +5,8 @@ import Loading from "../Loading";
 
 const CheckoutProduct = ({ product }) => {
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false)
-    const [isLoadingRemoved, setIsLoadingRemoved] = useState(false)
+    const [hasClicked, setHasClicked] = useState(false)
+    const [hasClickedRemove, setHasClickedRemove] = useState(false)
 
     const addItemToCart = async () => {
         const item = {
@@ -18,15 +18,15 @@ const CheckoutProduct = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-        setIsLoading(true)
+        setHasClicked(true)
         await dispatch(addToCart(item));
-        setIsLoading(false)
+        setHasClicked(false)
     };
 
     const removeItemFromCart = () => {
-        setIsLoadingRemoved(true)
+        setHasClickedRemove(true)
         dispatch(removeItem(product));
-        setIsLoadingRemoved(false)
+        setHasClickedRemove(false)
     };
     return (
         <div className="flex flex-row ml-4 my-2">
@@ -56,18 +56,21 @@ const CheckoutProduct = ({ product }) => {
                         </p>
                     </div>
                     <div className="flex flex-row">
+                    {hasClicked && <Loading />}
                     <button
                         className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px] mr-4"
+                        disabled={hasClicked}
                         onClick={() => {
                             addItemToCart();
                         }}>
-                        {isLoading ? <Loading /> : "Add to Cart"}
+                        Add to Cart
                     </button>
-
+                    {hasClickedRemove && <Loading />}
                     <button
                         className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px]"
+                        disabled={hasClickedRemove}
                         onClick={removeItemFromCart}>
-                        {isLoadingRemoved ? <Loading /> : "Remove from Cart"}
+                         Remove from Cart
                     </button></div>
                 </div>
             </div>

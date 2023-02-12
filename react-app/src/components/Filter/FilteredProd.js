@@ -3,12 +3,12 @@ import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addToCart } from "../../store/cartReducer";
-import Loading from "../Loading";
+
 
 export const FilteredProd = ({ product, userCart }) => {
     let ratingTotal = 0;
     let ratingAvg;
-    const [isLoading, setIsLoading] = useState(false);
+
 
     if (product && product.productReviews) {
         product.productReviews.forEach(el => {
@@ -31,9 +31,9 @@ export const FilteredProd = ({ product, userCart }) => {
             brand: product.brand,
             image: product.image,
         };
-        setIsLoading(true);
+
         await dispatch(addToCart(item));
-        setIsLoading(false);
+
     };
 
     return (
@@ -62,6 +62,7 @@ export const FilteredProd = ({ product, userCart }) => {
                 <p>${product.price}</p>
             </div>
             {user && (
+
                 <button
                     disabled={user.id === product.ownerId}
                     className={`${
@@ -70,7 +71,7 @@ export const FilteredProd = ({ product, userCart }) => {
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    {isLoading ? <Loading /> : "Add to Cart"}
+                    Add to Cart
                 </button>
             )}
         </div>

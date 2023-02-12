@@ -79,12 +79,10 @@ const ProductDetail = () => {
                             <div className="flex flex-col justify-center">
                                 {user && product.ownerId === user.id ? (
                                     <div className="flex flex-row items-center justify-center my-4">
+                                        {hasClickedEdit && <Loading />}
                                         <button
-                                            className={`${
-                                                hasClicked === true
-                                                    ? "hidden"
-                                                    : " flex mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3"
-                                            }`}
+                                            className="mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3"
+                                            disabled={hasClickedEdit}
                                             onClick={e => {
                                                 setHasClickedEdit(true);
                                                 history.push(
@@ -92,27 +90,16 @@ const ProductDetail = () => {
                                                 );
                                                 setHasClickedEdit(false);
                                             }}>
-                                            {hasClickedEdit ? (
-                                                <Loading />
-                                            ) : (
-                                                "Edit listing"
-                                            )}
+                                            Edit listing
                                         </button>
-
+                                        {hasClicked && <Loading />}
                                         <button
-                                            className={`${
-                                                hasClicked === true
-                                                    ? "hidden"
-                                                    : " flex mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow"
-                                            }`}
+                                            className="flex mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow"
+                                            disabled={hasClicked}
                                             onClick={async e => {
                                                 deleteItem(e);
                                             }}>
-                                            {hasClicked ? (
-                                                <Loading />
-                                            ) : (
-                                                "Delete listing"
-                                            )}
+                                            Delete listing
                                         </button>
                                     </div>
                                 ) : (

@@ -8,7 +8,7 @@ import Loading from "../Loading";
 const Product = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
-    const [isLoading, setIsLoading] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
 
     if (product && product.productReviews) {
         product.productReviews.forEach(el => {
@@ -31,10 +31,9 @@ const Product = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-
-        setIsLoading(true);
+        hasClicked(true)
         await dispatch(addToCart(item));
-        setIsLoading(false);
+        hasClicked(false)
     };
 
     return (
@@ -67,6 +66,7 @@ const Product = ({ product }) => {
                     ${product.price}
                 </p>
             </div>
+            {hasClicked && <Loading />}
             {user && (
                 <button
                     disabled={user.id === product.ownerId}
@@ -76,7 +76,7 @@ const Product = ({ product }) => {
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    {isLoading ? <Loading /> : "Add to Cart"}
+                    Add to Cart
                 </button>
             )}
         </div>

@@ -22,7 +22,6 @@ const CreateReview = () => {
 
     const [validateErrors, setValidateErrors] = useState([]);
     const [hasClicked, setHasClicked] = useState(false);
-    
 
     const user = useSelector(state => state.session.user);
     const product = useSelector(
@@ -61,6 +60,7 @@ const CreateReview = () => {
 
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
+
 
         setHasClicked(false);
 
@@ -188,17 +188,15 @@ const CreateReview = () => {
                             }}>
                             Cancel
                         </button>
-                        {hasClicked ? (
-                            <Loading />
-                        ) : (
-                            <button
-                                className="flex button ml-2 sm:ml-10"
-                                onClick={e => {
-                                    onReviewCreation(e);
-                                }}>
-                                Submit
-                            </button>
-                        )}
+                            
+                        <button
+                            className={"flex button ml-2 sm:ml-10"}
+                            disabled={hasClicked}
+                            onClick={e => {
+                                onReviewCreation(e);
+                            }}>
+                            Submit
+                        </button>
                     </div>
                 </form>
             </div>

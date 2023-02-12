@@ -1,14 +1,26 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../store/session';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/session";
+import Loading from "../Loading";
 
 const LogoutButton = () => {
-  const dispatch = useDispatch()
-  const onLogout = async (e) => {
-    await dispatch(logout());
-  };
+    const dispatch = useDispatch();
+    const [hasClicked, setHasClicked] = useState(false);
 
-  return <button onClick={onLogout}>Logout</button>;
+    const onLogout = async e => {
+        setHasClicked(true);
+        await dispatch(logout());
+        setHasClicked(false);
+    };
+
+    return (
+        <>
+            {hasClicked && <Loading />}
+            <button onClick={onLogout} >
+                Logout
+            </button>
+        </>
+    );
 };
 
 export default LogoutButton;

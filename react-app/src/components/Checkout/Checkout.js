@@ -13,7 +13,7 @@ import Loading from "../Loading";
 const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
 
     const user = useSelector(state => state.session.user);
     const cart = useSelector(state => state.cartStore);
@@ -51,11 +51,11 @@ const Checkout = () => {
             checkedOut: true,
             products: cart.addedItems,
         };
-        setIsLoading(true);
+        setHasClicked(true);
         await dispatch(cartCheckoutThunk(cartObj));
 
         await dispatch(authenticate());
-        setIsLoading(false);
+        setHasClicked(false);
     };
 
     if (total === 0) {
@@ -167,14 +167,12 @@ const Checkout = () => {
                                     </div>
                                     {/* order + total  */}
                                     <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center">
+                                    {hasClicked && <Loading />}
                                         <button
                                             className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]"
+                                            disabled={hasClicked}
                                             onClick={e => handleCheckout(e)}>
-                                            {isLoading ? (
-                                                <Loading />
-                                            ) : (
-                                                "Place your order"
-                                            )}
+                                            Place your order
                                         </button>
                                         <div className="flex flex-col pl-2">
                                             <div className=" flex text-md text-orange-700 p-0 m-0">
@@ -209,10 +207,12 @@ const Checkout = () => {
                 </div>
                 <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative ">
                     <div className="flex flex-col items-center">
+                    {hasClicked && <Loading />}
                         <button
                             className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow"
+                            disabled={hasClicked}
                             onClick={handleCheckout}>
-                            {isLoading ? <Loading /> : "Place your order"}
+                            Place your order
                         </button>
                         <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1">
                             {" "}

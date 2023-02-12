@@ -32,7 +32,6 @@ const EditReview = () => {
     const [valid, setValid] = useState(false);
     const [validateErrors, setValidateErrors] = useState([]);
     const [hasClicked, setHasClicked] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
     if (product && reviewObj && user) {
         if (!valid) {
@@ -66,8 +65,6 @@ const EditReview = () => {
             setHover(0);
             setValid(false);
             setValidateErrors([]);
-            setIsLoading(true)
-
             setHasClicked(true)
 
             const reviewId = reviewObj.id;
@@ -77,8 +74,6 @@ const EditReview = () => {
             await dispatch(getAllProductThunk());
             await dispatch(authenticate());
 
-
-            setIsLoading(false)
             setHasClicked(false);
 
             history.push(`/products/${productId}`);
@@ -211,16 +206,14 @@ const EditReview = () => {
                                 }}>
                                 Cancel
                             </button>
+                            {hasClicked && <Loading />}
                             <button
-                                className={`${
-                                    hasClicked === true
-                                        ? "hidden"
-                                        : "flex button ml-2 sm:ml-10"
-                                }`}
+                                className="button ml-2 sm:ml-10"
+                                disabled={hasClicked}
                                 onClick={e => {
                                     onReviewEdit(e);
                                 }}>
-                                {isLoading ? <Loading /> : "Submit"}
+                                Submit
                             </button>
                         </div>
                     </form>

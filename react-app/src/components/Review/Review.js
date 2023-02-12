@@ -25,15 +25,14 @@ const Review = ({ review, product, user }) => {
 
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClickedDelete, setHasClickedDelete] = useState(false);
-    const [isLoadingEdit, setIsLoadingEdit] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+
     const deleteReview = async e => {
         e.preventDefault();
         setHasClickedDelete(true);
-        setIsLoading(true)
+
         await dispatch(deleteReviewThunk(review.id));
         await dispatch(getAllProductThunk());
-        setIsLoading(false)
+
         setHasClickedDelete(false);
     };
 
@@ -57,32 +56,28 @@ const Review = ({ review, product, user }) => {
             )}
             {user && review.owner.id === user.id ? (
                 <div className="flex flex-row items-center my-2">
+                    {hasClickedEdit && <Loading />}
                     <button
-                        className={`${
-                            hasClickedEdit === true
-                                ? "hidden"
-                                : " mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
-                        }`}
+                        className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                        disabled={hasClickedEdit}
                         onClick={async e => {
                             setHasClickedEdit(true);
-                            setIsLoadingEdit(true)
+
                             history.push(`/reviews/edit/${product.id}`);
-                            setIsLoadingEdit(false)
+
                             setHasClickedEdit(false);
                         }}>
-                        {isLoadingEdit ? <Loading /> : "Edit review"}
+                        Edit review
                     </button>
+                    {hasClickedDelete && <Loading />}
                     <button
-                        className={`${
-                            hasClickedDelete === true
-                                ? "hidden"
-                                : " mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
-                        }`}
-                        disabled={hasClickedDelete === true}
+                        className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+
+                        disabled={hasClickedDelete}
                         onClick={async e => {
                             deleteReview(e);
                         }}>
-                        {isLoading ? <Loading /> : "Delete review"}
+                        Delete review
                     </button>
                 </div>
             ) : (
