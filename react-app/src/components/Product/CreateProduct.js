@@ -20,7 +20,6 @@ const CreateProduct = () => {
     const [brand, setBrand] = useState("");
     const [image, setImage] = useState("");
     const [hasClicked, setHasClicked] = useState(false);
-    const [isLoading, setIsLoading] = useState(false)
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -42,8 +41,8 @@ const CreateProduct = () => {
 
         const errors = validate();
 
-        if (errors.length > 0) return setValidateErrors(errors);
-        setIsLoading(true)
+        if (errors.length > 0) {return setValidateErrors(errors)};
+
         setHasClicked(true);
 
         const product = await dispatch(
@@ -68,7 +67,7 @@ const CreateProduct = () => {
         setImage("");
         setValidateErrors([]);
         setHasClicked(false);
-        setIsLoading(false);
+
 
         history.push(`/products/${product.id}`);
     };
@@ -203,7 +202,7 @@ const CreateProduct = () => {
                             onClick={e => {
                                 onProductCreate(e);
                             }}>
-                            {isLoading ? <Loading /> : "Submit"}
+                            {hasClicked ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>
