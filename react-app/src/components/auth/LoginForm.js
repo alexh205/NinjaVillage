@@ -10,6 +10,8 @@ const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [hasClickedDemo, setHasClickedDemo] = useState(false)
+    const [isLoadingDemo, setIsLoadingDemo] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const user = useSelector(state => state.session.user);
 
@@ -18,20 +20,25 @@ const LoginForm = () => {
 
     const demoLogin = async () => {
         setHasClickedDemo(true)
+        setIsLoadingDemo(true)
         await dispatch(login("demo@aa.io", "password"));
+        setIsLoadingDemo(false)
         setHasClickedDemo(false)
 
     };
     const onLogin = async e => {
         e.preventDefault();
+        setIsLoading(true)
         const data = await dispatch(login(email, password));
 
         if (data) {
             setErrors(data);
         }
+        setIsLoading(false)
     };
 
     if (user) {
+
         return <Redirect to="/" />;
     }
 
@@ -60,7 +67,7 @@ const LoginForm = () => {
                                 hasClickedDemo === true
                                     ? "hidden"
                                     :"cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark"}`}>
-                            {hasClickedDemo ? <Loading /> : "Demo Login"}
+                            {isLoadingDemo ? <Loading /> : "Demo Login"}
                         </button>
                     </div>
                 </div>
@@ -107,7 +114,8 @@ const LoginForm = () => {
                             onClick={e => {
                                 onLogin(e);
                             }}>
-                            Login
+                                {isLoading ? <Loading /> : "Login"}
+
                         </button>
                     </div>
                 </form>

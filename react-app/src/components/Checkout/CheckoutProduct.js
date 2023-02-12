@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch} from "react-redux";
 import { addToCart, removeItem } from "../../store/cartReducer";
+import Loading from "../Loading";
 
 const CheckoutProduct = ({ product }) => {
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingRemoved, setIsLoadingRemoved] = useState(false)
 
     const addItemToCart = async () => {
         const item = {
@@ -15,11 +18,15 @@ const CheckoutProduct = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
+        setIsLoading(true)
         await dispatch(addToCart(item));
+        setIsLoading(false)
     };
 
     const removeItemFromCart = () => {
+        setIsLoadingRemoved(true)
         dispatch(removeItem(product));
+        setIsLoadingRemoved(false)
     };
     return (
         <div className="flex flex-row ml-4 my-2">
@@ -54,14 +61,13 @@ const CheckoutProduct = ({ product }) => {
                         onClick={() => {
                             addItemToCart();
                         }}>
-                        Add to Cart
+                        {isLoading ? <Loading /> : "Add to Cart"}
                     </button>
 
                     <button
                         className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px]"
                         onClick={removeItemFromCart}>
-                        {" "}
-                        Remove from Cart
+                        {isLoadingRemoved ? <Loading /> : "Remove from Cart"}
                     </button></div>
                 </div>
             </div>

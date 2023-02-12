@@ -24,6 +24,8 @@ const EditProfile = ({ user, showProfile }) => {
     const [repeatPassword, setRepeatPassword] = useState("");
 
     const [valid, setValid] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -62,6 +64,7 @@ const EditProfile = ({ user, showProfile }) => {
 
             if (errors.length > 0) return setValidateErrors(errors);
             setHasClicked(true)
+            setIsLoading(true)
 
             setUsername("");
             setEmail("");
@@ -89,6 +92,7 @@ const EditProfile = ({ user, showProfile }) => {
                     userId
                 )
             );
+            setIsLoading(false)
             setHasClicked(false);
         };
         const onProfileDelete = async e => {
@@ -103,9 +107,10 @@ const EditProfile = ({ user, showProfile }) => {
             setPassword("");
             setRepeatPassword("");
             setValidateErrors([]);
-
+            
             await dispatch(deleteUserThunk(userId));
             await dispatch(authenticate());
+
         };
 
         return (
@@ -290,7 +295,7 @@ const EditProfile = ({ user, showProfile }) => {
                                     showProfile(false);
 
                                 }}>
-                                {hasClicked ? <Loading /> : "Submit"}
+                                {isLoading ? <Loading /> : "Submit"}
                             </button>
                         </div>
                     </div>

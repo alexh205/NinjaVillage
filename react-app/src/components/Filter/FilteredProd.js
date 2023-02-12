@@ -1,12 +1,14 @@
-import React from "react";
+import React,  {useState} from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addToCart} from "../../store/cartReducer";
+import { addToCart } from "../../store/cartReducer";
+import Loading from "../Loading";
 
 export const FilteredProd = ({ product, userCart }) => {
     let ratingTotal = 0;
     let ratingAvg;
+    const [isLoading, setIsLoading] = useState(false);
 
     if (product && product.productReviews) {
         product.productReviews.forEach(el => {
@@ -17,7 +19,7 @@ export const FilteredProd = ({ product, userCart }) => {
 
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const history = useHistory()
+    const history = useHistory();
 
     const addItemToCart = async () => {
         const item = {
@@ -28,15 +30,17 @@ export const FilteredProd = ({ product, userCart }) => {
             category: product.category,
             brand: product.brand,
             image: product.image,
-        }
-        await dispatch(addToCart(item))
+        };
+        setIsLoading(true);
+        await dispatch(addToCart(item));
+        setIsLoading(false);
     };
-
 
     return (
         <div className="flex flex-col m-2 bg-white p-3 border-4 border-double rounded-2xl w-full h-full ">
-
-            <div onClick={()=> history.push(`/products/${product.id}`)} className="flex items-center justify-center cursor-pointer">
+            <div
+                onClick={() => history.push(`/products/${product.id}`)}
+                className="flex items-center justify-center cursor-pointer">
                 <img
                     className="object-contain h-[200px] w-[200px] my-4"
                     src={product.image}
@@ -66,7 +70,7 @@ export const FilteredProd = ({ product, userCart }) => {
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    Add to Cart
+                    {isLoading ? <Loading /> : "Add to Cart"}
                 </button>
             )}
         </div>

@@ -22,6 +22,7 @@ const EditProduct = () => {
     const [image, setImage] = useState("");
     const [valid, setValid] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -59,6 +60,7 @@ const EditProduct = () => {
             const errors = validate();
 
             if (errors.length > 0) return setValidateErrors(errors);
+            setIsLoading(true)
             setHasClicked(true);
 
             const updatedProduct = await dispatch(
@@ -84,6 +86,7 @@ const EditProduct = () => {
             setValid(false);
             setValidateErrors([]);
             setHasClicked(false);
+            setIsLoading(false)
 
             history.push(`/products/${updatedProduct.id}`);
         };
@@ -230,7 +233,7 @@ const EditProduct = () => {
                                 onProductEdit(e);
 
                             }}>
-                            {hasClicked ? <Loading /> : "Submit"}
+                            {isLoading ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>

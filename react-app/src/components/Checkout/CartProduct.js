@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch} from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { addToCart, removeItem } from "../../store/cartReducer";
 import { useHistory } from "react-router-dom";
+import Loading from "../Loading";
 
 const CartProduct = ({ product }) => {
     const dispatch = useDispatch();
     const history = useHistory()
+    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingRemoved, setIsLoadingRemoved] = useState(false)
 
 
     const addItemToCart = async () => {
@@ -19,11 +22,15 @@ const CartProduct = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
+        setIsLoading(true)
         await dispatch(addToCart(item));
+        setIsLoading(false)
     };
 
-    const removeItemFromCart = () => {
+    const removeItemFromCart =  () => {
+        setIsLoadingRemoved(true)
         dispatch(removeItem(product));
+        setIsLoadingRemoved(false)
     };
 
     let ratingTotal = 0;
@@ -77,14 +84,14 @@ const CartProduct = ({ product }) => {
                         <button
                             className="mt-auto button mr-4"
                             onClick={addItemToCart}>
-                            Add to Cart
+                                {isLoading ? <Loading /> : "Add to Cart"}
                         </button>
 
                         <button
                             className="button mt-3"
                             onClick={removeItemFromCart}>
-                            {" "}
-                            Remove from Cart
+                            {isLoadingRemoved ? <Loading /> : "Remove from Cart"}
+
                         </button>
                     </div>
                 </div>

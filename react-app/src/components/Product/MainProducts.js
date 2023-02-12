@@ -7,6 +7,8 @@ import Loading from "../Loading";
 
 const MainProducts = ({ product }) => {
     const [hasClicked, setHasClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingAdd, setIsLoadingAdd] = useState(false)
 
     let ratingTotal = 0;
     let ratingAvg;
@@ -22,6 +24,7 @@ const MainProducts = ({ product }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+
     const addItemToCart = async () => {
         const item = {
             id: product.id,
@@ -32,7 +35,9 @@ const MainProducts = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
+        setIsLoadingAdd(true)
         await dispatch(addToCart(item));
+        setIsLoadingAdd(false)
     };
 
     return (
@@ -45,10 +50,12 @@ const MainProducts = ({ product }) => {
                 disabled={hasClicked === true}
                 onClick={() => {
                     setHasClicked(true);
+                    setIsLoading(true)
                     history.push(`/products/${product.id}`);
+                    setIsLoading(false)
                     setHasClicked(false)
                 }}>
-                {hasClicked ? (
+                {isLoading ? (
                     <Loading />
                 ) : (
                     <img
@@ -83,7 +90,7 @@ const MainProducts = ({ product }) => {
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    Add to Cart
+                    {isLoadingAdd ? <Loading /> : "Add to Cart"}
                 </button>
             )}
         </div>

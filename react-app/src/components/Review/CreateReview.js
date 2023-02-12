@@ -22,6 +22,7 @@ const CreateReview = () => {
 
     const [validateErrors, setValidateErrors] = useState([]);
     const [hasClicked, setHasClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const user = useSelector(state => state.session.user);
     const product = useSelector(
@@ -44,6 +45,7 @@ const CreateReview = () => {
         const errors = validate();
         if (errors.length > 0) return setValidateErrors(errors);
         setHasClicked(true);
+        setIsLoading(true)
 
         const owner_id = user.id;
         const product_id = product.id;
@@ -60,6 +62,7 @@ const CreateReview = () => {
         setRating(0);
         setHover(0);
         setValidateErrors([]);
+        setIsLoading(false)
         setHasClicked(false);
 
         history.push(`/products/${productId}`);
@@ -196,7 +199,7 @@ const CreateReview = () => {
 
                                 onReviewCreation(e);
                             }}>
-                            {hasClicked ? <Loading /> : "Submit"}
+                            {isLoading ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>

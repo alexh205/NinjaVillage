@@ -20,6 +20,7 @@ const CreateProduct = () => {
     const [brand, setBrand] = useState("");
     const [image, setImage] = useState("");
     const [hasClicked, setHasClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -42,6 +43,7 @@ const CreateProduct = () => {
         const errors = validate();
 
         if (errors.length > 0) return setValidateErrors(errors);
+        setIsLoading(true)
         setHasClicked(true);
 
         const product = await dispatch(
@@ -66,6 +68,7 @@ const CreateProduct = () => {
         setImage("");
         setValidateErrors([]);
         setHasClicked(false);
+        setIsLoading(false);
 
         history.push(`/products/${product.id}`);
     };
@@ -197,12 +200,10 @@ const CreateProduct = () => {
                         </button>
                         <button
                             className={`${hasClicked === true ? "hidden" :"flex button ml-2 sm:ml-10"}`}
-                            disabled={hasClicked === true}
                             onClick={e => {
-
                                 onProductCreate(e);
                             }}>
-                            {hasClicked ? <Loading /> : "Submit"}
+                            {isLoading ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>

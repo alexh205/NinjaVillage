@@ -32,6 +32,7 @@ const EditReview = () => {
     const [valid, setValid] = useState(false);
     const [validateErrors, setValidateErrors] = useState([]);
     const [hasClicked, setHasClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     if (product && reviewObj && user) {
         if (!valid) {
@@ -58,6 +59,7 @@ const EditReview = () => {
             const errors = validate();
 
             if (errors.length > 0) return setValidateErrors(errors);
+            setIsLoading(true)
 
             setHasClicked(true)
 
@@ -74,6 +76,7 @@ const EditReview = () => {
             setHover(0);
             setValid(false);
             setValidateErrors([]);
+            setIsLoading(false)
             setHasClicked(false);
 
             history.push(`/products/${productId}`);
@@ -215,7 +218,7 @@ const EditReview = () => {
                                 onClick={e => {
                                     onReviewEdit(e);
                                 }}>
-                                {hasClicked ? <Loading /> : "Submit"}
+                                {isLoading ? <Loading /> : "Submit"}
                             </button>
                         </div>
                     </form>

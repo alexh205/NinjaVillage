@@ -132,7 +132,7 @@ const ProductDetail = () => {
                                 </div>
 
                                 <div
-                                    className="text-[16px] cursor-pointer text-sky-600 text-bold"
+                                    className="text-[15px] cursor-pointer text-sky-600 text-bold"
                                     onClick={() => history.push("/listings")}>
                                     Visit {owner.name}'s store
                                 </div>

@@ -25,12 +25,15 @@ const Review = ({ review, product, user }) => {
 
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClickedDelete, setHasClickedDelete] = useState(false);
-
+    const [isLoadingEdit, setIsLoadingEdit] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const deleteReview = async e => {
         e.preventDefault();
         setHasClickedDelete(true);
+        setIsLoading(true)
         await dispatch(deleteReviewThunk(review.id));
         await dispatch(getAllProductThunk());
+        setIsLoading(false)
         setHasClickedDelete(false);
     };
 
@@ -62,10 +65,12 @@ const Review = ({ review, product, user }) => {
                         }`}
                         onClick={async e => {
                             setHasClickedEdit(true);
+                            setIsLoadingEdit(true)
                             history.push(`/reviews/edit/${product.id}`);
+                            setIsLoadingEdit(false)
                             setHasClickedEdit(false);
                         }}>
-                        {hasClickedEdit ? <Loading /> : "Edit review"}
+                        {isLoadingEdit ? <Loading /> : "Edit review"}
                     </button>
                     <button
                         className={`${
@@ -77,7 +82,7 @@ const Review = ({ review, product, user }) => {
                         onClick={async e => {
                             deleteReview(e);
                         }}>
-                        {hasClickedDelete ? <Loading /> : "Delete review"}
+                        {isLoading ? <Loading /> : "Delete review"}
                     </button>
                 </div>
             ) : (
