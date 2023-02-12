@@ -22,7 +22,7 @@ const CreateReview = () => {
 
     const [validateErrors, setValidateErrors] = useState([]);
     const [hasClicked, setHasClicked] = useState(false);
-
+    
 
     const user = useSelector(state => state.session.user);
     const product = useSelector(
@@ -44,8 +44,13 @@ const CreateReview = () => {
 
         const errors = validate();
         if (errors.length > 0) return setValidateErrors(errors);
-        setHasClicked(true);
 
+        setTitle("");
+        setReview("");
+        setRating(0);
+        setHover(0);
+        setValidateErrors([]);
+        setHasClicked(true);
 
         const owner_id = user.id;
         const product_id = product.id;
@@ -56,12 +61,6 @@ const CreateReview = () => {
 
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
-
-        setTitle("");
-        setReview("");
-        setRating(0);
-        setHover(0);
-        setValidateErrors([]);
 
         setHasClicked(false);
 
@@ -189,18 +188,17 @@ const CreateReview = () => {
                             }}>
                             Cancel
                         </button>
-                        <button
-                            className={`${
-                                hasClicked === true
-                                    ? "hidden"
-                                    : "flex button ml-2 sm:ml-10"
-                            }`}
-                            onClick={e => {
-
-                                onReviewCreation(e);
-                            }}>
-                            {hasClicked ? "Your data is now loading" : "Submit"}
-                        </button>
+                        {hasClicked ? (
+                            <Loading />
+                        ) : (
+                            <button
+                                className="flex button ml-2 sm:ml-10"
+                                onClick={e => {
+                                    onReviewCreation(e);
+                                }}>
+                                Submit
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>

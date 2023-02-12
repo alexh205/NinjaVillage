@@ -59,6 +59,13 @@ const EditReview = () => {
             const errors = validate();
 
             if (errors.length > 0) return setValidateErrors(errors);
+
+            setTitle("");
+            setReview("");
+            setRating(0);
+            setHover(0);
+            setValid(false);
+            setValidateErrors([]);
             setIsLoading(true)
 
             setHasClicked(true)
@@ -70,12 +77,7 @@ const EditReview = () => {
             await dispatch(getAllProductThunk());
             await dispatch(authenticate());
 
-            setTitle("");
-            setReview("");
-            setRating(0);
-            setHover(0);
-            setValid(false);
-            setValidateErrors([]);
+
             setIsLoading(false)
             setHasClicked(false);
 

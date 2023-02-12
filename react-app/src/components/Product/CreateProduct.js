@@ -41,8 +41,17 @@ const CreateProduct = () => {
 
         const errors = validate();
 
-        if (errors.length > 0) {return setValidateErrors(errors)};
+        if (errors.length > 0) {
+            return setValidateErrors(errors);
+        }
 
+        setTitle("");
+        setPrice("");
+        setDescription("");
+        setCategory("");
+        setBrand("");
+        setImage("");
+        setValidateErrors([]);
         setHasClicked(true);
 
         const product = await dispatch(
@@ -59,15 +68,7 @@ const CreateProduct = () => {
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
 
-        setTitle("");
-        setPrice("");
-        setDescription("");
-        setCategory("");
-        setBrand("");
-        setImage("");
-        setValidateErrors([]);
         setHasClicked(false);
-
 
         history.push(`/products/${product.id}`);
     };
@@ -198,7 +199,11 @@ const CreateProduct = () => {
                             Cancel
                         </button>
                         <button
-                            className={`${hasClicked === true ? "hidden" :"flex button ml-2 sm:ml-10"}`}
+                            className={`${
+                                hasClicked === true
+                                    ? "hidden"
+                                    : "flex button ml-2 sm:ml-10"
+                            }`}
                             onClick={e => {
                                 onProductCreate(e);
                             }}>

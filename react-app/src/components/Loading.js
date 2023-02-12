@@ -13,6 +13,7 @@ const Loading = () => {
                 ariaLabel="mutating-dots-loading"
                 visible={true}
             />
+            Loading...
         </div>
     );
 };
