@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { editUserThunk, deleteUserThunk } from "../../store/sessionReducer";
+import { editUserThunk, deleteUserThunk, authenticate } from "../../store/sessionReducer";
 import stateTaxes from "../../Media/stateTaxes.json";
 import Loading from "../Loading";
 
@@ -104,6 +104,7 @@ const EditProfile = ({ user, showProfile }) => {
             setValidateErrors([]);
 
             await dispatch(deleteUserThunk(userId));
+            await dispatch(authenticate());
         };
 
         return (
