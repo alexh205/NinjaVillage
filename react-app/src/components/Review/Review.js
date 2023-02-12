@@ -6,12 +6,17 @@ import {
     deleteReviewThunk,
 } from "../../store/productReducer";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../Loading";
 
 const Review = ({ review, product, user }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const productObj = useSelector(
+        state => state.productStore.products[review.productId]
+    );
+
 
     let rating = 0;
     if (review && review.rating) {
@@ -23,6 +28,7 @@ const Review = ({ review, product, user }) => {
 
     const deleteReview = async e => {
         e.preventDefault();
+        setHasClickedDelete(true);
         await dispatch(deleteReviewThunk(review.id));
         await dispatch(getAllProductThunk());
         setHasClickedDelete(false);
@@ -30,22 +36,30 @@ const Review = ({ review, product, user }) => {
 
     return (
         <div className="ml-4 border-b">
-            {review && review.owner && (
-                <div className="flex flex-row items-center mt-2">
-                    <img
-                        className="hidden md:block rounded-full h-12 w-12 mr-2"
-                        src={review.owner.profileImage}
-                        alt="user"></img>
-                    <div className="text-sm text-teal-700">
-                        {review.owner.name}
+            {review && review.owner && productObj && (
+                <div className="flex flex-col">
+                    <div className="flex flex-row items-center mt-2">
+                        <img
+                            className="hidden md:block rounded-full h-12 w-12 mr-2"
+                            src={review.owner.profileImage}
+                            alt="user"></img>
+                        <div className="text-sm text-teal-700">
+                            {review.owner.name}
+                        </div>
+                    </div>
+                    <div className="flex flex-row items-center mt-2 ">
+                    <p className="text-xs text-gray-500">{productObj.title}</p>
                     </div>
                 </div>
             )}
             {user && review.owner.id === user.id ? (
                 <div className="flex flex-row items-center my-2">
                     <button
-                        className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
-                        disabled={hasClickedEdit === true}
+                        className={`${
+                            hasClickedEdit === true
+                                ? "hidden"
+                                : " mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                        }`}
                         onClick={async e => {
                             setHasClickedEdit(true);
                             history.push(`/reviews/edit/${product.id}`);
@@ -54,12 +68,14 @@ const Review = ({ review, product, user }) => {
                         {hasClickedEdit ? <Loading /> : "Edit review"}
                     </button>
                     <button
-                        className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+                        className={`${
+                            hasClickedDelete === true
+                                ? "hidden"
+                                : " mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+                        }`}
                         disabled={hasClickedDelete === true}
                         onClick={async e => {
-                            setHasClickedDelete(true);
                             deleteReview(e);
-
                         }}>
                         {hasClickedDelete ? <Loading /> : "Delete review"}
                     </button>

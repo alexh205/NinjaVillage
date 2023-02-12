@@ -42,6 +42,7 @@ const CreateProduct = () => {
         const errors = validate();
 
         if (errors.length > 0) return setValidateErrors(errors);
+        setHasClicked(true);
 
         const product = await dispatch(
             createProductThunk(
@@ -195,10 +196,10 @@ const CreateProduct = () => {
                             Cancel
                         </button>
                         <button
-                            className="button ml-10"
+                            className={`${hasClicked === true ? "hidden" :"flex button ml-2 sm:ml-10"}`}
                             disabled={hasClicked === true}
                             onClick={e => {
-                                setHasClicked(true);
+
                                 onProductCreate(e);
                             }}>
                             {hasClicked ? <Loading /> : "Submit"}

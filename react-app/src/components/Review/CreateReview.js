@@ -43,6 +43,7 @@ const CreateReview = () => {
 
         const errors = validate();
         if (errors.length > 0) return setValidateErrors(errors);
+        setHasClicked(true);
 
         const owner_id = user.id;
         const product_id = product.id;
@@ -115,9 +116,8 @@ const CreateReview = () => {
                             {[...Array(5)].map((star, i) => {
                                 const ratingValue = i + 1;
                                 return (
-                                    <label>
+                                    <label key={i}>
                                         <input
-                                            key={i}
                                             className="hidden"
                                             type="radio"
                                             name="rating"
@@ -187,12 +187,14 @@ const CreateReview = () => {
                             Cancel
                         </button>
                         <button
-                            className="button ml-10"
-                            disabled={hasClicked === true}
+                            className={`${
+                                hasClicked === true
+                                    ? "hidden"
+                                    : "flex button ml-2 sm:ml-10"
+                            }`}
                             onClick={e => {
-                                setHasClicked(true);
-                                onReviewCreation(e);
 
+                                onReviewCreation(e);
                             }}>
                             {hasClicked ? <Loading /> : "Submit"}
                         </button>

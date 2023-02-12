@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FilteredProd } from "./FilteredProd";
 import Header from "../Header/Header";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 const Filters = () => {
     const { filterId } = useParams();
@@ -27,9 +28,11 @@ const Filters = () => {
             <Header />
             <div>
                 <div className="flex flex-row items-center text-[15px] text-gray-500 m-2 ml-4">
-                    <p>Category -></p>
-                    <p className="ml-2">{filterId}</p>
+                    <p>Category </p>
+                    <MdOutlineArrowRightAlt className="mt-[2px]" />
+                    <p className="ml-1">{filterId}</p>
                 </div>
+
                 <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
                     {filteredProd &&
                         filteredProd.map((product, i) => (
@@ -52,10 +55,3 @@ const Filters = () => {
 };
 
 export default Filters;
-
-
-// className={`${
-//     user && product.ownerId === user.id
-//         ? "hidden"
-//         : "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"
-// }`}

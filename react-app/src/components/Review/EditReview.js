@@ -56,7 +56,10 @@ const EditReview = () => {
             e.preventDefault();
 
             const errors = validate();
+
             if (errors.length > 0) return setValidateErrors(errors);
+
+            setHasClicked(true)
 
             const reviewId = reviewObj.id;
 
@@ -70,11 +73,11 @@ const EditReview = () => {
             setRating(0);
             setHover(0);
             setValid(false);
-
             setValidateErrors([]);
             setHasClicked(false);
 
             history.push(`/products/${productId}`);
+
         };
 
         return (
@@ -204,13 +207,13 @@ const EditReview = () => {
                                 Cancel
                             </button>
                             <button
-                                className="button ml-10"
-                                disabled={hasClicked === true}
+                                className={`${
+                                    hasClicked === true
+                                        ? "hidden"
+                                        : "flex button ml-2 sm:ml-10"
+                                }`}
                                 onClick={e => {
-                                    setHasClicked(true);
-                                    {<Loading />}
                                     onReviewEdit(e);
-
                                 }}>
                                 {hasClicked ? <Loading /> : "Submit"}
                             </button>

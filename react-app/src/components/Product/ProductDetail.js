@@ -61,7 +61,7 @@ const ProductDetail = () => {
 
     const deleteItem = async e => {
         e.preventDefault();
-
+        setHasClicked(true);
         await dispatch(deleteProductThunk(productId));
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
@@ -80,8 +80,11 @@ const ProductDetail = () => {
                                 {user && product.ownerId === user.id ? (
                                     <div className="flex flex-row items-center justify-center my-4">
                                         <button
-                                            className="mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3"
-                                            disabled={hasClickedEdit === true}
+                                            className={`${
+                                                hasClicked === true
+                                                    ? "hidden"
+                                                    : " flex mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3"
+                                            }`}
                                             onClick={e => {
                                                 setHasClickedEdit(true);
                                                 history.push(
@@ -97,12 +100,13 @@ const ProductDetail = () => {
                                         </button>
 
                                         <button
-                                            className="mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow"
-                                            disabled={hasClicked === true}
+                                            className={`${
+                                                hasClicked === true
+                                                    ? "hidden"
+                                                    : " flex mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow"
+                                            }`}
                                             onClick={async e => {
-                                                setHasClicked(true);
                                                 deleteItem(e);
-
                                             }}>
                                             {hasClicked ? (
                                                 <Loading />
@@ -128,7 +132,7 @@ const ProductDetail = () => {
                                 </div>
 
                                 <div
-                                    className="text-sm cursor-pointer text-sky-600 text-semibold"
+                                    className="text-[16px] cursor-pointer text-sky-600 text-bold"
                                     onClick={() => history.push("/listings")}>
                                     Visit {owner.name}'s store
                                 </div>
@@ -156,13 +160,13 @@ const ProductDetail = () => {
                                     <div>
                                         {product &&
                                         product.productReviews.length === 1 ? (
-                                            <div className="text-sm text-sky-600">
+                                            <div className="text-sm text-ninja_green">
                                                 {product.productReviews.length}{" "}
                                                 rating
                                             </div>
                                         ) : product &&
                                           product.productReviews.length > 1 ? (
-                                            <div className="text-sm text-sky-600 ">
+                                            <div className="text-sm text-ninja_green ">
                                                 {product.productReviews.length}{" "}
                                                 ratings
                                             </div>

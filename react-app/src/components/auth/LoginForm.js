@@ -9,16 +9,18 @@ const LoginForm = () => {
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [hasClickedDemo, setHasClickedDemo] = useState(false)
 
-    const [hasClickedDemo, setHasClickedDemo] = useState(false);
     const user = useSelector(state => state.session.user);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     const demoLogin = async () => {
+        setHasClickedDemo(true)
         await dispatch(login("demo@aa.io", "password"));
-        setHasClickedDemo(false);
+        setHasClickedDemo(false)
+
     };
     const onLogin = async e => {
         e.preventDefault();
@@ -49,12 +51,15 @@ const LoginForm = () => {
                             Sign in
                         </h1>
                         <button
-                            disabled={hasClickedDemo === true}
+
                             onClick={() => {
-                                setHasClickedDemo(true);
+
                                 demoLogin();
                             }}
-                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
+                            className={`${
+                                hasClickedDemo === true
+                                    ? "hidden"
+                                    :"cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark"}`}>
                             {hasClickedDemo ? <Loading /> : "Demo Login"}
                         </button>
                     </div>

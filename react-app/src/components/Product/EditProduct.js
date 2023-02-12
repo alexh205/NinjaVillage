@@ -59,6 +59,7 @@ const EditProduct = () => {
             const errors = validate();
 
             if (errors.length > 0) return setValidateErrors(errors);
+            setHasClicked(true);
 
             const updatedProduct = await dispatch(
                 editProductThunk(
@@ -91,7 +92,7 @@ const EditProduct = () => {
             <div>
                 <Header />
                 <div className="flex flex-col mt-6 mx-10 border-b">
-                    <h1 className="font-bold text-3xl">Edit Listing</h1>{" "}
+                    <h1 className="font-bold text-3xl">Edit Listing</h1>
                     {validateErrors.length > 0 && (
                         <div className="my-2 ml-2">
                             <h3 className="font-bold text-[16px] ">
@@ -220,14 +221,16 @@ const EditProduct = () => {
                             Cancel
                         </button>
                         <button
-                            className="button ml-10"
-                            disabled={hasClicked === true}
+                            className={`${
+                                hasClicked === true
+                                    ? "hidden"
+                                    : "flex button ml-2 sm:ml-10"
+                            }`}
                             onClick={e => {
-                                setHasClicked(true);
                                 onProductEdit(e);
 
                             }}>
-                           {hasClicked ? <Loading /> : "Submit"}
+                            {hasClicked ? <Loading /> : "Submit"}
                         </button>
                     </div>
                 </form>

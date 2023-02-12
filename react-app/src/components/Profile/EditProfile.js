@@ -61,6 +61,7 @@ const EditProfile = ({ user, showProfile }) => {
             const errors = validate();
 
             if (errors.length > 0) return setValidateErrors(errors);
+            setHasClicked(true)
 
             setUsername("");
             setEmail("");
@@ -278,10 +279,13 @@ const EditProfile = ({ user, showProfile }) => {
                                 Cancel
                             </button>
                             <button
-                                className="button ml-0 md:ml-6 mt-2 md:mt-0"
-                                disabled={hasClicked === true}
+                                className={`${
+                                    hasClicked === true
+                                        ? "hidden"
+                                        : "button ml-0 md:ml-6 mt-2 md:mt-0"}`}
+
                                 onClick={e => {
-                                    setHasClicked(true);
+                                    ;
                                     onProfileEdit(e);
                                     showProfile(false);
 
