@@ -79,7 +79,7 @@ const EditProfile = ({ user, showProfile }) => {
                     state,
                     zipCode,
                     profileImg,
-                    password,
+                    // password,
                     userId
                 )
             );
@@ -92,8 +92,8 @@ const EditProfile = ({ user, showProfile }) => {
             setState("");
             setZipCode("");
             setProfileImg("");
-            setPassword("");
-            setRepeatPassword("");
+            // setPassword("");
+            // setRepeatPassword("");
             setValidateErrors([]);
             setHasClicked(false);
             showProfile(false);
@@ -107,8 +107,8 @@ const EditProfile = ({ user, showProfile }) => {
             setState("");
             setZipCode("");
             setProfileImg("");
-            setPassword("");
-            setRepeatPassword("");
+            // setPassword("");
+            // setRepeatPassword("");
             setValidateErrors([]);
             setHasClickedDelete(true);
 

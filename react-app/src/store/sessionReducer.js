@@ -94,7 +94,7 @@ export const signUp = (username, name, email, streetAddress, city, state,zipCode
             city,
             state,
             zip_code:zipCode,
-            password,
+            // password,
             profile_img:profileImage,
         }),
     });
