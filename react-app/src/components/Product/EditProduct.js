@@ -60,14 +60,6 @@ const EditProduct = () => {
 
             if (errors.length > 0) return setValidateErrors(errors);
 
-            setTitle("");
-            setPrice("");
-            setDescription("");
-            setCategory("");
-            setBrand("");
-            setImage("");
-            setValid(false);
-            setValidateErrors([]);
             setHasClicked(true);
 
             const updatedProduct = await dispatch(
@@ -81,6 +73,14 @@ const EditProduct = () => {
                     productId
                 )
             );
+            setTitle("");
+            setPrice("");
+            setDescription("");
+            setCategory("");
+            setBrand("");
+            setImage("");
+            setValid(false);
+            setValidateErrors([]);
 
             await dispatch(getAllProductThunk());
 

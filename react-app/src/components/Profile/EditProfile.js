@@ -67,17 +67,6 @@ const EditProfile = ({ user, showProfile }) => {
 
             if (errors.length > 0) return setValidateErrors(errors);
 
-            setUsername("");
-            setEmail("");
-            setName("");
-            setStreetAddress("");
-            setCity("");
-            setState("");
-            setZipCode("");
-            setProfileImg("");
-            setPassword("");
-            setRepeatPassword("");
-            setValidateErrors([]);
             setHasClicked(true);
 
             await dispatch(
@@ -95,6 +84,17 @@ const EditProfile = ({ user, showProfile }) => {
                 )
             );
 
+            setUsername("");
+            setEmail("");
+            setName("");
+            setStreetAddress("");
+            setCity("");
+            setState("");
+            setZipCode("");
+            setProfileImg("");
+            setPassword("");
+            setRepeatPassword("");
+            setValidateErrors([]);
             setHasClicked(false);
             showProfile(false);
         };
@@ -295,7 +295,6 @@ const EditProfile = ({ user, showProfile }) => {
                                 disabled={hasClicked}
                                 onClick={e => {
                                     onProfileEdit(e);
-
                                 }}>
                                 Submit
                             </button>

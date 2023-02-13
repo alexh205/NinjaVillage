@@ -44,11 +44,6 @@ const CreateReview = () => {
         const errors = validate();
         if (errors.length > 0) return setValidateErrors(errors);
 
-        setTitle("");
-        setReview("");
-        setRating(0);
-        setHover(0);
-        setValidateErrors([]);
         setHasClicked(true);
 
         const owner_id = user.id;
@@ -57,10 +52,14 @@ const CreateReview = () => {
         await dispatch(
             createReviewThunk(title, review, rating, owner_id, product_id)
         );
+        setTitle("");
+        setReview("");
+        setRating(0);
+        setHover(0);
+        setValidateErrors([]);
 
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
-
 
         setHasClicked(false);
 

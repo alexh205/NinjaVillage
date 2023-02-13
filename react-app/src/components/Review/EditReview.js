@@ -59,18 +59,18 @@ const EditReview = () => {
 
             if (errors.length > 0) return setValidateErrors(errors);
 
-            setTitle("");
-            setReview("");
-            setRating(0);
-            setHover(0);
-            setValid(false);
-            setValidateErrors([]);
             setHasClicked(true)
 
             const reviewId = reviewObj.id;
 
             await dispatch(editReviewThunk(title, review, rating, reviewId));
 
+            setTitle("");
+            setReview("");
+            setRating(0);
+            setHover(0);
+            setValid(false);
+            setValidateErrors([]);
             await dispatch(getAllProductThunk());
             await dispatch(authenticate());
 

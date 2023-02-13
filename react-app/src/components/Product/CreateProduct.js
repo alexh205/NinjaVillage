@@ -45,13 +45,6 @@ const CreateProduct = () => {
             return setValidateErrors(errors);
         }
 
-        setTitle("");
-        setPrice("");
-        setDescription("");
-        setCategory("");
-        setBrand("");
-        setImage("");
-        setValidateErrors([]);
         setHasClicked(true);
 
         const product = await dispatch(
@@ -64,6 +57,13 @@ const CreateProduct = () => {
                 image
             )
         );
+        setTitle("");
+        setPrice("");
+        setDescription("");
+        setCategory("");
+        setBrand("");
+        setImage("");
+        setValidateErrors([]);
 
         await dispatch(getAllProductThunk());
         await dispatch(authenticate());
