@@ -32,7 +32,7 @@
     <br />
     <br />
     <br />
-    <a href="https://buzz-vxv2.onrender.com/">Live Site</a>
+    <a href="https://ninjavillage.onrender.com/">Live Site</a>
     ·
     <a href="https://dbdiagram.io/d/63c77e35296d97641d7a5d69">DB Schema</a>
     <!-- ·
