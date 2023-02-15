@@ -3,6 +3,7 @@ const initialState = {
     addedItems: [],
     total: 0,
     checkedOut: null,
+    ownerId: null
 };
 
 const SET_ACTIVE_CART = "cart/SET_ACTIVE_CART";

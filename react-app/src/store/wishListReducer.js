@@ -12,7 +12,7 @@ const SAVE_LIST = "list/AVE_LIST";
 //? ACTION CREATORS
 
 // set active list
-export const setActiveCart = list => {
+export const setActiveList = list => {
     return {
         type: SET_ACTIVE_LIST,
         payload: list,
@@ -52,7 +52,7 @@ const createListThunk = () => async dispatch => {
     });
     const response = await request.json();
 
-    dispatch(setActiveCart(response));
+    dispatch(setActiveList(response));
 };
 
 const saveListThunk = cartId => async dispatch => {
