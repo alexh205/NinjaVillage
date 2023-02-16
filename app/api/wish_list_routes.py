@@ -70,15 +70,15 @@ def wish_list_create():
     )
     db.session.add(new_wish_list)
     db.session.commit()
-    if req_data['productsId'] == None:
-        return new_wish_list.to_dict()
-    if req_data['productsId'] != None:
-        queried_wish_list = WishList.query.get_or_404(new_wish_list.id)
-        for product in req_data['productsId']:
-            new_product = Product.query.get_or_404(product)
-            queried_wish_list.lists_product.append(new_product)
-        db.session.commit()
-        return new_wish_list.to_dict()
+
+    return new_wish_list.to_dict()
+    # if req_data['productsId'] != None:
+    #     queried_wish_list = WishList.query.get_or_404(new_wish_list.id)
+    #     for product in req_data['productsId']:
+    #         new_product = Product.query.get_or_404(product)
+    #         queried_wish_list.lists_product.append(new_product)
+    #     db.session.commit()
+
 
 #* Edit Wish List *****************************************************
 @wish_list_routes.route('/<int:id>', methods=['PUT'])

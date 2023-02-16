@@ -1,7 +1,7 @@
 const initialState = {
     id: null,
     name: null,
-    addedItems: [],
+    listItems: null,
 };
 
 const SET_ACTIVE_LIST = "list/SET_ACTIVE_LIST";
@@ -18,6 +18,7 @@ export const setActiveList = list => {
         payload: list,
     };
 };
+
 
 // add product to List
 export const addToList = prod => {
@@ -45,14 +46,16 @@ export const saveList = List => {
 
 //? THUNK
 
-const createListThunk = () => async dispatch => {
-    const request = await fetch("/api/shopping_carts/new", {
+export const createListThunk = (listName) => async dispatch => {
+    await fetch("/api/wish_lists/new", {
         method: "POST",
-        headers: { "Content-Type:": "application/json" },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: listName
+        })
     });
-    const response = await request.json();
 
-    dispatch(setActiveList(response));
+
 };
 
 const saveListThunk = cartId => async dispatch => {
@@ -79,7 +82,7 @@ const wishListReducer = (state = initialState, action) => {
 
         case ADD_TO_LIST: {
             let addedItem;
-            let existed_item = currentState.addedItems.find(
+            let existed_item = currentState.listItems.find(
                 item => action.payload.id === item.id
             );
             if (!existed_item) {
@@ -92,19 +95,19 @@ const wishListReducer = (state = initialState, action) => {
             } else {
                 return {
                     ...currentState,
-                    addedItems: [...currentState.addedItems, addedItem],
+                    listItems: [...currentState.listItems, addedItem],
                 };
             }
         }
 
         case REMOVE_ITEM: {
-            let new_items = currentState.addedItems.filter(
+            let new_items = currentState.listItems.filter(
                 item => action.payload.id !== item.id
             );
 
             return {
                 ...currentState,
-                addedItems: new_items,
+                listItems: new_items,
             };
         }
 

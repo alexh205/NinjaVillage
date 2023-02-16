@@ -17,10 +17,10 @@ import EditProduct from "./components/Product/EditProduct";
 import Profile from "./components/Profile/Profile";
 import CreateProduct from "./components/Product/CreateProduct";
 import Filters from "./components/Filter/Filters";
-import WishList from "./components/WishList/WishList";
 import Order from "./components/Orders/Order";
 import OrdersContainer from "./components/Orders/OrdersContainer";
 import UserProducts from "./components/Product/UserProducts";
+import WishListContainer from "./components/WishList/WishListContainer";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -108,15 +108,15 @@ function App() {
                         <Route path="/filters/:filterId" exact={true}>
                             <Filters />
                         </Route>
-                        <Route path="/wishLists/:listId" exact={true}>
-                            <WishList />
-                        </Route>
-                        <Route path="/orders/:orderId" exact={true}>
-                            <Order />
+                        <Route path="/wishLists" exact={true}>
+                            <WishListContainer />
                         </Route>
                         <Route path="/orders" exact={true}>
                             <OrdersContainer />
                         </Route>
+                        {/* <Route path="/orders/:orderId" exact={true}>
+                            <Order />
+                        </Route> */}
                     </Switch>
                 </BrowserRouter>
             )}

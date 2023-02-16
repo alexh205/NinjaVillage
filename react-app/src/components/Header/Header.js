@@ -86,7 +86,7 @@ const Header = () => {
                             )}
                         </div>
                         {filteredData.length !== 0 && (
-                            <div className="hidden sm:block absolute top-[44px] z-50 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md sm:w-[80%] lg:w-[91%]">
+                            <div className="hidden sm:block absolute top-[44px] z-50 cursor-pointer bg-white overflow-hidden overflow-y-auto shadow-md md:w-[80%] lg:w-[90%]">
                                 {filteredData.slice(0, 12).map((product, i) => {
                                     return (
                                         <div
@@ -154,7 +154,7 @@ const Header = () => {
             {/* lower nav */}
             <div className="flex items-center space-x-3 p-2 pl-6 bg-ninja_green-dark text-white text-sm ">
                 <p
-                    className="link"
+                    className="link hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"All"}`);
                     }}>
@@ -162,56 +162,56 @@ const Header = () => {
                 </p>
                 {/* <p className="link">Buy Again</p> */}
                 <p
-                    className="link"
+                    className="link hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Books"}`);
                     }}>
                     Books
                 </p>
                 <p
-                    className="link"
+                    className="link hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Groceries"}`);
                     }}>
                     Groceries
                 </p>
                 <p
-                    className="link hidden lg:inline-flex"
+                    className="link hidden lg:inline-flex hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Beauty & Personal Care"}`);
                     }}>
                     Beauty & Personal Care
                 </p>
                 <p
-                    className="link hidden lg:inline-flex"
+                    className="link hidden lg:inline-flex hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Clothing, Shoes & Jewelry"}`);
                     }}>
                     Clothing, Shoes & Jewelry
                 </p>
                 <p
-                    className="link hidden lg:inline-flex"
+                    className="link hidden lg:inline-flex hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Electronics"}`);
                     }}>
                     Electronics
                 </p>
                 <p
-                    className="link hidden lg:inline-flex"
+                    className="link hidden lg:inline-flex hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Health & Household"}`);
                     }}>
                     Health & Household
                 </p>
                 <p
-                    className="link hidden lg:inline-flex"
+                    className="link hidden lg:inline-flex hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Pet Supplies"}`);
                     }}>
                     Pet Supplies
                 </p>
                 <p
-                    className="link hidden lg:inline-flex"
+                    className="link hidden lg:inline-flex hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${"Video Games"}`);
                     }}>

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { addToCart } from "../../store/cartReducer";
 
 
-export const FilteredProd = ({ product, userCart }) => {
+export const FilteredProd = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
 
