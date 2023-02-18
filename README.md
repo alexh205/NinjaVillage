@@ -28,7 +28,7 @@
   <h3 align="center">NinjaVillage (Amazon Clone)</h3>
 
   <p align="center">
-    This is a spin-off of the popular e-commerce site <a href="amazon.com">Amazon</a>. Users can search, sell, purchase, and review products.
+    This is an e-commerce application inspired by the popular e-commerce site <a href="amazon.com">Amazon</a>. Users can search, sell, purchase, and review products.
     <br />
     <br />
     <br />
