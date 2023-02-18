@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Header/Header";
-import checkout from "../../Media/checkout.png";
+import checkout from "../../media/checkout.png";
 import { useSelector} from "react-redux";
 import CartProduct from "./CartProduct";
 import { useHistory } from "react-router-dom";

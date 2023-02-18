@@ -20,7 +20,7 @@ import Filters from "./components/Filter/Filters";
 import Order from "./components/Orders/Order";
 import OrdersContainer from "./components/Orders/OrdersContainer";
 import UserProducts from "./components/Product/UserProducts";
-import WishListContainer from "./components/WishList/WishListContainer";
+import { WishListContainer } from "./components/WishList/WishListContainer";
 
 function App() {
     const [loaded, setLoaded] = useState(false);

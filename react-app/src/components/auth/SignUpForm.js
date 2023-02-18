@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp } from "../../store/sessionReducer";
-import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
+import NinjaVillage_logo from "../../media/NinjaVillage_logo.png";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Loading from "../Loading";
@@ -249,7 +249,7 @@ const SignUpForm = () => {
                     {hasClicked && <Loading />}
                     <button
                         className="my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]"
-                        
+
                         onClick={e => {
                             onSignUp(e);
                         }}>

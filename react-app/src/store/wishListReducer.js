@@ -59,7 +59,7 @@ export const createListThunk = (listName) => async dispatch => {
 };
 
 const saveListThunk = cartId => async dispatch => {
-    await fetch(`/api/shopping_carts/update/${cartId}`, {
+    await fetch(`/api/wish_lists/update/${cartId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
     });

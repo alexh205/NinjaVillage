@@ -1,6 +1,6 @@
 import React from "react";
 import MainProducts from "./MainProducts";
-import ninjas from '../../Media/Banner Images/ninjas.jpg'
+import ninjas from '../../media/Banner Images/ninjas.jpg'
 
 const ProductFeed = ({ products, user }) => {
 

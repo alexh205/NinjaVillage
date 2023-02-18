@@ -6,7 +6,7 @@ import {
     deleteUserThunk,
     authenticate,
 } from "../../store/sessionReducer";
-import stateTaxes from "../../Media/stateTaxes.json";
+import stateTaxes from "../../media/stateTaxes.json";
 import Loading from "../Loading";
 
 const EditProfile = ({ user, showProfile }) => {
