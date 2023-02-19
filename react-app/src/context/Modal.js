@@ -38,10 +38,10 @@ const Modal = ({ children, isOpen, onClose }) => {
                 <animated.div
                     style={styles}
                     onClick={onClose}
-                    className="fixed top-0 left-0 right-0 bottom-0 width-[100%] height-[100%] overflow-x-hidden overflow-y-hidden z-10 bg-gray-200">
+                    className="fixed top-0 left-0 right-0 bottom-0 w-[100%] h-[100%] overflow-x-hidden overflow-y-hidden z-10 bg-gray-200">
                     <animated.div
                         style={springs}
-                        className="w-max-[500px] m-[2rem]"
+                        className="w-max-[200px] m-[2rem]"
                         onClick={e => e.stopPropagation()}>
                         <div className="relative flex flex-col border-solid border-[1px] rounded-md bg-clip-padding p-[1rem] bg-white">
                             <ModalContext.Provider value={{ onClose }}>
