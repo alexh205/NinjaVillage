@@ -38,12 +38,12 @@ const Modal = ({ children, isOpen, onClose }) => {
                 <animated.div
                     style={styles}
                     onClick={onClose}
-                    className="fixed top-0 left-0 right-0 bottom-0 w-[100%] h-[100%] overflow-x-hidden overflow-y-hidden z-10 bg-gray-200">
+                    className="fixed top-0 left-0 right-0 bottom-0 w-[100%] h-[100%] overflow-x-hidden overflow-y-hidden z-[1] bg-[rgba(0,0,0,0.5)]">
                     <animated.div
                         style={springs}
-                        className="w-max-[200px] m-[2rem]"
+                        className="w-max-[100px] md:m-[20rem] m-[12rem]"
                         onClick={e => e.stopPropagation()}>
-                        <div className="relative flex flex-col border-solid border-[1px] rounded-md bg-clip-padding p-[1rem] bg-white">
+                        <div className="relative flex flex-col border-solid border-[1px] rounded-md bg-clip-padding p-[0.6rem] bg-white">
                             <ModalContext.Provider value={{ onClose }}>
                                 {children}
                             </ModalContext.Provider>
@@ -65,25 +65,26 @@ const DismissButton = ({ children, className }) => {
 };
 
 const ModalHeader = ({ children }) => {
-
     return (
-        <div className="p-[1rem] flex items-center justify-between border-b-[1px]">
-            <div className="text-[1.25rem] leading-6">{children}</div>
-            <DismissButton className="border-none text-[1rem] p-[0.25rem] cursor-pointer font-bold text-gray-400">&times;</DismissButton>
+        <div className="p-[0.35rem] flex items-center justify-between border-b-[1px] bg-[#f0f2f2]">
+            <div className="text-[1.1rem] leading-6">{children}</div>
+            <DismissButton className="border-none text-[1rem] p-[0.2rem] cursor-pointer font-bold text-gray-400">
+                &times;
+            </DismissButton>
         </div>
     );
 };
 
 const ModalBody = ({ children }) => {
     return (
-        <div className="p-[1rem]">
+        <div className="p-p-[0.35rem]">
             <div className="">{children}</div>
         </div>
     );
 };
 const ModalFooter = ({ children }) => {
     return (
-        <div className="p-[1rem] flex justify-end border-t-[1px] border-solid">
+        <div className="p-p-[0.35rem] flex justify-end ">
             <div className="">{children}</div>
         </div>
     );

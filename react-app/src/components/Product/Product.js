@@ -48,7 +48,7 @@ const Product = ({ product }) => {
                     className="object-contain h-[200px] w-[200px] my-4"
                     src={product.image}
                     alt="product"
-                />{" "}
+                />
             </div>
             <h4>{product.title}</h4>
             <div className="flex">

@@ -34,11 +34,10 @@ const WishListProd = ({ product }) => {
     }
 
     return (
-        <div className="container mx-auto grid grid-cols-2 gap-5 my-7">
-            <div className="flex flex-col">
+      <div className="flex flex-col">
                 <img src={product.image} />
-                <p>{product.description}</p>
-            </div>
+                <p>{product.description} Hey</p>
+
         </div>
     );
 };
