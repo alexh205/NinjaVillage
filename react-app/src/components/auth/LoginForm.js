@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../store/sessionReducer";
-import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
+import NinjaVillage_logo from "../../media/NinjaVillage_logo.png";
 import { useHistory, Link, Redirect } from "react-router-dom";
 import Loading from "../Loading";
 

@@ -15,6 +15,10 @@ import Loading from "../Loading";
 const ProductDetail = () => {
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
+
+    const [selectedList, setSelectedList] = useState("");
+    const [dropDown, setDropDown] = useState(false);
+
     const { productId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -207,27 +211,34 @@ const ProductDetail = () => {
                             </div>
                             <div className="border-b border-1"></div>
                         </div>
-                        <div className="flex flex-row justify-end self-start md:w-[140px] md:min-w-[140px] min-w-[80px] w-[80px] md:text-[10px] text-[14px] mr-20">
-                            {user && (
-                                <button
-                                    disabled={user.id === product.ownerId}
-                                    className={`${
-                                        user.id === product.ownerId
-                                            ? "hidden cursor-not-allowed"
-                                            : "button"
-                                    }`}
-                                    onClick={() => {
-                                        if (!user) {
-                                            history.push("/login");
-                                        } else {
-                                            addItemToCart();
-                                        }
-                                    }}>
-                                    {!user
-                                        ? "Sign in to add item"
-                                        : "Add to Cart"}
-                                </button>
-                            )}
+                        <div className="flex flex-col justify-end self-start md:w-[140px] md:min-w-[140px] min-w-[80px] w-[80px] md:text-[10px] text-[14px] mr-20 border-[2px] p-5">
+                            <div>
+                                {user && (
+                                    <button
+                                        disabled={user.id === product.ownerId}
+                                        className={`${
+                                            user.id === product.ownerId
+                                                ? "hidden cursor-not-allowed"
+                                                : "button"
+                                        }`}
+                                        onClick={() => {
+                                            if (!user) {
+                                                history.push("/login");
+                                            } else {
+                                                addItemToCart();
+                                            }
+                                        }}>
+                                        {!user
+                                            ? "Sign in to add item"
+                                            : "Add to Cart"}
+                                    </button>
+                                )}
+                            </div>
+                            <div>
+                                <form >
+                                    
+                                </form>
+                            </div>
                         </div>
                     </div>
                 )}

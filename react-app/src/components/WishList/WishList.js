@@ -15,18 +15,15 @@ const WishList = () => {
         return (
             <>
                 <div>
-                    <h3>{list.name}</h3>
-                    <div>
-                        <p>{list.createdDate}</p>
-                        {list.listProducts.map((product, i) => (
-                            <WishListProd key={i} product={product} />
-                        ))}
-                    </div>
+                    <p>{list.createdDate}</p>
+                    {list.listProducts.map((product, i) => (
+                        <WishListProd key={i} product={product} />
+                    ))}
                 </div>
             </>
         );
     } else {
-        return <Loading />
+        return <Loading />;
     }
 };
 

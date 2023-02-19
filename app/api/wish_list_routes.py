@@ -70,6 +70,8 @@ def wish_list_create():
     )
     db.session.add(new_wish_list)
     db.session.commit()
+    print("*************************************")
+    print(new_wish_list.to_dict())
 
     return new_wish_list.to_dict()
     # if req_data['productsId'] != None:

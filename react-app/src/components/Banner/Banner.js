@@ -1,11 +1,11 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import books from '../../Media/Banner Images/books.jpg'
-import clothe from '../../Media/Banner Images/clothe.jpg'
-import open from '../../Media/Banner Images/open.jpg'
-import splash from '../../Media/Banner Images/splash.jpg'
-import weAreOpen from '../../Media/Banner Images/weAreOpen.jpg'
+import books from '../../media/Banner Images/books.jpg'
+import clothe from '../../media/Banner Images/clothe.jpg'
+import open from '../../media/Banner Images/open.jpg'
+import splash from '../../media/Banner Images/splash.jpg'
+import weAreOpen from '../../media/Banner Images/weAreOpen.jpg'
 
 const Banner = () => {
     return (

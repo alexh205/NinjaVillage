@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
+import NinjaVillage_logo from "../../media/NinjaVillage_logo.png";
 import { useHistory } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutProduct from "./CheckoutProduct";
-import checkoutImg from "../../Media/checkoutImg.png";
-import stateTaxes from "../../Media/stateTaxes.json";
+import checkoutImg from "../../media/checkoutImg.png";
+import stateTaxes from "../../media/stateTaxes.json";
 import { cartCheckoutThunk } from "../../store/cartReducer";
 import { authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";

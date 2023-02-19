@@ -4,7 +4,7 @@ import {
     ShoppingCartIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
-import NinjaVillage_logo from "../../Media/NinjaVillage_logo.png";
+import NinjaVillage_logo from "../../media/NinjaVillage_logo.png";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DropDownMenu from "../DropDownMenu/DropDownMenu";
