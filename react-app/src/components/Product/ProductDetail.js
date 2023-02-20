@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartReducer";
 import { FaStar } from "react-icons/fa";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import ReviewContainer from "../Review/ReviewContainer";
 import {
     getAllProductThunk,
@@ -11,17 +12,22 @@ import {
 } from "../../store/productReducer";
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
+import WishListDropDown from "../WishList/WishListDropDown";
 
 const ProductDetail = () => {
+    const { productId } = useParams();
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
 
     const [selectedList, setSelectedList] = useState("");
     const [dropDown, setDropDown] = useState(false);
 
-    const { productId } = useParams();
-    const dispatch = useDispatch();
-    const history = useHistory();
+    const user = useSelector(state => state.session.user);
+    const owner = useSelector(state => state.session.productOwner);
+    const userLists = user.ownedLists;
 
     const product = useSelector(
         state => state.productStore.products[productId]
@@ -30,15 +36,12 @@ const ProductDetail = () => {
     if (!product) {
         history.push("/");
     }
-    const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         (async () => {
             await dispatch(getUserThunk(product.ownerId));
         })();
     }, [dispatch]);
-
-    const owner = useSelector(state => state.session.productOwner);
 
     let ratingTotal = 0;
     let ratingAvg;
@@ -117,7 +120,7 @@ const ProductDetail = () => {
                                 />
                             </div>
 
-                            <div className="flex flex-col ml-7">
+                            <div className="flex flex-col ml-7 mr-2">
                                 <div className="md:text-[28px] text-[22px] font-semibold">
                                     {product.title}
                                 </div>
@@ -168,7 +171,7 @@ const ProductDetail = () => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="border-b border-1"></div>
+                                <div className="border-b border-1 mr-2"></div>
                                 <div className="flex flex-row"></div>
                                 <div className="flex flex-row">
                                     <p className="mr-2 my-2">Price: </p>
@@ -176,7 +179,7 @@ const ProductDetail = () => {
                                         ${product.price}
                                     </p>
                                 </div>
-                                <div className="border-b border-1"></div>
+                                <div className="border-b border-1 mr-2"></div>
 
                                 <div className="flex flex-col">
                                     <p className="my-2 text-lg font-medium">
@@ -209,9 +212,9 @@ const ProductDetail = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="border-b border-1"></div>
+                            <div className="border-b border-1 mr-2"></div>
                         </div>
-                        <div className="flex flex-col justify-end self-start md:w-[140px] md:min-w-[140px] min-w-[80px] w-[80px] md:text-[10px] text-[14px] mr-20 border-[2px] p-5">
+                        <div className=" flex flex-col justify-center items-center self-start md:w-[200px] md:min-w-[200px] min-w-[90px] w-[90px] md:text-[10px] text-[14px] mr-20 border-[2px] p-4">
                             <div>
                                 {user && (
                                     <button
@@ -234,10 +237,27 @@ const ProductDetail = () => {
                                     </button>
                                 )}
                             </div>
-                            <div>
-                                <form >
-                                    
-                                </form>
+                            <hr className="w-[120%] mt-4"></hr>
+                            <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
+                                <div className="text-[13px] font-semibold  pl-[5px] py-[4px] border-r-[1px]">
+                                    <div
+                                        className="hover:text-amber-700 w-[120px]"
+                                        onClick={() => setDropDown(!dropDown)}>
+                                        Add to List
+                                    </div>
+                                    {dropDown && (
+                                        <div className="fixed border-[2px] bg-white z-10 w-[140px] mt-[7px] h-[90px] overflow-y-scroll">
+                                            <WishListDropDown
+                                                userLists={userLists}
+                                                product={product}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="">
+                                    <ChevronDownIcon className="h-5 pl-[1px] pr-[4px] w-[100%] hover:text-amber-700" onClick={() => setDropDown(!dropDown)}/>
+
+                                </div>
                             </div>
                         </div>
                     </div>

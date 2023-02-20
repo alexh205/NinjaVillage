@@ -19,7 +19,6 @@ export const setActiveList = list => {
     };
 };
 
-
 // add product to List
 export const addToList = prod => {
     return {
@@ -46,16 +45,14 @@ export const saveList = List => {
 
 //? THUNK
 
-export const createListThunk = (listName) => async dispatch => {
+export const createListThunk = listName => async dispatch => {
     await fetch("/api/wish_lists/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            name: listName
-        })
+            name: listName,
+        }),
     });
-
-
 };
 
 const saveListThunk = cartId => async dispatch => {
@@ -67,7 +64,7 @@ const saveListThunk = cartId => async dispatch => {
     dispatch(saveList());
 };
 
-// REDUCER
+//! REDUCER
 
 const wishListReducer = (state = initialState, action) => {
     const currentState = { ...state };
