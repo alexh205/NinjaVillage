@@ -78,7 +78,7 @@
 * [![Javascript][Javascript]][Javascript-url]
 * [![HTML5][HTML5]][HTML-url]
 * [![CSS][CSS]][CSS-url]
-* [![Tailwind CSS][Tailwind CSS]][Tailwind CSS]
+* [![Tailwind CSS][Tailwind CSS]][Tailwind CSS-url]
 * [![React][React.js]][React-url]
 * [![React Router][React Router]][React Router-url]
 * [![Redux][Redux]][Redux-url]
