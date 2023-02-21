@@ -25,6 +25,9 @@ const ProductDetail = () => {
     const [selectedList, setSelectedList] = useState("");
     const [dropDown, setDropDown] = useState(false);
 
+    const settingList = setSelectedList()
+    console.log(selectedList)
+
     const user = useSelector(state => state.session.user);
     const owner = useSelector(state => state.session.productOwner);
     const userLists = user.ownedLists;
@@ -214,7 +217,7 @@ const ProductDetail = () => {
                             </div>
                             <div className="border-b border-1 mr-2"></div>
                         </div>
-                        <div className=" flex flex-col justify-center items-center self-start md:w-[200px] md:min-w-[200px] min-w-[90px] w-[90px] md:text-[10px] text-[14px] mr-20 border-[2px] p-4">
+                        <div className=" flex flex-col justify-center items-center self-start md:w-[215px] md:min-w-[215px] min-w-[100px] w-[100px] md:text-[10px] text-[14px] mr-20 border-[2px] p-4">
                             <div>
                                 {user && (
                                     <button
@@ -239,24 +242,27 @@ const ProductDetail = () => {
                             </div>
                             <hr className="w-[120%] mt-4"></hr>
                             <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
-                                <div className="text-[13px] font-semibold  pl-[5px] py-[4px] border-r-[1px]">
+                                <div className="text-[13px] font-semibold  pl-[4px] py-[4px] border-r-[1px]">
                                     <div
-                                        className="hover:text-amber-700 w-[120px]"
+                                        className="hover:text-amber-700 w-[145px]"
                                         onClick={() => setDropDown(!dropDown)}>
                                         Add to List
                                     </div>
                                     {dropDown && (
-                                        <div className="fixed border-[2px] bg-white z-10 w-[140px] mt-[7px] h-[90px] overflow-y-scroll">
+                                        <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[7px] h-[90px] overflow-y-scroll" >
                                             <WishListDropDown
                                                 userLists={userLists}
                                                 product={product}
+                                                settingList={settingList}
                                             />
                                         </div>
                                     )}
                                 </div>
                                 <div className="">
-                                    <ChevronDownIcon className="h-5 pl-[1px] pr-[4px] w-[100%] hover:text-amber-700" onClick={() => setDropDown(!dropDown)}/>
-
+                                    <ChevronDownIcon
+                                        className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700"
+                                        onClick={() => setDropDown(!dropDown)}
+                                    />
                                 </div>
                             </div>
                         </div>

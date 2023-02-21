@@ -29,6 +29,8 @@ export const WishListContainer = () => {
         const errors = [];
 
         if (!listName) errors.push("Please provide a 'name' for the list");
+        if (listName.length > 20)
+            errors.push("Please limit your name to 20 characters or less");
 
         return errors;
     };
