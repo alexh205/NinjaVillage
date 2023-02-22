@@ -22,15 +22,15 @@ const ProductDetail = () => {
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
 
-    const [selectedList, setSelectedList] = useState("");
     const [dropDown, setDropDown] = useState(false);
-
-    const settingList = setSelectedList()
-    console.log(selectedList)
+    const showDropDown = Boolean => setDropDown(!dropDown)
 
     const user = useSelector(state => state.session.user);
     const owner = useSelector(state => state.session.productOwner);
-    const userLists = user.ownedLists;
+    let userLists;
+    if (user) {
+        userLists = user.ownedLists;
+    }
 
     const product = useSelector(
         state => state.productStore.products[productId]
@@ -88,10 +88,10 @@ const ProductDetail = () => {
                         <div className="flex flex-row ">
                             <div className="flex flex-col justify-center">
                                 {user && product.ownerId === user.id ? (
-                                    <div className="flex flex-row items-center justify-center my-4">
+                                    <div className="flex flex-col sm:flex-row items-center justify-start sm:justify-center my-4">
                                         {hasClickedEdit && <Loading />}
                                         <button
-                                            className="mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-5 border border-gray-400 rounded shadow mr-3"
+                                            className="mt-2 mb-2  text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
                                             disabled={hasClickedEdit}
                                             onClick={e => {
                                                 setHasClickedEdit(true);
@@ -104,7 +104,7 @@ const ProductDetail = () => {
                                         </button>
                                         {hasClicked && <Loading />}
                                         <button
-                                            className="flex mt-2 mb-4 self-center text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-5 border border-gray-400 rounded shadow"
+                                            className="flex mt-2 mb-2  text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-2 border border-gray-400 rounded shadow"
                                             disabled={hasClicked}
                                             onClick={async e => {
                                                 deleteItem(e);
@@ -217,55 +217,93 @@ const ProductDetail = () => {
                             </div>
                             <div className="border-b border-1 mr-2"></div>
                         </div>
-                        <div className=" flex flex-col justify-center items-center self-start md:w-[215px] md:min-w-[215px] min-w-[100px] w-[100px] md:text-[10px] text-[14px] mr-20 border-[2px] p-4">
-                            <div>
-                                {user && (
-                                    <button
-                                        disabled={user.id === product.ownerId}
-                                        className={`${
-                                            user.id === product.ownerId
-                                                ? "hidden cursor-not-allowed"
-                                                : "button"
-                                        }`}
-                                        onClick={() => {
-                                            if (!user) {
-                                                history.push("/login");
-                                            } else {
-                                                addItemToCart();
+                        {user ? (
+                            <div
+                                className={`${
+                                    user.id === product.ownerId
+                                        ? "hidden "
+                                        : "flex flex-col justify-center items-center self-start md:w-[215px] sm:min-w-[180px] md:min-w-[215px] min-w-[100px] w-[100px] sm:text-[9px] md:text-[10px] text-[14px] mr-5 sm:mr-10 border-[2px] p-3"
+                                }`}>
+                                <div>
+                                    {user && (
+                                        <button
+                                            disabled={
+                                                user.id === product.ownerId
                                             }
-                                        }}>
-                                        {!user
-                                            ? "Sign in to add item"
-                                            : "Add to Cart"}
-                                    </button>
-                                )}
-                            </div>
-                            <hr className="w-[120%] mt-4"></hr>
-                            <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
-                                <div className="text-[13px] font-semibold  pl-[4px] py-[4px] border-r-[1px]">
-                                    <div
-                                        className="hover:text-amber-700 w-[145px]"
-                                        onClick={() => setDropDown(!dropDown)}>
-                                        Add to List
-                                    </div>
-                                    {dropDown && (
-                                        <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[7px] h-[90px] overflow-y-scroll" >
-                                            <WishListDropDown
-                                                userLists={userLists}
-                                                product={product}
-                                                settingList={settingList}
-                                            />
-                                        </div>
+                                            className={`${
+                                                user.id === product.ownerId
+                                                    ? "hidden cursor-not-allowed"
+                                                    : "button"
+                                            }`}
+                                            onClick={() => {
+                                                if (!user) {
+                                                    history.push("/login");
+                                                } else {
+                                                    addItemToCart();
+                                                }
+                                            }}>
+                                            {!user
+                                                ? "Sign in to add item"
+                                                : "Add to Cart"}
+                                        </button>
                                     )}
                                 </div>
-                                <div className="">
-                                    <ChevronDownIcon
-                                        className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700"
-                                        onClick={() => setDropDown(!dropDown)}
-                                    />
+                                <hr className="w-[140%] sm:w-[115%] mt-4"></hr>
+                                <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
+                                    <div className="text-[9px] sm:text-[13px] font-semibold sm:pl-[6px] pl-[4px] py-[4px] border-r-[1px]">
+                                        <div
+                                            className="hover:text-amber-700 w-[80px] sm:w-[145px]"
+                                            onClick={() =>
+                                                setDropDown(!dropDown)
+                                            }>
+                                            Add to List
+                                        </div>
+                                        {dropDown && (
+                                            <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[7px] h-[90px] overflow-y-scroll">
+                                                {user && userLists && (
+                                                    <WishListDropDown
+                                                        userLists={userLists}
+                                                        product={product}
+                                                        showDropDown={showDropDown}
+                                                    />
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="md:flex hidden">
+                                        <ChevronDownIcon
+                                            className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700"
+                                            onClick={() =>
+                                                setDropDown(!dropDown)
+                                            }
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div
+                                className="flex flex-col justify-center items-center self-start md:w-[215px] sm:min-w-[180px] md:min-w-[215px] min-w-[100px] w-[100px] sm:text-[9px] md:text-[10px] text-[14px] mr-5 sm:mr-10 border-[2px] p-3"
+                                onClick={() => history.push("/login")}>
+                                <div>
+                                    <button className="button">
+                                        Sign in to add items
+                                    </button>
+                                </div>
+                                <hr className="w-[140%] sm:w-[115%] mt-4"></hr>
+                                <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
+                                    <div
+                                        className="text-[9px] sm:text-[13px] font-semibold sm:pl-[6px] pl-[4px] py-[4px] border-r-[1px]"
+                                        onClick={() => history.push("/login")}>
+                                        <div className="hover:text-amber-700 w-[80px] sm:w-[145px]">
+                                            Sign in for Lists
+                                        </div>
+                                    </div>
+                                    <div className="md:flex hidden">
+                                        <ChevronDownIcon className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700" />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
                 <div>

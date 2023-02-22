@@ -1,10 +1,8 @@
 const initialState = {
-    id: null,
-    name: null,
-    listItems: null,
+    userLists: null,
 };
 
-const SET_ACTIVE_LIST = "list/SET_ACTIVE_LIST";
+const SET_USER_LISTS = "list/SET_USER_LISTS";
 const ADD_TO_LIST = "list/ADD_ITEM";
 const REMOVE_ITEM = "list/REMOVE_ITEM";
 const SAVE_LIST = "list/AVE_LIST";
@@ -12,15 +10,15 @@ const SAVE_LIST = "list/AVE_LIST";
 //? ACTION CREATORS
 
 // set active list
-export const setActiveList = list => {
+const setActiveUserLists = lists => {
     return {
-        type: SET_ACTIVE_LIST,
-        payload: list,
+        type: SET_USER_LISTS,
+        payload: lists,
     };
 };
 
 // add product to List
-export const addToList = prod => {
+const addToList = prod => {
     return {
         type: ADD_TO_LIST,
         payload: prod,
@@ -28,7 +26,7 @@ export const addToList = prod => {
 };
 
 // remove product from List
-export const removeItem = prod => {
+const removeItem = prod => {
     return {
         type: REMOVE_ITEM,
         payload: prod,
@@ -36,7 +34,7 @@ export const removeItem = prod => {
 };
 
 // save list
-export const saveList = List => {
+const saveList = List => {
     return {
         type: SAVE_LIST,
         payload: List,
@@ -55,57 +53,63 @@ export const createListThunk = listName => async dispatch => {
     });
 };
 
-const saveListThunk = cartId => async dispatch => {
-    await fetch(`/api/wish_lists/update/${cartId}`, {
+export const getAllUserListsThunk = user => async dispatch => {
+    const request = await fetch(`/api/wish_lists/all/${user}`, {
+        method: "GET",
+    });
+    const response = await request.json();
+
+    dispatch(setActiveUserLists(response));
+};
+
+export const deleteWishListThunk = listId => async dispatch => {
+    await fetch(`/api/wish_lists/${listId}`, {
+        method: "DELETE",
+    });
+};
+
+export const addProductToListThunk = (listId, productId) => async dispatch => {
+    const request = await fetch(`/api/wish_lists/${listId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            productId,
+        }),
     });
-
-    dispatch(saveList());
+    const response = await request.json();
+    dispatch(addToList(response));
 };
+export const removeProductFromListThunk =
+    (listId, productId) => async dispatch => {
+        const request = await fetch(`/api/wish_lists/remove/${listId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                productId,
+            }),
+        });
+        const response = await request.json();
+        dispatch(addToList(response));
+    };
 
 //! REDUCER
 
 const wishListReducer = (state = initialState, action) => {
     const currentState = { ...state };
     switch (action.type) {
-        case SET_ACTIVE_LIST: {
-            return {
-                ...currentState,
-                id: action.payload[0].id,
-                name: action.payload[0].name,
-            };
+        case SET_USER_LISTS: {
+            currentState.userLists = [...Object.values(action.payload)[0]];
+            return currentState;
         }
-
         case ADD_TO_LIST: {
-            let addedItem;
-            let existed_item = currentState.listItems.find(
-                item => action.payload.id === item.id
-            );
-            if (!existed_item) {
-                addedItem = action.payload;
+            let copyNewList = currentState.userLists;
+            for (let i = 0; i < copyNewList.length; i++) {
+                if (copyNewList[i].id === action.payload.id) {
+                    copyNewList[i] = { ...action.payload };
+                }
             }
-            if (existed_item) {
-                return {
-                    ...currentState,
-                };
-            } else {
-                return {
-                    ...currentState,
-                    listItems: [...currentState.listItems, addedItem],
-                };
-            }
-        }
-
-        case REMOVE_ITEM: {
-            let new_items = currentState.listItems.filter(
-                item => action.payload.id !== item.id
-            );
-
-            return {
-                ...currentState,
-                listItems: new_items,
-            };
+            currentState.userLists = [...copyNewList];
+            return currentState;
         }
 
         default:

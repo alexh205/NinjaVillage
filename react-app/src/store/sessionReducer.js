@@ -1,13 +1,14 @@
 const initialState = {
     user: null,
-    productOwner: null
+    productOwner: null,
 };
 
 // *************** User ****************************
 const SET_USER = "session/SET_USER";
 const SET_PROD_OWNER = "session/SET_PROD_OWNER";
 const REMOVE_USER = "session/REMOVE_USER";
-
+// const ADD_LIST_PROD = "list/ADD_LIST_PROD";
+// const REMOVE_LIST_PROD = "list/REMOVE_LIST_PROD";
 
 //? ACTION CREATORS
 // *************** User ****************************
@@ -21,15 +22,22 @@ export const setUser = user => {
 const setProdOwner = user => {
     return {
         type: SET_PROD_OWNER,
-        payload: user
-    }
-}
+        payload: user,
+    };
+};
 
 const removeUser = () => {
     return {
         type: REMOVE_USER,
     };
 };
+
+// const addListProd = list => {
+//     return {
+//         type: ADD_LIST_PROD,
+//         payload: list,
+//     };
+// };
 
 //? THUNKS
 // *************** User ****************************
@@ -80,39 +88,51 @@ export const logout = () => async dispatch => {
     if (request.ok) dispatch(removeUser());
 };
 
-export const signUp = (username, name, email, streetAddress, city, state,zipCode, password,  profileImage) => async dispatch => {
-    const request = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username,
-            name,
-            email,
-            street_address: streetAddress,
-            city,
-            state,
-            zip_code:zipCode,
-            password,
-            profile_img:profileImage,
-        }),
-    });
+export const signUp =
+    (
+        username,
+        name,
+        email,
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        password,
+        profileImage
+    ) =>
+    async dispatch => {
+        const request = await fetch("/api/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                name,
+                email,
+                street_address: streetAddress,
+                city,
+                state,
+                zip_code: zipCode,
+                password,
+                profile_img: profileImage,
+            }),
+        });
 
-    if (request.ok) {
-        const data = await request.json();
+        if (request.ok) {
+            const data = await request.json();
 
-        dispatch(setUser(data));
+            dispatch(setUser(data));
 
-        return null;
-    } else if (request.status < 500) {
-        const data = await request.json();
+            return null;
+        } else if (request.status < 500) {
+            const data = await request.json();
 
-        if (data.errors) return data.errors;
-    } else {
-        return ["An error occurred. Please try again."];
-    }
-};
+            if (data.errors) return data.errors;
+        } else {
+            return ["An error occurred. Please try again."];
+        }
+    };
 
 export const getUserThunk = userId => async dispatch => {
     const request = await fetch(`/api/users/${userId}`, {
@@ -121,39 +141,86 @@ export const getUserThunk = userId => async dispatch => {
 
     const response = await request.json();
 
-    dispatch(setProdOwner(response))
+    dispatch(setProdOwner(response));
 };
 
-export const editUserThunk = (username, email, name, streetAddress, city, state, zipCode, profileImg, password, userId) => async dispatch => {
-    const request = await fetch(`/api/users/${userId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username,
-            email,
-            password,
-            name,
-            street_address: streetAddress,
-            city,
-            state,
-            zip_code: zipCode,
-            profile_img: profileImg,
-        }),
-    });
+export const editUserThunk =
+    (
+        username,
+        email,
+        name,
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        profileImg,
+        password,
+        userId
+    ) =>
+    async dispatch => {
+        const request = await fetch(`/api/users/${userId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                email,
+                password,
+                name,
+                street_address: streetAddress,
+                city,
+                state,
+                zip_code: zipCode,
+                profile_img: profileImg,
+            }),
+        });
 
-    if (request.ok) {
-        const data = await request.json();
-        dispatch(setUser(data));
-    }
-};
+        if (request.ok) {
+            const data = await request.json();
+            dispatch(setUser(data));
+        }
+    };
 export const deleteUserThunk = userId => async dispatch => {
     await fetch(`/api/users/${userId}`, {
         method: "DELETE",
-}); dispatch(removeUser());}
+    });
+    dispatch(removeUser());
+};
 
+// // ******************** Lists **********************************/
 
+// export const createListThunk = listName => async dispatch => {
+//     await fetch("/api/wish_lists/new", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//             name: listName,
+//         }),
+//     });
+// };
+
+// export const addProductToListThunk = (productId, list) => async dispatch => {
+//     const request = await fetch(`/api/wish_lists/update/${list.id}`, {
+//         method: "PUT",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//             productId,
+//         }),
+//     });
+//     const response = await request.json();
+//     dispatch(addListProd(response));
+// };
+// export const removeProductFromListThunk =
+//     (productId, list) => async dispatch => {
+//         await fetch(`/api/wish_lists/update/${list.id}`, {
+//             method: "PUT",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({
+//                 productId,
+//             }),
+//         });
+//     };
 
 //? REDUCER
 
@@ -169,10 +236,14 @@ const sessionReducer = (state = initialState, action) => {
         case REMOVE_USER:
             return initialState;
 
-        case SET_PROD_OWNER:{
+        case SET_PROD_OWNER: {
             currentState.productOwner = action.payload;
-            return currentState
+            return currentState;
         }
+        // case ADD_LIST_PROD: {
+        //    let currentStateCopy = currentState.user
+
+        // }
 
         default:
             return currentState;

@@ -1,26 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToList, removeItem } from "../../store/wishListReducer";
+import {
+    addProductToListThunk,
+    removeProductFromListThunk,
+} from "../../store/wishListReducer";
 
-const WishListProd = ({ product }) => {
+const WishListProd = ({ product, list }) => {
     const dispatch = useDispatch();
-    const listObj = useSelector(state=> state.listStore)
+    const listObj = useSelector(state => state.session.user.ownedLists);
 
     const addItemToList = async () => {
-        const item = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            brand: product.brand,
-            image: product.image,
-        }
-        await dispatch(addToList(item))
+        const productId = product.id;
+        await dispatch(addProductToListThunk(productId, list));
     };
 
     const removeItemFromList = () => {
-        dispatch(removeItem(product));
+        dispatch(removeProductFromListThunk(product));
     };
 
     let ratingTotal = 0;
@@ -34,10 +29,9 @@ const WishListProd = ({ product }) => {
     }
 
     return (
-      <div className="flex flex-col">
-                <img src={product.image} />
-                <p>{product.description} Hey</p>
-
+        <div className="flex flex-col">
+            <img src={product.image} />
+            <p>{product.description} Hey</p>
         </div>
     );
 };

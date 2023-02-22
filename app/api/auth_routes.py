@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 import random
-from app.models import User, db, ShoppingCart
+from app.models import User, db, ShoppingCart, WishList
 from app.forms import LoginForm, SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -62,7 +62,7 @@ def authenticate():
 #     return rand_password
 
 
-#* Login *****************************************************
+# * Login *****************************************************
 @auth_routes.route('/login', methods=['POST'])
 def login():
     """
@@ -80,7 +80,7 @@ def login():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-#* Logout *****************************************************
+# * Logout *****************************************************
 @auth_routes.route('/logout')
 def logout():
     """
@@ -89,7 +89,9 @@ def logout():
     logout_user()
     return {'message': 'User logged out'}
 
-#* Signup New User *****************************************************
+# * Signup New User *****************************************************
+
+
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     """
@@ -114,9 +116,16 @@ def sign_up():
 
         ''' addition of a new shopping cart to the newly created user'''
         new_cart = ShoppingCart(
-            checked_out= False,
-            owner_id= user.id
+            checked_out=False,
+            owner_id=user.id
         )
+
+        ''' addition of a new shopping cart to the newly created user'''
+        new_list = WishList(
+            name='Wish List',
+            owner_id=user.id
+        )
+        db.session.add(new_list)
         db.session.add(new_cart)
         db.session.commit()
 

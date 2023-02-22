@@ -6,7 +6,9 @@ from app.models import User, db, Product
 product_routes = Blueprint('products', __name__)
 auth_error = "User not authorized to complete this action"
 
-#* Get Product*****************************************************
+# * Get Product*****************************************************
+
+
 @product_routes.route('/<int:id>')
 def product(id):
     """
@@ -15,7 +17,9 @@ def product(id):
     product = Product.query.get_or_404(id)
     return product.to_dict()
 
-#* Get all Products *****************************************************
+# * Get all Products *****************************************************
+
+
 @product_routes.route('/all', methods=['GET'])
 def all_product():
     """
@@ -25,7 +29,7 @@ def all_product():
     return {'products': [product.to_dict() for product in products]}
 
 
-#* Delete Product *****************************************************
+# * Delete Product *****************************************************
 @product_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def product_delete(id):
@@ -43,14 +47,14 @@ def product_delete(id):
         return {'message': 'Successfully deleted'}
 
 
-#* Create Product *****************************************************
+# * Create Product *****************************************************
 @product_routes.route('/new', methods=['POST'])
 @login_required
 def product_create():
     """
     Create a new product instance and add to database
     """
-    req_data= request.json
+    req_data = request.json
 
     new_product = Product(
         title=req_data['title'],
@@ -59,7 +63,7 @@ def product_create():
         category=req_data['category'],
         brand=req_data['brand'],
         image=req_data['image'],
-        owner_id= current_user.id
+        owner_id=current_user.id
     )
 
     db.session.add(new_product)
@@ -68,7 +72,7 @@ def product_create():
     return new_product.to_dict()
 
 
-#* Edit Product *****************************************************
+# * Edit Product *****************************************************
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def product_edit(id):

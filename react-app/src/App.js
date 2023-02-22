@@ -20,6 +20,7 @@ import Filters from "./components/Filter/Filters";
 import OrdersContainer from "./components/Orders/OrdersContainer";
 import UserProducts from "./components/Product/UserProducts";
 import { WishListContainer } from "./components/WishList/WishListContainer";
+import { getAllUserListsThunk } from "./store/wishListReducer";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -38,18 +39,20 @@ function App() {
                 cart => cart.checkedOut === false
             );
             dispatch(setActiveCart(userCart));
+            dispatch(getAllUserListsThunk(`${user.id}`));
         }
     }, [user, cartStore, dispatch]);
 
     useEffect(() => {
         setTimeout(() => {
             setSpinner(false);
-        }, 2500);
+        }, 2000);
     });
 
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
+
             setLoaded(true);
         })();
     }, [dispatch]);
