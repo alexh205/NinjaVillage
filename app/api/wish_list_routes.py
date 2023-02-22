@@ -47,32 +47,6 @@ def wish_list_delete(id):
         db.session.commit()
         return {'message': 'Successfully deleted'}
 
-# * Delete a Product from a Wish List *****************************************************
-
-
-@wish_list_routes.route('/<int:id>/<int:pod>', methods=['DELETE'])
-@login_required
-def list_prod_delete(id, pod):
-    """
-    Delete a product from a wish_list after checking for user ownership
-    """
-    queried_wish_list = WishList.query.get_or_404(id)
-    queried_user = User.query.get_or_404(queried_wish_list.owner_id)
-    queried_product = Product.query.get_or_404(pod)
-
-    if queried_user.id != current_user.id:
-        return auth_error
-    else:
-        if len(queried_wish_list.lists_product) > 0 and queried_product != None and queried_product in queried_wish_list.lists_product:
-            queried_wish_list.lists_product.remove(queried_product)
-            db.session.commit()
-            return queried_wish_list.to_dict()
-        if len(queried_wish_list.lists_product) < 1 and queried_product != None:
-            return {'message': 'List is currently empty!'}
-        if len(queried_wish_list.lists_product) > 0 and queried_product != None and queried_product not in queried_wish_list.lists_product:
-            return {'message': 'Can not delete a product that is not currently in the list'}
-        else:
-            return {'message': 'This product does not exist!'}
 
 # * Create Wish List *****************************************************
 
@@ -93,8 +67,9 @@ def wish_list_create():
 
     return new_wish_list.to_dict()
 
+# * Add Product to Wish List *****************************************************
 
-# * Edit Wish List *****************************************************
+
 @wish_list_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def wish_list_edit(id):
@@ -112,3 +87,29 @@ def wish_list_edit(id):
         queried_wish_list.lists_product.append(new_product)
         db.session.commit()
         return queried_wish_list.to_dict()
+
+# * Delete a Product from a Wish List *****************************************************
+
+
+@wish_list_routes.route('/remove/<int:id>', methods=['PUT'])
+@login_required
+def list_prod_delete(id):
+    """
+    Delete a product from a wish_list after checking for user ownership
+    """
+    queried_wish_list = WishList.query.get_or_404(id)
+    queried_user = User.query.get_or_404(queried_wish_list.owner_id)
+
+    req_data = request.json
+
+    if queried_user.id != current_user.id:
+        return auth_error
+    if req_data['productId']:
+        prod_id = {"id": req_data['productId']}
+        queried_product = db.session.query(
+            Product).filter_by(**prod_id).first()
+        queried_wish_list.lists_product.remove(queried_product)
+        db.session.commit()
+        return queried_wish_list.to_dict()
+    else:
+        return {'message': 'This product does not exist!'}

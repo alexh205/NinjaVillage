@@ -4,7 +4,10 @@ import { useHistory } from "react-router-dom";
 import Header from "../Header/Header";
 import Modal from "../../context/Modal";
 import WishListProd from "./WishListProd";
-import { createListThunk } from "../../store/wishListReducer";
+import {
+    createListThunk,
+    removeWishListThunk,
+} from "../../store/wishListReducer";
 import { authenticate } from "../../store/sessionReducer";
 
 export const WishListContainer = () => {
@@ -16,11 +19,8 @@ export const WishListContainer = () => {
     const [listName, setListName] = useState("");
     const [validateErrors, setValidateErrors] = useState([]);
 
-    let userLists;
     const user = useSelector(state => state.session.user);
-    if (user) {
-        userLists = user.ownedLists;
-    }
+    const userWishLists = useSelector(state => state.listStore.userLists);
 
     if (!user) {
         history.push("/");
@@ -31,6 +31,13 @@ export const WishListContainer = () => {
         if (!listName) errors.push("Please provide a 'name' for the list");
         if (listName.length > 20)
             errors.push("Please limit your name to 20 characters or less");
+        userWishLists.map(list => {
+            if (list.name === listName) {
+                errors.push(
+                    "List name already exists. Please use another name."
+                );
+            }
+        });
 
         return errors;
     };
@@ -53,7 +60,7 @@ export const WishListContainer = () => {
     return (
         <>
             <Header />
-            <div className="grid grid-rows-auto mx-12 mt-5 mb-2 items-center">
+            <div className="grid grid-rows-auto mx-12 mt-5 mb-6 items-center">
                 <div className="flex flex-row justify-between mx-10">
                     <div className="text-[24px] font-bold hover:text-[#007185]">
                         Your Lists
@@ -113,26 +120,34 @@ export const WishListContainer = () => {
                 </div>
                 <div className="grid grid-cols-3 border-[2px] p-2">
                     <div className="mr-7 ml-3">
-                        {userLists &&
-                            userLists.map((list, i) => (
+                        {userWishLists &&
+                            userWishLists.map((list, i) => (
                                 <div key={i} className="mr-1">
                                     {selected === list.name ? (
                                         <div
-                                            className="text-sm font-semibold py-3 px-2
-                                            flex flex-row justify-between  cursor-pointer hover:text-amber-600
+                                            className="text-sm py-3 px-2
+                                            flex flex-row justify-between cursor-pointer hover:text-amber-600
                                             bg-[#f0f2f2]">
-                                            <div>{list.name}</div>
-                                            <div>Private</div>
+                                            <div className="font-semibold">
+                                                {list.name}
+                                            </div>
+                                            <div className="text-[12px]">
+                                                Private
+                                            </div>
                                         </div>
                                     ) : (
                                         <div
-                                            className="text-sm flex flex-row justify-between   font-semibold py-3 px-2 cursor-pointer hover:text-amber-600"
+                                            className="text-sm flex flex-row justify-between py-3 px-2 cursor-pointer hover:text-amber-600"
                                             onClick={() => {
                                                 setSelected(`${list.name}`);
                                                 setActiveList(list);
                                             }}>
-                                            <div>{list.name}</div>
-                                            <div>Private</div>
+                                            <div className="font-semibold">
+                                                {list.name}
+                                            </div>
+                                            <div className="text-[12px]">
+                                                Private
+                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -141,8 +156,26 @@ export const WishListContainer = () => {
 
                     <div className="col-span-2">
                         <div className="flex flex-col">
-                            <div>test #1</div>
-                            <div>search List</div>
+                            <div className="flex flex-row mb-3 items-center">
+                                <p className="text-lg mr-3">List Name: </p>
+                                <div className="text-lg font-bold ">
+                                    {activeList.name}
+                                </div>
+                            </div>
+
+                            <div className="flex flex-row justify-between mb-2 border-t">
+                                <div></div>
+                                <div
+                                    className="cursor-pointer text-sm font-semibold text-[#017185] hover:text-amber-600 mt-3 mr-10"
+                                    onClick={() => {
+                                        dispatch(
+                                            removeWishListThunk(activeList.id)
+                                        );
+                                        setActiveList("");
+                                    }}>
+                                    Remove List
+                                </div>
+                            </div>
                             <div>
                                 {activeList &&
                                     activeList.listProducts.map(

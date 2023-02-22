@@ -40,7 +40,7 @@ const MainProducts = ({ product }) => {
 
     return (
         <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-double rounded-2xl ">
-            <p className="absolute top-2 right-2 text-sm italic text-gray-400">
+            <p className="absolute top-2 right-4 text-sm italic text-gray-400 ">
                 {product.category}
             </p>
             {hasClicked && <Loading />}
@@ -56,7 +56,7 @@ const MainProducts = ({ product }) => {
                 }}>
 
                     <img
-                        className="object-contain h-[200px] w-[200px] mb-2"
+                        className="object-contain h-[200px] w-[200px] my-3"
                         src={product.image}
                         alt="product"
                     />

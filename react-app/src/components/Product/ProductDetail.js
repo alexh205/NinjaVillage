@@ -27,10 +27,8 @@ const ProductDetail = () => {
 
     const user = useSelector(state => state.session.user);
     const owner = useSelector(state => state.session.productOwner);
-    let userLists;
-    if (user) {
-        userLists = user.ownedLists;
-    }
+    const userWishLists = useSelector(state => state.listStore.userLists)
+  
 
     const product = useSelector(
         state => state.productStore.products[productId]
@@ -260,9 +258,9 @@ const ProductDetail = () => {
                                         </div>
                                         {dropDown && (
                                             <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[7px] h-[90px] overflow-y-scroll">
-                                                {user && userLists && (
+                                                {user && userWishLists && (
                                                     <WishListDropDown
-                                                        userLists={userLists}
+                                                    userWishLists={userWishLists}
                                                         product={product}
                                                         showDropDown={showDropDown}
                                                     />
@@ -285,21 +283,21 @@ const ProductDetail = () => {
                                 className="flex flex-col justify-center items-center self-start md:w-[215px] sm:min-w-[180px] md:min-w-[215px] min-w-[100px] w-[100px] sm:text-[9px] md:text-[10px] text-[14px] mr-5 sm:mr-10 border-[2px] p-3"
                                 onClick={() => history.push("/login")}>
                                 <div>
-                                    <button className="button">
+                                    <button className="mt-2 mb-2 self-center bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-1 px-3 text-[10px] sm:text-[13px] border border-gray-600 rounded shadow">
                                         Sign in to add items
                                     </button>
                                 </div>
                                 <hr className="w-[140%] sm:w-[115%] mt-4"></hr>
-                                <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
+                                <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer bg-gray-300 hover:bg-gray-400 text-gray-800  border-gray-600  shadow">
                                     <div
                                         className="text-[9px] sm:text-[13px] font-semibold sm:pl-[6px] pl-[4px] py-[4px] border-r-[1px]"
                                         onClick={() => history.push("/login")}>
-                                        <div className="hover:text-amber-700 w-[80px] sm:w-[145px]">
+                                        <div className="  w-[80px] sm:w-[145px]">
                                             Sign in for Lists
                                         </div>
                                     </div>
                                     <div className="md:flex hidden">
-                                        <ChevronDownIcon className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700" />
+                                        <ChevronDownIcon className="h-5 pl-[1px] pr-[2px] w-[100%]" />
                                     </div>
                                 </div>
                             </div>

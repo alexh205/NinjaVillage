@@ -31,9 +31,9 @@ const Product = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-        hasClicked(true)
+        setHasClicked(true)
         await dispatch(addToCart(item));
-        hasClicked(false)
+        setHasClicked(false)
     };
 
     return (

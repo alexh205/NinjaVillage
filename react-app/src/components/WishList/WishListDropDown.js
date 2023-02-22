@@ -3,13 +3,13 @@ import { GiNinjaStar } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import { addProductToListThunk } from "../../store/wishListReducer";
 
-const WishListDropDown = ({ product, userLists, showDropDown }) => {
+const WishListDropDown = ({ product, userWishLists, showDropDown }) => {
     const dispatch = useDispatch();
 
     return (
         <div>
-            {userLists &&
-                userLists.map((list, i) => (
+            {userWishLists &&
+                userWishLists.map((list, i) => (
                     <div key={i} className="hover:text-amber-600">
                         <div
                             className="flex flex-row items-center justify-start my-1 mx-1"

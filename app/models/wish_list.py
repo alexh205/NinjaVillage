@@ -24,5 +24,5 @@ class WishList(db.Model):
             'name': self.name,
             'ownerId': self.owner_id,
             'createdDate': self.created_date,
-            'listProducts': [list.to_dict_basic() for list in self.lists_product]
+            'listProducts': [list.to_dict() for list in self.lists_product]
         }

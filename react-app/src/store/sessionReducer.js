@@ -188,39 +188,6 @@ export const deleteUserThunk = userId => async dispatch => {
     dispatch(removeUser());
 };
 
-// // ******************** Lists **********************************/
-
-// export const createListThunk = listName => async dispatch => {
-//     await fetch("/api/wish_lists/new", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({
-//             name: listName,
-//         }),
-//     });
-// };
-
-// export const addProductToListThunk = (productId, list) => async dispatch => {
-//     const request = await fetch(`/api/wish_lists/update/${list.id}`, {
-//         method: "PUT",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({
-//             productId,
-//         }),
-//     });
-//     const response = await request.json();
-//     dispatch(addListProd(response));
-// };
-// export const removeProductFromListThunk =
-//     (productId, list) => async dispatch => {
-//         await fetch(`/api/wish_lists/update/${list.id}`, {
-//             method: "PUT",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify({
-//                 productId,
-//             }),
-//         });
-//     };
 
 //? REDUCER
 
@@ -240,11 +207,7 @@ const sessionReducer = (state = initialState, action) => {
             currentState.productOwner = action.payload;
             return currentState;
         }
-        // case ADD_LIST_PROD: {
-        //    let currentStateCopy = currentState.user
-
-        // }
-
+     
         default:
             return currentState;
     }

@@ -18,7 +18,7 @@ def seed():
     if environment == 'production':
         db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
-        # db.session.execute(f"TRUNCATE table {SCHEMA}.wish_lists RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.wish_lists RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.shopping_carts RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
@@ -28,7 +28,7 @@ def seed():
         undo_users()
         undo_products()
         undo_shopping_carts()
-        # undo_wish_lists()
+        undo_wish_lists()
         undo_reviews()
         undo_images()
 
@@ -36,7 +36,7 @@ def seed():
     seed_users()
     seed_products()
     seed_shopping_carts()
-    # seed_wish_lists()
+    seed_wish_lists()
     seed_reviews()
     seed_images()
 
@@ -47,6 +47,6 @@ def undo():
     undo_users()
     undo_products()
     undo_shopping_carts()
-    # undo_wish_lists()
+    undo_wish_lists()
     undo_reviews()
     undo_images()
