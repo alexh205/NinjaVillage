@@ -20,9 +20,11 @@ const OrdersContainer = () => {
         <>
             <Header />
             {user && userOrders && (
-                <div className="flex flex-col items-center mt-5 mx-3">
-                    <p className="mb-2 font-bold text-xl md:text-3xl">Your Orders ({userOrders.length})</p>
-                    <div>
+                <div className="flex flex-col items-center mt-5 static container mx-auto">
+                    <p className="mb-2 font-bold text-xl md:text-3xl">
+                        Your Orders ({userOrders.length})
+                    </p>
+                    <div className="absolute mt-10 mx-14">
                         <div className="grid grid-rows-1 gap-y-4 ">
                             {userOrders.map((cart, i) => (
                                 <Order cart={cart} key={i} />

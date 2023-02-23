@@ -42,6 +42,9 @@ export const WishListContainer = () => {
         return errors;
     };
 
+    if (!activeList) {
+        setActiveList(userWishLists[0]);
+    }
     const handelListCreation = async e => {
         e.preventDefault();
 
@@ -60,7 +63,7 @@ export const WishListContainer = () => {
     return (
         <>
             <Header />
-            <div className="grid grid-rows-auto mx-12 mt-5 mb-6 items-center">
+            <div className="grid grid-rows-auto container mx-auto mt-5 mb-6 items-center">
                 <div className="flex flex-row justify-between mx-10">
                     <div className="text-[24px] font-bold hover:text-[#007185]">
                         Your Lists
@@ -154,7 +157,7 @@ export const WishListContainer = () => {
                             ))}
                     </div>
 
-                    <div className="col-span-2">
+                    <div className="col-span-2 mx-4">
                         <div className="flex flex-col">
                             <div className="flex flex-row mb-3 items-center">
                                 <p className="text-lg mr-3">List Name: </p>
@@ -183,6 +186,7 @@ export const WishListContainer = () => {
                                             <WishListProd
                                                 key={i}
                                                 product={product}
+                                                activeList={activeList}
                                             />
                                         )
                                     )}

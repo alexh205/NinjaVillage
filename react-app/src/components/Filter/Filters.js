@@ -22,7 +22,7 @@ const Filters = () => {
             filteredProd = Object.values(products);
         }
     });
-    const randomizedProducts = filteredProd.sort(() => Math.random() - 0.5)
+    // const randomizedProducts = filteredProd.sort(() => Math.random() - 0.5)
 
     return (
         <>
@@ -35,8 +35,8 @@ const Filters = () => {
                 </div>
 
                 <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
-                    {randomizedProducts &&
-                        randomizedProducts.map((product, i) => (
+                    {filteredProd &&
+                        filteredProd.map((product, i) => (
                             <div
                                 className={
                                     "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"

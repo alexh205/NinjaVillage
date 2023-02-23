@@ -4,7 +4,6 @@ const initialState = {
 
 const SET_USER_LISTS = "list/SET_USER_LISTS";
 const ADD_TO_LIST = "list/ADD_ITEM";
-const REMOVE_ITEM = "list/REMOVE_ITEM";
 const NEW_LIST = "list/NEW_LIST";
 const REMOVE_LIST = "list/REMOVE_LIST";
 
@@ -19,20 +18,14 @@ const setActiveUserLists = lists => {
 };
 
 // add product to List
-const addToList = prod => {
+const addToList = list => {
     return {
         type: ADD_TO_LIST,
-        payload: prod,
+        payload: list,
     };
 };
 
-// remove product from List
-const removeItem = prod => {
-    return {
-        type: REMOVE_ITEM,
-        payload: prod,
-    };
-};
+
 
 // new list
 const newList = list => {
@@ -124,7 +117,7 @@ const wishListReducer = (state = initialState, action) => {
             return currentState;
         }
         case ADD_TO_LIST: {
-            let copyNewList = currentState.userLists;
+            let copyNewList = [...currentState.userLists];
             for (let i = 0; i < copyNewList.length; i++) {
                 if (copyNewList[i].id === action.payload.id) {
                     copyNewList[i] = { ...action.payload };
@@ -133,6 +126,7 @@ const wishListReducer = (state = initialState, action) => {
             currentState.userLists = [...copyNewList];
             return currentState;
         }
+
         case REMOVE_LIST: {
             let copyNewList = [...currentState.userLists];
 

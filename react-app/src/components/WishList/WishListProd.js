@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 import { removeItemFromListThunk } from "../../store/wishListReducer";
 import { addToCart } from "../../store/cartReducer";
 
-const WishListProd = ({ product, list }) => {
+const WishListProd = ({ product, activeList }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [hasClicked, setHasClicked] = useState(false);
@@ -28,7 +28,7 @@ const WishListProd = ({ product, list }) => {
     };
 
     const removeItemFromList = async () => {
-        await dispatch(removeItemFromListThunk(list.id, product.id));
+        await dispatch(removeItemFromListThunk(activeList.id, product.id));
     };
 
     let ratingTotal = 0;
@@ -57,7 +57,7 @@ const WishListProd = ({ product, list }) => {
             </div>
             <div className="col-span-2 mx-7 pt-7">
                 <h4
-                    className="cursor-pointer text-[#017185] hover:text-amber-600"
+                    className="cursor-pointer text-[#017185] hover:text-amber-600 text-[17px]"
                     onClick={() => history.push(`/products/${product.id}`)}>
                     {product.title}
                 </h4>
@@ -83,16 +83,22 @@ const WishListProd = ({ product, list }) => {
                 </div>
             </div>
             {hasClicked && <Loading />}
-            {user && (
-                <div className="flex flex-col items-start justify-center pb-10">
-                    <div onClick={addItemToCart} className="button">
+            {user &&  (
+                <div className="flex flex-col items-center justify-center pb-10">
+                    <div
+                        onClick={addItemToCart}
+                        className="text-sm bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-12 py-1 mb-1">
                         Add to Cart
                     </div>
-                    <div className="flex flex-row items-center justify-center mt-1">
-                        <div className="mr-3 cursor-pointer" onClick={() => {}}>
+                    <div className="flex flex-row items-center justify-center mt-1 ">
+                        <div
+                            className="mr-2 cursor-pointer border-[2px] rounded-lg px-4 text-xs"
+                            onClick={() => {}}>
                             Move
                         </div>
-                        <div className="cursor-pointer " onClick={() => {}}>
+                        <div
+                            className="cursor-pointer border-[2px] rounded-lg px-4 text-xs "
+                            onClick={removeItemFromList}>
                             Delete
                         </div>
                     </div>

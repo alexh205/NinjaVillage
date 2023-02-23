@@ -28,7 +28,7 @@ const ProductDetail = () => {
     const user = useSelector(state => state.session.user);
     const owner = useSelector(state => state.session.productOwner);
     const userWishLists = useSelector(state => state.listStore.userLists)
-  
+
 
     const product = useSelector(
         state => state.productStore.products[productId]
@@ -80,7 +80,7 @@ const ProductDetail = () => {
     return (
         <>
             <Header />
-            <div className="flex flex-col mt-6 mx-3 ">
+            <div className="flex flex-col mt-6 mx-10 ">
                 {product && owner && (
                     <div className="flex flex-row mb-5">
                         <div className="flex flex-row ">
