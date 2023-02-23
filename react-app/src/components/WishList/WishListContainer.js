@@ -45,6 +45,16 @@ export const WishListContainer = () => {
     if (!activeList) {
         setActiveList(userWishLists[0]);
     }
+
+    let currentList;
+
+    userWishLists.map(list => {
+        if (activeList.id === list.id) {
+            currentList = list;
+        }
+    });
+
+    
     const handelListCreation = async e => {
         e.preventDefault();
 
@@ -159,26 +169,34 @@ export const WishListContainer = () => {
 
                     <div className="col-span-2 mx-4">
                         <div className="flex flex-col">
-                            <div className="flex flex-row mb-3 items-center">
-                                <p className="text-lg mr-3">List Name: </p>
-                                <div className="text-lg font-bold ">
-                                    {activeList.name}
+                            <div className="flex flex-row mb-3 items-center justify-between border-b">
+                                <div className="flex flex-row items-center mb-3">
+                                    <p className="text-lg mr-3">List Name: </p>
+
+                                    <div className="text-lg font-bold ">
+                                        {activeList.name}
+                                    </div>
+                                </div>
+                                <div
+                                    className="cursor-pointer text-sm font-semibold text-amber-600 hover:text-[#007185] mt-3 mr-[30px] mb-3"
+                                    onClick={() => {
+                                        if (activeList.name !== "Wish List") {
+                                            dispatch(
+                                                removeWishListThunk(
+                                                    activeList.id
+                                                )
+                                            );
+                                        } else {
+                                            alert(
+                                                "Wish List Can not be deleted!"
+                                            );
+                                        }
+                                        setActiveList("");
+                                    }}>
+                                    Delete List
                                 </div>
                             </div>
 
-                            <div className="flex flex-row justify-between mb-2 border-t">
-                                <div></div>
-                                <div
-                                    className="cursor-pointer text-sm font-semibold text-[#017185] hover:text-amber-600 mt-3 mr-10"
-                                    onClick={() => {
-                                        dispatch(
-                                            removeWishListThunk(activeList.id)
-                                        );
-                                        setActiveList("");
-                                    }}>
-                                    Remove List
-                                </div>
-                            </div>
                             <div>
                                 {activeList &&
                                     activeList.listProducts.map(
@@ -186,7 +204,7 @@ export const WishListContainer = () => {
                                             <WishListProd
                                                 key={i}
                                                 product={product}
-                                                activeList={activeList}
+                                                activeList={currentList}
                                             />
                                         )
                                     )}

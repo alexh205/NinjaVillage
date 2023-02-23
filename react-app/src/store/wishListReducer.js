@@ -57,8 +57,8 @@ export const createListThunk = listName => async dispatch => {
     dispatch(newList(response));
 };
 
-export const getAllUserListsThunk = user => async dispatch => {
-    const request = await fetch(`/api/wish_lists/all/${user}`, {
+export const getAllUserListsThunk = userId => async dispatch => {
+    const request = await fetch(`/api/wish_lists/all/${userId}`, {
         method: "GET",
     });
     const response = await request.json();
