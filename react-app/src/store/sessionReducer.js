@@ -153,12 +153,12 @@ export const editUserThunk =
         city,
         state,
         zipCode,
-        profileImg,
-        password,
-        userId
+        // profileImg,
+        // password,
+        user
     ) =>
     async dispatch => {
-        const request = await fetch(`/api/users/${userId}`, {
+        const request = await fetch(`/api/users/${user.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -166,13 +166,13 @@ export const editUserThunk =
             body: JSON.stringify({
                 username,
                 email,
-                password,
+                // password,
                 name,
                 street_address: streetAddress,
                 city,
                 state,
                 zip_code: zipCode,
-                profile_img: profileImg,
+                // profile_img: profileImg,
             }),
         });
 
@@ -187,7 +187,6 @@ export const deleteUserThunk = userId => async dispatch => {
     });
     dispatch(removeUser());
 };
-
 
 //? REDUCER
 
@@ -207,7 +206,7 @@ const sessionReducer = (state = initialState, action) => {
             currentState.productOwner = action.payload;
             return currentState;
         }
-     
+
         default:
             return currentState;
     }

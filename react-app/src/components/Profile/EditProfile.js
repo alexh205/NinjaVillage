@@ -55,8 +55,8 @@ const EditProfile = ({ user, showProfile }) => {
             if (!city) errors.push("Please provide a 'City'");
             if (!state) errors.push("Please provide a 'State'");
             if (!zipCode) errors.push("Please provide a 'Zip Code' number");
-            if (!profileImg)
-                errors.push("Please provide a 'Profile Image' url");
+            // if (!profileImg)
+                // errors.push("Please provide a 'Profile Image' url");
 
             return errors;
         };
@@ -78,9 +78,9 @@ const EditProfile = ({ user, showProfile }) => {
                     city,
                     state,
                     zipCode,
-                    profileImg,
+                    // profileImg,
                     // password,
-                    userId
+                    user
                 )
             );
 
@@ -91,7 +91,7 @@ const EditProfile = ({ user, showProfile }) => {
             setCity("");
             setState("");
             setZipCode("");
-            setProfileImg("");
+            // setProfileImg("");
             // setPassword("");
             // setRepeatPassword("");
             setValidateErrors([]);
@@ -280,9 +280,9 @@ const EditProfile = ({ user, showProfile }) => {
                                     setCity("");
                                     setState("");
                                     setZipCode("");
-                                    setProfileImg("");
-                                    setPassword("");
-                                    setRepeatPassword("");
+                                    // setProfileImg("");
+                                    // setPassword("");
+                                    // setRepeatPassword("");
                                     setValidateErrors([]);
 
                                     showProfile(false);
