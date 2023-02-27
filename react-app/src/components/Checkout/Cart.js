@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Header/Header";
-import checkout from "../../media/checkout.png";
+import register from "../../media/register.png";
 import { useSelector} from "react-redux";
 import CartProduct from "./CartProduct";
 import { useHistory } from "react-router-dom";
@@ -19,7 +19,7 @@ const Cart = ({user}) => {
                 <div className="flex-grow m-4 shadow-sm">
                     <img
                         className="w-[100%] h-[250px] mb-3 border-[2px]"
-                        src={checkout}
+                        src={register}
                         alt="checkout register"
                     />
                     <div className="flex flex-col p-5 space-y-10 bg-white">
