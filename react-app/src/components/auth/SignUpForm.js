@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp } from "../../store/sessionReducer";
-import NinjaVillage_logo from "../../media/NinjaVillage_logo.png";
+import ninjaVillage_image from "../../media/ninjaVillage_image.png";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Loading from "../Loading";
@@ -108,7 +108,7 @@ const SignUpForm = () => {
                     <Link to="/">
                         <img
                             className="object-contain my-[20px] mx-auto w-[100px]"
-                            src={NinjaVillage_logo}
+                            src={ninjaVillage_image}
                             alt="ninja Village logo"
                         />
                     </Link>

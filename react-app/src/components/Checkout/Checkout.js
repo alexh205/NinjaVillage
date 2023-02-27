@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import NinjaVillage_logo from "../../media/NinjaVillage_logo.png";
+import React, { useState } from "react";
+import ninjaVillage_image from "../../media/ninjaVillage_image.png";
 import { useHistory } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutProduct from "./CheckoutProduct";
-import checkoutImg from "../../media/checkoutImg.png";
+import villageImage from "../../media/villageImage.png";
 import stateTaxes from "../../media/stateTaxes.json";
 import { cartCheckoutThunk } from "../../store/cartReducer";
 import { authenticate } from "../../store/sessionReducer";
@@ -32,7 +32,7 @@ const Checkout = () => {
                             return [...accum, value];
                         }
                         if (key === user.state && user.state === 0) {
-                            return;
+                            return 1;
                         }
                         return [...accum];
                     }, [])
@@ -73,7 +73,7 @@ const Checkout = () => {
                         }}>
                         <img
                             className="w-[120px] h-[40px] object-contain cursor-pointer mt-2 "
-                            src={NinjaVillage_logo}
+                            src={ninjaVillage_image}
                             alt="ninja village logo"
                         />
                     </div>
@@ -147,7 +147,7 @@ const Checkout = () => {
                                     Review items
                                     <div className="border-[1px] p-3 rounded-lg flex flex-col mt-2 object-contain">
                                         <img
-                                            src={checkoutImg}
+                                            src={villageImage}
                                             alt="trees"
                                             className=" object-contain w-[100%] border-2"
                                         />
@@ -167,7 +167,7 @@ const Checkout = () => {
                                     </div>
                                     {/* order + total  */}
                                     <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center">
-                                    {hasClicked && <Loading />}
+                                        {hasClicked && <Loading />}
                                         <button
                                             className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]"
                                             disabled={hasClicked}
@@ -207,7 +207,7 @@ const Checkout = () => {
                 </div>
                 <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative ">
                     <div className="flex flex-col items-center">
-                    {hasClicked && <Loading />}
+                        {hasClicked && <Loading />}
                         <button
                             className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow"
                             disabled={hasClicked}
