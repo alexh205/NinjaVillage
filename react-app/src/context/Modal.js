@@ -14,7 +14,7 @@ const Modal = ({ children, isOpen, onClose }) => {
         document.addEventListener("keydown", handleEscape);
 
         return () => document.removeEventListener("keydown", handleEscape);
-    }, []);
+    }, [handleEscape]);
 
     const modalTransition = useTransition(isOpen, {
         from: { opacity: 0 },

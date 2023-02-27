@@ -13,15 +13,15 @@ const Home = () => {
   const currentUser = useSelector(state => state.session.user)
   const cartArr = useSelector(state => state.cartStore.addedItems)
 
-  const randomizedProducts = Object.values(products).sort(() => Math.random() - 0.5).slice(0, 15)
- 
+  // const randomizedProducts = Object.values(products).sort(() => Math.random() - 0.5).slice(0, 15)
+
 
   return (
     <div>
       <Header cart={cartArr && cartArr.length && currentUser ? cartArr.length : 0} products={products}/>
         <main className="max-w-screen-2xl mx-auto">
           <Banner />
-          <ProductFeed products={randomizedProducts} user={currentUser}/>
+          <ProductFeed products={products} user={currentUser}/>
         </main>
         <Footer />
     </div>
