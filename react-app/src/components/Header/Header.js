@@ -4,7 +4,6 @@ import {
     ShoppingCartIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
-import ninjaVillage_image from "../../media/ninjaVillage_image.png";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DropDownMenu from "../DropDownMenu/DropDownMenu";
@@ -60,7 +59,9 @@ const Header = () => {
                     }}>
                     <img
                         className="w-[140px] h-[40px] object-contain cursor-pointer mt-2"
-                        src={ninjaVillage_image}
+                        src={
+                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                        }
                         alt="ninja village logo"
                     />
                 </div>

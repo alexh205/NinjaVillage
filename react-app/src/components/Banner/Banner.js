@@ -1,17 +1,14 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import books from '../../media/Banner Images/books.jpg'
-import clothe from '../../media/Banner Images/clothe.jpg'
-import open from '../../media/Banner Images/open.jpg'
-import splash from '../../media/Banner Images/splash.jpg'
-import weAreOpen from '../../media/Banner Images/weAreOpen.jpg'
 
 const Banner = () => {
     return (
         <div className="relative pb-10">
-            <div className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent
-            bottom-0 z-20"/>
+            <div
+                className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent
+            bottom-0 z-20"
+            />
             <Carousel
                 autoPlay
                 infiniteLoop
@@ -20,21 +17,50 @@ const Banner = () => {
                 showThumbs={false}
                 interval={5000}>
                 <div>
-                    <img loading="lazy" src={books} alt="first banner" />
+                    <img
+                        loading="lazy"
+                        src={
+                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/Banner+Images/books.jpg"
+                        }
+                        alt="first banner"
+                    />
                 </div>
                 <div>
-                    <img loading="lazy" src={clothe} alt="second banner" />
+                    <img
+                        loading="lazy"
+                        src={
+                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/Banner+Images/clothe.jpg"
+                        }
+                        alt="second banner"
+                    />
                 </div>
                 <div>
-                    <img loading="lazy" src={open} alt="third banner" />
+                    <img
+                        loading="lazy"
+                        src={
+                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/Banner+Images/open.jpg"
+                        }
+                        alt="third banner"
+                    />
                 </div>
                 <div>
-                    <img loading="lazy" src={splash} alt="four banner" />
+                    <img
+                        loading="lazy"
+                        src={
+                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/Banner+Images/splash.jpg"
+                        }
+                        alt="four banner"
+                    />
                 </div>
                 <div>
-                    <img loading="lazy" src={weAreOpen} alt="five banner" />
+                    <img
+                        loading="lazy"
+                        src={
+                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/Banner+Images/weAreOpen.jpg"
+                        }
+                        alt="five banner"
+                    />
                 </div>
-
             </Carousel>
         </div>
     );

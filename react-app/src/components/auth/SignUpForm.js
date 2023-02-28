@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp } from "../../store/sessionReducer";
-import ninjaVillage_image from "../../media/ninjaVillage_image.png";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Loading from "../Loading";
@@ -108,7 +107,9 @@ const SignUpForm = () => {
                     <Link to="/">
                         <img
                             className="object-contain my-[20px] mx-auto w-[100px]"
-                            src={ninjaVillage_image}
+                            src={
+                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                            }
                             alt="ninja Village logo"
                         />
                     </Link>
@@ -249,7 +250,6 @@ const SignUpForm = () => {
                     {hasClicked && <Loading />}
                     <button
                         className="my-3 button p-[5px] border-[1px] border-gray-400 w-[100%]"
-
                         onClick={e => {
                             onSignUp(e);
                         }}>

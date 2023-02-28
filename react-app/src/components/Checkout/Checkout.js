@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import ninjaVillage_image from "../../media/ninjaVillage_image.png";
 import { useHistory } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutProduct from "./CheckoutProduct";
-import villageImage from "../../media/villageImage.png";
 import stateTaxes from "../../media/stateTaxes.json";
 import { cartCheckoutThunk } from "../../store/cartReducer";
 import { authenticate } from "../../store/sessionReducer";
@@ -73,7 +71,9 @@ const Checkout = () => {
                         }}>
                         <img
                             className="w-[120px] h-[40px] object-contain cursor-pointer mt-2 "
-                            src={ninjaVillage_image}
+                            src={
+                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                            }
                             alt="ninja village logo"
                         />
                     </div>
@@ -147,7 +147,9 @@ const Checkout = () => {
                                     Review items
                                     <div className="border-[1px] p-3 rounded-lg flex flex-col mt-2 object-contain">
                                         <img
-                                            src={villageImage}
+                                            src={
+                                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/villageImage.png"
+                                            }
                                             alt="trees"
                                             className=" object-contain w-[100%] border-2"
                                         />

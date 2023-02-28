@@ -13,6 +13,7 @@ import {
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
 import WishListDropDown from "../WishList/WishListDropDown";
+import ImageUpload from "../ImageUpload";
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -23,12 +24,11 @@ const ProductDetail = () => {
     const [hasClicked, setHasClicked] = useState(false);
 
     const [dropDown, setDropDown] = useState(false);
-    const showDropDown = Boolean => setDropDown(!dropDown)
+    const showDropDown = Boolean => setDropDown(!dropDown);
 
     const user = useSelector(state => state.session.user);
     const owner = useSelector(state => state.session.productOwner);
-    const userWishLists = useSelector(state => state.listStore.userLists)
-
+    const userWishLists = useSelector(state => state.listStore.userLists);
 
     const product = useSelector(
         state => state.productStore.products[productId]
@@ -193,6 +193,10 @@ const ProductDetail = () => {
                                         <p className="text-sm block ml-5">
                                             {product.description}
                                         </p>
+
+                                        <div>
+                                            <ImageUpload productId={product.id} reviewId={1}/>
+                                        </div>
                                     </div>
 
                                     <div>
@@ -260,9 +264,13 @@ const ProductDetail = () => {
                                             <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[7px] h-[90px] overflow-y-scroll">
                                                 {user && userWishLists && (
                                                     <WishListDropDown
-                                                    userWishLists={userWishLists}
+                                                        userWishLists={
+                                                            userWishLists
+                                                        }
                                                         product={product}
-                                                        showDropDown={showDropDown}
+                                                        showDropDown={
+                                                            showDropDown
+                                                        }
                                                     />
                                                 )}
                                             </div>

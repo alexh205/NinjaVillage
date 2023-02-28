@@ -7,8 +7,7 @@ const initialState = {
 const SET_USER = "session/SET_USER";
 const SET_PROD_OWNER = "session/SET_PROD_OWNER";
 const REMOVE_USER = "session/REMOVE_USER";
-// const ADD_LIST_PROD = "list/ADD_LIST_PROD";
-// const REMOVE_LIST_PROD = "list/REMOVE_LIST_PROD";
+
 
 //? ACTION CREATORS
 // *************** User ****************************
@@ -32,12 +31,6 @@ const removeUser = () => {
     };
 };
 
-// const addListProd = list => {
-//     return {
-//         type: ADD_LIST_PROD,
-//         payload: list,
-//     };
-// };
 
 //? THUNKS
 // *************** User ****************************

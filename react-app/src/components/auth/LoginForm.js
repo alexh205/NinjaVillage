@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../store/sessionReducer";
-import ninjaVillage_image from "../../media/ninjaVillage_image.png";
 import { useHistory, Link, Redirect } from "react-router-dom";
 import Loading from "../Loading";
 
@@ -46,7 +45,9 @@ const LoginForm = () => {
                     <Link to="/">
                         <img
                             className="object-contain mb-3 w-[100px]"
-                            src={ninjaVillage_image}
+                            src={
+                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                            }
                             alt="ninja village logo"
                         />
                     </Link>
