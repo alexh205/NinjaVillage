@@ -13,7 +13,6 @@ import {
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
 import WishListDropDown from "../WishList/WishListDropDown";
-// import ImageUpload from "../ImageUpload";
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -193,10 +192,6 @@ const ProductDetail = () => {
                                         <p className="text-sm block ml-5">
                                             {product.description}
                                         </p>
-
-                                        {/* <div>
-                                            <ImageUpload productId={product.id} reviewId={1}/>
-                                        </div> */}
                                     </div>
 
                                     <div>
@@ -251,10 +246,10 @@ const ProductDetail = () => {
                                     )}
                                 </div>
                                 <hr className="w-[140%] sm:w-[115%] mt-4"></hr>
-                                <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg cursor-pointer">
+                                <div className="flex flex-row mt-5 items-center justify-center border-[2px] rounded-lg ">
                                     <div className="text-[9px] sm:text-[13px] font-semibold sm:pl-[6px] pl-[4px] py-[4px] border-r-[1px]">
                                         <div
-                                            className="hover:text-amber-700 w-[80px] sm:w-[145px]"
+                                            className="hover:text-amber-700 w-[80px] sm:w-[145px] cursor-pointer"
                                             onClick={() =>
                                                 setDropDown(!dropDown)
                                             }>
@@ -278,7 +273,7 @@ const ProductDetail = () => {
                                     </div>
                                     <div className="md:flex hidden">
                                         <ChevronDownIcon
-                                            className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700"
+                                            className="h-5 pl-[1px] pr-[2px] w-[100%] hover:text-amber-700 cursor-pointer"
                                             onClick={() =>
                                                 setDropDown(!dropDown)
                                             }

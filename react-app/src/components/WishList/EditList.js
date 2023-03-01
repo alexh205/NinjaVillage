@@ -14,6 +14,7 @@ const EditList = ({ list, edit, userLists }) => {
 
     const listId = list.id;
 
+    
     useEffect(() => {
         function handleClickOutside(event) {
             if (editRef.current && !editRef.current.contains(event.target)) {
@@ -48,6 +49,11 @@ const EditList = ({ list, edit, userLists }) => {
     const handleSave = async e => {
         e.preventDefault();
 
+        if (name === "Wish List") {
+            alert("'Wish List' can't be edited");
+            return;
+        }
+
         const errors = validate();
 
         if (errors.length) {
@@ -62,6 +68,10 @@ const EditList = ({ list, edit, userLists }) => {
         setValidateErrors([]);
     };
     const handleKeyPress = e => {
+        if (name === "Wish List") {
+            alert("'Wish List' can't be edited");
+            return;
+        }
         if (e.key === "Enter") {
             handleSave(e);
         }
@@ -73,6 +83,7 @@ const EditList = ({ list, edit, userLists }) => {
             className="flex flex-row text-xs md:text-base justify-between items-center w-full">
             <input
                 value={name}
+                disabled={name === "Wish List"}
                 onChange={e => setName(e.target.value)}
                 onKeyDown={handleKeyPress}
                 className="p-1 flex md:flex-grow mr-1"

@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import { FaStar } from "react-icons/fa";
 import { removeItemFromListThunk } from "../../store/wishListReducer";
 import { addToCart } from "../../store/cartReducer";
+import ProductRelocation from "./ProductRelocation";
 
 const WishListProd = ({ product, activeList }) => {
     const dispatch = useDispatch();
@@ -14,8 +15,12 @@ const WishListProd = ({ product, activeList }) => {
     const list = useSelector(state =>
         state.listStore.userLists.find(list => list.id === activeList.id)
     );
+    const userWishLists = useSelector(state => state.listStore.userLists);
 
     const item = list.listProducts.find(prod => prod.id === product.id);
+    const [dropDown, setDropDown] = useState(false);
+
+    const showDropDown = Boolean => setDropDown(false);
 
     const addItemToCart = async () => {
         const itemObj = {
@@ -101,13 +106,34 @@ const WishListProd = ({ product, activeList }) => {
                                 Add to Cart
                             </div>
                             <div className="flex flex-row items-center justify-center mt-1 ">
-                                <div
-                                    className="mr-[14px] cursor-pointer border-[2px] rounded-lg px-5 text-xs bg-gradient-to-b from-gray-200 to-gray-400 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 active:from-gray-500 "
-                                    onClick={() => {}}>
-                                    Move
+                                <div>
+                                    <div
+                                        className="mr-[14px] cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                    active:bg-gray-400 text-white px-4 py-1 rounded-lg "
+                                        onClick={() => {
+                                            setDropDown(!dropDown);
+                                        }}>
+                                        Move
+                                    </div>
+
+                                    {dropDown && (
+                                        <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[5px] h-[90px] overflow-y-scroll">
+                                            {userWishLists && (
+                                                <ProductRelocation
+                                                    userWishLists={
+                                                        userWishLists
+                                                    }
+                                                    product={product}
+                                                    showDropDown={showDropDown}
+                                                    startingList={list}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                                 <div
-                                    className="cursor-pointer border-[2px] rounded-lg px-5 text-xs bg-gradient-to-b from-gray-200 to-gray-400 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 active:from-gray-500 "
+                                    className="cursor-pointer    text-xs bg-gray-500 hover:bg-gray-600
+                                    active:bg-gray-400 text-white px-4 py-1 rounded-lg "
                                     onClick={removeItemFromList}>
                                     Delete
                                 </div>

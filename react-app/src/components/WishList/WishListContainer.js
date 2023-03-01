@@ -165,7 +165,11 @@ export const WishListContainer = () => {
 
                                         <div className="flex justify-center items-center">
                                             <button
-                                                className="text-center mr-5 cursor-pointer hover:text-amber-600"
+                                                className={`${
+                                                    list.name === "Wish List"
+                                                        ? "hidden"
+                                                        : "text-center mr-5 cursor-pointer hover:text-amber-600 p-1"
+                                                }`}
                                                 onClick={() =>
                                                     setHasEdit(!hasEdit)
                                                 }>
@@ -185,7 +189,11 @@ export const WishListContainer = () => {
                                         </div>
                                         <div className="flex  items-center">
                                             <button
-                                                className="text-center mr-5 cursor-pointer hover:text-amber-600 p-1"
+                                                className={`${
+                                                    list.name === "Wish List"
+                                                        ? "hidden"
+                                                        : "text-center mr-5 cursor-pointer hover:text-amber-600 p-1"
+                                                }`}
                                                 onClick={() => {
                                                     setHasEdit(!hasEdit);
                                                 }}>
@@ -224,7 +232,7 @@ export const WishListContainer = () => {
                                             }
                                         } else {
                                             alert(
-                                                "Wish List Can not be deleted!"
+                                                "'Wish List' can't be deleted!"
                                             );
                                         }
                                         setActiveList("");
