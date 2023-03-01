@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Header from "../Header/Header";
 import Modal from "../../context/Modal";
 import WishListProd from "./WishListProd";
+import Loading from "../Loading";
 import {
     createListThunk,
     removeWishListThunk,
@@ -16,6 +17,7 @@ export const WishListContainer = () => {
     const [openModal, setOpenModal] = useState(false);
     const [selected, setSelected] = useState("");
     const [activeList, setActiveList] = useState("");
+    const [hasClicked, setHasClicked] = useState("");
     const [listName, setListName] = useState("");
     const [validateErrors, setValidateErrors] = useState([]);
 
@@ -54,17 +56,19 @@ export const WishListContainer = () => {
         }
     });
 
-    
     const handelListCreation = async e => {
         e.preventDefault();
 
         const errors = validate();
 
-        if (errors.length > 0) return setValidateErrors(errors);
-
+        if (errors.length > 0) {
+            return setValidateErrors(errors);
+        }
+        setHasClicked(true);
         await dispatch(createListThunk(listName));
         await dispatch(authenticate());
 
+        setHasClicked(false);
         setListName("");
         setValidateErrors([]);
         setOpenModal(false);
@@ -114,8 +118,10 @@ export const WishListContainer = () => {
                                             All lists are private.
                                         </p>
                                         <div className="mt-3 flex flex-row justify-center ml-40 ">
+                                            {hasClicked && <Loading />}
                                             <button
                                                 className="border-[2px] rounded-md p-1 cursor-pointer text-[14px] font-semibold bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400   focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600"
+                                                disabled={hasClicked}
                                                 onClick={e => {
                                                     handelListCreation(e);
                                                 }}>

@@ -178,7 +178,7 @@ const CreateReview = () => {
                     <div className="flex flex-row mt-5 justify-end">
                         <button
                             className="button"
-                            onClick={e => {
+                            onClick={() => {
                                 setTitle("");
                                 setReview("");
                                 setRating(0);
