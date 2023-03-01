@@ -1,16 +1,17 @@
-import React, {useState} from "react";
-import { useDispatch} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { addToCart, removeItem } from "../../store/cartReducer";
 import { useHistory } from "react-router-dom";
+import { BsPlus } from "react-icons/bs";
+import { BiMinus } from "react-icons/bi";
 import Loading from "../Loading";
 
 const CartProduct = ({ product }) => {
     const dispatch = useDispatch();
-    const history = useHistory()
-    const [hasClicked, setHasClicked] = useState(false)
-    const [hasClickedRemove, setHasClickedRemove] = useState(false)
-
+    const history = useHistory();
+    const [hasClicked, setHasClicked] = useState(false);
+    const [hasClickedRemove, setHasClickedRemove] = useState(false);
 
     const addItemToCart = async () => {
         const item = {
@@ -22,16 +23,15 @@ const CartProduct = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-        setHasClicked(true)
+        setHasClicked(true);
         await dispatch(addToCart(item));
-        setHasClicked(false)
+        setHasClicked(false);
     };
 
-    const removeItemFromCart =  () => {
-        setHasClickedRemove(true)
+    const removeItemFromCart = () => {
+        setHasClickedRemove(true);
         dispatch(removeItem(product));
-        setHasClickedRemove(false)
-
+        setHasClickedRemove(false);
     };
 
     let ratingTotal = 0;
@@ -46,7 +46,9 @@ const CartProduct = ({ product }) => {
 
     return (
         <div className="grid grid-cols-5">
-            <div className="cursor-pointer" onClick={()=> history.push(`/products/${product.id}`)}>
+            <div
+                className="cursor-pointer"
+                onClick={() => history.push(`/products/${product.id}`)}>
                 <img
                     src={product.image}
                     alt="product"
@@ -82,20 +84,19 @@ const CartProduct = ({ product }) => {
                     </div>
 
                     <div className="flex flex-row items-center">
-                    {hasClicked && <Loading />}
+                        {hasClicked && <Loading />}
                         <button
                             className="mt-auto button mr-4"
                             disabled={hasClicked}
                             onClick={addItemToCart}>
-                                Add to Cart
+                            <BsPlus />
                         </button>
                         {hasClickedRemove && <Loading />}
                         <button
                             className="button mt-3"
                             disabled={hasClickedRemove}
                             onClick={removeItemFromCart}>
-                            Remove from Cart
-
+                            <BiMinus />
                         </button>
                     </div>
                 </div>
