@@ -13,7 +13,7 @@ import {
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
 import WishListDropDown from "../WishList/WishListDropDown";
-import ImageUpload from "../ImageUpload";
+// import ImageUpload from "../ImageUpload";
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -194,9 +194,9 @@ const ProductDetail = () => {
                                             {product.description}
                                         </p>
 
-                                        <div>
+                                        {/* <div>
                                             <ImageUpload productId={product.id} reviewId={1}/>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div>

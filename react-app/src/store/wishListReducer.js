@@ -25,8 +25,6 @@ const addToList = list => {
     };
 };
 
-
-
 // new list
 const newList = list => {
     return {
@@ -55,6 +53,18 @@ export const createListThunk = listName => async dispatch => {
     });
     const response = await request.json();
     dispatch(newList(response));
+};
+
+export const editListThunk = (listName, listId) => async dispatch => {
+    const request = await fetch(`/api/wish_lists/edit/${listId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: listName,
+        }),
+    });
+    const response = await request.json();
+    dispatch(addToList(response));
 };
 
 export const getAllUserListsThunk = userId => async dispatch => {

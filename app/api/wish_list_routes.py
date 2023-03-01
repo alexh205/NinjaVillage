@@ -67,12 +67,36 @@ def wish_list_create():
 
     return new_wish_list.to_dict()
 
+# * Edit Wish List *****************************************************
+
+
+@wish_list_routes.route('/edit/<int:id>', methods=['PUT'])
+@login_required
+def wish_list_edit(id):
+    """
+    Modify wish_list's name
+    """
+
+    queried_wish_list = WishList.query.get_or_404(id)
+    queried_user = User.query.get_or_404(queried_wish_list.owner_id)
+
+    if queried_user.id != current_user.id:
+        return auth_error
+    else:
+        req_data = request.json
+        for key, val in req_data.items():
+            if key != None:
+                setattr(queried_wish_list, key, val)
+        db.session.commit()
+    return queried_wish_list.to_dict()
+
+
 # * Add Product to Wish List *****************************************************
 
 
 @wish_list_routes.route('/<int:id>', methods=['PUT'])
 @login_required
-def wish_list_edit(id):
+def wish_list_add(id):
     """
     Update an existing wish_list instance after checking for user ownership, and then add changes to database
     """
@@ -93,7 +117,7 @@ def wish_list_edit(id):
 
 @wish_list_routes.route('/remove/<int:id>', methods=['PUT'])
 @login_required
-def list_prod_delete(id):
+def list_prod_remove(id):
     """
     Delete a product from a wish_list after checking for user ownership
     """

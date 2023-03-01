@@ -10,6 +10,7 @@ import {
     removeWishListThunk,
 } from "../../store/wishListReducer";
 import { authenticate } from "../../store/sessionReducer";
+import EditList from "./EditList";
 
 export const WishListContainer = () => {
     const dispatch = useDispatch();
@@ -17,10 +18,12 @@ export const WishListContainer = () => {
     const [openModal, setOpenModal] = useState(false);
     const [selected, setSelected] = useState("");
     const [activeList, setActiveList] = useState("");
-    const [hasClicked, setHasClicked] = useState("");
+    const [hasClicked, setHasClicked] = useState(false);
+    const [hasEdit, setHasEdit] = useState(false);
+
     const [listName, setListName] = useState("");
     const [validateErrors, setValidateErrors] = useState([]);
-
+    const showEdit = boolean => setHasEdit(boolean);
     const user = useSelector(state => state.session.user);
     const userWishLists = useSelector(state => state.listStore.userLists);
 
@@ -30,16 +33,17 @@ export const WishListContainer = () => {
     const validate = () => {
         const errors = [];
 
-        if (!listName) errors.push("Please provide a 'name' for the list");
-        if (listName.length > 20)
+        if (!listName) {
+            errors.push("Please provide a 'name' for the list");
+        }
+
+        if (listName.length >= 20) {
             errors.push("Please limit your name to 20 characters or less");
-        userWishLists.map(list => {
-            if (list.name === listName) {
-                errors.push(
-                    "List name already exists. Please use another name."
-                );
-            }
-        });
+        }
+
+        if (userWishLists.some(list => list.name === listName)) {
+            errors.push("List name already exists.");
+        }
 
         return errors;
     };
@@ -61,13 +65,14 @@ export const WishListContainer = () => {
 
         const errors = validate();
 
-        if (errors.length > 0) {
-            return setValidateErrors(errors);
+        if (errors.length) {
+            setValidateErrors(errors);
+            return;
         }
+
         setHasClicked(true);
         await dispatch(createListThunk(listName));
         await dispatch(authenticate());
-
         setHasClicked(false);
         setListName("");
         setValidateErrors([]);
@@ -138,39 +143,59 @@ export const WishListContainer = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-3 border-[2px] p-2">
-                    <div className="mr-7 ml-3">
-                        {userWishLists &&
-                            userWishLists.map((list, i) => (
-                                <div key={i} className="mr-1">
-                                    {selected === list.name ? (
-                                        <div
-                                            className="text-sm py-3 px-2
-                                            flex flex-row justify-between cursor-pointer hover:text-amber-600
-                                            bg-[#f0f2f2]">
-                                            <div className="font-semibold">
-                                                {list.name}
-                                            </div>
-                                            <div className="text-[12px]">
-                                                Private
-                                            </div>
+                    <div className="mr-4 md:mr-7 ml-2 md:ml-3">
+                        {userWishLists.map(list => (
+                            <div key={list.name} className="mr-1">
+                                {selected === list.name ? (
+                                    <div
+                                        className="text-sm py-3 px-2
+                                        flex flex-row justify-between hover:text-amber-600
+                                        bg-[#f0f2f2]">
+                                        <div className="font-semibold p-1 w-full">
+                                            {hasEdit ? (
+                                                <EditList
+                                                    list={list}
+                                                    edit={showEdit}
+                                                    userLists={userWishLists}
+                                                />
+                                            ) : (
+                                                list.name
+                                            )}
                                         </div>
-                                    ) : (
-                                        <div
-                                            className="text-sm flex flex-row justify-between py-3 px-2 cursor-pointer hover:text-amber-600"
-                                            onClick={() => {
-                                                setSelected(`${list.name}`);
-                                                setActiveList(list);
-                                            }}>
-                                            <div className="font-semibold">
-                                                {list.name}
-                                            </div>
-                                            <div className="text-[12px]">
-                                                Private
-                                            </div>
+
+                                        <div className="flex justify-center items-center">
+                                            <button
+                                                className="text-center mr-5 cursor-pointer hover:text-amber-600"
+                                                onClick={() =>
+                                                    setHasEdit(!hasEdit)
+                                                }>
+                                                {!hasEdit ? "Edit" : null}
+                                            </button>
                                         </div>
-                                    )}
-                                </div>
-                            ))}
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="text-sm flex flex-row justify-between py-3 px-2 "
+                                        onClick={() => {
+                                            setSelected(list.name);
+                                            setActiveList(list);
+                                        }}>
+                                        <div className="font-semibold cursor-pointer hover:text-amber-600">
+                                            {list.name}
+                                        </div>
+                                        <div className="flex  items-center">
+                                            <button
+                                                className="text-center mr-5 cursor-pointer hover:text-amber-600 p-1"
+                                                onClick={() => {
+                                                    setHasEdit(!hasEdit);
+                                                }}>
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
                     </div>
 
                     <div className="col-span-2 mx-4">
@@ -184,14 +209,19 @@ export const WishListContainer = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className="cursor-pointer text-sm font-semibold text-amber-600 hover:text-[#007185] mt-3 mr-[30px] mb-3"
+                                    className="cursor-pointer text-sm font-semibold text-amber-600 hover:text-[#007185] mt-3 mr-[30px]"
                                     onClick={() => {
-                                        if (activeList.name !== "Wish List") {
-                                            dispatch(
+                                        if (activeList?.name !== "Wish List") {
+                                            const data = dispatch(
                                                 removeWishListThunk(
                                                     activeList.id
                                                 )
                                             );
+                                            if (data) {
+                                                alert(
+                                                    `List '${activeList.name}' was deleted`
+                                                );
+                                            }
                                         } else {
                                             alert(
                                                 "Wish List Can not be deleted!"
