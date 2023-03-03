@@ -7,7 +7,7 @@ const Banner = () => {
         <div className="relative pb-10">
             <div
                 className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent
-            bottom-0 z-20"
+            bottom-7 z-20"
             />
             <Carousel
                 autoPlay
@@ -15,7 +15,7 @@ const Banner = () => {
                 showStatus={false}
                 showIndicators={false}
                 showThumbs={false}
-                interval={5000}>
+                interval={4000}>
                 <div>
                     <img
                         loading="lazy"

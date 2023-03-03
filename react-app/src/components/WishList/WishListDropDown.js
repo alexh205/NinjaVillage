@@ -52,6 +52,7 @@ const WishListDropDown = ({ product, userWishLists, showDropDown }) => {
                     product={product}
                     list={activeList}
                     closeModal={closeModal}
+                    showDropDown={showDropDown}
                 />
             )}
         </div>

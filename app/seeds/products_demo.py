@@ -19,7 +19,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-            "owner_id": 1,
+            "owner_id": 3,
         },
         {
             "title": "Mens Cotton Jacket",
@@ -28,7 +28,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-            "owner_id": 1,
+            "owner_id": 2,
         },
         {
             "title": "Mens Casual Slim Fit",
@@ -37,7 +37,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-            "owner_id": 1,
+            "owner_id": 3,
         },
         {
             "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
@@ -46,7 +46,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Mountain Glow",
             "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-            "owner_id": 1,
+            "owner_id": 3,
         },
         {
             "title": "Solid Gold Petite Micropave ",
@@ -181,7 +181,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Shirt Company",
             "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
-            "owner_id": 1,
+            "owner_id": 3,
         },
         {
             "title": "Lettuce - Sea / Sea Asparagus",
@@ -253,7 +253,7 @@ def seed_products():
             "category": "Pet Supplies",
             "brand": "Purina",
             "image": "https://m.media-amazon.com/images/I/71Nu7MkUEOL._AC_SL1500_.jpg",
-            "owner_id": 1,
+            "owner_id": 3,
         },
         {
             "title": "Gain - Aroma Boost Laundry Detergent Liquid Soap, Moonlight Breeze Scent",

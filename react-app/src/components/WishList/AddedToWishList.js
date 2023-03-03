@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-const AddedToWishList = ({ closeModal, product, list }) => {
+const AddedToWishList = ({ closeModal, product, list, showDropDown }) => {
     const history = useHistory();
 
     return (
@@ -23,7 +23,10 @@ const AddedToWishList = ({ closeModal, product, list }) => {
                 <div className="font-medium mb-2">{product.title}</div>
                 <div className="text-gray-600 mb-2">${product.price}</div>
                 <button
-                    onClick={closeModal}
+                    onClick={() => {
+                        closeModal();
+                        showDropDown();
+                    }}
                     className="bg-gray-500 active:bg-gray-400 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
                     Close
                 </button>

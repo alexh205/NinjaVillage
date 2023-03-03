@@ -113,8 +113,8 @@ const Checkout = () => {
         if (modal) {
             const timeout = setTimeout(() => {
                 setModal(false);
-                history.push("/");
-            }, 3500);
+                history.push("/orders");
+            }, 4000);
 
             return () => {
                 clearTimeout(timeout);
@@ -225,7 +225,7 @@ const Checkout = () => {
                                         ))}
                                     </div>
                                     {/* order + total  */}
-                                    <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center">
+                                    <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center mb-3">
                                         {hasClicked && <Loading />}
                                         <button
                                             className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]"
@@ -264,7 +264,7 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-                <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative ">
+                <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative">
                     <div className="flex flex-col items-center">
                         {hasClicked && <Loading />}
                         <button

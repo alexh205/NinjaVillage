@@ -51,13 +51,14 @@ const OrdersContainer = () => {
         <>
             <Header />
             <div className="flex flex-col items-center mt-3 static container mx-auto">
-                <p
-                    className="mb-1 font-bold text-xl md:text-3xl"
-                    v
-                    id="orderHeader">
-                    Your Orders ({userOrders.length})
-                </p>
-                {user && userOrders && (
+                <section id="orders">
+                    <p
+                        className="mb-1 font-bold text-xl md:text-3xl"
+                        id="orderHeader">
+                        Your Orders ({userOrders.length})
+                    </p>
+                </section>
+                {user && userOrders.length > 0 ? (
                     <div className="mt-2 flex flex-col items-center">
                         <div className=" mb-3 z-10">
                             <DatePicker
@@ -73,10 +74,10 @@ const OrdersContainer = () => {
                                 endDate={endDate}
                                 isClearable={true}
                                 selectsRange
-                                placeholderText="Select order date range"
+                                placeholderText="Filter by order's date range"
                                 withPortal
                                 todayButton={true}
-                                className="bg-white rounded-md border-gray-300 border pr-6 pl-3 py-2 placeholder-gray-400 placeholder:text-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                                className="bg-white rounded-md border-gray-300 border pr-6 pl-3 placeholder:text-[14px] py-2 placeholder-gray-400 placeholder:text-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                             />
                         </div>
                         <ReactPaginate
@@ -85,15 +86,21 @@ const OrdersContainer = () => {
                             pageCount={pageCount}
                             onPageChange={handlePageClick}
                             containerClassName={"flex justify-center mt-2"}
-                            pageClassName={
-                                "mx-1 py-2 px-2 rounded-lg cursor-pointer"
-                            }
-                            previousClassName={
-                                "mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
-                            }
-                            nextClassName={
-                                "mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
-                            }
+                            pageClassName={`${
+                                pageCount === 1
+                                    ? "hidden"
+                                    : "mx-1 py-2 px-2 rounded-lg cursor-pointer"
+                            }`}
+                            previousClassName={`${
+                                pageCount === 1
+                                    ? "hidden"
+                                    : " mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
+                            }`}
+                            nextClassName={`${
+                                pageCount === 1
+                                    ? "hidden"
+                                    : " mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
+                            }`}
                             pageLinkClassName={"hover:bg-gray-200 px-2"}
                             previousLinkClassName={"hover:text-amber-600"}
                             nextLinkClassName={"hover:text-amber-600"}
@@ -103,6 +110,21 @@ const OrdersContainer = () => {
                             {displayOrders}
                         </div>
                     </div>
+                ) : (
+                    <div className="text-[20px] mt-3 text-ninja_green hover:font-semibold">
+                        Currently you do not have any past orders
+                    </div>
+                )}
+                {userOrders.length > 1 && (
+                    <footer>
+                        <a href="#orders">
+                            <div className="flex flex-col items-center justify-center cursor-pointer mb-5">
+                                <p className="text-[10px] md:text-lg text-teal-700 hover:text-amber-600">
+                                    Back to the top
+                                </p>
+                            </div>
+                        </a>
+                    </footer>
                 )}
             </div>
         </>

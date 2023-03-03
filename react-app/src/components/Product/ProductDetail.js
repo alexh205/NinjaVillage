@@ -13,7 +13,6 @@ import {
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
 import WishListDropDown from "../WishList/WishListDropDown";
-import ImageUpload from "../ImageUpload";
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -25,7 +24,7 @@ const ProductDetail = () => {
     const [buttonAction, setButtonAction] = useState(false);
 
     const [dropDown, setDropDown] = useState(false);
-    const showDropDown = Boolean => setDropDown(!dropDown);
+    const showDropDown = Boolean => setDropDown(false);
 
     const user = useSelector(state => state.session.user);
     const owner = useSelector(state => state.session.productOwner);

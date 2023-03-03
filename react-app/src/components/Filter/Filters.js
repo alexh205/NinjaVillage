@@ -21,15 +21,17 @@ const Filters = () => {
         if (filterId === "All") {
             filteredProd = Object.values(products);
         }
-        return null
+        return null;
     });
     // const randomizedProducts = filteredProd.sort(() => Math.random() - 0.5)
 
     return (
         <>
-            <Header />
+            <section id="filters">
+                <Header />
+            </section>
             <div>
-                <div className="flex flex-row items-center text-[15px] text-gray-500 m-2 ml-4">
+                <div className="flex flex-row items-center text-[17px] text-gray-500 m-2 ml-4">
                     <p>Category </p>
                     <MdOutlineArrowRightAlt className="mt-[2px]" />
                     <p className="ml-1">{filterId}</p>
@@ -52,6 +54,15 @@ const Filters = () => {
                         ))}
                 </div>
             </div>
+            <footer>
+                <a href="#filters">
+                    <div className="flex flex-col items-center justify-center cursor-pointer mb-5">
+                        <p className="text-[10px] md:text-lg text-teal-700 hover:text-amber-600">
+                            Back to the top
+                        </p>
+                    </div>
+                </a>
+            </footer>
         </>
     );
 };

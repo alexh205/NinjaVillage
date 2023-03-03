@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../store/sessionReducer";
@@ -15,7 +15,6 @@ const DropDownMenu = () => {
     const dispatch = useDispatch();
 
     const [clicked, setClicked] = useState(false);
-    const showDropDown = boolean => setClicked(boolean);
 
     const handleClicked = e => {
         e.preventDefault();
@@ -60,7 +59,7 @@ const DropDownMenu = () => {
                             <div
                                 className="text-black text-[16px] font-bold px-[14px] border-b-[2px] border-black flex flex-row my-1 pb-2 items-center cursor-pointer hover:text-amber-500"
                                 onClick={() => {
-                                    showDropDown(false);
+                                    setClicked(false);
                                     history.push("/wishlists");
                                 }}>
                                 <ClipboardDocumentListIcon className="text-ninja_green h-6 mr-1" />
@@ -70,7 +69,7 @@ const DropDownMenu = () => {
                             <div
                                 className="text-black text-[16px] font-bold mr-2 flex flex-row my-1 pb-2 items-center cursor-pointer hover:text-amber-500"
                                 onClick={async () => {
-                                    showDropDown(false);
+                                    setClicked(false);
                                     await dispatch(logout());
                                     history.push("/");
                                 }}>
