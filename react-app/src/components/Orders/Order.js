@@ -29,6 +29,10 @@ const Order = ({ cart }) => {
                             <p className="mr-2">Order #</p>
                             <p className="text-sm md:text-base font-bold">NVORD-{cart.id}</p>
                         </div>
+                        <div className="flex text-sm md:text-base flex-col items-center justify-center ml-2">
+                            <p className="mr-2">Estimated delivery Date</p>
+                            <p className="text-sm md:text-base font-bold">{cart.estimatedDate}</p>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {cart.cartProducts.map((product, i) => (

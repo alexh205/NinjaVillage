@@ -13,6 +13,7 @@ import {
 import { getUserThunk, authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
 import WishListDropDown from "../WishList/WishListDropDown";
+import ImageUpload from "../ImageUpload";
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -21,6 +22,7 @@ const ProductDetail = () => {
 
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
+    const [buttonAction, setButtonAction] = useState(false);
 
     const [dropDown, setDropDown] = useState(false);
     const showDropDown = Boolean => setDropDown(!dropDown);
@@ -54,16 +56,26 @@ const ProductDetail = () => {
     }
 
     const addItemToCart = async () => {
-        const item = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            brand: product.brand,
-            image: product.image,
-        };
-        await dispatch(addToCart(item));
+        setButtonAction(true);
+        try {
+            const item = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                description: product.description,
+                category: product.category,
+                brand: product.brand,
+                image: product.image,
+            };
+
+            await dispatch(addToCart(item));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTimeout(() => {
+                setButtonAction(false);
+            }, 600);
+        }
     };
 
     const deleteItem = async e => {
@@ -225,12 +237,15 @@ const ProductDetail = () => {
                                     {user && (
                                         <button
                                             disabled={
-                                                user.id === product.ownerId
+                                                user.id === product.ownerId ||
+                                                buttonAction
                                             }
                                             className={`${
                                                 user.id === product.ownerId
                                                     ? "hidden cursor-not-allowed"
-                                                    : "button"
+                                                    : buttonAction
+                                                    ? "mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  rounded-sm   bg-green-500 border-green-500 focus:ring-2 focus:ring-green-600 focus:outline-none"
+                                                    : "mt-auto button"
                                             }`}
                                             onClick={() => {
                                                 if (!user) {
@@ -241,6 +256,8 @@ const ProductDetail = () => {
                                             }}>
                                             {!user
                                                 ? "Sign in to add item"
+                                                : buttonAction
+                                                ? "Added"
                                                 : "Add to Cart"}
                                         </button>
                                     )}

@@ -1,14 +1,14 @@
-import React,  {useState} from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addToCart } from "../../store/cartReducer";
 
-
 export const FilteredProd = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
 
+    const [buttonAction, setButtonAction] = useState(false);
 
     if (product && product.productReviews) {
         product.productReviews.forEach(el => {
@@ -22,18 +22,26 @@ export const FilteredProd = ({ product }) => {
     const history = useHistory();
 
     const addItemToCart = async () => {
-        const item = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            brand: product.brand,
-            image: product.image,
-        };
+        setButtonAction(true);
+        try {
+            const item = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                description: product.description,
+                category: product.category,
+                brand: product.brand,
+                image: product.image,
+            };
 
-        await dispatch(addToCart(item));
-
+            await dispatch(addToCart(item));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTimeout(() => {
+                setButtonAction(false);
+            }, 600);
+        }
     };
 
     return (
@@ -62,16 +70,17 @@ export const FilteredProd = ({ product }) => {
                 <p>${product.price}</p>
             </div>
             {user && (
-
                 <button
-                    disabled={user.id === product.ownerId}
+                    disabled={user.id === product.ownerId || buttonAction}
                     className={`${
                         user.id === product.ownerId
                             ? "hidden cursor-not-allowed"
+                            : buttonAction
+                            ? "mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  rounded-sm   bg-green-500 border-green-500 focus:ring-2 focus:ring-green-600 focus:outline-none"
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    Add to Cart
+                    {buttonAction ? "Added" : "Add to Cart"}
                 </button>
             )}
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,11 +7,15 @@ import stateTaxes from "../../media/stateTaxes.json";
 import { cartCheckoutThunk } from "../../store/cartReducer";
 import { authenticate } from "../../store/sessionReducer";
 import Loading from "../Loading";
+import ConfirmationModal from "./ConfirmationModal";
 
 const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [hasClicked, setHasClicked] = useState(false);
+    const [modal, setModal] = useState(false);
+
+    const showModal = Boolean => setModal(false);
 
     const user = useSelector(state => state.session.user);
     const cart = useSelector(state => state.cartStore);
@@ -42,23 +46,82 @@ const Checkout = () => {
     const cartTotal =
         Math.round((preTax_total + tax + Number.EPSILON) * 100) / 100;
 
+    const addWeekdays = (date, weekdays) => {
+        // Copy the date object to avoid modifying the original date
+        const newDate = new Date(date);
+
+        // Get the current day of the week (0 = Sunday, 1 = Monday, etc.)
+        const dayOfWeek = newDate.getDay();
+
+        // Calculate the number of days to add, taking weekends into account
+        let daysToAdd =
+            weekdays + parseInt((weekdays + dayOfWeek - 1) / 5, 10) * 2;
+
+        // Add the days to the date object, skipping over weekends
+        while (daysToAdd > 0) {
+            newDate.setDate(newDate.getDate() + 1);
+            if (newDate.getDay() !== 0 && newDate.getDay() !== 6) {
+                daysToAdd--;
+            }
+        }
+
+        return newDate;
+    };
+
+    const date = new Date();
+    const month = new Intl.DateTimeFormat("en-US", {
+        month: "short",
+    }).format(date);
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const orderDate = `${day}-${month}-${year}`;
+
+    const deliveryDate = addWeekdays(date, 3).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+
+    const endDeliveryDate = addWeekdays(date, 7).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+
     const handleCheckout = async () => {
+        console.log(deliveryDate);
         const cartObj = {
             id: cart.id,
             total: cartTotal,
             checkedOut: true,
             products: cart.addedItems,
+            estimated_delivery: deliveryDate,
         };
         setHasClicked(true);
-        await dispatch(cartCheckoutThunk(cartObj));
-
-        await dispatch(authenticate());
-        setHasClicked(false);
+        try {
+            await dispatch(cartCheckoutThunk(cartObj));
+            await dispatch(authenticate());
+            setModal(true);
+        } catch (error) {
+            console.log("Error during dispatch:", error);
+        } finally {
+            setHasClicked(false);
+        }
     };
 
-    if (total === 0) {
-        history.push("/");
-    }
+    useEffect(() => {
+        if (modal) {
+            const timeout = setTimeout(() => {
+                setModal(false);
+                history.push("/");
+            }, 3500);
+
+            return () => {
+                clearTimeout(timeout);
+                setModal(false);
+            };
+        }
+    }, [modal]);
 
     return (
         <>
@@ -86,17 +149,12 @@ const Checkout = () => {
                         </p>
                         )
                     </div>
-                    <LockClosedIcon className="hidden md:flex h-7 opacity-80 pr-4 md:pr-[160px] cursor-pointer text-white" />
+                    <LockClosedIcon className="hidden md:flex h-7 opacity-80 pr-4 md:pr-[160px] text-white" />
                 </div>
             )}
             <div className="flex flex-row">
-                {/* checkout header  */}
-
-                {/* lower checkout components */}
                 <div>
-                    {/* outer container */}
                     <div className="ml-[160px] mr-7">
-                        {/* shipping address */}
                         <div>
                             <div className="flex flex-row mt-3">
                                 <div className="font-semibold text-xl mr-6">
@@ -116,7 +174,6 @@ const Checkout = () => {
                             </div>
                             <hr className="w-[100%] mt-3"></hr>
                         </div>
-                        {/* payment method  */}
                         <div>
                             <div className="flex flex-row mt-3">
                                 <div className="font-semibold text-xl mr-6">
@@ -154,8 +211,8 @@ const Checkout = () => {
                                             className=" object-contain w-[100%] border-2"
                                         />
                                         <div className="text-orange-700 ml-2">
-                                            Estimated delivery: May. 20, 2045 -
-                                            May. 22, 2045
+                                            Estimated delivery: {deliveryDate} -
+                                            {endDeliveryDate}
                                         </div>
                                         <div className="text-sm text-gray-500 ml-2">
                                             Items Shipped from NinjaVillage.com
@@ -267,6 +324,20 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
+            {modal && (
+                <ConfirmationModal
+                    showModal={showModal}
+                    total={
+                        Math.round(
+                            (preTax_total + tax + Number.EPSILON) * 100
+                        ) / 100
+                    }
+                    cart={cart}
+                    isOpen={modal}
+                    orderDate={orderDate}
+                    deliveryDate={deliveryDate}
+                />
+            )}
         </>
     );
 };

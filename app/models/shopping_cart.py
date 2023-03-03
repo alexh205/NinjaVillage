@@ -11,10 +11,11 @@ class ShoppingCart(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     total = db.Column(db.Integer, default=0)
-    checked_out= db.Column(db.Boolean, nullable=False)
+    checked_out = db.Column(db.Boolean, nullable=False)
+    estimated_delivery = db.Column(db.String, default=None)
     owner_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
-    order_placed = db.Column(db.String,default=None)
+    order_placed = db.Column(db.String, default=None)
     created_date = db.Column(db.DateTime(
         timezone=True), server_default=func.now())
 
@@ -32,6 +33,7 @@ class ShoppingCart(db.Model):
             'ownerId': self.owner_id,
             'createdDate': self.created_date,
             'orderPlaced': self.order_placed,
+            'estimatedDate': self.estimated_delivery,
             'cartProducts': [product.to_dict() for product in self.carts_product],
             'total': self.total
         }

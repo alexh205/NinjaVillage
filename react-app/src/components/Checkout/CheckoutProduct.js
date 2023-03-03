@@ -1,12 +1,14 @@
-import React, {useState} from "react";
-import { useDispatch} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { addToCart, removeItem } from "../../store/cartReducer";
+import { BsPlus } from "react-icons/bs";
+import { BiMinus } from "react-icons/bi";
 import Loading from "../Loading";
 
 const CheckoutProduct = ({ product }) => {
     const dispatch = useDispatch();
-    const [hasClicked, setHasClicked] = useState(false)
-    const [hasClickedRemove, setHasClickedRemove] = useState(false)
+    const [hasClicked, setHasClicked] = useState(false);
+    const [hasClickedRemove, setHasClickedRemove] = useState(false);
 
     const addItemToCart = async () => {
         const item = {
@@ -18,15 +20,15 @@ const CheckoutProduct = ({ product }) => {
             brand: product.brand,
             image: product.image,
         };
-        setHasClicked(true)
+        setHasClicked(true);
         await dispatch(addToCart(item));
-        setHasClicked(false)
+        setHasClicked(false);
     };
 
     const removeItemFromCart = () => {
-        setHasClickedRemove(true)
+        setHasClickedRemove(true);
         dispatch(removeItem(product));
-        setHasClickedRemove(false)
+        setHasClickedRemove(false);
     };
     return (
         <div className="flex flex-row ml-4 my-2">
@@ -56,22 +58,23 @@ const CheckoutProduct = ({ product }) => {
                         </p>
                     </div>
                     <div className="flex flex-row">
-                    {hasClicked && <Loading />}
-                    <button
-                        className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px] mr-4"
-                        disabled={hasClicked}
-                        onClick={() => {
-                            addItemToCart();
-                        }}>
-                        Add to Cart
-                    </button>
-                    {hasClickedRemove && <Loading />}
-                    <button
-                        className="cursor-pointer py-1 m-1 text-[8px] md:text-[10px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[100px]"
-                        disabled={hasClickedRemove}
-                        onClick={removeItemFromCart}>
-                         Remove from Cart
-                    </button></div>
+                        {hasClicked && <Loading />}
+                        <button
+                            className="button mr-2 mt-3"
+                            disabled={hasClicked}
+                            onClick={() => {
+                                addItemToCart();
+                            }}>
+                            <BsPlus />
+                        </button>
+                        {hasClickedRemove && <Loading />}
+                        <button
+                            className="button mt-3"
+                            disabled={hasClickedRemove}
+                            onClick={removeItemFromCart}>
+                            <BiMinus />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

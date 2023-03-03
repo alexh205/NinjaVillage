@@ -3,9 +3,11 @@ from flask_login import login_required, current_user
 from app.models import User, ShoppingCart, db, Product
 
 shopping_cart_routes = Blueprint('shopping_carts', __name__)
-auth_error= "User is not authorized to complete this action"
+auth_error = "User is not authorized to complete this action"
 
-#* Get Shopping Cart *****************************************************
+# * Get Shopping Cart *****************************************************
+
+
 @shopping_cart_routes.route('/<int:id>')
 @login_required
 def shopping_cart(id):
@@ -15,7 +17,9 @@ def shopping_cart(id):
     shopping_cart = ShoppingCart.query.get_or_404(id)
     return shopping_cart.to_dict()
 
-#* Create Shopping Cart *****************************************************
+# * Create Shopping Cart *****************************************************
+
+
 @shopping_cart_routes.route('/new', methods=['POST'])
 @login_required
 def shopping_cart_create():
@@ -23,8 +27,8 @@ def shopping_cart_create():
     Create a new shopping_cart instance, and then add to database
     """
     new_shopping_cart = ShoppingCart(
-        checked_out= False,
-        owner_id= current_user.id,
+        checked_out=False,
+        owner_id=current_user.id,
     )
     db.session.add(new_shopping_cart)
     db.session.commit()
@@ -32,7 +36,7 @@ def shopping_cart_create():
     return new_shopping_cart.to_dict()
 
 
-#* Checkout Shopping Cart *****************************************************
+# * Checkout Shopping Cart *****************************************************
 @shopping_cart_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def shopping_cart_edit(id):
@@ -65,10 +69,13 @@ def shopping_cart_edit(id):
             if key != 'products' and key == 'orderPlaced':
                 queried_shopping_cart.order_placed = val
                 db.session.commit()
+            if key != 'products' and key == 'estimated_delivery':
+                queried_shopping_cart.estimated_delivery = val
+                db.session.commit()
 
         new_shopping_cart = ShoppingCart(
-            checked_out= False,
-            owner_id= current_user.id,
+            checked_out=False,
+            owner_id=current_user.id,
         )
         db.session.add(new_shopping_cart)
         db.session.commit()

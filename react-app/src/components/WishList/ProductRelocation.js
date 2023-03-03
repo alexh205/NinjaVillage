@@ -5,7 +5,7 @@ import {
     addProductToListThunk,
     removeItemFromListThunk,
 } from "../../store/wishListReducer";
-import AddedToWishList from "./AddedToWishList";
+
 
 const ProductRelocation = ({
     product,

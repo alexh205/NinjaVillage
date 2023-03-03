@@ -7,6 +7,11 @@ import Loading from "../Loading";
 
 const MainProducts = ({ product }) => {
     const [hasClicked, setHasClicked] = useState(false);
+    const [buttonAction, setButtonAction] = useState(false);
+
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     let ratingTotal = 0;
     let ratingAvg;
@@ -18,24 +23,27 @@ const MainProducts = ({ product }) => {
         ratingAvg = ratingTotal / product.productReviews.length;
     }
 
-    const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
-    const history = useHistory();
-
-
     const addItemToCart = async () => {
-        const item = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            brand: product.brand,
-            image: product.image,
-        };
+        setButtonAction(true);
+        try {
+            const item = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                description: product.description,
+                category: product.category,
+                brand: product.brand,
+                image: product.image,
+            };
 
-        await dispatch(addToCart(item));
-
+            await dispatch(addToCart(item));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTimeout(() => {
+                setButtonAction(false);
+            }, 600);
+        }
     };
 
     return (
@@ -52,15 +60,13 @@ const MainProducts = ({ product }) => {
 
                     history.push(`/products/${product.id}`);
 
-                    setHasClicked(false)
+                    setHasClicked(false);
                 }}>
-
-                    <img
-                        className="object-contain h-[200px] w-[200px] my-3"
-                        src={product.image}
-                        alt="product"
-                    />
-
+                <img
+                    className="object-contain h-[200px] w-[200px] my-3"
+                    src={product.image}
+                    alt="product"
+                />
             </div>
             <h4>{product.title}</h4>
             <div className="flex">
@@ -81,14 +87,16 @@ const MainProducts = ({ product }) => {
             {hasClicked && <Loading />}
             {user && (
                 <button
-                    disabled={user.id === product.ownerId}
+                    disabled={user.id === product.ownerId || buttonAction}
                     className={`${
                         user.id === product.ownerId
                             ? "hidden cursor-not-allowed"
+                            : buttonAction
+                            ? "mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  rounded-sm   bg-green-500 border-green-500 focus:ring-2 focus:ring-green-600 focus:outline-none"
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>
-                    Add to Cart
+                    {buttonAction ? "Added" : "Add to Cart"}
                 </button>
             )}
         </div>

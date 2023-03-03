@@ -84,16 +84,16 @@ const ModalBody = ({ children }) => {
         </div>
     );
 };
-const ModalFooter = ({ children }) => {
-    return (
-        <div className="p-p-[0.35rem] flex justify-end ">
-            <div className="">{children}</div>
-        </div>
-    );
-};
+// const ModalFooter = ({ children }) => {
+//     return (
+//         <div className="p-p-[0.35rem] flex justify-end ">
+//             <div className="">{children}</div>
+//         </div>
+//     );
+// };
 Modal.Header = ModalHeader;
 Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
+// Modal.Footer = ModalFooter;
 Modal.DismissButton = DismissButton;
 
 export default Modal;

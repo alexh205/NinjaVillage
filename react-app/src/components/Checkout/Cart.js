@@ -40,7 +40,7 @@ const Cart = ({user}) => {
                     {user && cart && cart.length > 0 ? (
                         <>
                         <h2 className="whitespace-nowrap font-bold text-lg static">Subtotal ({cart.length} items): {" "}
-                            {cartTotal > 0 ? <p>${Math.round(((cartTotal) + Number.EPSILON) * 100) / 100}</p>: <p>$0</p>}
+                        <p>${cartTotal >= 1 ? (Math.round(((cartTotal) + Number.EPSILON) * 100) / 100): 0}</p>
                             </h2>
                             <button
                             className={`button mt-2 ${!user && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`} onClick={()=> history.push('/checkout')}>

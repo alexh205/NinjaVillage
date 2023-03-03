@@ -66,6 +66,7 @@ export const cartCheckoutThunk = cartObj => async dispatch => {
             checkedOut: cartObj.checkedOut,
             orderPlaced: new Date(),
             products: cartObj.products,
+            estimated_delivery: cartObj.estimated_delivery
         }),
     });
     const response = await request.json();

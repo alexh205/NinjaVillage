@@ -75,7 +75,8 @@ const CartProduct = ({ product }) => {
                 <p className="text-xs my-2 line-clamp-3">
                     {product.description}
                 </p>
-                <div className="flex flex-row justify-between items-center">
+
+                <div className="flex flex-col justify-center items-start ml-4">
                     <div className="flex flex-row items-center">
                         <p className="mr-2">Quantity:</p>
                         <p className="font-semibold text-red-700">
@@ -86,7 +87,7 @@ const CartProduct = ({ product }) => {
                     <div className="flex flex-row items-center">
                         {hasClicked && <Loading />}
                         <button
-                            className="mt-auto button mr-4"
+                            className="mt-auto button mr-2"
                             disabled={hasClicked}
                             onClick={addItemToCart}>
                             <BsPlus />
