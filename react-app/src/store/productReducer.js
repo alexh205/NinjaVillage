@@ -11,10 +11,10 @@ const EDIT_PROD_DATA = "product/EDIT_PROD_DATA";
 const DELETE_PROD_DATA = "product/DELETE_PROD_DATA";
 const CLEAR_PROD_DATA = "product/CLEAR_PROD_DATA";
 
-// ******************** Review *****************************
-const ADD_REVIEW_DATA = "review/ADD_REVIEW_DATA";
-const EDIT_REVIEW_DATA = "review/EDIT_REVIEW_DATA";
-const DELETE_REVIEW_DATA = "review/DELETE_REVIEW_DATA";
+// // ******************** Review *****************************
+// const ADD_REVIEW_DATA = "review/ADD_REVIEW_DATA";
+// const EDIT_REVIEW_DATA = "review/EDIT_REVIEW_DATA";
+// const DELETE_REVIEW_DATA = "review/DELETE_REVIEW_DATA";
 
 // ACTION CREATORS
 
@@ -59,26 +59,26 @@ export const clearProduct = () => {
     };
 };
 
-// ************** Review ********************
-const addReview = review => {
-    return {
-        type: ADD_REVIEW_DATA,
-        payload: review,
-    };
-};
+// // ************** Review ********************
+// const addReview = review => {
+//     return {
+//         type: ADD_REVIEW_DATA,
+//         payload: review,
+//     };
+// };
 
-const editReview = review => {
-    return {
-        type: EDIT_REVIEW_DATA,
-        payload: review,
-    };
-};
-const deleteReview = reviewId => {
-    return {
-        type: DELETE_REVIEW_DATA,
-        payload: reviewId,
-    };
-};
+// const editReview = review => {
+//     return {
+//         type: EDIT_REVIEW_DATA,
+//         payload: review,
+//     };
+// };
+// const deleteReview = reviewId => {
+//     return {
+//         type: DELETE_REVIEW_DATA,
+//         payload: reviewId,
+//     };
+// };
 
 // THUNKS
 

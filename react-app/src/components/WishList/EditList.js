@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import Loading from "../Loading";
-import Modal from "../../context/Modal";
+import { useDispatch} from "react-redux";
 import { editListThunk } from "../../store/wishListReducer";
 import { authenticate } from "../../store/sessionReducer";
 
@@ -14,7 +11,7 @@ const EditList = ({ list, edit, userLists }) => {
 
     const listId = list.id;
 
-    
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (editRef.current && !editRef.current.contains(event.target)) {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Loading from "../Loading";
 import { FaStar } from "react-icons/fa";
 import { removeItemFromListThunk } from "../../store/wishListReducer";
 import { addToCart } from "../../store/cartReducer";
@@ -10,7 +9,7 @@ import ProductRelocation from "./ProductRelocation";
 const WishListProd = ({ product, activeList }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [hasClicked, setHasClicked] = useState(false);
+
     const user = useSelector(state => state.session.user);
     const list = useSelector(state =>
         state.listStore.userLists.find(list => list.id === activeList.id)
@@ -19,22 +18,31 @@ const WishListProd = ({ product, activeList }) => {
 
     const item = list.listProducts.find(prod => prod.id === product.id);
     const [dropDown, setDropDown] = useState(false);
+    const [buttonAction, setButtonAction] = useState(false);
 
     const showDropDown = Boolean => setDropDown(false);
 
     const addItemToCart = async () => {
-        const itemObj = {
-            id: item.id,
-            title: item.title,
-            price: item.price,
-            description: item.description,
-            category: item.category,
-            brand: item.brand,
-            image: item.image,
-        };
-        setHasClicked(true);
-        await dispatch(addToCart(itemObj));
-        setHasClicked(false);
+        setButtonAction(true);
+        try {
+            const itemObj = {
+                id: item.id,
+                title: item.title,
+                price: item.price,
+                description: item.description,
+                category: item.category,
+                brand: item.brand,
+                image: item.image,
+            };
+
+            await dispatch(addToCart(itemObj));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTimeout(() => {
+                setButtonAction(false);
+            }, 1600);
+        }
     };
 
     const removeItemFromList = async () => {
@@ -97,14 +105,19 @@ const WishListProd = ({ product, activeList }) => {
                             </p>
                         </div>
                     </div>
-                    {hasClicked && <Loading />}
+
                     {user && (
                         <div className="flex flex-col items-center justify-center pb-10 cursor-pointer">
-                            <div
+                            <button
                                 onClick={addItemToCart}
-                                className="text-sm bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-12 py-1 mb-1">
+                                disabled={buttonAction}
+                                className={`${
+                                    buttonAction
+                                        ? "text-sm bg-gradient-to-b from-green-300 to-green-500 border-green-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600 active:from-green-600 px-12 py-1 mb-1"
+                                        : "text-sm bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-12 py-1 mb-1"
+                                }`}>
                                 Add to Cart
-                            </div>
+                            </button>
                             <div className="flex flex-row items-center justify-center mt-1 ">
                                 <div>
                                     <div

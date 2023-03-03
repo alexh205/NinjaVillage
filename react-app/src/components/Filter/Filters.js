@@ -21,6 +21,7 @@ const Filters = () => {
         if (filterId === "All") {
             filteredProd = Object.values(products);
         }
+        return null
     });
     // const randomizedProducts = filteredProd.sort(() => Math.random() - 0.5)
 

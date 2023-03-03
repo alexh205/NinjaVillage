@@ -76,7 +76,7 @@ export const FilteredProd = ({ product }) => {
                         user.id === product.ownerId
                             ? "hidden cursor-not-allowed"
                             : buttonAction
-                            ? "mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  rounded-sm   bg-green-500 border-green-500 focus:ring-2 focus:ring-green-600 focus:outline-none"
+                            ? "mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  text-white rounded-sm bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none"
                             : "mt-auto button"
                     }`}
                     onClick={addItemToCart}>

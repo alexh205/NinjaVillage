@@ -14,10 +14,7 @@ const ImageUpload = ({ productId, reviewId }) => {
 
         formData.append("reviewId", reviewId);
         formData.append("productId", productId);
-        // console.log(typeof(productId))
-        console.log(image, 'Image before submission')
-        console.log(reviewId, 'reviewId before submission')
-        console.log(productId, 'productId before submission')
+        
         // aws uploads can be a bit slow—displaying
         setHasClicked(true);
 

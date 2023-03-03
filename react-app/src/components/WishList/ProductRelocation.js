@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { GiNinjaStar } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import {

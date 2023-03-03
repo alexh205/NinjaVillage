@@ -51,7 +51,9 @@ const ConfirmationModal = ({
                                             </p>
                                             <div className="text-sm text-gray-500 flex flex-row">
                                                 Estimated delivery date:
-                                                <p className="ml-2">{deliveryDate}</p>
+                                                <p className="ml-2">
+                                                    {deliveryDate}
+                                                </p>
                                                 {/* <p>{endDeliveryDate}</p> */}
                                             </div>
                                             <p className="text-sm text-gray-500">
@@ -65,7 +67,7 @@ const ConfirmationModal = ({
                                 <button
                                     onClick={() => {
                                         showModal();
-                                        history.push("/");
+                                        history.push("/orders");
                                     }}
                                     type="button"
                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">

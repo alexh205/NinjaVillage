@@ -41,8 +41,7 @@ def image_delete(id):
 @login_required
 def image_create():
     image = request.files["image"]
-    print('**********************************')
-    print(request.files["image"])
+
     if "image" not in request.files:
         return {"errors": "image required"}, 400
 
@@ -66,9 +65,7 @@ def image_create():
                       review_id=request.form['reviewId'], product_id=request.form['productId'])
     db.session.add(new_image)
     db.session.commit()
-    # print("**********")
-    # print({'url': url})
-    # return {'url': url}
+
     return new_image.to_dict()
 
 

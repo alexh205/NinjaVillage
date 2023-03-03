@@ -19,7 +19,7 @@ const OrderProduct = ({ product}) => {
         history.push("/");
     }
     return (
-        <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-dotted rounded-2xl ">
+        <div className="relative flex flex-col m-4 bg-white  p-8 border-4 border-dotted rounded-2xl ">
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
@@ -27,7 +27,7 @@ const OrderProduct = ({ product}) => {
                 className="cursor-pointer"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 <img
-                    className="object-contain h-[200px] w-[200px] mb-2"
+                    className="object-contain h-[150px] w-[150px] mb-2"
                     src={product.image}
                     alt="product"
                 />{" "}

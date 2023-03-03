@@ -58,6 +58,7 @@ export const WishListContainer = () => {
         if (activeList.id === list.id) {
             currentList = list;
         }
+        return null
     });
 
     const handelListCreation = async e => {
@@ -67,7 +68,7 @@ export const WishListContainer = () => {
 
         if (errors.length) {
             setValidateErrors(errors);
-            return;
+            return null
         }
 
         setHasClicked(true);

@@ -11,11 +11,11 @@ const Order = ({ cart }) => {
     return (
         <>
             {cart && cart.cartProducts && (
-                <div className="border-4 border-ninja_green border-double m-2 p-2  ">
+                <div className="border-4 border-ninja_green border-double m-3 p-3  ">
                     <div className="flex flex-row justify-center md:justify-evenly border-b-2 border-solid bg-gray-500 text-white text-[15px] ">
                         <div className="flex flex-col items-center justify-center">
                             <p className="mr-2">Order Placed</p>
-                            <p className="text-sm md:text-md font-bold">
+                            <p className="text-sm md:text-base font-bold">
                                 {orderDate}
                             </p>
                         </div>
