@@ -41,7 +41,7 @@ const WishListProd = ({ product, activeList }) => {
         } finally {
             setTimeout(() => {
                 setButtonAction(false);
-            }, 1600);
+            }, 600);
         }
     };
 

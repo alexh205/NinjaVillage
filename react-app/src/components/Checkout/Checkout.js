@@ -13,6 +13,7 @@ const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [hasClicked, setHasClicked] = useState(false);
+    const [hasClicked_b, setHasClicked_b] = useState(false);
     const [modal, setModal] = useState(false);
     const [cartObj, setCartObj] = useState("");
     const [valTotal, setValTotal] = useState("");
@@ -108,6 +109,25 @@ const Checkout = () => {
             console.log("Error during dispatch:", error);
         } finally {
             setHasClicked(false);
+        }
+    };
+    const handleCheckout_b = async () => {
+        const cartObj = {
+            id: cart.id,
+            total: cartTotal,
+            checkedOut: true,
+            products: cart.addedItems,
+            estimated_delivery: deliveryDate,
+        };
+        setHasClicked_b(true);
+        try {
+            await dispatch(cartCheckoutThunk(cartObj));
+            await dispatch(authenticate());
+            setModal(true);
+        } catch (error) {
+            console.log("Error during dispatch:", error);
+        } finally {
+            setHasClicked_b(false);
         }
     };
 
@@ -264,10 +284,10 @@ const Checkout = () => {
                 </div>
                 <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative">
                     <div className="flex flex-col items-center">
-                        {hasClicked && <Loading />}
+                        {hasClicked_b && <Loading />}
                         <button
                             className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow"
-                            disabled={hasClicked || total < 1}
+                            disabled={hasClicked_b || total < 1}
                             onClick={() => {
                                 setCartObj(cart);
                                 setValTotal(cartTotal);
