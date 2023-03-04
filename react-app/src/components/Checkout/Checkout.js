@@ -14,6 +14,8 @@ const Checkout = () => {
     const dispatch = useDispatch();
     const [hasClicked, setHasClicked] = useState(false);
     const [modal, setModal] = useState(false);
+    const [cartObj, setCartObj] = useState("");
+    const [valTotal, setValTotal] = useState("");
 
     const showModal = Boolean => setModal(false);
 
@@ -23,6 +25,7 @@ const Checkout = () => {
     const total = useSelector(state => state.cartStore.total);
 
     const preTax_total = Math.round((total + 10 + Number.EPSILON) * 100) / 100;
+    const shippingHandling = Number(10);
 
     const tax =
         Math.round(
@@ -89,7 +92,6 @@ const Checkout = () => {
     });
 
     const handleCheckout = async () => {
-        console.log(deliveryDate);
         const cartObj = {
             id: cart.id,
             total: cartTotal,
@@ -229,8 +231,12 @@ const Checkout = () => {
                                         {hasClicked && <Loading />}
                                         <button
                                             className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]"
-                                            disabled={hasClicked}
-                                            onClick={e => handleCheckout(e)}>
+                                            disabled={hasClicked || total < 1}
+                                            onClick={() => {
+                                                setCartObj(cart);
+                                                setValTotal(cartTotal);
+                                                handleCheckout();
+                                            }}>
                                             Place your order
                                         </button>
                                         <div className="flex flex-col pl-2">
@@ -238,15 +244,7 @@ const Checkout = () => {
                                                 Order total:
                                                 <div className="ml-2">
                                                     {total > 0 ? (
-                                                        <p>
-                                                            $
-                                                            {Math.round(
-                                                                (preTax_total +
-                                                                    tax +
-                                                                    Number.EPSILON) *
-                                                                    100
-                                                            ) / 100}
-                                                        </p>
+                                                        <p>${cartTotal}</p>
                                                     ) : (
                                                         <p>$0</p>
                                                     )}
@@ -269,8 +267,12 @@ const Checkout = () => {
                         {hasClicked && <Loading />}
                         <button
                             className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow"
-                            disabled={hasClicked}
-                            onClick={handleCheckout}>
+                            disabled={hasClicked || total < 1}
+                            onClick={() => {
+                                setCartObj(cart);
+                                setValTotal(cartTotal);
+                                handleCheckout();
+                            }}>
                             Place your order
                         </button>
                         <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1">
@@ -295,7 +297,11 @@ const Checkout = () => {
                         <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
                             <p>Shipping & handling:</p>
                             <div>
-                                {total > 0 ? <p>$10.00</p> : <p>$0</p>}
+                                {total > 0 ? (
+                                    <p>${shippingHandling}</p>
+                                ) : (
+                                    <p>$0</p>
+                                )}
 
                                 <hr className="w-[100%] mt-2"></hr>
                             </div>
@@ -311,28 +317,15 @@ const Checkout = () => {
                     </div>
                     <div className="font-semibold sm:text-md md:text-lg lg:text-xl ml-2 md:ml-5 my-3 md:my-4 lg:my-6 sm:mx-2 md:mx-3 lg:mx-6 text-orange-700 flex flex-row justify-between items-center">
                         <p className="mr-[2px]">Order total:</p>
-                        {total > 0 ? (
-                            <p>
-                                $
-                                {Math.round(
-                                    (preTax_total + tax + Number.EPSILON) * 100
-                                ) / 100}
-                            </p>
-                        ) : (
-                            <p>$0</p>
-                        )}
+                        {total > 0 ? <p>${cartTotal}</p> : <p>$0</p>}
                     </div>
                 </div>
             </div>
             {modal && (
                 <ConfirmationModal
                     showModal={showModal}
-                    total={
-                        Math.round(
-                            (preTax_total + tax + Number.EPSILON) * 100
-                        ) / 100
-                    }
-                    cart={cart}
+                    cart={cartObj}
+                    total={valTotal}
                     isOpen={modal}
                     orderDate={orderDate}
                     deliveryDate={deliveryDate}

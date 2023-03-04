@@ -3,14 +3,14 @@ import { useHistory } from "react-router-dom";
 
 const ConfirmationModal = ({
     showModal,
-    total,
     cart,
+    total,
     isOpen,
-    deliveryDate,
     orderDate,
+    deliveryDate,
 }) => {
     const history = useHistory();
-
+    
     return (
         <div>
             {isOpen && (
@@ -54,7 +54,6 @@ const ConfirmationModal = ({
                                                 <p className="ml-2">
                                                     {deliveryDate}
                                                 </p>
-                                                {/* <p>{endDeliveryDate}</p> */}
                                             </div>
                                             <p className="text-sm text-gray-500">
                                                 Total cost: ${total}

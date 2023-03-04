@@ -58,7 +58,7 @@ export const WishListContainer = () => {
         if (activeList.id === list.id) {
             currentList = list;
         }
-        return null
+        return null;
     });
 
     const handelListCreation = async e => {
@@ -68,7 +68,7 @@ export const WishListContainer = () => {
 
         if (errors.length) {
             setValidateErrors(errors);
-            return null
+            return null;
         }
 
         setHasClicked(true);
@@ -108,6 +108,7 @@ export const WishListContainer = () => {
                                             <input
                                                 className=" border-[1px] pr-1 rounded-sm"
                                                 value={listName}
+                                                placeholder="Wish List"
                                                 onChange={e =>
                                                     setListName(e.target.value)
                                                 }></input>

@@ -105,6 +105,7 @@ const CreateProduct = () => {
                             name="title"
                             onChange={e => setTitle(e.target.value)}
                             value={title}
+                            placeholder='Product Name'
                             required={true}></input>
                     </div>
 
@@ -117,6 +118,7 @@ const CreateProduct = () => {
                             name="price"
                             onChange={e => setPrice(e.target.value)}
                             value={price}
+                            placeholder='12.50'
                             required={true}></input>
                     </div>
 
@@ -130,7 +132,9 @@ const CreateProduct = () => {
                             maxLength="1000"
                             name="description"
                             onChange={e => setDescription(e.target.value)}
-                            value={description}></textarea>
+                            value={description}
+                            placeholder='Top of the line cheese maker'
+                            ></textarea>
                     </div>
 
                     <div className="mt-3 flex flex-col border-b">
@@ -172,9 +176,9 @@ const CreateProduct = () => {
                             name="brand"
                             onChange={e => setBrand(e.target.value)}
                             value={brand}
+                            placeholder='The best company'
                             required={true}></input>
                     </div>
-
                     <div className="mt-3 flex flex-col border-b">
                         <label className="font-bold text-xl my-1">
                             Image url
@@ -187,6 +191,7 @@ const CreateProduct = () => {
                             name="image"
                             onChange={e => setImage(e.target.value)}
                             value={image}
+                            placeholder='https://www.images.com'
                             required={true}></input>
                     </div>
 
