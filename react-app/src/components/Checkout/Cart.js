@@ -46,7 +46,9 @@ const Cart = ({ user }) => {
                                 <p>
                                     $
                                     {cartTotal > 0
-                                        ? Math.round(cartTotal + Number.EPSILON)
+                                        ? Math.round(
+                                              (cartTotal + Number.EPSILON) * 100
+                                          ) / 100
                                         : 0}
                                 </p>
                             </h2>
