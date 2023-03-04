@@ -10,7 +10,7 @@ def seed_products():
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Wolf House",
             "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            "owner_id": 1,
+            "owner_id": 4,
         },
         {
             "title": "Mens Casual Premium Slim Fit T-Shirts ",
@@ -469,7 +469,7 @@ def seed_products():
             "category": "Electronics",
             "brand": "Logitech",
             "image": "https://m.media-amazon.com/images/I/61gnGTGkPkL._AC_SL1500_.jpg",
-            "owner_id": 3,
+            "owner_id": 1,
         },
         {
             "title": "2K - Mafia: Trilogy - Steam PC",

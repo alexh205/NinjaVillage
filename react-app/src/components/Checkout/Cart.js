@@ -11,7 +11,7 @@ const Cart = ({ user }) => {
     if (cartTotal < 1) cartTotal = 0;
 
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 mb-5">
             <Header />
             <main className="lg:flex max-w-screen-2xl mx-auto">
                 {/* left */}

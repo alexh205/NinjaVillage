@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Header from "../Header/Header";
@@ -20,27 +20,44 @@ const OrdersContainer = () => {
         history.push("/");
     }
 
-    // set up pagination
-    const [pageNumber, setPageNumber] = useState(0);
-    const itemsPerPage = 3;
-    const pagesVisited = pageNumber * itemsPerPage;
-
     // set up date filtering
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
+    const [pageNumber, setPageNumber] = useState(0);
+
+    // reset page number when date range changes
+    useEffect(() => {
+        setPageNumber(0);
+    }, [dateRange]);
 
     // filter orders based on date range
+    let filteredOrders;
+    if (userOrders) {
+        filteredOrders = userOrders;
+    }
+
     if (startDate && endDate) {
-        userOrders = userOrders.filter(cart => {
+        filteredOrders = filteredOrders.filter(cart => {
             const date = new Date(cart.orderPlaced);
             return date >= startDate && date <= endDate;
         });
     }
 
-    const pageCount = Math.ceil(userOrders.length / itemsPerPage);
-    const displayOrders = userOrders
-        .slice(pagesVisited, pagesVisited + itemsPerPage)
-        .map((cart, i) => <Order cart={cart} key={i} />);
+    // set up pagination
+    const itemsPerPage = 4;
+    const pagesVisited = pageNumber * itemsPerPage;
+    let pageCount;
+
+    // display orders for current page
+    let displayOrders;
+
+    if (filteredOrders) {
+        pageCount = Math.ceil(filteredOrders.length / itemsPerPage);
+        filteredOrders.sort((a, b) => b.createdDate - a.createdDate).reverse();
+        displayOrders = filteredOrders
+            .slice(pagesVisited, pagesVisited + itemsPerPage)
+            .map((cart, i) => <Order cart={cart} key={i} />);
+    }
 
     // handle page change
     const handlePageClick = ({ selected }) => {
@@ -51,14 +68,16 @@ const OrdersContainer = () => {
         <>
             <Header />
             <div className="flex flex-col items-center mt-3 static container mx-auto">
-                <section id="orders">
-                    <p
-                        className="mb-1 font-bold text-xl md:text-3xl"
-                        id="orderHeader">
-                        Your Orders ({userOrders.length})
-                    </p>
-                </section>
-                {user && userOrders.length > 0 ? (
+                {userOrders && (
+                    <section id="orders">
+                        <p
+                            className="mb-1 font-bold text-xl md:text-3xl"
+                            id="orderHeader">
+                            Your Orders ({userOrders.length})
+                        </p>
+                    </section>
+                )}
+                {user && userOrders?.length ? (
                     <div className="mt-2 flex flex-col items-center">
                         <div className=" mb-3 z-10">
                             <DatePicker
@@ -115,11 +134,11 @@ const OrdersContainer = () => {
                         Currently you do not have any past orders
                     </div>
                 )}
-                {userOrders.length > 1 && (
+                {userOrders?.length > 1 && (
                     <footer>
                         <a href="#orders">
                             <div className="flex flex-col items-center justify-center cursor-pointer mb-5">
-                                <p className="text-[10px] md:text-lg text-teal-700 hover:text-amber-600">
+                                <p className="text-[12px] md:text-lg text-teal-700 hover:text-amber-600">
                                     Back to the top
                                 </p>
                             </div>

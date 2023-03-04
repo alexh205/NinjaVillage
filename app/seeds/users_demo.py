@@ -33,50 +33,14 @@ def seed_users():
         "zip_code": "79116",
         "profile_img": "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80"
     }, {
-        "username": "hcassley2",
-        "name": "Humbert Cassley",
-        "email": "hcassley2@bbc.co.uk",
-        "password": "0T0G4qct5", "street_address": "98416 Del Mar Alley",
-        "city": "Las Vegas",
-        "state": "NV",
-        "zip_code": "89150",
-        "profile_img": "https://images.unsplash.com/photo-1497206365907-f5e630693df0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-    }, {
-        "username": "iallen3",
-        "name": "Izzy Allen",
-        "email": "iallen3@time.gov",
-        "password": "eziRJlJoe", "street_address": "36 Front Avenue",
-        "city": "Richmond",
-        "state": "VA",
-        "zip_code": "23289",
-        "profile_img": "https://images.unsplash.com/photo-1555169062-013468b47731?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
-    }, {
-        "username": "jkadar4",
-        "name": "Josh Kadar",
-        "email": "jkadar4@soup.io",
-        "password": "et90uD", "street_address": "2 Heath Place",
-        "city": "Reno",
-        "state": "NV",
-        "zip_code": "89505",
-        "profile_img": "https://images.unsplash.com/photo-1605895773434-3579e181bc3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
-    }, {
-        "username": "pcollelton5",
-        "name": "Paul Collelton",
-        "email": "pcollelton5@flickr.com",
-        "password": "eyRfcW6S", "street_address": "01 Continental Way",
-        "city": "Jackson",
-        "state": "MS",
-        "zip_code": "39204",
-        "profile_img": "https://images.unsplash.com/photo-1602491453631-e2a5ad90a131?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
-    }, {
-        "username": "tkolis6",
-        "name": "Tim Kolis",
-        "email": "tkolis6@aa.com",
-        "password": "WMV8TghcYdhI", "street_address": "23747 Carey Junction",
+        "username": "alexH",
+        "name": "Alexios AC",
+        "email": "alex@aa.com",
+        "password": "password", "street_address": "23747 Kosmos Arena",
         "city": "Portland",
         "state": "OR",
-        "zip_code": "97271",
-        "profile_img": "https://images.unsplash.com/photo-1669954879851-26df381d6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1348&q=80"
+        "zip_code": "00425",
+        "profile_img": "https://images.unsplash.com/photo-1610987630265-35804332a182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
     }]
 
     db.session.add_all([User(**user)for user in users])

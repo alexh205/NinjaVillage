@@ -31,7 +31,7 @@ const Home = () => {
             <div>
                 <a href="#header">
                     <div className="flex flex-col items-center justify-center cursor-pointer mb-5">
-                        <p className="text-[10px] md:text-lg text-teal-700 hover:text-amber-600">
+                        <p className="text-[12px] md:text-lg text-teal-700 hover:text-amber-600">
                             Back to the top
                         </p>
                     </div>

@@ -21,6 +21,7 @@ import OrdersContainer from "./components/Orders/OrdersContainer";
 import UserProducts from "./components/Product/UserProducts";
 import { WishListContainer } from "./components/WishList/WishListContainer";
 import { getAllUserListsThunk } from "./store/wishListReducer";
+import { addToCart } from "./store/cartReducer";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -40,8 +41,23 @@ function App() {
             );
             dispatch(setActiveCart(userCart));
             dispatch(getAllUserListsThunk(`${user.id}`));
+            // localStorage.setItem();
         }
-    }, [user, cartStore, dispatch]);
+    }, [user, dispatch]);
+
+    useEffect(() => {
+        const savedUserId = localStorage.getItem("userId");
+        if (user && user.id === savedUserId) {
+            // const cartItems =
+            //     JSON.parse(localStorage.getItem("cartItems")) || [];
+            // cartItems.forEach(item => dispatch(addToCart(item)));
+        } else if (user && user.id !== cartStore.ownerId) {
+            // localStorage.removeItem("cartItems");
+            let userCart = user.ownedCarts.filter(
+                cart => cart.checkedOut === false
+            );
+        }
+    }, [dispatch, user]);
 
     useEffect(() => {
         setTimeout(() => {

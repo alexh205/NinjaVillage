@@ -123,12 +123,16 @@ const ProductDetail = () => {
                                 ) : (
                                     !user && null
                                 )}
-
-                                <img
-                                    className="hidden md:flex md:min-w-[300px] min-w-[250px] md:min-h-[280px] max-h-[300px] object-contain"
-                                    src={product.image}
-                                    alt="product"
-                                />
+                                <a
+                                    href={product.image}
+                                    target="_blank"
+                                    rel="noreferrer">
+                                    <img
+                                        className="hidden md:flex md:min-w-[300px] min-w-[250px] md:min-h-[280px] max-h-[300px] object-contain"
+                                        src={product.image}
+                                        alt="product"
+                                    />
+                                </a>
                             </div>
 
                             <div className="flex flex-col ml-7 mr-2">

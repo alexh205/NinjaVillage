@@ -24,7 +24,6 @@ const Profile = () => {
     const handleClickProfileImage = e => {
         e.preventDefault();
         setClicked(!clicked);
-
     };
 
     return (
@@ -36,7 +35,6 @@ const Profile = () => {
                         <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                             About Me
                         </h1>
-
                         <div className=" flex flex-row ml-4 items-center mt-3">
                             <img
                                 className="hidden md:flex rounded-full max-h-[175px] mr-3"
@@ -131,10 +129,12 @@ const Profile = () => {
                                     </div>
                                     <div className="mt-2 ml-14">
                                         <button
-                                            className="text-sky-600 text-sm cursor-pointer font-bold"
-
+                                            className={`${
+                                                user.username === "Demo"
+                                                    ? "hidden"
+                                                    : "text-sky-600 text-sm cursor-pointer font-bold"
+                                            }`}
                                             onClick={e => {
-
                                                 handleClickProfileImage(e);
                                             }}>
                                             Edit profile

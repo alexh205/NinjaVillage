@@ -84,6 +84,7 @@ const cartReducer = (state = initialState, action) => {
                 ...initialState,
                 id: action.payload[0].id,
                 checkedOut: action.payload[0].checkedOut,
+                ownerId: action.payload[0].ownerId
             };
         }
 
