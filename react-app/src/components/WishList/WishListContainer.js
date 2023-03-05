@@ -11,6 +11,7 @@ import {
 } from "../../store/wishListReducer";
 import { authenticate } from "../../store/sessionReducer";
 import EditList from "./EditList";
+import { GiRunningNinja } from "react-icons/gi";
 
 export const WishListContainer = () => {
     const dispatch = useDispatch();
@@ -82,7 +83,9 @@ export const WishListContainer = () => {
 
     return (
         <>
-            <Header />
+            <section id="header">
+                <Header />
+            </section>
             <div className="grid grid-rows-auto container mx-auto mt-5 mb-6 items-center">
                 <div className="flex flex-row justify-between mx-10">
                     <div className="text-[24px] font-bold hover:text-ninja_green">
@@ -191,7 +194,6 @@ export const WishListContainer = () => {
                                         </div>
                                         <div className="flex  items-center">
                                             <button
-
                                                 className={`${
                                                     list.name === "Wish List"
                                                         ? "hidden"
@@ -260,6 +262,17 @@ export const WishListContainer = () => {
                     </div>
                 </div>
             </div>
+            <footer>
+                <a
+                    href="#header"
+                    className="flex flex-row items-center justify-center cursor-pointer my-4">
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
+                    <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                        Scroll to the top
+                    </div>
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
+                </a>
+            </footer>
         </>
     );
 };

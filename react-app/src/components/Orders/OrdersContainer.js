@@ -6,6 +6,7 @@ import Order from "./Order";
 import ReactPaginate from "react-paginate";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { GiRunningNinja } from "react-icons/gi";
 
 const OrdersContainer = () => {
     const history = useHistory();
@@ -87,7 +88,7 @@ const OrdersContainer = () => {
                                 showMonthDropdown
                                 showYearDropdown
                                 dropdownMode="select"
-                                selected={startDate}
+                                // selected={startDate}
                                 showIcon={true}
                                 startDate={startDate}
                                 endDate={endDate}
@@ -136,12 +137,14 @@ const OrdersContainer = () => {
                 )}
                 {userOrders?.length > 1 && (
                     <footer>
-                        <a href="#orders">
-                            <div className="flex flex-col items-center justify-center cursor-pointer mb-5">
-                                <p className="text-[12px] md:text-lg text-teal-700 hover:text-amber-600">
-                                    Back to the top
-                                </p>
+                        <a
+                            href="#orders"
+                            className="flex flex-row items-center justify-center cursor-pointer my-4">
+                            <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
+                            <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                                Scroll to the top
                             </div>
+                            <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
                         </a>
                     </footer>
                 )}

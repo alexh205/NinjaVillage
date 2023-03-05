@@ -8,9 +8,10 @@ body {
     height: 100%;
 }
 
-/* html {
-    background-color:#015f41;
-} */
+html {
+    scroll-behavior: smooth;
+    scroll-margin-top: 3rem; /* Set the scroll margin */
+}
 
 @layer components {
     .link {

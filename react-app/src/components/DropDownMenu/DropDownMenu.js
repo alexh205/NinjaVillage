@@ -2,12 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../store/sessionReducer";
-import {
-    ClipboardDocumentListIcon,
-    ShoppingBagIcon,
-} from "@heroicons/react/24/outline";
-import { SlLogout } from "react-icons/sl";
-import { RiUserSettingsLine } from "react-icons/ri";
+import { GiTiedScroll, GiScrollQuill, GiRunningNinja } from "react-icons/gi";
+import { FaUserNinja } from "react-icons/fa";
 
 const DropDownMenu = () => {
     const user = useSelector(state => state.session.user);
@@ -25,7 +21,7 @@ const DropDownMenu = () => {
         <>
             {user ? (
                 <div onClick={handleClicked} className="cursor-pointer ">
-                    <div>
+                    <div className="hover:text-amber-500">
                         <p>{`Hello, ${user.name}`}</p>
                         <p className="font-extrabold md:text-sm">
                             Account & Lists
@@ -33,26 +29,15 @@ const DropDownMenu = () => {
                     </div>
 
                     {clicked && (
-                        <div className="absolute justify-center flex flex-col z-10 items-center right-[170px] md:right-[194px] h-[168px] w-[138px] mt-[2px] rounded-xl bg-gray-100 border-2 border-black">
+                        <div className="absolute justify-center flex flex-col z-40 items-center right-[162px] md:right-[188px] h-[170px] w-[138px] mt-[2px] rounded-xl bg-gray-100 border-2 border-black">
                             <div className="flex flex-row my-1 pb-2 px-[26px] items-center border-b-[2px] border-black">
                                 <div
                                     className="text-black text-[17px] font-bold flex flex-row cursor-pointer items-center hover:text-amber-500"
                                     onClick={() =>
                                         history.push(`/profile/${user.id}`)
                                     }>
-                                    <RiUserSettingsLine className="text-ninja_green text-2xl mr-1" />
+                                    <FaUserNinja className="text-ninja_green text-2xl mr-2 h-5 w-5" />
                                     Profile
-                                </div>
-                            </div>
-
-                            <div className="flex flex-row my-1 pb-2 px-[6px] items-center border-b-[2px] border-black">
-                                <div
-                                    className="text-black text-[17px] font-bold flex flex-row cursor-pointer items-center hover:text-amber-500"
-                                    onClick={() =>
-                                        history.push("/products/new")
-                                    }>
-                                    <ShoppingBagIcon className="text-ninja_green h-6 mr-1" />
-                                    New Listing
                                 </div>
                             </div>
 
@@ -62,8 +47,19 @@ const DropDownMenu = () => {
                                     setClicked(false);
                                     history.push("/wishlists");
                                 }}>
-                                <ClipboardDocumentListIcon className="text-ninja_green h-6 mr-1" />
+                                <GiScrollQuill className="text-ninja_green h-6 w-6 mr-2" />
                                 Wish Lists
+                            </div>
+
+                            <div className="flex flex-row my-1 pb-2 px-[6px] items-center border-b-[2px] border-black">
+                                <div
+                                    className="text-black text-[17px] font-bold flex flex-row cursor-pointer items-center hover:text-amber-500"
+                                    onClick={() =>
+                                        history.push("/products/new")
+                                    }>
+                                    <GiTiedScroll className="text-ninja_green h-6 w-6 mr-2" />
+                                    New Listing
+                                </div>
                             </div>
 
                             <div
@@ -73,7 +69,7 @@ const DropDownMenu = () => {
                                     await dispatch(logout());
                                     history.push("/");
                                 }}>
-                                <SlLogout className="text-ninja_green text-[19px] mr-[8px]" />
+                                <GiRunningNinja className="text-ninja_green scale-x-[-1] text-[19px] h-7 w-7 mr-2" />
                                 Sign out
                             </div>
                         </div>

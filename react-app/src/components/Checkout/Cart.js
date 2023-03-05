@@ -38,10 +38,10 @@ const Cart = ({ user }) => {
                     </div>
                 </div>
                 {/* right */}
-                <div className="flex flex-col bg-white p-9 shadow-md">
+                <div className="flex flex-col bg-white p-9 shadow-md my-7">
                     {user && cart && cart.length > 0 ? (
                         <>
-                            <h2 className="whitespace-nowrap font-bold text-lg static">
+                            <h2 className="whitespace-nowrap font-bold text-lg static ">
                                 Subtotal ({cart.length} items):{" "}
                                 <p>
                                     $
@@ -58,7 +58,7 @@ const Cart = ({ user }) => {
                                     "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
                                 }`}
                                 onClick={() => history.push("/checkout")}>
-                                {"Proceed to checkout"}
+                                Proceed to checkout
                             </button>
                         </>
                     ) : user && cart && cart.length === 0 ? (

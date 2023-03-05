@@ -123,14 +123,14 @@ const Header = () => {
 
                     {!user ? (
                         <div
-                            className="link rounded-lg "
+                            className="link rounded-lg hover:text-amber-500"
                             onClick={() => history.push("/login")}>
                             <p>Past</p>
                             <p className="font-extrabold md:text-sm">Orders</p>
                         </div>
                     ) : (
                         <div
-                            className="link rounded-lg "
+                            className="link rounded-lg hover:text-amber-500"
                             onClick={() => history.push("/orders")}>
                             <p>Past</p>
                             <p className="font-extrabold md:text-sm">Orders</p>
@@ -138,7 +138,7 @@ const Header = () => {
                     )}
 
                     <div
-                        className="link relative flex items-center "
+                        className="link relative flex items-center hover:text-amber-500"
                         onClick={() => {
                             history.push("/cart");
                         }}>

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FilteredProd } from "./FilteredProd";
 import Header from "../Header/Header";
+import { GiRunningNinja } from "react-icons/gi";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 const Filters = () => {
@@ -58,12 +59,14 @@ const Filters = () => {
                 </div>
             </div>
             <footer>
-                <a href="#filters">
-                    <div className="flex flex-col items-center justify-center cursor-pointer mb-5">
-                        <p className="text-[12px] md:text-lg text-teal-700 hover:text-amber-600">
-                            Back to the top
-                        </p>
+                <a
+                    href="#filters"
+                    className="flex flex-row items-center justify-center cursor-pointer my-4">
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
+                    <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                        Scroll to the top
                     </div>
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
                 </a>
             </footer>
         </>
