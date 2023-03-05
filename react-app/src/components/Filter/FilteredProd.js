@@ -45,7 +45,7 @@ export const FilteredProd = ({ product }) => {
     };
 
     return (
-        <div className="flex flex-col m-2 bg-white p-3 border-4 border-double rounded-2xl w-full h-full ">
+        <div className="flex flex-col m-2 bg-white p-3 border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full ">
             <div
                 onClick={() => history.push(`/products/${product.id}`)}
                 className="flex items-center justify-center cursor-pointer">

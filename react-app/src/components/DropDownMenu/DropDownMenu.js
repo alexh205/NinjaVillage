@@ -24,7 +24,7 @@ const DropDownMenu = () => {
     return (
         <>
             {user ? (
-                <div onClick={handleClicked} className="cursor-pointer">
+                <div onClick={handleClicked} className="cursor-pointer ">
                     <div>
                         <p>{`Hello, ${user.name}`}</p>
                         <p className="font-extrabold md:text-sm">

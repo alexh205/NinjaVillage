@@ -52,7 +52,7 @@ const LoginForm = () => {
                         />
                     </Link>
                     <div className="flex flex-row items-center">
-                        <h1 className="font-medium text-[27px] text-white mr-32">
+                        <h1 className="font-medium whitespace-nowrap text-[27px] text-white mr-32 mb-2">
                             Sign in
                         </h1>
                         {hasClickedDemo && <Loading />}
@@ -61,7 +61,7 @@ const LoginForm = () => {
                             onClick={() => {
                                 demoLogin();
                             }}
-                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-xs rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[75px] border-[1px] border-ninja_green-dark">
+                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-sm whitespace-nowrap rounded-lg focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 px-3 py-2 border-[1px] border-ninja_green-dark">
                             Demo Login
                         </button>
                     </div>

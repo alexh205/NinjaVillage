@@ -73,7 +73,7 @@ const Cart = ({ user }) => {
                                 disabled={cart.length < 1}
                                 className={`button mt-2 ${
                                     (!user || cart.length < 1) &&
-                                    "from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed"
+                                    "from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed whitespace-nowrap"
                                 }`}>
                                 {"Please add at least one item to proceed"}
                             </button>
@@ -90,7 +90,7 @@ const Cart = ({ user }) => {
                                 disabled={!user}
                                 className={`button mt-2 ${
                                     !user &&
-                                    "from-gray-200 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
+                                    "from-gray-200 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed whitespace-nowrap"
                                 }`}>
                                 {!user && "Sign in to checkout"}
                             </button>{" "}

@@ -52,7 +52,7 @@ const CartProduct = ({ product }) => {
                 <img
                     src={product.image}
                     alt="product"
-                    className="h-[200px] w-[200px] object-contain"
+                    className="h-[200px] w-[200px] object-fill rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                 />
             </div>
             {/* middle section  */}

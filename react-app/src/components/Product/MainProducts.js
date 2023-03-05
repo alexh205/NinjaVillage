@@ -47,7 +47,7 @@ const MainProducts = ({ product }) => {
     };
 
     return (
-        <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-double rounded-2xl ">
+        <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 ">
             <p className="absolute top-2 right-4 text-sm italic text-gray-400 ">
                 {product.category}
             </p>
@@ -63,7 +63,7 @@ const MainProducts = ({ product }) => {
                     setHasClicked(false);
                 }}>
                 <img
-                    className="object-contain h-[200px] w-[200px] my-3"
+                    className="object-contain h-[200px] w-[200px] my-3 "
                     src={product.image}
                     alt="product"
                 />

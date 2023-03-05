@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 
-const OrderProduct = ({ product}) => {
+const OrderProduct = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
 
@@ -19,7 +19,7 @@ const OrderProduct = ({ product}) => {
         history.push("/");
     }
     return (
-        <div className="relative flex flex-col m-4 bg-white  p-8 border-4 border-dotted rounded-2xl ">
+        <div className="relative flex flex-col m-3 bg-white p-6 rounded-xl border-dotted shadow-lg border-4 border-slate-300 hover:shadow-xl transform transition duration-300 hover:-translate-x-1 hover:scale-110">
             <p className="absolute top-2 right-2 text-sm italic text-gray-400">
                 {product.category}
             </p>
@@ -27,7 +27,7 @@ const OrderProduct = ({ product}) => {
                 className="cursor-pointer"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 <img
-                    className="object-contain h-[150px] w-[150px] mb-2"
+                    className="object-contain h-[150px] w-[150px] mb-2 "
                     src={product.image}
                     alt="product"
                 />{" "}
@@ -43,7 +43,7 @@ const OrderProduct = ({ product}) => {
                 )}
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
-            <div className="mb-5 flex flex-row justify-between" >
+            <div className="mb-5 flex flex-row justify-between">
                 <p className=" text-amber-700 font-semibold">
                     ${product.price}
                 </p>

@@ -191,6 +191,7 @@ export const WishListContainer = () => {
                                         </div>
                                         <div className="flex  items-center">
                                             <button
+                                    
                                                 className={`${
                                                     list.name === "Wish List"
                                                         ? "hidden"

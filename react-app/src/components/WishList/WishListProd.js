@@ -62,12 +62,12 @@ const WishListProd = ({ product, activeList }) => {
     return (
         <>
             {item ? (
-                <div className="grid grid-cols-4 gap-x-2 mb-3 m-2 bg-white p-[5px] border-4 border-double rounded-2xl   ">
+                <div className="grid grid-cols-4 gap-x-2 mb-3 m-2  bg-white px-5 border-4 border-double rounded-2xl w-fit ">
                     <div
                         className="cursor-pointer "
                         onClick={() => history.push(`/products/${item.id}`)}>
                         <img
-                            className="object-contain h-[200px] w-[200px] ml-3"
+                            className="object-fill m-2 h-[200px] w-[200px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 "
                             src={item.image}
                             alt="product"
                         />
@@ -107,49 +107,67 @@ const WishListProd = ({ product, activeList }) => {
                     </div>
 
                     {user && (
-                        <div className="flex flex-col items-center justify-center pb-10 cursor-pointer">
+                        <div className="flex flex-col items-center justify-center pb-4 cursor-pointer">
                             <button
                                 onClick={addItemToCart}
                                 disabled={buttonAction}
                                 className={`${
                                     buttonAction
-                                        ? "text-sm bg-gradient-to-b from-green-300 to-green-500 border-green-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600 active:from-green-600 px-12 py-1 mb-1"
-                                        : "text-sm bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-12 py-1 mb-1"
+                                        ? "text-xs max-w-fit bg-gradient-to-b from-green-300 to-green-500 border-green-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600 active:from-green-600 px-4 sm:px-6 md:px-8 py-[2px] md:py-2 mb-1 whitespace-nowrap"
+                                        : "text-xs max-w-fit bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-4 sm:px-6 md:px-8 py-[2px] md:py-2 mb-1 whitespace-nowrap"
                                 }`}>
                                 Add to Cart
                             </button>
-                            <div className="flex flex-row items-center justify-center mt-1 ">
-                                <div>
-                                    <div
-                                        className="mr-[14px] cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
-                                    active:bg-gray-400 text-white px-4 py-1 rounded-lg "
-                                        onClick={() => {
-                                            setDropDown(!dropDown);
-                                        }}>
-                                        Move
-                                    </div>
+                            <div className="flex flex-row items-center justify-center mt-1 max-w-fit">
+                                {userWishLists.length > 1 ? (
+                                    <div>
+                                        <button
+                                            className="mr-[10px] cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                    active:bg-gray-400 text-white px-3 py-1 rounded-lg whitespace-nowrap "
+                                            onClick={() => {
+                                                setDropDown(!dropDown);
+                                            }}>
+                                            Move
+                                        </button>
 
-                                    {dropDown && (
-                                        <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[5px] h-[90px] overflow-y-scroll">
-                                            {userWishLists && (
-                                                <ProductRelocation
-                                                    userWishLists={
-                                                        userWishLists
-                                                    }
-                                                    product={product}
-                                                    showDropDown={showDropDown}
-                                                    startingList={list}
-                                                />
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                                <div
-                                    className="cursor-pointer    text-xs bg-gray-500 hover:bg-gray-600
-                                    active:bg-gray-400 text-white px-4 py-1 rounded-lg "
+                                        {dropDown && (
+                                            <div className="fixed border-[2px] bg-white z-10 w-[170px] mt-[5px] h-[90px] overflow-y-scroll">
+                                                {userWishLists && (
+                                                    <ProductRelocation
+                                                        userWishLists={
+                                                            userWishLists
+                                                        }
+                                                        product={product}
+                                                        showDropDown={
+                                                            showDropDown
+                                                        }
+                                                        startingList={list}
+                                                    />
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <button
+                                            className="mr-[10px] cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                active:bg-gray-400 text-white px-3 py-1 rounded-lg whitespace-nowrap "
+                                            onClick={() => {
+                                                alert(
+                                                    "2 or more lists are required"
+                                                );
+                                            }}>
+                                            Move
+                                        </button>
+                                    </div>
+                                )}
+
+                                <button
+                                    className="cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                    active:bg-gray-400 text-white px-3 py-1 rounded-lg whitespace-nowrap "
                                     onClick={removeItemFromList}>
                                     Delete
-                                </div>
+                                </button>
                             </div>
                         </div>
                     )}

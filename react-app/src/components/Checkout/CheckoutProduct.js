@@ -35,7 +35,7 @@ const CheckoutProduct = ({ product }) => {
             <img
                 src={product.image}
                 alt="product"
-                className="object-contain h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4 shadow-black"
+                className="object-fill h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4 rounded-lg shadow-lg border-4 border-white hover:shadow-xl"
             />
             <div className="flex flex-col mt-5">
                 <div className="text-[12px] md:text-sm font-bold">
