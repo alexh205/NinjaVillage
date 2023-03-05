@@ -27,7 +27,7 @@ const OrderProduct = ({ product }) => {
                 className="cursor-pointer"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 <img
-                    className="object-contain h-[150px] w-[150px] mb-2 "
+                    className="object-contain h-[150px] w-[150px] my-2 "
                     src={product.image}
                     alt="product"
                 />{" "}

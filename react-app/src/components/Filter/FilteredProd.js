@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addToCart } from "../../store/cartReducer";
+// import { addToCart } from "../../store/cartReducer";
 
 export const FilteredProd = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
 
-    const [buttonAction, setButtonAction] = useState(false);
+    // const [buttonAction, setButtonAction] = useState(false);
 
     if (product && product.productReviews) {
         product.productReviews.forEach(el => {
@@ -17,32 +17,32 @@ export const FilteredProd = ({ product }) => {
         ratingAvg = ratingTotal / product.productReviews.length;
     }
 
-    const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
+    // const user = useSelector(state => state.session.user);
+    // const dispatch = useDispatch();
     const history = useHistory();
 
-    const addItemToCart = async () => {
-        setButtonAction(true);
-        try {
-            const item = {
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                description: product.description,
-                category: product.category,
-                brand: product.brand,
-                image: product.image,
-            };
+    // const addItemToCart = async () => {
+    //     setButtonAction(true);
+    //     try {
+    //         const item = {
+    //             id: product.id,
+    //             title: product.title,
+    //             price: product.price,
+    //             description: product.description,
+    //             category: product.category,
+    //             brand: product.brand,
+    //             image: product.image,
+    //         };
 
-            await dispatch(addToCart(item));
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setTimeout(() => {
-                setButtonAction(false);
-            }, 600);
-        }
-    };
+    //         await dispatch(addToCart(item));
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         setTimeout(() => {
+    //             setButtonAction(false);
+    //         }, 600);
+    //     }
+    // };
 
     return (
         <div className="flex flex-col m-2 bg-white p-3 border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full ">
@@ -69,7 +69,7 @@ export const FilteredProd = ({ product }) => {
             <div className="pt-2">
                 <p>${product.price}</p>
             </div>
-            {user && (
+            {/* {user && (
                 <button
                     disabled={user.id === product.ownerId || buttonAction}
                     className={`${
@@ -82,7 +82,7 @@ export const FilteredProd = ({ product }) => {
                     onClick={addItemToCart}>
                     {buttonAction ? "Added" : "Add to Cart"}
                 </button>
-            )}
+            )} */}
         </div>
     );
 };

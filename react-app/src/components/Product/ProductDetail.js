@@ -141,7 +141,7 @@ const ProductDetail = () => {
                                 </div>
 
                                 <div
-                                    className="text-[15px] cursor-pointer text-sky-600 text-bold hover:text-amber-600 transform transition duration-300 hover:-translate-y-1 hover:scale-110"
+                                    className="text-[15px] cursor-pointer text-sky-600 text-bold hover:text-amber-600 hover:font-semibold"
                                     onClick={() => history.push("/listings")}>
                                     Visit {owner.name}'s store
                                 </div>
@@ -247,8 +247,8 @@ const ProductDetail = () => {
                                                 user.id === product.ownerId
                                                     ? "hidden cursor-not-allowed"
                                                     : buttonAction
-                                                    ? "mt-auto cursor-pointer p-2 px-7 font-bold text-[11px] md:text-sm  text-white rounded-sm bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none "
-                                                    : "mt-auto button "
+                                                    ? "mt-auto cursor-pointer px-12 font-bold rounded-lg text-[11px] md:text-sm  text-white bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none py-3"
+                                                    : "mt-auto button px-7 py-3 rounded-lg"
                                             }`}
                                             onClick={() => {
                                                 if (!user) {

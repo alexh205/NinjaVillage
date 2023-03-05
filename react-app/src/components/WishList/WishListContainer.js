@@ -85,12 +85,12 @@ export const WishListContainer = () => {
             <Header />
             <div className="grid grid-rows-auto container mx-auto mt-5 mb-6 items-center">
                 <div className="flex flex-row justify-between mx-10">
-                    <div className="text-[24px] font-bold hover:text-[#007185]">
+                    <div className="text-[24px] font-bold hover:text-ninja_green">
                         Your Lists
                     </div>
                     <div className="mr-2">
                         <button
-                            className="text-sm font-semibold text-[#017185] hover:text-amber-600"
+                            className="text-base font-semibold text-[#017185] hover:text-amber-600"
                             onClick={() => setOpenModal(!openModal)}>
                             Create a List
                         </button>
@@ -191,7 +191,7 @@ export const WishListContainer = () => {
                                         </div>
                                         <div className="flex  items-center">
                                             <button
-                                    
+
                                                 className={`${
                                                     list.name === "Wish List"
                                                         ? "hidden"

@@ -73,7 +73,7 @@ const Header = () => {
                                 className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
                                 type="text"
                                 autoComplete="off"
-                                placeholder={`Search for a product by name or category...`}
+                                placeholder={`Search for a product by name, description, or category...`}
                                 onChange={handleChange}
                                 value={input}></input>
 
@@ -123,14 +123,14 @@ const Header = () => {
 
                     {!user ? (
                         <div
-                            className="link rounded-lg shadow-md border-2 border-ninja_green outline-none hover:shadow-xl transform transition duration-300 hover:-translate-x-1 hover:scale-110"
+                            className="link rounded-lg "
                             onClick={() => history.push("/login")}>
                             <p>Past</p>
                             <p className="font-extrabold md:text-sm">Orders</p>
                         </div>
                     ) : (
                         <div
-                            className="link rounded-lg shadow-md border-2 border-ninja_green outline-none hover:shadow-xl transform transition duration-300 hover:-translate-x-1 hover:scale-110"
+                            className="link rounded-lg "
                             onClick={() => history.push("/orders")}>
                             <p>Past</p>
                             <p className="font-extrabold md:text-sm">Orders</p>
@@ -138,7 +138,7 @@ const Header = () => {
                     )}
 
                     <div
-                        className="link relative flex items-center rounded-lg shadow-md border-2 border-ninja_green outline-none hover:shadow-xl transform transition duration-300 hover:-translate-x-1 hover:scale-110"
+                        className="link relative flex items-center "
                         onClick={() => {
                             history.push("/cart");
                         }}>
