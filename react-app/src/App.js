@@ -1,67 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { authenticate } from "./store/sessionReducer";
-import { setActiveCart } from "./store/cartReducer";
-import { getAllProductThunk } from "./store/productReducer";
-import Home from "./components/Home";
-import Loading from "./components/Loading";
-import Cart from "./components/Checkout/Cart";
-import LoginForm from "./components/auth/LoginForm";
-import SignUpForm from "./components/auth/SignUpForm";
-import ProductDetail from "./components/Product/ProductDetail";
-import Checkout from "./components/Checkout/Checkout";
-import EditReview from "./components/Review/EditReview";
-import CreateReview from "./components/Review/CreateReview";
-import EditProduct from "./components/Product/EditProduct";
-import Profile from "./components/Profile/Profile";
-import CreateProduct from "./components/Product/CreateProduct";
-import Filters from "./components/Filter/Filters";
-import OrdersContainer from "./components/Orders/OrdersContainer";
-import UserProducts from "./components/Product/UserProducts";
-import { WishListContainer } from "./components/WishList/WishListContainer";
-import { getAllUserListsThunk } from "./store/wishListReducer";
-import { addToCart } from "./store/cartReducer";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenticate } from './store/sessionReducer';
+import { setActiveCart, setUserId } from './store/cartReducer';
+import { getAllProductThunk } from './store/productReducer';
+import Home from './components/Home';
+import Loading from './components/Loading';
+import Cart from './components/Checkout/Cart';
+import LoginForm from './components/auth/LoginForm';
+import SignUpForm from './components/auth/SignUpForm';
+import ProductDetail from './components/Product/ProductDetail';
+import Checkout from './components/Checkout/Checkout';
+import EditReview from './components/Review/EditReview';
+import CreateReview from './components/Review/CreateReview';
+import EditProduct from './components/Product/EditProduct';
+import Profile from './components/Profile/Profile';
+import CreateProduct from './components/Product/CreateProduct';
+import Filters from './components/Filter/Filters';
+import OrdersContainer from './components/Orders/OrdersContainer';
+import UserProducts from './components/Product/UserProducts';
+import { WishListContainer } from './components/WishList/WishListContainer';
+import { getAllUserListsThunk } from './store/wishListReducer';
 
 function App() {
     const [loaded, setLoaded] = useState(false);
-    const [spinner, setSpinner] = useState(true);
+    const [clicked, setClicked] = useState(true);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    const cartStore = useSelector(state => state.cartStore);
+
 
     useEffect(() => {
         dispatch(getAllProductThunk());
     }, [dispatch]);
 
     useEffect(() => {
-        if (user && !cartStore.id) {
+        if (user) {
+            dispatch(setUserId(user.id));
             let userCart = user.ownedCarts.filter(
                 cart => cart.checkedOut === false
             );
             dispatch(setActiveCart(userCart));
             dispatch(getAllUserListsThunk(`${user.id}`));
-            // localStorage.setItem();
         }
     }, [user, dispatch]);
 
     useEffect(() => {
-        const savedUserId = localStorage.getItem("userId");
-        if (user && user.id === savedUserId) {
-            // const cartItems =
-            //     JSON.parse(localStorage.getItem("cartItems")) || [];
-            // cartItems.forEach(item => dispatch(addToCart(item)));
-        } else if (user && user.id !== cartStore.ownerId) {
-            // localStorage.removeItem("cartItems");
-            let userCart = user.ownedCarts.filter(
-                cart => cart.checkedOut === false
-            );
-        }
-    }, [dispatch, user]);
-
-    useEffect(() => {
         setTimeout(() => {
-            setSpinner(false);
+            setClicked(false);
         }, 2000);
     });
 
@@ -79,7 +64,7 @@ function App() {
 
     return (
         <>
-            {spinner ? (
+            {clicked ? (
                 <Loading />
             ) : (
                 <BrowserRouter>

@@ -1,5 +1,5 @@
-import React, { useEffect, useContext, createContext } from "react";
-import { useSpring, animated, useTransition } from "@react-spring/web";
+import React, { useEffect, useContext, createContext } from 'react';
+import { useSpring, animated, useTransition } from '@react-spring/web';
 
 const ModalContext = createContext();
 
@@ -11,9 +11,9 @@ const Modal = ({ children, isOpen, onClose }) => {
     };
 
     useEffect(() => {
-        document.addEventListener("keydown", handleEscape);
+        document.addEventListener('keydown', handleEscape);
 
-        return () => document.removeEventListener("keydown", handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
     }, [handleEscape]);
 
     const modalTransition = useTransition(isOpen, {
@@ -26,7 +26,7 @@ const Modal = ({ children, isOpen, onClose }) => {
     });
     const springs = useSpring({
         opacity: isOpen ? 1 : 0,
-        transform: isOpen ? "translateY(0%)" : "translateY(-100%)",
+        transform: isOpen ? 'translateY(0%)' : 'translateY(-100%)',
         config: {
             duration: 300,
         },

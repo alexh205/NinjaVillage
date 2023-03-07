@@ -4,12 +4,12 @@ const initialState = {
 };
 
 // ******************** Product *****************************
-const POPULATE_PROD_DATA = "product/POPULATE_PROD_DATA";
-const POPULATE_ALL_PROD_DATA = "product/POPULATE_ALL_PROD_DATA";
-const ADD_PROD_DATA = "product/ADD_PROD_DATA";
-const EDIT_PROD_DATA = "product/EDIT_PROD_DATA";
-const DELETE_PROD_DATA = "product/DELETE_PROD_DATA";
-const CLEAR_PROD_DATA = "product/CLEAR_PROD_DATA";
+const POPULATE_PROD_DATA = 'product/POPULATE_PROD_DATA';
+const POPULATE_ALL_PROD_DATA = 'product/POPULATE_ALL_PROD_DATA';
+const ADD_PROD_DATA = 'product/ADD_PROD_DATA';
+const EDIT_PROD_DATA = 'product/EDIT_PROD_DATA';
+const DELETE_PROD_DATA = 'product/DELETE_PROD_DATA';
+const CLEAR_PROD_DATA = 'product/CLEAR_PROD_DATA';
 
 // // ******************** Review *****************************
 // const ADD_REVIEW_DATA = "review/ADD_REVIEW_DATA";
@@ -84,11 +84,10 @@ export const clearProduct = () => {
 
 // ************************* Product *****************************
 export const createProductThunk =
-    (title, price, description, category, brand, image) =>
-    async dispatch => {
-        const request = await fetch("/api/products/new", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+    (title, price, description, category, brand, image) => async dispatch => {
+        const request = await fetch('/api/products/new', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title,
                 price,
@@ -100,18 +99,17 @@ export const createProductThunk =
         });
         const response = await request.json();
 
-
         dispatch(addProduct(response));
 
-        return response
+        return response;
     };
 
 export const editProductThunk =
     (title, price, description, category, brand, image, productId) =>
     async dispatch => {
         const request = await fetch(`/api/products/${productId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title,
                 price,
@@ -124,19 +122,19 @@ export const editProductThunk =
         const response = await request.json();
 
         dispatch(editProduct(response));
-        return response
+        return response;
     };
 
 export const deleteProductThunk = productId => async dispatch => {
     await fetch(`/api/products/${productId}`, {
-        method: "DELETE",
+        method: 'DELETE',
     });
     dispatch(deleteProduct(productId));
 };
 
 export const getAllProductThunk = () => async dispatch => {
-    const request = await fetch("/api/products/all", {
-        method: "GET",
+    const request = await fetch('/api/products/all', {
+        method: 'GET',
     });
     if (request.ok) {
         const data = await request.json();
@@ -146,7 +144,7 @@ export const getAllProductThunk = () => async dispatch => {
 };
 export const getProductThunk = prodId => async dispatch => {
     const request = await fetch(`/api/products/${prodId}`, {
-        method: "GET",
+        method: 'GET',
     });
     if (request.ok) {
         const data = await request.json();
@@ -159,9 +157,9 @@ export const getProductThunk = prodId => async dispatch => {
 
 export const createReviewThunk =
     (title, review, rating, owner_id, product_id) => async dispatch => {
-        const request = await fetch("/api/reviews/new", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        const request = await fetch('/api/reviews/new', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title,
                 review,
@@ -174,14 +172,13 @@ export const createReviewThunk =
         const response = await request.json();
 
         dispatch(addProduct(response));
-
     };
 
 export const editReviewThunk =
     (title, review, rating, reviewId) => async dispatch => {
         const request = await fetch(`/api/reviews/${reviewId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title,
                 review,
@@ -195,7 +192,7 @@ export const editReviewThunk =
 
 export const deleteReviewThunk = reviewId => async dispatch => {
     const request = await fetch(`/api/reviews/${reviewId}`, {
-        method: "DELETE",
+        method: 'DELETE',
     });
 
     const response = await request.json();
