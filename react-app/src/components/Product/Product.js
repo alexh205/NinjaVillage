@@ -1,6 +1,6 @@
-import React from "react";
-import { FaStar } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { FaStar } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 
 const Product = ({ product }) => {
     let ratingTotal = 0;
@@ -36,7 +36,7 @@ const Product = ({ product }) => {
                         <FaStar size={23} className="text-yellow-500" key={i} />
                     ))
                 ) : (
-                    <FaStar size={23} color={"#e4e5e9"} />
+                    <FaStar size={23} color={'#e4e5e9'} />
                 )}
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>

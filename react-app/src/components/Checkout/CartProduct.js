@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { FaStar } from "react-icons/fa";
-import { addToCart, removeItem } from "../../store/cartReducer";
-import { useHistory } from "react-router-dom";
-import { BsPlus } from "react-icons/bs";
-import { BiMinus } from "react-icons/bi";
-import Loading from "../Loading";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { FaStar } from 'react-icons/fa';
+import { addToCart, removeItem } from '../../store/cartReducer';
+import { useHistory } from 'react-router-dom';
+import { BsPlus } from 'react-icons/bs';
+import { BiMinus } from 'react-icons/bi';
+import Loading from '../Loading';
 
 const CartProduct = ({ product }) => {
     const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const CartProduct = ({ product }) => {
                 <img
                     src={product.image}
                     alt="product"
-                    className="h-[200px] w-[200px] object-fill rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
+                    className="h-[200px] w-[200px] object-contain rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                 />
             </div>
             {/* middle section  */}
@@ -68,7 +68,7 @@ const CartProduct = ({ product }) => {
                             />
                         ))
                     ) : (
-                        <FaStar size={20} color={"#e4e5e9"} />
+                        <FaStar size={20} color={'#e4e5e9'} />
                     )}
                 </div>
                 {/* Right side to add and remove buttons */}

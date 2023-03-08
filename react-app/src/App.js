@@ -28,18 +28,18 @@ function App() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
 
-
     useEffect(() => {
         dispatch(getAllProductThunk());
     }, [dispatch]);
 
     useEffect(() => {
         if (user) {
-            dispatch(setUserId(user.id));
             let userCart = user.ownedCarts.filter(
                 cart => cart.checkedOut === false
             );
-            dispatch(setActiveCart(userCart));
+
+            dispatch(setUserId(user.id, userCart));
+
             dispatch(getAllUserListsThunk(`${user.id}`));
         }
     }, [user, dispatch]);

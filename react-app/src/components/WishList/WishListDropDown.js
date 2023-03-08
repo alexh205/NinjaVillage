@@ -28,7 +28,7 @@ const WishListDropDown = ({ product, userWishLists, showDropDown }) => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [showModal]); // add an empty dependency array to ensure the useEffect hook only runs once
+    }, [showModal, showDropDown]); // add an empty dependency array to ensure the useEffect hook only runs once
     return (
         <div>
             {userWishLists &&

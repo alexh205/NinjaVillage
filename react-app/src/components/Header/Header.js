@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
     MagnifyingGlassIcon,
     ShoppingCartIcon,
     XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import DropDownMenu from "../DropDownMenu/DropDownMenu";
+} from '@heroicons/react/24/outline';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import DropDownMenu from '../DropDownMenu/DropDownMenu';
 
 const Header = () => {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
     const userCart = useSelector(state => state.cartStore.addedItems);
     const products = useSelector(state => state.productStore.products);
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState('');
     const [filteredData, setFilteredData] = useState([]);
 
-    const cartTotal = userCart.reduce((accum, product) => {
-        return accum + product.quantity;
-    }, 0);
-
+    let cartTotal;
+    if (userCart) {
+        cartTotal = userCart.reduce((accum, product) => {
+            return accum + product.quantity;
+        }, 0);
+    }
     const handleChange = e => {
         const searchTerm = e.target.value;
         setInput(searchTerm);
@@ -36,7 +38,7 @@ const Header = () => {
                     .includes(searchTerm.toLowerCase())
             );
         });
-        if (searchTerm === "") {
+        if (searchTerm === '') {
             setFilteredData([]);
         } else {
             setFilteredData(filteredProducts);
@@ -45,7 +47,7 @@ const Header = () => {
 
     const clearInput = () => {
         setFilteredData([]);
-        setInput("");
+        setInput('');
     };
 
     return (
@@ -55,12 +57,12 @@ const Header = () => {
                 <div
                     className="flex mt-2 items-center flex-grow sm:flex-grow-0 cursor-pointer"
                     onClick={() => {
-                        history.push("/");
+                        history.push('/');
                     }}>
                     <img
                         className="w-[140px] h-[40px] object-contain cursor-pointer mt-2"
                         src={
-                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                            'https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png'
                         }
                         alt="ninja village logo"
                     />
@@ -124,14 +126,14 @@ const Header = () => {
                     {!user ? (
                         <div
                             className="link rounded-lg hover:text-amber-500"
-                            onClick={() => history.push("/login")}>
+                            onClick={() => history.push('/login')}>
                             <p>Past</p>
                             <p className="font-extrabold md:text-sm">Orders</p>
                         </div>
                     ) : (
                         <div
                             className="link rounded-lg hover:text-amber-500"
-                            onClick={() => history.push("/orders")}>
+                            onClick={() => history.push('/orders')}>
                             <p>Past</p>
                             <p className="font-extrabold md:text-sm">Orders</p>
                         </div>
@@ -140,7 +142,7 @@ const Header = () => {
                     <div
                         className="link relative flex items-center hover:text-amber-500"
                         onClick={() => {
-                            history.push("/cart");
+                            history.push('/cart');
                         }}>
                         <span className="absolute top-0 right-0 text-xs md:right-7 h-4 w-4 bg-amber-400 text-center rounded-full text-black font-bold">
                             {user && cartTotal ? cartTotal : 0}
@@ -157,7 +159,7 @@ const Header = () => {
                 <p
                     className="link   rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"All"}`);
+                        history.push(`/filters/${'All'}`);
                     }}>
                     All
                 </p>
@@ -165,56 +167,56 @@ const Header = () => {
                 <p
                     className="link  rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Books"}`);
+                        history.push(`/filters/${'Books'}`);
                     }}>
                     Books
                 </p>
                 <p
                     className="link  rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Groceries"}`);
+                        history.push(`/filters/${'Groceries'}`);
                     }}>
                     Groceries
                 </p>
                 <p
                     className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Beauty & Personal Care"}`);
+                        history.push(`/filters/${'Beauty & Personal Care'}`);
                     }}>
                     Beauty & Personal Care
                 </p>
                 <p
                     className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Clothing, Shoes & Jewelry"}`);
+                        history.push(`/filters/${'Clothing, Shoes & Jewelry'}`);
                     }}>
                     Clothing, Shoes & Jewelry
                 </p>
                 <p
                     className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Electronics"}`);
+                        history.push(`/filters/${'Electronics'}`);
                     }}>
                     Electronics
                 </p>
                 <p
                     className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Health & Household"}`);
+                        history.push(`/filters/${'Health & Household'}`);
                     }}>
                     Health & Household
                 </p>
                 <p
                     className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Pet Supplies"}`);
+                        history.push(`/filters/${'Pet Supplies'}`);
                     }}>
                     Pet Supplies
                 </p>
                 <p
                     className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
-                        history.push(`/filters/${"Video Games"}`);
+                        history.push(`/filters/${'Video Games'}`);
                     }}>
                     Video Games
                 </p>

@@ -23,7 +23,7 @@ const EditList = ({ list, edit, userLists }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [editRef]);
+    }, [editRef, edit]);
 
     const validate = () => {
         const errors = [];

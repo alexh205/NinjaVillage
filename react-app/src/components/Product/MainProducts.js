@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { addToCart } from "../../store/cartReducer";
-import Loading from "../Loading";
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { addToCart } from '../../store/cartReducer';
+import Loading from '../Loading';
 
 const MainProducts = ({ product }) => {
     const [hasClicked, setHasClicked] = useState(false);
@@ -75,7 +75,7 @@ const MainProducts = ({ product }) => {
                         <FaStar size={23} className="text-yellow-500" key={i} />
                     ))
                 ) : (
-                    <FaStar size={23} color={"#e4e5e9"} />
+                    <FaStar size={23} color={'#e4e5e9'} />
                 )}
             </div>
             <p className="text-sm my-2 line-clamp-2">{product.description}</p>
@@ -90,13 +90,13 @@ const MainProducts = ({ product }) => {
                     disabled={user.id === product.ownerId || buttonAction}
                     className={`${
                         user.id === product.ownerId
-                            ? "hidden cursor-not-allowed"
+                            ? 'hidden cursor-not-allowed'
                             : buttonAction
-                            ? "mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  text-white rounded-sm bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none"
-                            : "mt-auto button"
+                            ? 'mt-auto cursor-pointer p-2 font-bold text-[11px] md:text-sm  text-white rounded-sm bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none'
+                            : 'mt-auto button'
                     }`}
-                    onClick={addItemToCart}>
-                    {buttonAction ? "Added" : "Add to Cart"}
+                    onClick={() => addItemToCart()}>
+                    {buttonAction ? 'Added' : 'Add to Cart'}
                 </button>
             )}
         </div>

@@ -1,8 +1,8 @@
-import React from "react";
-import Header from "../Header/Header";
-import { useSelector } from "react-redux";
-import CartProduct from "./CartProduct";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import Header from '../Header/Header';
+import { useSelector } from 'react-redux';
+import CartProduct from './CartProduct';
+import { useHistory } from 'react-router-dom';
 
 const Cart = ({ user }) => {
     const history = useHistory();
@@ -19,7 +19,7 @@ const Cart = ({ user }) => {
                     <img
                         className="w-[100%] h-[250px] mb-3 border-[2px]"
                         src={
-                            "https://ninjastore.s3.amazonaws.com/site_backgrounds/register.png"
+                            'https://ninjastore.s3.amazonaws.com/site_backgrounds/register.png'
                         }
                         alt="checkout register"
                     />
@@ -27,7 +27,7 @@ const Cart = ({ user }) => {
                         <div className="flex border-b pb-4 justify-between ">
                             <h1 className="text-3xl">Shopping Cart</h1>
                             <h5 className="self-end mr-4 text-gray-600 ">
-                                {" "}
+                                {' '}
                                 Price
                             </h5>
                         </div>
@@ -42,7 +42,7 @@ const Cart = ({ user }) => {
                     {user && cart && cart.length > 0 ? (
                         <>
                             <h2 className="whitespace-nowrap font-bold text-lg static ">
-                                Subtotal ({cart.length} items):{" "}
+                                Subtotal ({cart.length} items):{' '}
                                 <p>
                                     $
                                     {cartTotal > 0
@@ -55,16 +55,16 @@ const Cart = ({ user }) => {
                             <button
                                 className={`button mt-2 ${
                                     !user &&
-                                    "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
+                                    'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'
                                 }`}
-                                onClick={() => history.push("/checkout")}>
+                                onClick={() => history.push('/checkout')}>
                                 Proceed to checkout
                             </button>
                         </>
                     ) : user && cart && cart.length === 0 ? (
                         <>
                             <h2 className="whitespace-nowrap">
-                                Subtotal ({cart.length} items):{" "}
+                                Subtotal ({cart.length} items):{' '}
                                 <span className="font-bold">
                                     <p>${cartTotal}</p>
                                 </span>
@@ -73,27 +73,27 @@ const Cart = ({ user }) => {
                                 disabled={cart.length < 1}
                                 className={`button mt-2 ${
                                     (!user || cart.length < 1) &&
-                                    "from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed whitespace-nowrap"
+                                    'from-gray-300 to-gray-500 border-gray-200 text-gray-200 cursor-not-allowed whitespace-nowrap'
                                 }`}>
-                                {"Please add at least one item to proceed"}
+                                {'Please add at least one item to proceed'}
                             </button>
                         </>
                     ) : (
                         <>
                             <h2 className="whitespace-nowrap">
-                                Subtotal (0 item):{" "}
+                                Subtotal (0 item):{' '}
                                 <span className="font-bold">
                                     <p>$0</p>
                                 </span>
                             </h2>
                             <button
-                                disabled={!user}
+                                onClick={() => history.push('/login')}
                                 className={`button mt-2 ${
                                     !user &&
-                                    "from-gray-200 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed whitespace-nowrap"
+                                    'from-gray-200 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed whitespace-nowrap'
                                 }`}>
-                                {!user && "Sign in to checkout"}
-                            </button>{" "}
+                                {!user && 'Sign in to checkout'}
+                            </button>{' '}
                         </>
                     )}
                 </div>

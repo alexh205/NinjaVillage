@@ -42,7 +42,7 @@ const ProductDetail = () => {
         (async () => {
             await dispatch(getUserThunk(product.ownerId));
         })();
-    }, [dispatch]);
+    }, [dispatch, product.ownerId]);
 
     let ratingTotal = 0;
     let ratingAvg;

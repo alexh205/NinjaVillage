@@ -29,7 +29,7 @@ const UserProducts = () => {
                         <img
                             src={storeOwner.profileImage}
                             alt="user"
-                            className="hidden md:flex rounded-full max-h-[100px] mr-3"
+                            className="hidden md:flex rounded-full max-h-[100px] mr-3 "
                         />
                         <p className="font-bold text-2xl">
                             {" "}

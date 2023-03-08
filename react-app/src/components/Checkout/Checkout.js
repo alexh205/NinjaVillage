@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/24/solid";
-import { useSelector, useDispatch } from "react-redux";
-import CheckoutProduct from "./CheckoutProduct";
-import stateTaxes from "../../media/stateTaxes.json";
-import { cartCheckoutThunk } from "../../store/cartReducer";
-import { authenticate } from "../../store/sessionReducer";
-import Loading from "../Loading";
-import ConfirmationModal from "./ConfirmationModal";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { LockClosedIcon } from '@heroicons/react/24/solid';
+import { useSelector, useDispatch } from 'react-redux';
+import CheckoutProduct from './CheckoutProduct';
+import stateTaxes from '../../media/stateTaxes.json';
+import { cartCheckoutThunk } from '../../store/cartReducer';
+import { authenticate } from '../../store/sessionReducer';
+import Loading from '../Loading';
+import ConfirmationModal from './ConfirmationModal';
 
 const Checkout = () => {
     const history = useHistory();
@@ -15,8 +15,8 @@ const Checkout = () => {
     const [hasClicked, setHasClicked] = useState(false);
     const [hasClicked_b, setHasClicked_b] = useState(false);
     const [modal, setModal] = useState(false);
-    const [cartObj, setCartObj] = useState("");
-    const [valTotal, setValTotal] = useState("");
+    const [cartObj, setCartObj] = useState('');
+    const [valTotal, setValTotal] = useState('');
 
     const showModal = Boolean => setModal(false);
 
@@ -24,6 +24,13 @@ const Checkout = () => {
     const cart = useSelector(state => state.cartStore);
     const cartArr = useSelector(state => state.cartStore.addedItems);
     const total = useSelector(state => state.cartStore.total);
+
+    let cartItems;
+    if (cartArr) {
+        cartItems = cartArr.reduce((accum, product) => {
+            return accum + product.quantity;
+        }, 0);
+    }
 
     const preTax_total = Math.round((total + 10 + Number.EPSILON) * 100) / 100;
     const shippingHandling = Number(10);
@@ -73,23 +80,23 @@ const Checkout = () => {
     };
 
     const date = new Date();
-    const month = new Intl.DateTimeFormat("en-US", {
-        month: "short",
+    const month = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
     }).format(date);
     const day = date.getDate();
     const year = date.getFullYear();
     const orderDate = `${day}-${month}-${year}`;
 
-    const deliveryDate = addWeekdays(date, 3).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
+    const deliveryDate = addWeekdays(date, 3).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
     });
 
-    const endDeliveryDate = addWeekdays(date, 7).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
+    const endDeliveryDate = addWeekdays(date, 7).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
     });
 
     const handleCheckout = async () => {
@@ -106,7 +113,7 @@ const Checkout = () => {
             await dispatch(authenticate());
             setModal(true);
         } catch (error) {
-            console.log("Error during dispatch:", error);
+            console.log('Error during dispatch:', error);
         } finally {
             setHasClicked(false);
         }
@@ -125,7 +132,7 @@ const Checkout = () => {
             await dispatch(authenticate());
             setModal(true);
         } catch (error) {
-            console.log("Error during dispatch:", error);
+            console.log('Error during dispatch:', error);
         } finally {
             setHasClicked_b(false);
         }
@@ -135,7 +142,7 @@ const Checkout = () => {
         if (modal) {
             const timeout = setTimeout(() => {
                 setModal(false);
-                history.push("/orders");
+                history.push('/orders');
             }, 4000);
 
             return () => {
@@ -143,7 +150,7 @@ const Checkout = () => {
                 setModal(false);
             };
         }
-    }, [modal]);
+    }, []);
 
     return (
         <>
@@ -152,12 +159,12 @@ const Checkout = () => {
                     <div
                         className="flex ml-4 md:ml-[160px] items-center cursor-pointer"
                         onClick={() => {
-                            history.push("/");
+                            history.push('/');
                         }}>
                         <img
                             className="w-[120px] h-[40px] object-contain cursor-pointer mt-2 "
                             src={
-                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                                'https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png'
                             }
                             alt="ninja village logo"
                         />
@@ -165,9 +172,9 @@ const Checkout = () => {
                     <div className="flex font-semibold text-xl md:text-3xl text-white items-center ">
                         Checkout (
                         <p className="text-amber-600 text-lg md:text-2xl">
-                            {cartArr.length > 1
-                                ? `${cartArr.length} items`
-                                : `${cartArr.length} item`}
+                            {cartItems > 1
+                                ? `${cartItems} items`
+                                : `${cartItems} item`}
                         </p>
                         )
                     </div>
@@ -189,7 +196,7 @@ const Checkout = () => {
                                     <p>{user.name}</p>
                                     <p>{user.street_address}</p>
                                     <p>
-                                        {user.city}, {user.state},{" "}
+                                        {user.city}, {user.state},{' '}
                                         {user.zip_code}
                                     </p>
                                 </div>
@@ -219,15 +226,15 @@ const Checkout = () => {
                         <div>
                             <div className="flex flex-row mt-3 ">
                                 <div className="font-semibold text-xl mr-6">
-                                    {" "}
-                                    3{" "}
+                                    {' '}
+                                    3{' '}
                                 </div>
                                 <div className="font-semibold text-lg md:text-xl">
                                     Review items
                                     <div className="border-[1px] p-3 rounded-lg flex flex-col mt-2 object-contain">
                                         <img
                                             src={
-                                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/villageImage.png"
+                                                'https://ninjastore.s3.amazonaws.com/site_backgrounds/villageImage.png'
                                             }
                                             alt="trees"
                                             className=" object-contain w-[100%] border-2"
@@ -250,7 +257,7 @@ const Checkout = () => {
                                     <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center mb-3">
                                         {hasClicked && <Loading />}
                                         <button
-                                            className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px]"
+                                            className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] whitespace-nowrap"
                                             disabled={hasClicked || total < 1}
                                             onClick={() => {
                                                 setCartObj(cart);
@@ -260,9 +267,9 @@ const Checkout = () => {
                                             Place your order
                                         </button>
                                         <div className="flex flex-col pl-2">
-                                            <div className=" flex text-md text-orange-700 p-0 m-0">
+                                            <div className=" flex text-md text-orange-700 p-0 m-0 ">
                                                 Order total:
-                                                <div className="ml-2">
+                                                <div className="ml-2 ">
                                                     {total > 0 ? (
                                                         <p>${cartTotal}</p>
                                                     ) : (
@@ -286,17 +293,17 @@ const Checkout = () => {
                     <div className="flex flex-col items-center">
                         {hasClicked_b && <Loading />}
                         <button
-                            className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow"
+                            className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow whitespace-nowrap"
                             disabled={hasClicked_b || total < 1}
                             onClick={() => {
                                 setCartObj(cart);
                                 setValTotal(cartTotal);
-                                handleCheckout();
+                                handleCheckout_b();
                             }}>
                             Place your order
                         </button>
                         <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1">
-                            {" "}
+                            {' '}
                             By placing your order, you agree to NinjaVillage's
                             privacy notice and conditions of use
                         </p>

@@ -1,14 +1,22 @@
-import React, { useEffect, useContext, createContext } from 'react';
+import React, {
+    useEffect,
+    useContext,
+    createContext,
+    useCallback,
+} from 'react';
 import { useSpring, animated, useTransition } from '@react-spring/web';
 
 const ModalContext = createContext();
 
 const Modal = ({ children, isOpen, onClose }) => {
-    const handleEscape = e => {
-        if (e.keyCode === 27) {
-            onClose();
-        }
-    };
+    const handleEscape = useCallback(
+        e => {
+            if (e.keyCode === 27) {
+                onClose();
+            }
+        },
+        [onClose]
+    );
 
     useEffect(() => {
         document.addEventListener('keydown', handleEscape);

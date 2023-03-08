@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const SET_ACTIVE_CART = 'cart/SET_ACTIVE_CART';
-const SET_USER_ID = 'cart/SET_USER_ID';
+const SET_CART_USER = 'cart/SET_CART_USER';
 const ADD_TO_CART = 'cart/ADD_ITEM';
 const REMOVE_ITEM = 'cart/REMOVE_ITEM';
 const SET_CART_CHECKOUT = 'cart/SET_CART_CHECKOUT';
@@ -21,10 +21,11 @@ export const setActiveCart = cart => {
         payload: cart,
     };
 };
-export const setUserId = userId => {
+export const setUserId = (userId, cartObj) => {
     return {
-        type: SET_USER_ID,
-        payload: userId,
+        type: SET_CART_USER,
+        user: userId,
+        cart: cartObj,
     };
 };
 
@@ -85,32 +86,22 @@ export const cartCheckoutThunk = cartObj => async dispatch => {
 const cartReducer = (state = initialState, action) => {
     const currentState = { ...state };
     switch (action.type) {
-        case SET_USER_ID:
+        case SET_CART_USER:
             const savedUserId = localStorage.getItem('userId');
-            if (savedUserId !== action.userId) {
-                localStorage.removeItem('cart');
-                localStorage.setItem('userId', JSON.stringify(action.userId));
-                return {...initialState};
-            }
             const cart = JSON.parse(localStorage.getItem('cart'));
-            return cart;
 
-        case SET_ACTIVE_CART: {
-            const cartObj = {
-                ...currentState,
-                id: action.payload[0].id,
-                checkedOut: action.payload[0].checkedOut,
-                ownerId: action.payload[0].ownerId,
-            };
-            return cartObj;
-        }
+            if (Number(savedUserId) !== action.user || !cart) {
+                localStorage.removeItem('cart');
+                localStorage.setItem('userId', JSON.stringify(action.user));
 
-        case SET_CART_CHECKOUT: {
-            return {
-                ...initialState,
-                checkedOut: action.payload.checkedOut,
-            };
-        }
+                return {
+                    ...initialState,
+                    ownerId: action.user,
+                    id: action.cart[0].id,
+                    checkedOut: action.cart[0].checkedOut,
+                };
+            }
+            return { ...cart };
 
         case ADD_TO_CART: {
             let addedItem;
@@ -139,7 +130,7 @@ const cartReducer = (state = initialState, action) => {
                     total: newTotal,
                 };
                 localStorage.setItem('cart', JSON.stringify(cartObj));
-                localStorage.setItem('userId', JSON.stringify(cartObj.ownerId));
+
                 return cartObj;
             }
         }
@@ -164,17 +155,17 @@ const cartReducer = (state = initialState, action) => {
                 localStorage.setItem('cart', JSON.stringify(cartObj));
 
                 return cartObj;
-            } else {
-                if (currentState.total > itemToRemove.price) {
-                    const cartObj = {
-                        ...currentState,
-                        addedItems: new_items,
-                        total: 0,
-                    };
-                    localStorage.setItem('cart', JSON.stringify(cartObj));
+            }
+            if (itemToRemove.quantity === 1) {
+                let newTotal = currentState.total - itemToRemove.price;
+                const cartObj = {
+                    ...currentState,
+                    addedItems: new_items,
+                    total: newTotal >= 1 ? newTotal : 0,
+                };
+                localStorage.setItem('cart', JSON.stringify(cartObj));
 
-                    return cartObj;
-                }
+                return cartObj;
             }
         }
 
