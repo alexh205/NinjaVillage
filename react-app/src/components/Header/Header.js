@@ -157,7 +157,7 @@ const Header = () => {
             {/* lower nav */}
             <div className="flex items-center space-x-3 p-2 pl-6 bg-ninja_green-dark text-white text-sm ">
                 <p
-                    className="link   rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'All'}`);
                     }}>
@@ -165,56 +165,56 @@ const Header = () => {
                 </p>
 
                 <p
-                    className="link  rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Books'}`);
                     }}>
                     Books
                 </p>
                 <p
-                    className="link  rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Groceries'}`);
                     }}>
                     Groceries
                 </p>
                 <p
-                    className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Beauty & Personal Care'}`);
                     }}>
                     Beauty & Personal Care
                 </p>
                 <p
-                    className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Clothing, Shoes & Jewelry'}`);
                     }}>
                     Clothing, Shoes & Jewelry
                 </p>
                 <p
-                    className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Electronics'}`);
                     }}>
                     Electronics
                 </p>
                 <p
-                    className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Health & Household'}`);
                     }}>
                     Health & Household
                 </p>
                 <p
-                    className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Pet Supplies'}`);
                     }}>
                     Pet Supplies
                 </p>
                 <p
-                    className="link  hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Video Games'}`);
                     }}>

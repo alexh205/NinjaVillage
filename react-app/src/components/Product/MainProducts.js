@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addToCart } from '../../store/cartReducer';
+// import { addToCart } from '../../store/cartReducer';
 import Loading from '../Loading';
 
 const MainProducts = ({ product }) => {
     const [hasClicked, setHasClicked] = useState(false);
-    const [buttonAction, setButtonAction] = useState(false);
+    // const [buttonAction, setButtonAction] = useState(false);
 
-    const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
+    // const user = useSelector(state => state.session.user);
+    // const dispatch = useDispatch();
     const history = useHistory();
 
     let ratingTotal = 0;
@@ -23,28 +23,28 @@ const MainProducts = ({ product }) => {
         ratingAvg = ratingTotal / product.productReviews.length;
     }
 
-    const addItemToCart = async () => {
-        setButtonAction(true);
-        try {
-            const item = {
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                description: product.description,
-                category: product.category,
-                brand: product.brand,
-                image: product.image,
-            };
+    // const addItemToCart = async () => {
+    //     setButtonAction(true);
+    //     try {
+    //         const item = {
+    //             id: product.id,
+    //             title: product.title,
+    //             price: product.price,
+    //             description: product.description,
+    //             category: product.category,
+    //             brand: product.brand,
+    //             image: product.image,
+    //         };
 
-            await dispatch(addToCart(item));
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setTimeout(() => {
-                setButtonAction(false);
-            }, 600);
-        }
-    };
+    //         await dispatch(addToCart(item));
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         setTimeout(() => {
+    //             setButtonAction(false);
+    //         }, 600);
+    //     }
+    // };
 
     return (
         <div className="relative flex flex-col m-5 bg-white z-30 p-8 border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 ">
@@ -84,8 +84,8 @@ const MainProducts = ({ product }) => {
                     ${product.price}
                 </p>
             </div>
-            {hasClicked && <Loading />}
-            {user && (
+            {/* {hasClicked && <Loading />} */}
+            {/* {user && (
                 <button
                     disabled={user.id === product.ownerId || buttonAction}
                     className={`${
@@ -98,7 +98,7 @@ const MainProducts = ({ product }) => {
                     onClick={() => addItemToCart()}>
                     {buttonAction ? 'Added' : 'Add to Cart'}
                 </button>
-            )}
+            )} */}
         </div>
     );
 };

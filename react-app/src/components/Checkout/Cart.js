@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
 import CartProduct from './CartProduct';
 import { useHistory } from 'react-router-dom';
+import { GiRunningNinja } from 'react-icons/gi';
 
 const Cart = ({ user }) => {
     const history = useHistory();
@@ -12,7 +13,8 @@ const Cart = ({ user }) => {
 
     return (
         <div className="bg-gray-100 mb-5">
-            <Header />
+            <section id="headers">
+            <Header  /></section>
             <main className="lg:flex max-w-screen-2xl mx-auto">
                 {/* left */}
                 <div className="flex-grow m-4 shadow-sm">
@@ -98,6 +100,21 @@ const Cart = ({ user }) => {
                     )}
                 </div>
             </main>
+
+            <footer
+                className={`${
+                    cart.length < 4
+                        ? 'hidden'
+                        : 'flex flex-row items-center justify-center cursor-pointer my-3 pb-2'
+                }`}>
+                <a href="#headers" className="flex  ">
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
+                    <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                        Scroll to the top
+                    </div>
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2 ml-2 transform scale-x-[-1]" />
+                </a>
+            </footer>
         </div>
     );
 };
