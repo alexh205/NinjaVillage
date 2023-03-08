@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
     editUserThunk,
     deleteUserThunk,
     authenticate,
-} from "../../store/sessionReducer";
-import stateTaxes from "../../media/stateTaxes.json";
-import Loading from "../Loading";
+} from '../../store/sessionReducer';
+import stateTaxes from '../../media/stateTaxes.json';
+import Loading from '../Loading';
 
 const EditProfile = ({ user, showProfile }) => {
     const { userId } = useParams();
@@ -17,16 +17,16 @@ const EditProfile = ({ user, showProfile }) => {
 
     const [hasClicked, setHasClicked] = useState(false);
     const [hasClickedDelete, setHasClickedDelete] = useState(false);
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [streetAddress, setStreetAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipCode, setZipCode] = useState("");
-    const [profileImg, setProfileImg] = useState("");
-    const [password, setPassword] = useState("");
-    const [repeatPassword, setRepeatPassword] = useState("");
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [profileImg, setProfileImg] = useState('');
+    const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
 
     const [valid, setValid] = useState(false);
 
@@ -55,8 +55,8 @@ const EditProfile = ({ user, showProfile }) => {
             if (!city) errors.push("Please provide a 'City'");
             if (!state) errors.push("Please provide a 'State'");
             if (!zipCode) errors.push("Please provide a 'Zip Code' number");
-            // if (!profileImg)
-                // errors.push("Please provide a 'Profile Image' url");
+            if (!profileImg)
+                errors.push("Please provide a 'Profile Image' url");
 
             return errors;
         };
@@ -78,20 +78,20 @@ const EditProfile = ({ user, showProfile }) => {
                     city,
                     state,
                     zipCode,
-                    // profileImg,
+                    profileImg,
                     // password,
                     user
                 )
             );
 
-            setUsername("");
-            setEmail("");
-            setName("");
-            setStreetAddress("");
-            setCity("");
-            setState("");
-            setZipCode("");
-            // setProfileImg("");
+            setUsername('');
+            setEmail('');
+            setName('');
+            setStreetAddress('');
+            setCity('');
+            setState('');
+            setZipCode('');
+            setProfileImg('');
             // setPassword("");
             // setRepeatPassword("");
             setValidateErrors([]);
@@ -99,14 +99,14 @@ const EditProfile = ({ user, showProfile }) => {
             showProfile(false);
         };
         const onProfileDelete = async e => {
-            setUsername("");
-            setEmail("");
-            setName("");
-            setStreetAddress("");
-            setCity("");
-            setState("");
-            setZipCode("");
-            setProfileImg("");
+            setUsername('');
+            setEmail('');
+            setName('');
+            setStreetAddress('');
+            setCity('');
+            setState('');
+            setZipCode('');
+            setProfileImg('');
             // setPassword("");
             // setRepeatPassword("");
             setValidateErrors([]);
@@ -115,7 +115,7 @@ const EditProfile = ({ user, showProfile }) => {
             await dispatch(deleteUserThunk(userId));
             await dispatch(authenticate());
             setHasClickedDelete(false);
-            history.push("/");
+            history.push('/');
         };
 
         return (
@@ -273,13 +273,13 @@ const EditProfile = ({ user, showProfile }) => {
                             <button
                                 className="button mr-2"
                                 onClick={e => {
-                                    setUsername("");
-                                    setEmail("");
-                                    setName("");
-                                    setStreetAddress("");
-                                    setCity("");
-                                    setState("");
-                                    setZipCode("");
+                                    setUsername('');
+                                    setEmail('');
+                                    setName('');
+                                    setStreetAddress('');
+                                    setCity('');
+                                    setState('');
+                                    setZipCode('');
                                     // setProfileImg("");
                                     // setPassword("");
                                     // setRepeatPassword("");

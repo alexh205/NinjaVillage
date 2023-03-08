@@ -1,35 +1,35 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import Header from "../Header/Header";
-import Modal from "../../context/Modal";
-import WishListProd from "./WishListProd";
-import Loading from "../Loading";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Header from '../Header/Header';
+import Modal from '../../context/Modal';
+import WishListProd from './WishListProd';
+import Loading from '../Loading';
 import {
     createListThunk,
     removeWishListThunk,
-} from "../../store/wishListReducer";
-import { authenticate } from "../../store/sessionReducer";
-import EditList from "./EditList";
-import { GiRunningNinja } from "react-icons/gi";
+} from '../../store/wishListReducer';
+import { authenticate } from '../../store/sessionReducer';
+import EditList from './EditList';
+import { GiRunningNinja } from 'react-icons/gi';
 
 export const WishListContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [openModal, setOpenModal] = useState(false);
-    const [selected, setSelected] = useState("");
-    const [activeList, setActiveList] = useState("");
+    const [selected, setSelected] = useState('');
+    const [activeList, setActiveList] = useState('');
     const [hasClicked, setHasClicked] = useState(false);
     const [hasEdit, setHasEdit] = useState(false);
-
-    const [listName, setListName] = useState("");
+    const [listName, setListName] = useState('');
     const [validateErrors, setValidateErrors] = useState([]);
+
     const showEdit = boolean => setHasEdit(boolean);
     const user = useSelector(state => state.session.user);
     const userWishLists = useSelector(state => state.listStore.userLists);
 
     if (!user) {
-        history.push("/");
+        history.push('/');
     }
     const validate = () => {
         const errors = [];
@@ -39,11 +39,11 @@ export const WishListContainer = () => {
         }
 
         if (listName.length >= 20) {
-            errors.push("Please limit your name to 20 characters or less");
+            errors.push('Please limit your name to 20 characters or less');
         }
 
         if (userWishLists.some(list => list.name === listName)) {
-            errors.push("List name already exists.");
+            errors.push('List name already exists.');
         }
 
         return errors;
@@ -54,7 +54,6 @@ export const WishListContainer = () => {
     }
 
     let currentList;
-
     userWishLists.map(list => {
         if (activeList.id === list.id) {
             currentList = list;
@@ -76,7 +75,7 @@ export const WishListContainer = () => {
         await dispatch(createListThunk(listName));
         await dispatch(authenticate());
         setHasClicked(false);
-        setListName("");
+        setListName('');
         setValidateErrors([]);
         setOpenModal(false);
     };
@@ -171,14 +170,14 @@ export const WishListContainer = () => {
                                         <div className="flex justify-center items-center">
                                             <button
                                                 className={`${
-                                                    list.name === "Wish List"
-                                                        ? "hidden"
-                                                        : "text-center mr-5 cursor-pointer hover:text-amber-600 p-1"
+                                                    list.name === 'Wish List'
+                                                        ? 'hidden'
+                                                        : 'text-center mr-5 cursor-pointer hover:text-amber-600 p-1'
                                                 }`}
                                                 onClick={() =>
                                                     setHasEdit(!hasEdit)
                                                 }>
-                                                {!hasEdit ? "Edit" : null}
+                                                {!hasEdit ? 'Edit' : null}
                                             </button>
                                         </div>
                                     </div>
@@ -188,6 +187,9 @@ export const WishListContainer = () => {
                                         onClick={() => {
                                             setSelected(list.name);
                                             setActiveList(list);
+                                            {
+                                                console.log(activeList);
+                                            }
                                         }}>
                                         <div className="font-semibold cursor-pointer hover:text-amber-600">
                                             {list.name}
@@ -195,9 +197,9 @@ export const WishListContainer = () => {
                                         <div className="flex  items-center">
                                             <button
                                                 className={`${
-                                                    list.name === "Wish List"
-                                                        ? "hidden"
-                                                        : "text-center mr-5 cursor-pointer hover:text-amber-600 p-1"
+                                                    list.name === 'Wish List'
+                                                        ? 'hidden'
+                                                        : 'text-center mr-5 cursor-pointer hover:text-amber-600 p-1'
                                                 }`}
                                                 onClick={() => {
                                                     setHasEdit(!hasEdit);
@@ -224,7 +226,7 @@ export const WishListContainer = () => {
                                 <div
                                     className="cursor-pointer text-sm font-semibold text-amber-600 hover:text-[#007185] mt-3 mr-[30px]"
                                     onClick={() => {
-                                        if (activeList?.name !== "Wish List") {
+                                        if (activeList?.name !== 'Wish List') {
                                             const data = dispatch(
                                                 removeWishListThunk(
                                                     activeList.id
@@ -240,7 +242,7 @@ export const WishListContainer = () => {
                                                 "'Wish List' can't be deleted!"
                                             );
                                         }
-                                        setActiveList("");
+                                        setActiveList('');
                                     }}>
                                     Delete List
                                 </div>
@@ -262,7 +264,12 @@ export const WishListContainer = () => {
                     </div>
                 </div>
             </div>
-            <footer>
+            <footer
+                className={`${
+                    activeList && activeList.listProducts.length <= 3
+                        ? 'hidden'
+                        : 'block'
+                }`}>
                 <a
                     href="#header"
                     className="flex flex-row items-center justify-center cursor-pointer my-4">

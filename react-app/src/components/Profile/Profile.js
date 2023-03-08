@@ -1,13 +1,26 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Header from "../Header/Header";
-import EditProfile from "./EditProfile";
-import Product from "../Product/Product";
-import Review from "../Review/Review";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import Header from '../Header/Header';
+import EditProfile from './EditProfile';
+import Product from '../Product/Product';
+import UserReviews from '../Review/UserReviews';
+import { authenticate } from '../../store/sessionReducer';
+import {
+    getAllProductThunk,
+    deleteProductThunk,
+} from '../../store/productReducer';
+// import Loading from '../Loading';
+import { GiRunningNinja } from 'react-icons/gi';
 
 const Profile = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const [hasClickedEdit, setHasClickedEdit] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
+    const [listingClick, setListingClick] = useState(false);
+    const [reviewClick, setReviewClick] = useState(false);
+
     const user = useSelector(state => state.session.user);
 
     let userProducts;
@@ -31,7 +44,7 @@ const Profile = () => {
             <Header />
             {user && !clicked && (
                 <div className="flex flex-col">
-                    <div className="flex flex-col md:max-w-[580px] max-w-[420px] justify-center  md:ml-[40%] ml-[15%] flex-grow mt-6 border-2 p-1 ">
+                    <div className="flex flex-col md:max-w-[580px] max-w-[420px] justify-center md:ml-[33%] ml-[15%] flex-grow mt-10 border-2 p-1 ">
                         <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                             About Me
                         </h1>
@@ -41,43 +54,42 @@ const Profile = () => {
                                 src={user.profileImage}
                                 alt="user"></img>
                             <div className="flex flex-row items-center justify-center">
-                                <div className="">
+                                <div>
                                     <div className="flex flex-row items-center mb-1">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
                                             Username:
                                         </label>
-                                        <p className="text-xs md:text-[14px] text-green-800">
+                                        <p className="text-xs md:text-[14px] text-ninja_green">
                                             {user.username}
                                         </p>
                                     </div>
-
                                     <div className="flex flex-row items-center mb-1">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
                                             Email:
                                         </label>
-                                        <p className="text-xs md:text-[14px] text-green-800">
+                                        <p className="text-xs md:text-[14px] text-ninja_green">
                                             {user.email}
                                         </p>
                                     </div>
 
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
                                             Name:
                                         </label>
-                                        <p className="text-xs md:text-[14px] text-green-800">
+                                        <p className="text-xs md:text-[14px] text-ninja_green">
                                             {user.name}
                                         </p>
                                     </div>
 
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
                                             Address:
                                         </label>
                                         <div className="flex flex-col items-center">
-                                            <p className="text-xs md:text-[14px] text-green-800">
+                                            <p className="text-xs md:text-[14px] text-ninja_green">
                                                 {user.street_address}
                                             </p>
-                                            <p className="text-xs md:text-[14px] text-green-800">
+                                            <p className="text-xs md:text-[14px] text-ninja_green">
                                                 {user.city}, {user.state},
                                                 {user.zip_code}
                                             </p>
@@ -86,102 +98,176 @@ const Profile = () => {
                                 </div>
                                 <div className="items-center ml-6">
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3 text-amber-700">
-                                            Listings:
-                                        </label>
-                                        {user && user.ownedProducts && (
-                                            <p className="text-xs md:text-[14px] text-green-800">
-                                                {user.ownedProducts.length}
-                                            </p>
+                                        <div className="flex flex-row items-center justify-center">
+                                            <GiRunningNinja className="h-5 w-5" />
+                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                                Listings:
+                                            </label>
+                                        </div>
+                                        {user?.ownedProducts && (
+                                            <div
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600"
+                                                onClick={() => {
+                                                    setListingClick(
+                                                        !listingClick
+                                                    );
+                                                    setReviewClick(false);
+                                                }}>
+                                                {user.ownedProducts.length || 0}
+                                            </div>
                                         )}
                                     </div>
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
-                                            Reviews:
-                                        </label>
-                                        {user && user.userReviews && (
-                                            <p className="text-xs md:text-[14px] text-green-800">
-                                                {user.userReviews.length}
-                                            </p>
+                                        <div className="flex flex-row items-center justify-center">
+                                            <GiRunningNinja className="h-5 w-5" />
+                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                                Reviews:
+                                            </label>
+                                        </div>
+                                        {user?.userReviews && (
+                                            <div
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600 "
+                                                onClick={() => {
+                                                    setReviewClick(
+                                                        !reviewClick
+                                                    );
+                                                    setListingClick(false);
+                                                }}>
+                                                {user.userReviews.length || 0}
+                                            </div>
                                         )}
                                     </div>
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
-                                            Wish Lists:
-                                        </label>
-                                        {user && user.ownedLists && (
-                                            <p className="text-xs md:text-[14px] text-green-800">
-                                                {user.ownedLists.length}
-                                            </p>
+                                        <div className="flex flex-row items-center justify-center">
+                                            <GiRunningNinja className="h-5 w-5" />
+                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                                Wish Lists:
+                                            </label>
+                                        </div>
+                                        {user?.ownedLists && (
+                                            <div
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600"
+                                                onClick={() =>
+                                                    history.push('/wishlists')
+                                                }>
+                                                {user.ownedLists.length || 0}
+                                            </div>
                                         )}
                                     </div>
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-amber-700">
-                                            Orders:
-                                        </label>
-                                        {user && user.ownedCarts && (
-                                            <p className="text-xs md:text-[14px] text-green-800">
+                                        <div className="flex flex-row items-center justify-center">
+                                            <GiRunningNinja className="h-5 w-5" />
+                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                                Orders:
+                                            </label>
+                                        </div>
+                                        {user?.ownedCarts && (
+                                            <div
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600"
+                                                onClick={() =>
+                                                    history.push('/orders')
+                                                }>
                                                 {user.ownedCarts.length > 0
                                                     ? user.ownedCarts.length - 1
                                                     : 0}
-                                            </p>
+                                            </div>
                                         )}
                                     </div>
-                                    <div className="mt-2 ml-14">
-                                        <button
-                                            className={`${
-                                                user.username === "Demo"
-                                                    ? "hidden"
-                                                    : "text-sky-600 text-sm cursor-pointer font-bold"
-                                            }`}
-                                            onClick={e => {
-                                                handleClickProfileImage(e);
-                                            }}>
-                                            Edit profile
-                                        </button>
+                                    <div className="mt-2 ">
+                                        {user?.username === 'Demo' ? (
+                                            <p className="text-xs whitespace-nowrap font-semibold">
+                                                "Demo user is not Editable"
+                                            </p>
+                                        ) : (
+                                            <button
+                                                className="text-sky-600 text-base cursor-pointer font-bold hover:text-amber-600 hover:shadow-lg"
+                                                onClick={e => {
+                                                    handleClickProfileImage(e);
+                                                }}>
+                                                Edit profile
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 items-start justify-start mt-6 ml-1">
-                        <div>
-                            <h2 className="text-2xl font-bold flex justify-center mb-4">
-                                User Reviews
-                            </h2>
-                            <div className="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 ">
-                                {user &&
-                                    userReviews &&
-                                    userReviews.map((review, i) => (
-                                        <div
-                                            key={i}
-                                            className="cursor-pointer border-2 m-3 flex items-center"
-                                            onClick={() =>
-                                                history.push(
-                                                    `/products/${review.productId}`
-                                                )
-                                            }>
-                                            <Review key={i} review={review} />
+                    <div className="">
+                        <div
+                            className={`${
+                                !listingClick
+                                    ? 'hidden'
+                                    : !reviewClick &&
+                                      'my-3 flex flex-col items-center justify-center'
+                            }`}>
+                            <h1 className="text-2xl font-bold ">Listings</h1>
+                            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
+                                {userProducts?.map(product => (
+                                    <div key={product.id} className="mb-8">
+                                        <div className="flex flex-col sm:flex-row items-center justify-start sm:justify-center my-2">
+                                            {/* {hasClickedEdit && <Loading />} */}
+                                            <button
+                                                className="mt-2 mb-2  text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                                                disabled={hasClickedEdit}
+                                                onClick={() => {
+                                                    setHasClickedEdit(true);
+                                                    history.push(
+                                                        `/products/edit/${product.id}`
+                                                    );
+                                                    setHasClickedEdit(false);
+                                                }}>
+                                                Edit listing
+                                            </button>
+                                            {/* {hasClicked && <Loading />} */}
+                                            <button
+                                                className="flex mt-2 mb-2  text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-2 border border-gray-400 rounded shadow"
+                                                disabled={hasClicked}
+                                                onClick={async () => {
+                                                    setHasClicked(true);
+                                                    await dispatch(
+                                                        deleteProductThunk(
+                                                            product.id
+                                                        )
+                                                    );
+                                                    await dispatch(
+                                                        getAllProductThunk()
+                                                    );
+                                                    await dispatch(
+                                                        authenticate()
+                                                    );
+                                                    setHasClicked(false);
+                                                    history.push(
+                                                        `/profile/${user.id}`
+                                                    );
+                                                }}>
+                                                Delete listing
+                                            </button>
                                         </div>
-                                    ))}
+                                        <Product product={product} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <div className="mr-6">
-                            <h2 className="text-2xl font-bold flex justify-center ">
-                                User Listings
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {user &&
-                                    userProducts &&
-                                    userProducts.map((product, i) => (
-                                        <Product key={i} product={product} />
-                                    ))}
+                        <div
+                            className={`${
+                                !reviewClick
+                                    ? 'hidden'
+                                    : !listingClick &&
+                                      'my-3 flex flex-col items-center justify-center'
+                            }`}>
+                            <h1 className="text-2xl font-bold ">Reviews</h1>
+                            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
+                                {userReviews?.map(review => (
+                                    <UserReviews
+                                        review={review}
+                                        key={review.id}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
             )}
-
             {user && clicked && (
                 <EditProfile user={user} showProfile={showProfile} />
             )}

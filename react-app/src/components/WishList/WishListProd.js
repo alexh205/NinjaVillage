@@ -67,7 +67,7 @@ const WishListProd = ({ product, activeList }) => {
                         className="cursor-pointer "
                         onClick={() => history.push(`/products/${item.id}`)}>
                         <img
-                            className="object-fill m-2 h-[200px] w-[200px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 "
+                            className="object-contain m-2 h-[200px] w-[200px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 "
                             src={item.image}
                             alt="product"
                         />

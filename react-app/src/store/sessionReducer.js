@@ -144,7 +144,7 @@ export const editUserThunk =
         city,
         state,
         zipCode,
-        // profileImg,
+        profileImg,
         // password,
         user
     ) =>
@@ -163,7 +163,7 @@ export const editUserThunk =
                 city,
                 state,
                 zip_code: zipCode,
-                // profile_img: profileImg,
+                profile_img: profileImg,
             }),
         });
 

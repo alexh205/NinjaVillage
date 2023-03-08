@@ -5,16 +5,16 @@ def seed_users():
     users = [{"username": "Demo", "name": "John Doe", "email": "demo@aa.io", "password": "password", "street_address": "47 Del Mar Avenue",
               "city": "Honolulu",
               "state": "HI",
-              "zip_code": "96825", "profile_img": "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1017&q=80"},
+              "zip_code": "96825", "profile_img": "https://images.unsplash.com/photo-1654900365111-34ae7a645c2a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=817&q=80"},
              {"username": "marnie", "name": "Marnie Stark", "email": "marnie@aa.io", "password": "password", "street_address": "65 Summit Trail",
               "city": "Macon",
               "state": "GA",
               "zip_code": "31205",
-              "profile_img": "https://images.unsplash.com/photo-1505628346881-b72b27e84530?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"},
+              "profile_img": "https://images.unsplash.com/photo-1552939037-6d7afda394c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fG5pbmphJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"},
              {"username": "bobbie", "name": "Bobbie William", "email": "bobbie@aa.io", "password": "password", "street_address": "93957 Washington Way",
               "city": "Lakewood",
               "state": "WA",
-              "zip_code": "98498", "profile_img": "https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=982&q=80"}, {
+              "zip_code": "98498", "profile_img": "https://images.unsplash.com/photo-1640685425708-9a1b4c1988ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fG5pbmphJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"}, {
         "username": "ghenry0",
         "name": "Gina Henry",
         "email": "ghenry0@blogspot.com",
@@ -22,7 +22,7 @@ def seed_users():
         "city": "Sacramento",
         "state": "CA",
         "zip_code": "95823",
-        "profile_img": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2359&q=80"
+        "profile_img": "https://images.unsplash.com/photo-1572987744154-c41fa44b36a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fG5pbmphJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
     }, {
         "username": "cgrandham1",
         "name": "Cobb Grandham",
@@ -31,7 +31,7 @@ def seed_users():
         "city": "Amarillo",
         "state": "TX",
         "zip_code": "79116",
-        "profile_img": "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80"
+        "profile_img": "https://images.unsplash.com/photo-1597047521791-32e57285b0d4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fG5pbmphJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
     }, {
         "username": "alexH",
         "name": "Alexios AC",
@@ -40,7 +40,7 @@ def seed_users():
         "city": "Portland",
         "state": "OR",
         "zip_code": "00425",
-        "profile_img": "https://images.unsplash.com/photo-1610987630265-35804332a182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+        "profile_img": "https://images.unsplash.com/photo-1634120151525-800e685a7c75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjEzfHxuaW5qYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
     }]
 
     db.session.add_all([User(**user)for user in users])

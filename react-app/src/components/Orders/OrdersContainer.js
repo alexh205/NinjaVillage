@@ -94,7 +94,7 @@ const OrdersContainer = () => {
                                 endDate={endDate}
                                 isClearable={true}
                                 selectsRange
-                                placeholderText="Filter by order's date range"
+                                placeholderText="Filter by purchase date"
                                 withPortal
                                 todayButton={true}
                                 className="bg-white rounded-md border-gray-300 border pr-6 pl-3 placeholder:text-[14px] py-2 placeholder-gray-400 placeholder:text-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"

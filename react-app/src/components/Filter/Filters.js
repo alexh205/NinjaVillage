@@ -1,10 +1,10 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { FilteredProd } from "./FilteredProd";
-import Header from "../Header/Header";
-import { GiRunningNinja } from "react-icons/gi";
-import { MdOutlineArrowRightAlt } from "react-icons/md";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { FilteredProd } from './FilteredProd';
+import Header from '../Header/Header';
+import { GiRunningNinja } from 'react-icons/gi';
+import { MdOutlineArrowRightAlt } from 'react-icons/md';
 
 const Filters = () => {
     const { filterId } = useParams();
@@ -19,7 +19,7 @@ const Filters = () => {
         if (product.category === filterId) {
             filteredProd.push(product);
         }
-        if (filterId === "All") {
+        if (filterId === 'All') {
             filteredProd = Object.values(products);
         }
         return null;
@@ -43,10 +43,10 @@ const Filters = () => {
                         <div
                             className={`${
                                 !user
-                                    ? "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"
+                                    ? 'w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]'
                                     : user.id === product.ownerId
-                                    ? "hidden"
-                                    : "w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]"
+                                    ? 'hidden'
+                                    : 'w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]'
                             }`}
                             key={i}>
                             <FilteredProd
@@ -58,7 +58,8 @@ const Filters = () => {
                     ))}
                 </div>
             </div>
-            <footer>
+            <footer
+                className={`${filteredProd?.length <= 6 ? 'hidden' : 'block'}`}>
                 <a
                     href="#filters"
                     className="flex flex-row items-center justify-center cursor-pointer my-4">

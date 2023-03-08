@@ -16,13 +16,13 @@ const Product = ({ product }) => {
     const history = useHistory();
 
     return (
-        <div className="flex flex-col m-2 bg-white p-3 border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full  ">
+        <div
+            className="flex flex-col m-2 p-[10px] bg-white border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full cursor-pointer "
+            onClick={() => history.push(`/products/${product.id}`)}>
             <p className="flex justify-end text-sm italic text-gray-400">
                 {product.category}
             </p>
-            <div
-                className="cursor-pointer"
-                onClick={() => history.push(`/products/${product.id}`)}>
+            <div>
                 <img
                     className="object-contain h-[200px] w-[200px] my-4 "
                     src={product.image}
