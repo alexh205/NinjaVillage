@@ -84,10 +84,6 @@ export const signUp =
         username,
         name,
         email,
-        streetAddress,
-        city,
-        state,
-        zipCode,
         password,
         profileImage
     ) =>
@@ -101,10 +97,6 @@ export const signUp =
                 username,
                 name,
                 email,
-                street_address: streetAddress,
-                city,
-                state,
-                zip_code: zipCode,
                 password,
                 profile_img: profileImage,
             }),

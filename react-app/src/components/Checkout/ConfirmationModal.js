@@ -1,5 +1,5 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ConfirmationModal = ({
     showModal,
@@ -10,7 +10,7 @@ const ConfirmationModal = ({
     deliveryDate,
 }) => {
     const history = useHistory();
-    
+
     return (
         <div>
             {isOpen && (
@@ -33,7 +33,7 @@ const ConfirmationModal = ({
                                         <img
                                             className="object-contain h-12 w-12"
                                             src={
-                                                "https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png"
+                                                'https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png'
                                             }
                                             alt="ninja village logo"
                                         />
@@ -66,7 +66,7 @@ const ConfirmationModal = ({
                                 <button
                                     onClick={() => {
                                         showModal();
-                                        history.push("/orders");
+                                        history.push('/orders');
                                     }}
                                     type="button"
                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">

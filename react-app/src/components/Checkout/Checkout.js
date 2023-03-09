@@ -12,8 +12,6 @@ import ConfirmationModal from './ConfirmationModal';
 const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [hasClicked, setHasClicked] = useState(false);
-    const [hasClicked_b, setHasClicked_b] = useState(false);
     const [modal, setModal] = useState(false);
     const [cartObj, setCartObj] = useState('');
     const [valTotal, setValTotal] = useState('');
@@ -107,7 +105,7 @@ const Checkout = () => {
             products: cart.addedItems,
             estimated_delivery: deliveryDate,
         };
-        setHasClicked(true);
+        // setHasClicked(true);
         try {
             await dispatch(cartCheckoutThunk(cartObj));
             await dispatch(authenticate());
@@ -115,26 +113,7 @@ const Checkout = () => {
         } catch (error) {
             console.log('Error during dispatch:', error);
         } finally {
-            setHasClicked(false);
-        }
-    };
-    const handleCheckout_b = async () => {
-        const cartObj = {
-            id: cart.id,
-            total: cartTotal,
-            checkedOut: true,
-            products: cart.addedItems,
-            estimated_delivery: deliveryDate,
-        };
-        setHasClicked_b(true);
-        try {
-            await dispatch(cartCheckoutThunk(cartObj));
-            await dispatch(authenticate());
-            setModal(true);
-        } catch (error) {
-            console.log('Error during dispatch:', error);
-        } finally {
-            setHasClicked_b(false);
+            // setHasClicked(false);
         }
     };
 
@@ -143,7 +122,7 @@ const Checkout = () => {
             const timeout = setTimeout(() => {
                 setModal(false);
                 history.push('/orders');
-            }, 4000);
+            }, 3000);
 
             return () => {
                 clearTimeout(timeout);
@@ -194,11 +173,37 @@ const Checkout = () => {
                                 </div>
                                 <div className="text-[12px] md:text-[16px]">
                                     <p>{user.name}</p>
-                                    <p>{user.street_address}</p>
-                                    <p>
-                                        {user.city}, {user.state},{' '}
-                                        {user.zip_code}
-                                    </p>
+                                    {user?.street_address ? (
+                                        <p>{user.street_address}</p>
+                                    ) : (
+                                        <p
+                                            className=" text-sky-600 hover:text-amber-700 cursor-pointer"
+                                            onClick={() =>
+                                                history.push(
+                                                    `/profile/${user.id}`
+                                                )
+                                            }>
+                                            Please populate your address details
+                                        </p>
+                                    )}
+                                    {user?.city ||
+                                    user?.state ||
+                                    user?.zip_code ? (
+                                        <p>
+                                            {user.city}, {user.state},{' '}
+                                            {user.zip_code}
+                                        </p>
+                                    ) : (
+                                        <p
+                                            className=" text-sky-600 hover:text-amber-700 cursor-pointer"
+                                            onClick={() =>
+                                                history.push(
+                                                    `/profile/${user.id}`
+                                                )
+                                            }>
+                                            Please populate your address details
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                             <hr className="w-[100%] mt-3"></hr>
@@ -226,8 +231,7 @@ const Checkout = () => {
                         <div>
                             <div className="flex flex-row mt-3 ">
                                 <div className="font-semibold text-xl mr-6">
-                                    {' '}
-                                    3{' '}
+                                    3
                                 </div>
                                 <div className="font-semibold text-lg md:text-xl">
                                     Review items
@@ -255,34 +259,56 @@ const Checkout = () => {
                                     </div>
                                     {/* order + total  */}
                                     <div className="border-[1px] rounded-lg mt-5 flex p-1 items-center mb-3">
-                                        {hasClicked && <Loading />}
-                                        <button
-                                            className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] whitespace-nowrap"
-                                            disabled={hasClicked || total < 1}
-                                            onClick={() => {
-                                                setCartObj(cart);
-                                                setValTotal(cartTotal);
-                                                handleCheckout();
-                                            }}>
-                                            Place your order
-                                        </button>
-                                        <div className="flex flex-col pl-2">
-                                            <div className=" flex text-md text-orange-700 p-0 m-0 ">
-                                                Order total:
-                                                <div className="ml-2 ">
-                                                    {total > 0 ? (
-                                                        <p>${cartTotal}</p>
-                                                    ) : (
-                                                        <p>$0</p>
-                                                    )}
+                                        {user.city &&
+                                        user.state &&
+                                        user.zip_code &&
+                                        user.street_address ? (
+                                            <>
+                                                {' '}
+                                                <button
+                                                    className=" cursor-pointer p-1 m-2 text-[10px] md:text-[12px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] whitespace-nowrap"
+                                                    disabled={total < 1}
+                                                    onClick={() => {
+                                                        setCartObj(cart);
+                                                        setValTotal(cartTotal);
+                                                        handleCheckout();
+                                                    }}>
+                                                    Place your order
+                                                </button>
+                                                <div className="flex flex-col pl-2">
+                                                    <div className=" flex text-md text-orange-700 p-0 m-0 ">
+                                                        Order total:
+                                                        <div className="ml-2 ">
+                                                            {total > 0 ? (
+                                                                <p>
+                                                                    ${cartTotal}
+                                                                </p>
+                                                            ) : (
+                                                                <p>$0</p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <p className="text-[10px] text-gray-500 p-0 m-0">
+                                                        By placing your order,
+                                                        you agree to
+                                                        NinjaVillage's privacy
+                                                        notice and conditions of
+                                                        use
+                                                    </p>
                                                 </div>
-                                            </div>
-                                            <p className="text-[10px] text-gray-500 p-0 m-0">
-                                                By placing your order, you agree
-                                                to NinjaVillage's privacy notice
-                                                and conditions of use
+                                            </>
+                                        ) : (
+                                            <p
+                                                className=" text-sky-600 hover:text-amber-700 cursor-pointer flex flex-row justify-center ml-[300px] text-2xl"
+                                                onClick={() =>
+                                                    history.push(
+                                                        `/profile/${user.id}`
+                                                    )
+                                                }>
+                                                Please populate your address
+                                                details
                                             </p>
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -290,62 +316,76 @@ const Checkout = () => {
                     </div>
                 </div>
                 <div className="border-[1px] rounded-lg mt-7 w-[330px] h-[312px] md:h-[360px] mr-7 relative">
-                    <div className="flex flex-col items-center">
-                        {hasClicked_b && <Loading />}
-                        <button
-                            className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow whitespace-nowrap"
-                            disabled={hasClicked_b || total < 1}
-                            onClick={() => {
-                                setCartObj(cart);
-                                setValTotal(cartTotal);
-                                handleCheckout_b();
-                            }}>
-                            Place your order
-                        </button>
-                        <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1">
+                    {user.city &&
+                    user.state &&
+                    user.zip_code &&
+                    user.street_address ? (
+                        <>
                             {' '}
-                            By placing your order, you agree to NinjaVillage's
-                            privacy notice and conditions of use
-                        </p>
-                        <hr className="w-[85%] mt-2"></hr>
-                    </div>
-                    <div>
-                        <div className="font-semibold text-md md:text-lg ml-4 mt-2">
-                            Order Summary
-                        </div>
-                        <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs mt-4">
-                            <p>Items:</p>
-                            <p>
-                                $
-                                {Math.round((total + Number.EPSILON) * 100) /
-                                    100}
-                            </p>
-                        </div>
-                        <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
-                            <p>Shipping & handling:</p>
-                            <div>
-                                {total > 0 ? (
-                                    <p>${shippingHandling}</p>
-                                ) : (
-                                    <p>$0</p>
-                                )}
-
-                                <hr className="w-[100%] mt-2"></hr>
+                            <div className="flex flex-col items-center">
+                                <button
+                                    className=" cursor-pointer py-[6px] m-2 text-[12px] md:text-[13px] bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-md  focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 w-[120px] flex-grow whitespace-nowrap"
+                                    disabled={total < 1}
+                                    onClick={() => {
+                                        setCartObj(cart);
+                                        setValTotal(cartTotal);
+                                        handleCheckout();
+                                    }}>
+                                    Place your order
+                                </button>
+                                <p className="text-[10px] hidden md:flex text-gray-500 text-center px-1">
+                                    By placing your order, you agree to
+                                    NinjaVillage's privacy notice and conditions
+                                    of use
+                                </p>
+                                <hr className="w-[85%] mt-2"></hr>
                             </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
-                        <p>Total before tax:</p>
-                        {total > 0 ? <p>${preTax_total}</p> : <p>$0</p>}
-                    </div>
-                    <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2 border-b pb-1">
-                        <p>Estimated tax to be collected:</p>
-                        {total > 0 ? <p>${tax}</p> : <p>$0</p>}
-                    </div>
-                    <div className="font-semibold sm:text-md md:text-lg lg:text-xl ml-2 md:ml-5 my-3 md:my-4 lg:my-6 sm:mx-2 md:mx-3 lg:mx-6 text-orange-700 flex flex-row justify-between items-center">
-                        <p className="mr-[2px]">Order total:</p>
-                        {total > 0 ? <p>${cartTotal}</p> : <p>$0</p>}
-                    </div>
+                            <div>
+                                <div className="font-semibold text-md md:text-lg ml-4 mt-2">
+                                    Order Summary
+                                </div>
+                                <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs mt-4">
+                                    <p>Items:</p>
+                                    <p>
+                                        $
+                                        {Math.round(
+                                            (total + Number.EPSILON) * 100
+                                        ) / 100}
+                                    </p>
+                                </div>
+                                <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
+                                    <p>Shipping & handling:</p>
+                                    <div>
+                                        {total > 0 ? (
+                                            <p>${shippingHandling}</p>
+                                        ) : (
+                                            <p>$0</p>
+                                        )}
+
+                                        <hr className="w-[100%] mt-2"></hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2">
+                                <p>Total before tax:</p>
+                                {total > 0 ? <p>${preTax_total}</p> : <p>$0</p>}
+                            </div>
+                            <div className="flex flex-row justify-between mx-2 text-[10px] md:text-xs my-2 border-b pb-1">
+                                <p>Estimated tax to be collected:</p>
+                                {total > 0 ? <p>${tax}</p> : <p>$0</p>}
+                            </div>
+                            <div className="font-semibold sm:text-md md:text-lg lg:text-xl ml-2 md:ml-5 my-3 md:my-4 lg:my-6 sm:mx-2 md:mx-3 lg:mx-6 text-orange-700 flex flex-row justify-between items-center">
+                                <p className="mr-[2px]">Order total:</p>
+                                {total > 0 ? <p>${cartTotal}</p> : <p>$0</p>}
+                            </div>
+                        </>
+                    ) : (
+                        <p
+                            className=" text-sky-600 hover:text-amber-700 cursor-pointer flex flex-row justify-center items-center mt-[50%] font-medium whitespace-nowrap text-lg"
+                            onClick={() => history.push(`/profile/${user.id}`)}>
+                            Please populate your address details
+                        </p>
+                    )}
                 </div>
             </div>
             {modal && (

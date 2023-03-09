@@ -30,10 +30,10 @@ def upgrade():
                     sa.Column('hashed_password', sa.String(
                         length=255), nullable=False),
                     sa.Column('street_address', sa.String(
-                        length=100), nullable=False),
-                    sa.Column('city', sa.String(length=50), nullable=False),
-                    sa.Column('state', sa.String(length=10), nullable=False),
-                    sa.Column('zip_code', sa.Integer(), nullable=False),
+                        length=100), default=None),
+                    sa.Column('city', sa.String(length=50), default=None),
+                    sa.Column('state', sa.String(length=10), default=None),
+                    sa.Column('zip_code', sa.Integer(), default=None),
                     sa.Column('profile_img', sa.String(
                         length=500), nullable=True),
                     sa.Column('created_date', sa.DateTime(timezone=True),

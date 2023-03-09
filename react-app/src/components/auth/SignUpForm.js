@@ -12,10 +12,6 @@ const SignUpForm = () => {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [profileImage, setProfileImage] = useState("");
-    const [streetAddress, setStreetAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipCode, setZipCode] = useState("");
     const [validateErrors, setValidateErrors] = useState([]);
     const [hasClicked, setHasClicked] = useState(false);
 
@@ -43,14 +39,6 @@ const SignUpForm = () => {
         if (!password) errors.push("Please provide a 'Password'");
         if (!repeatPassword) errors.push("Please provide a 'Repeat Password'");
         if (!profileImage) errors.push("Please provide a 'Profile Image'");
-        if (!streetAddress) errors.push("Please provide a 'Street Address'");
-        if (!city) errors.push("Please provide a 'City'");
-        if (!state) errors.push("Please provide a 'State'");
-        if (state.length > 2)
-            errors.push("Please provide a two letter abbreviation");
-        if (!zipCode) errors.push("Please provide a 'Zip Code'");
-        if (!Number(zipCode) && zipCode)
-            errors.push("Please only use numbers for the 'Zip Code' field");
         if (password !== repeatPassword)
             errors.push("Both passwords must match");
         return errors;
@@ -69,10 +57,6 @@ const SignUpForm = () => {
                     username,
                     name,
                     email,
-                    streetAddress,
-                    city,
-                    state,
-                    zipCode,
                     password,
                     profileImage
                 )
@@ -85,10 +69,6 @@ const SignUpForm = () => {
         setPassword("");
         setRepeatPassword("");
         setProfileImage("");
-        setStreetAddress("");
-        setCity("");
-        setState("");
-        setZipCode("");
         setValidateErrors([]);
         setHasClicked(false);
     };
@@ -198,54 +178,6 @@ const SignUpForm = () => {
                             placeholder="image url"
                             onChange={e => setProfileImage(e.target.value)}
                             value={profileImage}></input>
-                    </div>
-                    <div className="mb-[5px] flex flex-col">
-                        <label className="font-semibold text-sm my-1 text-white">
-                            Street Address
-                        </label>
-                        <input
-                            className="border-[1px] border-gray-600 p-1"
-                            type="text"
-                            name="Street Address"
-                            placeholder="1234 Main Street"
-                            onChange={e => setStreetAddress(e.target.value)}
-                            value={streetAddress}></input>
-                    </div>
-                    <div className="mb-[5px] flex flex-col">
-                        <label className="font-semibold text-sm my-1 text-white">
-                            City
-                        </label>
-                        <input
-                            className="border-[1px] border-gray-600 p-1"
-                            type="text"
-                            name="City"
-                            placeholder="New York"
-                            onChange={e => setCity(e.target.value)}
-                            value={city}></input>
-                    </div>
-                    <div className="mb-[5px] flex flex-col">
-                        <label className="font-semibold text-sm my-1 text-white">
-                            State
-                        </label>
-                        <input
-                            className="border-[1px] border-gray-600 p-1"
-                            type="text"
-                            name="State"
-                            placeholder="NY"
-                            onChange={e => setState(e.target.value)}
-                            value={state}></input>
-                    </div>
-                    <div className="mb-[5px] flex flex-col">
-                        <label className="font-semibold text-sm my-1 text-white">
-                            Zip Code
-                        </label>
-                        <input
-                            className="border-[1px] border-gray-600 p-1"
-                            type="text"
-                            name="zipCode"
-                            placeholder="1234"
-                            onChange={e => setZipCode(e.target.value)}
-                            value={zipCode}></input>
                     </div>
                     {hasClicked && <Loading />}
                     <button

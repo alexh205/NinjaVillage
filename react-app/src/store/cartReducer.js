@@ -79,6 +79,7 @@ export const cartCheckoutThunk = cartObj => async dispatch => {
     const response = await request.json();
 
     dispatch(setCartCheckOut(response));
+    localStorage.removeItem('cart');
 };
 
 //? REDUCER
