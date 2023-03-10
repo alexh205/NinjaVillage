@@ -92,7 +92,7 @@ export const WishListContainer = () => {
                     </div>
                     <div className="mr-2">
                         <button
-                            className="text-base font-semibold text-[#017185] hover:text-amber-600"
+                            className="text-base font-semibold text-blue-500 hover:text-amber-600"
                             onClick={() => setOpenModal(!openModal)}>
                             Create a List
                         </button>
@@ -187,9 +187,6 @@ export const WishListContainer = () => {
                                         onClick={() => {
                                             setSelected(list.name);
                                             setActiveList(list);
-                                            {
-                                                console.log(activeList);
-                                            }
                                         }}>
                                         <div className="font-semibold cursor-pointer hover:text-amber-600">
                                             {list.name}
@@ -219,12 +216,12 @@ export const WishListContainer = () => {
                                 <div className="flex flex-row items-center mb-3">
                                     <p className="text-lg mr-3">List Name: </p>
 
-                                    <div className="text-lg font-bold ">
+                                    <div className="text-lg text-ninja_green font-semibold ">
                                         {activeList.name}
                                     </div>
                                 </div>
                                 <div
-                                    className="cursor-pointer text-sm font-semibold text-amber-600 hover:text-[#007185] mt-3 mr-[30px]"
+                                    className="cursor-pointer text-base font-semibold text-amber-600 hover:text-[#007185] mt-3 mr-[30px]"
                                     onClick={() => {
                                         if (activeList?.name !== 'Wish List') {
                                             const data = dispatch(
@@ -274,7 +271,7 @@ export const WishListContainer = () => {
                     href="#header"
                     className="flex flex-row items-center justify-center cursor-pointer my-4">
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
-                    <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                    <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                         Scroll to the top
                     </div>
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />

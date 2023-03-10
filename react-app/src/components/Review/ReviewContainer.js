@@ -1,7 +1,7 @@
-import React from "react";
-import { FaStar } from "react-icons/fa";
-import Review from "./Review";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { FaStar } from 'react-icons/fa';
+import Review from './Review';
+import { useHistory } from 'react-router-dom';
 
 const ReviewContainer = ({ product, user }) => {
     const history = useHistory();
@@ -32,17 +32,24 @@ const ReviewContainer = ({ product, user }) => {
                                             size={23}
                                             className="text-yellow-500"
                                             key={i}
-                                        />))
+                                        />
+                                    )
+                                )
                             ) : (
-                                <FaStar size={23} color={"#e4e5e9"} />
+                                <FaStar size={23} color={'#e4e5e9'} />
                             )}
                         </div>
                         {ratingAvg ? (
-                            <div className="text-lg">
-                                {ratingAvg.toFixed(1)} out of 5.0
+                            <div className="md:text-lg text-sm">
+                                {ratingAvg.toFixed(1)}{' '}
+                                <p className="hidden md:flex">out of 5.0</p>
                             </div>
                         ) : (
-                            !ratingAvg && <div>0 out of 5.0</div>
+                            !ratingAvg && (
+                                <div className="hidden md:flex whitespace-nowrap">
+                                    0 out of 5.0
+                                </div>
+                            )
                         )}
                     </div>
                     {product && product.productReviews.length === 1 ? (
@@ -51,7 +58,7 @@ const ReviewContainer = ({ product, user }) => {
                         </div>
                     ) : product && product.productReviews.length > 1 ? (
                         <div className="text-sm text-gray-500 mt-1">
-                            {product.productReviews.length} ratings{" "}
+                            {product.productReviews.length} ratings{' '}
                         </div>
                     ) : (
                         <div className="text-sm text-gray-500 mt-1">
@@ -73,8 +80,8 @@ const ReviewContainer = ({ product, user }) => {
                         </div>
                         <button
                             className="mt-2 mb-4 self-center text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-1 px-6 border border-gray-600 rounded shadow "
-                            onClick={() => history.push("/login")}>
-                            {!user && "Sign in to write a review"}
+                            onClick={() => history.push('/login')}>
+                            {!user && 'Sign in to write a review'}
                         </button>
                     </div>
                 ) : (
@@ -85,8 +92,8 @@ const ReviewContainer = ({ product, user }) => {
                                 product.productReviews.find(
                                     review => review.owner.id === user.id
                                 )
-                                    ? "hidden"
-                                    : "flex flex-col border-t border-b mt-3"
+                                    ? 'hidden'
+                                    : 'flex flex-col border-t border-b mt-3'
                             }`}>
                             <div className="mt-4 font-semibold text-lg">
                                 Review this product

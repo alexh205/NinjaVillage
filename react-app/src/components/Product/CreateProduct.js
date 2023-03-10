@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import Header from "../Header/Header";
+import React, { useState } from 'react';
+import Header from '../Header/Header';
 import {
     getAllProductThunk,
     createProductThunk,
-} from "../../store/productReducer";
-import { authenticate } from "../../store/sessionReducer";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import Loading from "../Loading";
+} from '../../store/productReducer';
+import { authenticate } from '../../store/sessionReducer';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Loading from '../Loading';
 
 const CreateProduct = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("");
-    const [brand, setBrand] = useState("");
-    const [image, setImage] = useState("");
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [brand, setBrand] = useState('');
+    const [image, setImage] = useState('');
     const [hasClicked, setHasClicked] = useState(false);
 
     const [validateErrors, setValidateErrors] = useState([]);
@@ -46,32 +46,43 @@ const CreateProduct = () => {
         }
 
         setHasClicked(true);
+        let product;
+        try {
+            product = await dispatch(
+                createProductThunk(
+                    title,
+                    price,
+                    description,
+                    category,
+                    brand,
+                    image
+                )
+            );
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTitle('');
+            setPrice('');
+            setDescription('');
+            setCategory('');
+            setBrand('');
+            setImage('');
+            setValidateErrors([]);
 
-        const product = await dispatch(
-            createProductThunk(
-                title,
-                price,
-                description,
-                category,
-                brand,
-                image
-            )
-        );
-        setTitle("");
-        setPrice("");
-        setDescription("");
-        setCategory("");
-        setBrand("");
-        setImage("");
-        setValidateErrors([]);
+            await dispatch(getAllProductThunk());
+            await dispatch(authenticate());
 
-        await dispatch(getAllProductThunk());
-        await dispatch(authenticate());
+            setHasClicked(false);
 
-        setHasClicked(false);
-
-        history.push(`/products/${product.id}`);
+            history.push(`/products/${product.id}`);
+        }
     };
+
+    // const handleKeyPress = e => {
+    //     if (e.keyCode === 13) {
+    //         console.log('Enter key pressed');
+    //     }
+    // };
 
     return (
         <div>
@@ -94,7 +105,10 @@ const CreateProduct = () => {
                         </div>
                     )}
                 </div>
-                <form className="mt-4 mx-10">
+                <form
+                    className="mt-4 mx-10"
+                    // onKeyDown={handleKeyPress}
+                >
                     <div className="mt-3 flex flex-col border-b">
                         <label className="font-bold text-xl my-1">Title</label>
                         <input
@@ -105,7 +119,7 @@ const CreateProduct = () => {
                             name="title"
                             onChange={e => setTitle(e.target.value)}
                             value={title}
-                            placeholder='Product Name'
+                            placeholder="Product Name"
                             required={true}></input>
                     </div>
 
@@ -118,7 +132,7 @@ const CreateProduct = () => {
                             name="price"
                             onChange={e => setPrice(e.target.value)}
                             value={price}
-                            placeholder='12.50'
+                            placeholder="12.50"
                             required={true}></input>
                     </div>
 
@@ -133,8 +147,7 @@ const CreateProduct = () => {
                             name="description"
                             onChange={e => setDescription(e.target.value)}
                             value={description}
-                            placeholder='Top of the line cheese maker'
-                            ></textarea>
+                            placeholder="Top of the line cheese maker"></textarea>
                     </div>
 
                     <div className="mt-3 flex flex-col border-b">
@@ -176,7 +189,7 @@ const CreateProduct = () => {
                             name="brand"
                             onChange={e => setBrand(e.target.value)}
                             value={brand}
-                            placeholder='The best company'
+                            placeholder="The best company"
                             required={true}></input>
                     </div>
                     <div className="mt-3 flex flex-col border-b">
@@ -191,7 +204,7 @@ const CreateProduct = () => {
                             name="image"
                             onChange={e => setImage(e.target.value)}
                             value={image}
-                            placeholder='https://www.images.com'
+                            placeholder="https://www.images.com"
                             required={true}></input>
                     </div>
 
@@ -199,7 +212,7 @@ const CreateProduct = () => {
                         <button
                             className="button"
                             onClick={e => {
-                                history.push("/");
+                                history.push('/');
                             }}>
                             Cancel
                         </button>

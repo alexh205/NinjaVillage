@@ -5,19 +5,19 @@ import Header from '../Header/Header';
 import EditProfile from './EditProfile';
 import Product from '../Product/Product';
 import UserReviews from '../Review/UserReviews';
-import { authenticate } from '../../store/sessionReducer';
-import {
-    getAllProductThunk,
-    deleteProductThunk,
-} from '../../store/productReducer';
-// import Loading from '../Loading';
+// import { authenticate } from '../../store/sessionReducer';
+// import {
+//     getAllProductThunk,
+//     deleteProductThunk,
+// } from '../../store/productReducer';
+
 import { GiRunningNinja } from 'react-icons/gi';
 
 const Profile = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [hasClickedEdit, setHasClickedEdit] = useState(false);
-    const [hasClicked, setHasClicked] = useState(false);
+    // const [hasClickedEdit, setHasClickedEdit] = useState(false);
+    // const [hasClicked, setHasClicked] = useState(false);
     const [listingClick, setListingClick] = useState(false);
     const [reviewClick, setReviewClick] = useState(false);
 
@@ -25,6 +25,7 @@ const Profile = () => {
 
     let userProducts;
     let userReviews;
+
 
     if (user) {
         userProducts = user.ownedProducts;
@@ -44,17 +45,17 @@ const Profile = () => {
             <Header />
             {user && !clicked && (
                 <div className="flex flex-col">
-                    <div className="flex flex-col md:max-w-[580px] max-w-[420px] justify-center md:ml-[33%] ml-[15%] flex-grow mt-10 border-2 p-1 ">
+                    <div className="flex flex-col md:max-w-[580px] max-w-[420px] justify-start lg:justify-center lg:ml-[33%] ml-[15%] flex-grow mt-10 border-2 p-1 ">
                         <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                             About Me
                         </h1>
                         <div className=" flex flex-row ml-4 items-center mt-3">
                             <img
-                                className="hidden md:flex rounded-full max-h-[175px] mr-3"
+                                className="hidden md:flex rounded-full max-h-[120px] md:max-h-[175px] mr-3"
                                 src={user.profileImage}
                                 alt="user"></img>
                             <div className="flex flex-row items-center justify-center">
-                                <div>
+                                <div className="px-4">
                                     <div className="flex flex-row items-center mb-1">
                                         <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
                                             Username:
@@ -81,7 +82,7 @@ const Profile = () => {
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-row items-center mb-2">
+                                    <div className="flex flex-row items-center mb-2 w-full">
                                         <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
                                             Address:
                                         </label>
@@ -90,7 +91,7 @@ const Profile = () => {
                                                 {user.street_address}
                                             </p>
                                             <p className="text-xs md:text-[14px] text-ninja_green">
-                                                {user.city}, {user.state},
+                                                {user.city}, {user.state}{' '}
                                                 {user.zip_code}
                                             </p>
                                         </div>
@@ -101,7 +102,7 @@ const Profile = () => {
                                         <div className="flex flex-row items-center justify-center">
                                             <GiRunningNinja className="h-5 w-5" />
                                             <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
-                                                Listings:
+                                                Products:
                                             </label>
                                         </div>
                                         {user?.ownedProducts && (
@@ -200,51 +201,16 @@ const Profile = () => {
                                     : !reviewClick &&
                                       'my-3 flex flex-col items-center justify-center'
                             }`}>
-                            <h1 className="text-2xl font-bold ">Listings</h1>
+                            <h1 className="text-3xl text-ninja_green font-bold">
+                                Products
+                            </h1>
                             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
                                 {userProducts?.map(product => (
-                                    <div key={product.id} className="mb-8">
-                                        <div className="flex flex-col sm:flex-row items-center justify-start sm:justify-center my-2">
-                                            {/* {hasClickedEdit && <Loading />} */}
-                                            <button
-                                                className="mt-2 mb-2  text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
-                                                disabled={hasClickedEdit}
-                                                onClick={() => {
-                                                    setHasClickedEdit(true);
-                                                    history.push(
-                                                        `/products/edit/${product.id}`
-                                                    );
-                                                    setHasClickedEdit(false);
-                                                }}>
-                                                Edit listing
-                                            </button>
-                                            {/* {hasClicked && <Loading />} */}
-                                            <button
-                                                className="flex mt-2 mb-2  text-xs bg-white hover:bg-gray-100 text-gray-800  font-semibold px-2 border border-gray-400 rounded shadow"
-                                                disabled={hasClicked}
-                                                onClick={async () => {
-                                                    setHasClicked(true);
-                                                    await dispatch(
-                                                        deleteProductThunk(
-                                                            product.id
-                                                        )
-                                                    );
-                                                    await dispatch(
-                                                        getAllProductThunk()
-                                                    );
-                                                    await dispatch(
-                                                        authenticate()
-                                                    );
-                                                    setHasClicked(false);
-                                                    history.push(
-                                                        `/profile/${user.id}`
-                                                    );
-                                                }}>
-                                                Delete listing
-                                            </button>
-                                        </div>
-                                        <Product product={product} />
-                                    </div>
+                                    <Product
+                                        product={product}
+                                        className="mb-8"
+                                        key={product.id}
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -253,15 +219,20 @@ const Profile = () => {
                                 !reviewClick
                                     ? 'hidden'
                                     : !listingClick &&
-                                      'my-3 flex flex-col items-center justify-center'
+                                      'my-3 flex flex-col items-center justify-center '
                             }`}>
-                            <h1 className="text-2xl font-bold ">Reviews</h1>
+                            <h1 className="text-3xl text-ninja_green font-bold ">
+                                Reviews
+                            </h1>
                             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
                                 {userReviews?.map(review => (
                                     <UserReviews
                                         review={review}
+                                        productId={review.productId}
+                                        user={user}
                                         key={review.id}
                                     />
+
                                 ))}
                             </div>
                         </div>

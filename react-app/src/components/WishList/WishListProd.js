@@ -74,7 +74,7 @@ const WishListProd = ({ product, activeList }) => {
                     </div>
                     <div className="col-span-2 mx-7 pt-7">
                         <h4
-                            className="cursor-pointer text-[#017185] hover:text-amber-600 text-[17px]"
+                            className="cursor-pointer text-blue-500 hover:text-amber-600 text-[17px]"
                             onClick={() =>
                                 history.push(`/products/${item.id}`)
                             }>

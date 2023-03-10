@@ -118,7 +118,7 @@ const EditReview = () => {
                                 Overall Rating
                             </h1>
                             <p
-                                className=" cursor-pointer text-teal-700 text-sm"
+                                className=" cursor-pointer text-blue-500 text-sm"
                                 onClick={() => {
                                     setRating(0);
                                     setHover(0);

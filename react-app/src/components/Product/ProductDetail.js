@@ -102,7 +102,7 @@ const ProductDetail = () => {
 
                                 <div
                                     className="text-[15px] cursor-pointer text-sky-600 text-bold hover:text-amber-600 hover:font-semibold"
-                                    onClick={() => history.push('/listings')}>
+                                    onClick={() => history.push('/products')}>
                                     Visit {owner.name}'s store
                                 </div>
 

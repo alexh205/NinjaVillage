@@ -48,10 +48,10 @@ const UserProducts = () => {
                                 "mx-1 py-2 px-2 rounded-lg cursor-pointer"
                             }
                             previousClassName={
-                                "mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
+                                "mx-1 py-2 px-2 rounded-lg cursor-pointer text-blue-500"
                             }
                             nextClassName={
-                                "mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
+                                "mx-1 py-2 px-2 rounded-lg cursor-pointer text-blue-500"
                             }
                             pageLinkClassName={"hover:bg-gray-200 px-2"}
                             previousLinkClassName={"hover:text-amber-600"}
@@ -80,7 +80,7 @@ const UserProducts = () => {
                     href="#header"
                     className="flex flex-row items-center justify-center cursor-pointer my-4">
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
-                    <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                    <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                         Scroll to the top
                     </div>
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />

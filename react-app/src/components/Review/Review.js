@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
-import ReviewImages from "../Images/ReviewImages";
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import ReviewImages from '../Images/ReviewImages';
 import {
     getAllProductThunk,
     deleteReviewThunk,
-} from "../../store/productReducer";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "../Loading";
+} from '../../store/productReducer';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../Loading';
 
 const Review = ({ review, product, user }) => {
     const dispatch = useDispatch();
@@ -17,11 +17,23 @@ const Review = ({ review, product, user }) => {
         state => state.productStore.products[review.productId]
     );
 
-
     let rating = 0;
     if (review && review.rating) {
         rating = review.rating;
     }
+
+    //? Truncate review text beyond 100 characters
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleExpansion = () => {
+        setIsExpanded(!isExpanded);
+    };
+    const max_length = 100; // Maximum number of characters to display before truncating the text
+
+    const truncatedText =
+        review.review.length > max_length
+            ? review.review.slice(0, max_length) + '...'
+            : review.review;
 
     const [hasClickedEdit, setHasClickedEdit] = useState(false);
     const [hasClickedDelete, setHasClickedDelete] = useState(false);
@@ -45,12 +57,14 @@ const Review = ({ review, product, user }) => {
                             className="hidden md:block rounded-full h-12 w-12 mr-2"
                             src={review.owner.profileImage}
                             alt="user"></img>
-                        <div className="text-sm text-teal-700">
+                        <div className="text-base text-ninja_green">
                             {review.owner.name}
                         </div>
                     </div>
                     <div className="flex flex-row items-center mt-2 ">
-                    <p className="text-xs text-gray-500">{productObj.title}</p>
+                        <p className="text-xs text-gray-500">
+                            {productObj.title}
+                        </p>
                     </div>
                 </div>
             )}
@@ -58,7 +72,7 @@ const Review = ({ review, product, user }) => {
                 <div className="flex flex-row items-center my-2">
                     {hasClickedEdit && <Loading />}
                     <button
-                        className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                        className=" mb-2 self-center text-xs bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow mr-2"
                         disabled={hasClickedEdit}
                         onClick={async e => {
                             setHasClickedEdit(true);
@@ -71,8 +85,7 @@ const Review = ({ review, product, user }) => {
                     </button>
                     {hasClickedDelete && <Loading />}
                     <button
-                        className=" mb-2 self-center text-xs bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
-
+                        className=" mb-2 self-center text-xs bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow"
                         disabled={hasClickedDelete}
                         onClick={async e => {
                             deleteReview(e);
@@ -95,7 +108,7 @@ const Review = ({ review, product, user }) => {
                             />
                         ))
                     ) : (
-                        <FaStar size={14} color={"#e4e5e9"} />
+                        <FaStar size={14} color={'#e4e5e9'} />
                     )}
                 </div>
                 {review && (
@@ -104,10 +117,17 @@ const Review = ({ review, product, user }) => {
                     </div>
                 )}
             </div>
-            <div>
-                <div className="text-sm mt-1 mb-2 line-clamp-1">
-                    {review.review}
-                </div>
+            <div className="w-[80%]">
+                <p className="text-sm mt-1 mb-2 text-gray-600 truncate truncate-2-lines overflow-hidden whitespace-pre-line">
+                    {isExpanded ? review.review : truncatedText}
+                    {review.review.length > max_length && (
+                        <span
+                            className="text-blue-500 text-sm cursor-pointer ml-1"
+                            onClick={toggleExpansion}>
+                            {isExpanded ? 'Read Less' : 'Read More'}
+                        </span>
+                    )}
+                </p>
             </div>
             <div>
                 {review && <ReviewImages reviewImages={review.reviewImages} />}

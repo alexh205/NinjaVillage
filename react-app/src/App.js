@@ -69,23 +69,11 @@ function App() {
             ) : (
                 <BrowserRouter>
                     <Switch>
-                        <Route path="/cart" exact={true}>
-                            <Cart user={user} />
-                        </Route>
-                        <Route path="/" exact={true}>
-                            <Home />
-                        </Route>
-                        <Route path="/login" exact={true}>
-                            <LoginForm />
-                        </Route>
-                        <Route path="/signup" exact={true}>
-                            <SignUpForm />
-                        </Route>
-                        <Route path="/profile/:userId" exact={true}>
-                            <Profile />
-                        </Route>
-                        <Route path="/listings" exact={true}>
-                            <UserProducts />
+                        <Route
+                            path="/products/edit/:productId"
+                            user={user}
+                            exact={true}>
+                            <EditProduct />
                         </Route>
                         <Route path="/products/new" exact={true}>
                             <CreateProduct />
@@ -93,11 +81,20 @@ function App() {
                         <Route path="/products/:productId" exact={true}>
                             <ProductDetail />
                         </Route>
-                        <Route
-                            path="/products/edit/:productId"
-                            user={user}
-                            exact={true}>
-                            <EditProduct />
+                        <Route path="/products" exact={true}>
+                            <UserProducts />
+                        </Route>
+                        <Route path="/filters/:filterId" exact={true}>
+                            <Filters />
+                        </Route>
+                        <Route path="/cart" exact={true}>
+                            <Cart user={user} />
+                        </Route>
+                        <Route path="/orders" exact={true}>
+                            <OrdersContainer />
+                        </Route>
+                        <Route path="/wishLists" exact={true}>
+                            <WishListContainer />
                         </Route>
                         <Route path="/reviews/edit/:productId" exact={true}>
                             <EditReview />
@@ -108,14 +105,17 @@ function App() {
                         <Route path="/checkout" exact={true}>
                             <Checkout />
                         </Route>
-                        <Route path="/filters/:filterId" exact={true}>
-                            <Filters />
+                        <Route path="/profile/:userId" exact={true}>
+                            <Profile />
                         </Route>
-                        <Route path="/wishLists" exact={true}>
-                            <WishListContainer />
+                        <Route path="/login" exact={true}>
+                            <LoginForm />
                         </Route>
-                        <Route path="/orders" exact={true}>
-                            <OrdersContainer />
+                        <Route path="/signup" exact={true}>
+                            <SignUpForm />
+                        </Route>
+                        <Route path="/" exact={true}>
+                            <Home />
                         </Route>
                     </Switch>
                 </BrowserRouter>

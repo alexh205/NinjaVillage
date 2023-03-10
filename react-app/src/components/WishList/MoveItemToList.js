@@ -10,7 +10,7 @@ const MoveItemToList = ({ closeModal, product, list }) => {
                 <div className="text-lg mb-2 font-normal flex flex-row items-center">
                     Product was added to
                     <div
-                        className="font-semibold ml-1 cursor-pointer test-xl text-blue-600 hover:text-amber-600"
+                        className="font-semibold ml-1 cursor-pointer test-xl text-blue-500 hover:text-amber-600"
                         onClick={() => history.push("/wishLists")}>
                         '{list?.name}'
                     </div>

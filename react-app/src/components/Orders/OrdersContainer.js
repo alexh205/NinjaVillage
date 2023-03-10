@@ -97,7 +97,7 @@ const OrdersContainer = () => {
                                 placeholderText="Filter by purchase date"
                                 withPortal
                                 todayButton={true}
-                                className="bg-white rounded-md border-gray-300 border pr-6 pl-3 placeholder:text-[14px] py-2 placeholder-gray-400 placeholder:text-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                                className="bg-white rounded-md border-gray-300 border pr-6 pl-3 placeholder:text-[14px] py-2 placeholder-gray-400 placeholder:text-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                         </div>
                         <ReactPaginate
@@ -114,12 +114,12 @@ const OrdersContainer = () => {
                             previousClassName={`${
                                 pageCount === 1
                                     ? "hidden"
-                                    : " mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
+                                    : " mx-1 py-2 px-2 rounded-lg cursor-pointer text-blue-500"
                             }`}
                             nextClassName={`${
                                 pageCount === 1
                                     ? "hidden"
-                                    : " mx-1 py-2 px-2 rounded-lg cursor-pointer text-teal-700"
+                                    : " mx-1 py-2 px-2 rounded-lg cursor-pointer text-blue-500"
                             }`}
                             pageLinkClassName={"hover:bg-gray-200 px-2"}
                             previousLinkClassName={"hover:text-amber-600"}
@@ -141,7 +141,7 @@ const OrdersContainer = () => {
                             href="#orders"
                             className="flex flex-row items-center justify-center cursor-pointer my-4">
                             <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
-                            <div className="text-teal-700 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
+                            <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                                 Scroll to the top
                             </div>
                             <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
