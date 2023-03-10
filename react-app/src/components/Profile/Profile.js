@@ -15,7 +15,7 @@ import { GiRunningNinja } from 'react-icons/gi';
 
 const Profile = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const [hasClickedEdit, setHasClickedEdit] = useState(false);
     // const [hasClicked, setHasClicked] = useState(false);
     const [listingClick, setListingClick] = useState(false);
