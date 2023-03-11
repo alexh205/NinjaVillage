@@ -5,19 +5,10 @@ import Header from '../Header/Header';
 import EditProfile from './EditProfile';
 import Product from '../Product/Product';
 import UserReviews from '../Review/UserReviews';
-// import { authenticate } from '../../store/sessionReducer';
-// import {
-//     getAllProductThunk,
-//     deleteProductThunk,
-// } from '../../store/productReducer';
-
 import { GiRunningNinja } from 'react-icons/gi';
 
 const Profile = () => {
     const history = useHistory();
-    // const dispatch = useDispatch();
-    // const [hasClickedEdit, setHasClickedEdit] = useState(false);
-    // const [hasClicked, setHasClicked] = useState(false);
     const [listingClick, setListingClick] = useState(false);
     const [reviewClick, setReviewClick] = useState(false);
 
@@ -25,7 +16,6 @@ const Profile = () => {
 
     let userProducts;
     let userReviews;
-
 
     if (user) {
         userProducts = user.ownedProducts;
@@ -45,19 +35,19 @@ const Profile = () => {
             <Header />
             {user && !clicked && (
                 <div className="flex flex-col">
-                    <div className="flex flex-col md:max-w-[580px] max-w-[420px] justify-start lg:justify-center lg:ml-[33%] ml-[15%] flex-grow mt-10 border-2 p-1 ">
+                    <div className="flex flex-col md:max-w-[600px] max-w-[440px] justify-start lg:justify-center lg:ml-[33%] ml-[15%] flex-grow mt-10 border-2 p-2 ">
                         <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                             About Me
                         </h1>
-                        <div className=" flex flex-row ml-4 items-center mt-3">
+                        <div className=" flex flex-row ml-3 items-center mt-3">
                             <img
-                                className="hidden md:flex rounded-full max-h-[120px] md:max-h-[175px] mr-3"
+                                className="hidden md:flex rounded-full max-h-[100px] md:max-h-[120px] mr-2"
                                 src={user.profileImage}
                                 alt="user"></img>
                             <div className="flex flex-row items-center justify-center">
-                                <div className="px-4">
+                                <div className="px-2">
                                     <div className="flex flex-row items-center mb-1">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
                                             Username:
                                         </label>
                                         <p className="text-xs md:text-[14px] text-ninja_green">
@@ -65,7 +55,7 @@ const Profile = () => {
                                         </p>
                                     </div>
                                     <div className="flex flex-row items-center mb-1">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
                                             Email:
                                         </label>
                                         <p className="text-xs md:text-[14px] text-ninja_green">
@@ -74,7 +64,7 @@ const Profile = () => {
                                     </div>
 
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
                                             Name:
                                         </label>
                                         <p className="text-xs md:text-[14px] text-ninja_green">
@@ -83,7 +73,7 @@ const Profile = () => {
                                     </div>
 
                                     <div className="flex flex-row items-center mb-2 w-full">
-                                        <label className="text-sm md:text-lg font-semibold mr-3  text-purple-700">
+                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
                                             Address:
                                         </label>
                                         <div className="flex flex-col items-center">
@@ -97,17 +87,17 @@ const Profile = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="items-center ml-6">
+                                <div className="items-center mx-3">
                                     <div className="flex flex-row items-center mb-2">
                                         <div className="flex flex-row items-center justify-center">
                                             <GiRunningNinja className="h-5 w-5" />
-                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                            <label className="text-sm md:text-[17px] whitespace-nowrap font-semibold mr-2 ml-1 text-purple-700">
                                                 Products:
                                             </label>
                                         </div>
                                         {user?.ownedProducts && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600"
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
                                                 onClick={() => {
                                                     setListingClick(
                                                         !listingClick
@@ -121,13 +111,13 @@ const Profile = () => {
                                     <div className="flex flex-row items-center mb-2">
                                         <div className="flex flex-row items-center justify-center">
                                             <GiRunningNinja className="h-5 w-5" />
-                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                            <label className="text-sm md:text-[17px] whitespace-nowrap font-semibold mr-2 ml-1 text-purple-700">
                                                 Reviews:
                                             </label>
                                         </div>
                                         {user?.userReviews && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600 "
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600 "
                                                 onClick={() => {
                                                     setReviewClick(
                                                         !reviewClick
@@ -141,13 +131,13 @@ const Profile = () => {
                                     <div className="flex flex-row items-center mb-2">
                                         <div className="flex flex-row items-center justify-center">
                                             <GiRunningNinja className="h-5 w-5" />
-                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                            <label className="text-sm md:text-[17px] whitespace-nowrap font-semibold mr-2 ml-1 text-purple-700">
                                                 Wish Lists:
                                             </label>
                                         </div>
                                         {user?.ownedLists && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600"
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
                                                 onClick={() =>
                                                     history.push('/wishlists')
                                                 }>
@@ -158,13 +148,13 @@ const Profile = () => {
                                     <div className="flex flex-row items-center mb-2">
                                         <div className="flex flex-row items-center justify-center">
                                             <GiRunningNinja className="h-5 w-5" />
-                                            <label className="text-sm md:text-lg font-semibold mr-3 ml-1 text-purple-700">
+                                            <label className="text-sm md:text-[17px] whitespace-nowrap font-semibold mr-2 ml-1 text-purple-700">
                                                 Orders:
                                             </label>
                                         </div>
                                         {user?.ownedCarts && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-bold hover:text-amber-600"
+                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
                                                 onClick={() =>
                                                     history.push('/orders')
                                                 }>
@@ -232,7 +222,6 @@ const Profile = () => {
                                         user={user}
                                         key={review.id}
                                     />
-
                                 ))}
                             </div>
                         </div>

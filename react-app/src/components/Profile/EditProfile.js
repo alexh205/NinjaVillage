@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 import {
     editUserThunk,
     deleteUserThunk,
-    authenticate,
 } from '../../store/sessionReducer';
 import stateTaxes from '../../media/stateTaxes.json';
 import Loading from '../Loading';
+import PasswordUpdate from './PasswordUpdate';
 
 const EditProfile = ({ user, showProfile }) => {
     const { userId } = useParams();
@@ -25,11 +25,7 @@ const EditProfile = ({ user, showProfile }) => {
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [profileImg, setProfileImg] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-
     const [valid, setValid] = useState(false);
-
     const [validateErrors, setValidateErrors] = useState([]);
 
     if (user) {
@@ -68,7 +64,7 @@ const EditProfile = ({ user, showProfile }) => {
             if (errors.length > 0) return setValidateErrors(errors);
 
             setHasClicked(true);
-
+            const userId = user.id
             await dispatch(
                 editUserThunk(
                     username,
@@ -79,8 +75,7 @@ const EditProfile = ({ user, showProfile }) => {
                     state,
                     zipCode,
                     profileImg,
-                    // password,
-                    user
+                    userId
                 )
             );
 
@@ -92,8 +87,6 @@ const EditProfile = ({ user, showProfile }) => {
             setState('');
             setZipCode('');
             setProfileImg('');
-            // setPassword("");
-            // setRepeatPassword("");
             setValidateErrors([]);
             setHasClicked(false);
             showProfile(false);
@@ -107,21 +100,18 @@ const EditProfile = ({ user, showProfile }) => {
             setState('');
             setZipCode('');
             setProfileImg('');
-            // setPassword("");
-            // setRepeatPassword("");
             setValidateErrors([]);
             setHasClickedDelete(true);
 
             await dispatch(deleteUserThunk(userId));
-            await dispatch(authenticate());
             setHasClickedDelete(false);
             history.push('/');
         };
 
         return (
-            <div className=" justify-center flex flex-col mx-2 md:mx-40">
+            <div className=" justify-center flex flex-col container">
                 {/* <Header /> */}
-                <div className="flex flex-col mt-6 mx-10 border-b ">
+                <div className="flex flex-col mt-6 mx-10 border-b">
                     <div className="flex flex-row justify-between">
                         <h1 className="font-bold text-4xl mb-2 text-ninja_green">
                             Edit Profile
@@ -152,7 +142,8 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="username"
                             onChange={e => setUsername(e.target.value)}
-                            value={username}></input>
+                            value={username}
+                        />
                     </div>
 
                     <div className="mt-3 flex flex-row border-b">
@@ -166,7 +157,8 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="name"
                             onChange={e => setName(e.target.value)}
-                            value={name}></input>
+                            value={name}
+                        />
                     </div>
 
                     <div className="mt-3 flex flex-row border-b">
@@ -180,7 +172,8 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="email"
                             onChange={e => setEmail(e.target.value)}
-                            value={email}></input>
+                            value={email}
+                        />
                     </div>
 
                     <div className="mt-3 flex flex-row border-b">
@@ -194,7 +187,8 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="streetAddress"
                             onChange={e => setStreetAddress(e.target.value)}
-                            value={streetAddress}></input>
+                            value={streetAddress}
+                        />
                     </div>
 
                     <div className="mt-3 flex flex-row border-b">
@@ -208,7 +202,8 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="city"
                             onChange={e => setCity(e.target.value)}
-                            value={city}></input>
+                            value={city}
+                        />
                     </div>
 
                     <div className="mt-3 flex flex-row border-b">
@@ -240,9 +235,9 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="zipCode"
                             onChange={e => setZipCode(e.target.value)}
-                            value={zipCode}></input>
+                            value={zipCode}
+                        />
                     </div>
-
                     <div className="mt-3 flex flex-row border-b">
                         <label className="font-bold text-xl mr-4 my-1">
                             Profile Image:
@@ -254,25 +249,25 @@ const EditProfile = ({ user, showProfile }) => {
                             maxLength="50"
                             name="profileImg"
                             onChange={e => setProfileImg(e.target.value)}
-                            value={profileImg}></input>
+                            value={profileImg}
+                        />
                     </div>
 
                     <div className="flex md:flex-row flex-col mt-5 justify-between">
-                        <div className="flex mb-3 md:mb-0">
-                            {hasClickedDelete && <Loading />}
-                            <button
-                                className="cursor-pointer text-white p-2 font-bold text-[9px] md:text-sm bg-gradient-to-b from-red-500 to-red-700 border-red-600 rounded-sm  focus:outline-none focus:ring-2 focus:ring-red-800 active:from-red-800"
-                                disabled={hasClickedDelete}
-                                onClick={e => {
-                                    onProfileDelete(e);
-                                }}>
-                                Delete Account
-                            </button>
-                        </div>
                         <div>
+                            {hasClicked && <Loading />}
+                            <button
+                                className="button mr-6 mb-2"
+                                disabled={hasClicked}
+                                onClick={e => {
+                                    onProfileEdit(e);
+                                }}>
+                                Submit
+                            </button>
                             <button
                                 className="button mr-2"
                                 onClick={e => {
+                                    e.preventDefault();
                                     setUsername('');
                                     setEmail('');
                                     setName('');
@@ -280,27 +275,33 @@ const EditProfile = ({ user, showProfile }) => {
                                     setCity('');
                                     setState('');
                                     setZipCode('');
-                                    // setProfileImg("");
-                                    // setPassword("");
-                                    // setRepeatPassword("");
+                                    setProfileImg('');
                                     setValidateErrors([]);
 
                                     showProfile(false);
                                 }}>
                                 Cancel
                             </button>
-                            {hasClicked && <Loading />}
+                        </div>
+                        <div className="flex mt-2 mr-4 md:mt-0 md:mb-0">
+                            {hasClickedDelete && <Loading />}
                             <button
-                                className="button ml-0 md:ml-6 mt-2 md:mt-0"
-                                disabled={hasClicked}
+                                className="cursor-pointer text-white p-2 font-bold text-[13px] md:text-sm bg-gradient-to-b from-red-500 to-red-700 border-red-600 rounded-sm  focus:outline-none focus:ring-2 focus:ring-red-800 active:from-red-800"
+                                disabled={hasClickedDelete}
                                 onClick={e => {
-                                    onProfileEdit(e);
+                                    onProfileDelete(e);
                                 }}>
-                                Submit
+                                Delete Account
                             </button>
                         </div>
                     </div>
                 </form>
+                <div className="flex flex-col py-6 mx-10 mt-8 border-y">
+                    <div className="text-2xl font-bold text-ninja_green border-b pb-2">
+                        Update password
+                    </div>
+                    <PasswordUpdate showProfile={showProfile} user={user} />
+                </div>
             </div>
         );
     } else {
