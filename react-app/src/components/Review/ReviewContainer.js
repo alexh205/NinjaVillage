@@ -40,14 +40,19 @@ const ReviewContainer = ({ product, user }) => {
                             )}
                         </div>
                         {ratingAvg ? (
-                            <div className="md:text-lg text-sm">
-                                {ratingAvg.toFixed(1)}{' '}
-                                <p className="hidden md:flex">out of 5.0</p>
+                            <div className="flex flex-row text-base whitespace-nowrap">
+                                {ratingAvg.toFixed(1)}
+                                <p className="hidden md:flex text-base ml-1">
+                                    out of 5.0
+                                </p>
                             </div>
                         ) : (
                             !ratingAvg && (
-                                <div className="hidden md:flex whitespace-nowrap">
-                                    0 out of 5.0
+                                <div className="flex flex-row whitespace-nowrap text-base">
+                                    0{' '}
+                                    <p className="hidden md:flex text-base ml-1">
+                                        out of 5.0
+                                    </p>
                                 </div>
                             )
                         )}

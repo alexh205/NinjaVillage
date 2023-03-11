@@ -88,15 +88,15 @@ const ProductDetail = () => {
                                     target="_blank"
                                     rel="noreferrer">
                                     <img
-                                        className="hidden md:flex md:min-w-[300px] min-w-[250px] md:min-h-[280px] max-h-[300px] object-contain rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
+                                        className="hidden md:flex object-contain md:min-w-[200px] min-w-[100px] md:min-h-[200px] min-h-[230px] max-h-[280px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                                         src={product.image}
                                         alt="product"
                                     />
                                 </a>
                             </div>
 
-                            <div className="flex flex-col ml-7 mr-2">
-                                <div className="md:text-[28px] text-[22px] font-semibold">
+                            <div className="flex flex-col ml-7 mr-1">
+                                <div className="md:text-[28px] text-[22px] font-semibold whitespace-nowrap">
                                     {product.title}
                                 </div>
 
@@ -194,7 +194,7 @@ const ProductDetail = () => {
                                 className={`${
                                     user.id === product.ownerId
                                         ? 'hidden '
-                                        : 'flex flex-col justify-center items-center self-start md:w-[215px] sm:min-w-[180px] md:min-w-[215px] min-w-[120px] w-[120px] sm:text-[9px] md:text-[10px] text-[14px] mr-5 sm:mr-10 border-[2px] p-3'
+                                        : 'flex flex-col justify-center items-center self-start md:w-[215px] sm:min-w-[180px] md:min-w-[215px] min-w-[120px] w-[120px] sm:text-[13px] md:text-[14px] text-[16px] mr-4 sm:mr-10 border-[2px] p-3'
                                 }`}>
                                 <div>
                                     {user && (
@@ -207,7 +207,7 @@ const ProductDetail = () => {
                                                 user.id === product.ownerId
                                                     ? 'hidden cursor-not-allowed'
                                                     : buttonAction
-                                                    ? 'mt-auto cursor-pointer px-12 font-bold rounded-lg text-[11px] md:text-sm  text-white bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none py-3'
+                                                    ? 'mt-auto cursor-pointer px-5 lg:px-10 font-bold rounded-lg text-[13px] md:text-sm text-white bg-green-600 border-green-600 focus:ring-2 focus:ring-green-700 focus:outline-none py-3'
                                                     : 'mt-auto button sm:px-8 px-4 py-3 rounded-lg whitespace-nowrap'
                                             }`}
                                             onClick={() => {
