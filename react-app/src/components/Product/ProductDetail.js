@@ -96,7 +96,7 @@ const ProductDetail = () => {
                             </div>
 
                             <div className="flex flex-col ml-7 mr-1">
-                                <div className="md:text-[28px] text-[22px] font-semibold whitespace-nowrap">
+                                <div className="md:text-[28px] text-[22px] font-semibold">
                                     {product.title}
                                 </div>
 
