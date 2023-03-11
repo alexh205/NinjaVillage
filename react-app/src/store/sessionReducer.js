@@ -80,14 +80,7 @@ export const logout = () => async dispatch => {
 };
 
 export const signUp =
-    (
-        username,
-        name,
-        email,
-        password,
-        profileImage
-    ) =>
-    async dispatch => {
+    (username, name, email, password, profileImage) => async dispatch => {
         const request = await fetch('/api/auth/signup', {
             method: 'POST',
             headers: {
@@ -137,11 +130,10 @@ export const editUserThunk =
         state,
         zipCode,
         profileImg,
-        // password,
-        user
+        userId
     ) =>
     async dispatch => {
-        const request = await fetch(`/api/users/${user.id}`, {
+        const request = await fetch(`/api/users/${userId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -149,7 +141,6 @@ export const editUserThunk =
             body: JSON.stringify({
                 username,
                 email,
-                // password,
                 name,
                 street_address: streetAddress,
                 city,
@@ -164,6 +155,24 @@ export const editUserThunk =
             dispatch(setUser(data));
         }
     };
+
+export const updateUserPasswordThunk = (password, userId) => async dispatch => {
+    const request = await fetch(`/api/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            password,
+        }),
+    });
+
+    if (request.ok) {
+        const data = await request.json();
+        dispatch(setUser(data));
+    }
+};
+
 export const deleteUserThunk = userId => async dispatch => {
     await fetch(`/api/users/${userId}`, {
         method: 'DELETE',
