@@ -105,7 +105,7 @@ const Checkout = () => {
             products: cart.addedItems,
             estimated_delivery: deliveryDate,
         };
-        // setHasClicked(true);
+        setHasClicked(true);
         try {
             await dispatch(cartCheckoutThunk(cartObj));
             await dispatch(authenticate());
@@ -113,7 +113,7 @@ const Checkout = () => {
         } catch (error) {
             console.log('Error during dispatch:', error);
         } finally {
-            // setHasClicked(false);
+            setHasClicked(false);
         }
     };
 
