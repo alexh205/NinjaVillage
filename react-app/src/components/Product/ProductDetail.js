@@ -88,7 +88,7 @@ const ProductDetail = () => {
                                     target="_blank"
                                     rel="noreferrer">
                                     <img
-                                        className="hidden md:flex object-contain md:min-w-[200px] min-w-[100px] md:min-h-[200px] min-h-[230px] max-h-[280px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
+                                        className="hidden md:flex object-contain md:min-w-[220px] min-w-[100px] md:min-h-[220px] min-h-[230px] max-h-[280px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                                         src={product.image}
                                         alt="product"
                                     />
@@ -96,7 +96,7 @@ const ProductDetail = () => {
                             </div>
 
                             <div className="flex flex-col ml-7 mr-1">
-                                <div className="md:text-[28px] text-[22px] font-semibold">
+                                <div className="text-xl font-semibold">
                                     {product.title}
                                 </div>
 
@@ -127,7 +127,6 @@ const ProductDetail = () => {
                                             />
                                         )}
                                     </div>
-
                                     <div>
                                         {product &&
                                         product.productReviews.length === 1 ? (

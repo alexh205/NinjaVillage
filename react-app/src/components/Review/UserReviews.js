@@ -63,7 +63,7 @@ const UserReviews = ({ review, productId, user }) => {
                         </div>
                     </div>
                     <div className="flex flex-row items-center mt-2 ">
-                        <p className="text-xs text-gray-500">
+                        <p className="text-sm text-gray-500">
                             {productObj.title}
                         </p>
                     </div>
@@ -73,7 +73,7 @@ const UserReviews = ({ review, productId, user }) => {
                 <div className="flex flex-row items-center my-2">
                     {hasClickedEdit && <Loading />}
                     <button
-                        className=" mb-2 self-center text-xs bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                        className=" mb-2 self-center text-sm bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow mr-2"
                         disabled={hasClickedEdit}
                         onClick={async e => {
                             setHasClickedEdit(true);
@@ -86,7 +86,7 @@ const UserReviews = ({ review, productId, user }) => {
                     </button>
                     {hasClickedDelete && <Loading />}
                     <button
-                        className=" mb-2 self-center text-xs bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow"
+                        className=" mb-2 self-center text-sm bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow"
                         disabled={hasClickedDelete}
                         onClick={async e => {
                             deleteReview(e);

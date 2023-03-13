@@ -11,8 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const Product = ({ product }) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    // const [hasClickedEdit, setHasClickedEdit] = useState(false);
-    // const [hasClicked, setHasClicked] = useState(false);
 
     const user = useSelector(state => state.session.user);
 
@@ -32,21 +30,19 @@ const Product = ({ product }) => {
     }
 
     return (
-        <div className="flex flex-col m-2 p-[10px] bg-white border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full">
+        <div className="flex flex-col m-2 p-[10px] bg-white border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full cursor-pointer"  onClick={() => history.push(`/products/${product.id}`)}>
             <p className="flex justify-end text-sm italic text-gray-400">
                 {product.category}
             </p>
-            <div
-                onClick={() => history.push(`/products/${product.id}`)}
-                className="cursor-pointer">
+
                 <img
                     className="object-contain h-[200px] w-[200px] my-4 "
                     src={product.image}
                     alt="product"
                 />
-            </div>
+
             <h4
-                className=" font-semibold text-blue-500 hover:text-amber-600 cursor-pointer"
+                className="text-lg font-semibold"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 {product.title}
             </h4>
@@ -59,7 +55,7 @@ const Product = ({ product }) => {
                     <FaStar size={23} color={'#e4e5e9'} />
                 )}
             </div>
-            <p className="text-sm my-2 line-clamp-2">{product.description}</p>
+            <p className="text-sm my-2 line-clamp-3">{product.description}</p>
             <div>
                 <p className=" text-amber-700 font-semibold">
                     ${product.price}
@@ -72,7 +68,7 @@ const Product = ({ product }) => {
                         : 'flex flex-row items-center justify-center whitespace-nowrap my-3'
                 }`}>
                 <button
-                    className=" text-xs bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow mr-2"
+                    className=" text-sm bg-gray-300 hover:bg-amber-600 hover:text-white font-semibold px-2 border border-gray-400 rounded shadow mr-2"
                     onClick={() => {
                         history.push(`/products/edit/${product.id}`);
                     }}>
@@ -80,7 +76,7 @@ const Product = ({ product }) => {
                 </button>
 
                 <button
-                    className="flex text-xs bg-gray-300 hover:bg-amber-600 hover:text-white text-gray-800  font-semibold px-2 border border-gray-400 rounded shadow"
+                    className="flex text-sm bg-gray-300 hover:bg-amber-600 hover:text-white text-gray-800  font-semibold px-2 border border-gray-400 rounded shadow"
                     onClick={async () => {
                         await dispatch(deleteProductThunk(product.id));
                         await dispatch(getAllProductThunk());

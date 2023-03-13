@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import CartProduct from './CartProduct';
 import { useHistory } from 'react-router-dom';
 import { GiRunningNinja } from 'react-icons/gi';
+import Footer from '../Footer/Footer';
+
 
 const Cart = ({ user }) => {
     const history = useHistory();
@@ -12,7 +14,7 @@ const Cart = ({ user }) => {
     if (cartTotal < 1) cartTotal = 0;
 
     return (
-        <div className="bg-gray-100 mb-5 h-screen">
+        <div className="bg-gray-100 mb-5 h-full">
             <section id="headers">
                 <Header />
             </section>
@@ -41,9 +43,9 @@ const Cart = ({ user }) => {
                     </div>
                 </div>
                 {/* right */}
-                <div className="flex flex-col bg-white p-9 shadow-md my-7">
+                <div className="flex flex-col bg-white p-9 shadow-md my-7 ">
                     {user && cart && cart.length > 0 ? (
-                        <>
+                        <div className='sticky top-32'>
                             <h2 className="whitespace-nowrap font-bold text-lg static ">
                                 Subtotal ({cart.length} items):{' '}
                                 <p>
@@ -63,7 +65,7 @@ const Cart = ({ user }) => {
                                 onClick={() => history.push('/checkout')}>
                                 Proceed to checkout
                             </button>
-                        </>
+                        </div>
                     ) : user && cart && cart.length === 0 ? (
                         <>
                             <h2 className="whitespace-nowrap">
@@ -106,16 +108,17 @@ const Cart = ({ user }) => {
                 className={`${
                     cart.length < 4
                         ? 'hidden'
-                        : 'flex flex-row items-center justify-center cursor-pointer my-3 pb-2'
+                        : 'flex flex-row items-center justify-center cursor-pointer my-3 pb-10'
                 }`}>
                 <a href="#headers" className="flex  ">
-                    <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
+                    <GiRunningNinja className="h-[30px] w-[30px] mr-2" />
                     <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                         Scroll to the top
                     </div>
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2 ml-2 transform scale-x-[-1]" />
                 </a>
             </footer>
+            <Footer />
         </div>
     );
 };

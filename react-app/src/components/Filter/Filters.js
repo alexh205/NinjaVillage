@@ -5,6 +5,7 @@ import { FilteredProd } from './FilteredProd';
 import Header from '../Header/Header';
 import { GiRunningNinja } from 'react-icons/gi';
 import { MdOutlineArrowRightAlt } from 'react-icons/md';
+import Footer from '../Footer/Footer';
 
 const Filters = () => {
     const { filterId } = useParams();
@@ -31,7 +32,7 @@ const Filters = () => {
             <section id="filters">
                 <Header />
             </section>
-            <div className='w-fit sm:mx-12 mx-6'>
+            <div className='w-fit sm:mx-12 mx-6 pb-6'>
                 <div className="flex flex-row items-center text-[17px] text-gray-500 m-2 ml-4 sm:ml-10">
                     <p>Category </p>
                     <MdOutlineArrowRightAlt className="mt-[2px]" />
@@ -59,10 +60,10 @@ const Filters = () => {
                 </div>
             </div>
             <footer
-                className={`${filteredProd?.length <= 6 ? 'hidden' : 'block'}`}>
+                className={`${filteredProd?.length <= 6 ? 'hidden' : 'block mb-14'}`}>
                 <a
                     href="#filters"
-                    className="flex flex-row items-center justify-center cursor-pointer my-4">
+                    className="flex flex-row items-center justify-center cursor-pointer pb-1">
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
                     <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                         Scroll to the top
@@ -70,6 +71,7 @@ const Filters = () => {
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
                 </a>
             </footer>
+            <Footer />
         </>
     );
 };

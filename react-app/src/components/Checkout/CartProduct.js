@@ -52,7 +52,7 @@ const CartProduct = ({ product }) => {
                 <img
                     src={product.image}
                     alt="product"
-                    className="h-[200px] w-[200px] object-contain rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
+                    className="h-[210px] w-[210px] object-contain rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                 />
             </div>
             {/* middle section  */}
@@ -72,7 +72,7 @@ const CartProduct = ({ product }) => {
                     )}
                 </div>
                 {/* Right side to add and remove buttons */}
-                <p className="text-xs my-2 line-clamp-3">
+                <p className="text-sm my-2 line-clamp-3">
                     {product.description}
                 </p>
 
