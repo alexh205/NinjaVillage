@@ -12,9 +12,10 @@ const Cart = ({ user }) => {
     if (cartTotal < 1) cartTotal = 0;
 
     return (
-        <div className="bg-gray-100 mb-5">
+        <div className="bg-gray-100 mb-5 h-screen">
             <section id="headers">
-            <Header  /></section>
+                <Header />
+            </section>
             <main className="lg:flex max-w-screen-2xl mx-auto">
                 {/* left */}
                 <div className="flex-grow m-4 shadow-sm">

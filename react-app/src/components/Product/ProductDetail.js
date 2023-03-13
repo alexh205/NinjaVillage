@@ -101,9 +101,11 @@ const ProductDetail = () => {
                                 </div>
 
                                 <div
-                                    className="text-[15px] cursor-pointer text-sky-600 text-bold hover:text-amber-600 hover:font-semibold"
+                                    className="text-[15px]  text-sky-600 text-bold hover:text-amber-600 hover:font-semibold"
                                     onClick={() => history.push('/products')}>
-                                    Visit {owner.name}'s store
+                                    <p className="cursor-pointer">
+                                        Visit {owner.name}'s store
+                                    </p>
                                 </div>
 
                                 <div className="flex flex-row items-center mb-2">

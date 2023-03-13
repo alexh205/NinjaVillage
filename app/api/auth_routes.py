@@ -28,40 +28,6 @@ def authenticate():
     return {'errors': ['Unauthorized']}
 
 
-# def create_random_username(usernames):
-#     rand_username = ''
-#     rand_len = random.randint(3, 10)
-#     # Generate a random length for the username (between 3 and 10)
-#     chars = ['A', 'E', 'I', 'O', 'U', 'Y', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-#         'M', 'N', 'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Z', 'Q', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-#     for i in range(0, rand_len):
-#         random_index = random.randint(0, len(chars)-1)
-#         # Append random characters to empty string for the length of the username
-#         rand_username += str(chars[random_index])
-#         i += 1
-
-#     # If the username exists in existing usernames (passed as parameters), recurse
-#     if rand_username.lower() in usernames:
-#         return create_random_username(usernames)
-#     # Otherwise, return the new username
-#     return rand_username
-
-
-# def create_random_password():
-#     rand_password = ''
-#     rand_len = random.randint(8, 12)
-#     chars = ['A', 'E', 'I', 'O', 'U', 'Y', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-#         'M', 'N', 'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Z', 'Q', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-#     for i in range(0, rand_len):
-#         random_index = random.randint(0, len(chars)-1)
-#         rand_password += str(chars[random_index])
-#         i += 1
-
-#     return rand_password
-
-
 # * Login *****************************************************
 @auth_routes.route('/login', methods=['POST'])
 def login():
@@ -116,7 +82,7 @@ def sign_up():
             owner_id=user.id
         )
 
-        ''' addition of a new shopping cart to the newly created user'''
+        ''' addition of the wish list to the newly created user'''
         new_list = WishList(
             name='Wish List',
             owner_id=user.id
@@ -130,46 +96,9 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-# @auth_routes.route('/unauthorized')
-# def unauthorized():
-#     """
-#     Returns unauthorized JSON when flask-login authentication fails
-#     """
-#     return {'errors': ['Unauthorized']}, 401
-
-
-# @auth_routes.route('/signup/random', methods=['POST'])
-# def create_random_user():
-#     form = SignUpForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     all_users = User.query.all()
-
-#     usernames_ls = []
-#     # Get the usernames of all users and append to list
-#     for user in all_users:
-#         username = getattr(user, 'user_name')
-#         usernames_ls.append(username.lower())
-
-#     random_username = create_random_username(usernames_ls)
-#     # Add username + @domain_name for email
-#     random_email = random_username + '@ninjaVillage.com'
-#     random_password = create_random_password()
-
-#     new_user = User(
-#         user_name=random_username,
-#         user_email=random_email,
-#         password=random_password,
-#         name='James Doe',
-#         street_address='987 Broad Street',
-#         city='New York',
-#         state='NY',
-#         zip_code=1234,
-#         profile_img='https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2831&q=80'
-#     )
-
-#     db.session.add(new_user)
-#     db.session.commit()
-#     # login_user(new_user)
-
-#     return {'id': new_user.id, 'status': 200}
+@auth_routes.route('/unauthorized')
+def unauthorized():
+    """
+    Returns unauthorized JSON when flask-login authentication fails
+    """
+    return {'errors': ['Unauthorized']}, 401

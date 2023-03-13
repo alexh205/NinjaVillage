@@ -19,7 +19,7 @@ const UserProducts = () => {
         history.push("/");
     }
     return (
-        <>
+        <div className="h-fit w-fit">
             <section id="header">
                 <Header />
             </section>
@@ -86,7 +86,7 @@ const UserProducts = () => {
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
                 </a>
             </footer>
-        </>
+        </div>
     );
 };
 

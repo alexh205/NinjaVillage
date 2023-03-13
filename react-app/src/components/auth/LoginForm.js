@@ -39,7 +39,7 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="flex flex-col items-center mt-20">
+        <div className="flex flex-col items-center mt-20 h-screen">
             <div className="bg-ninja_green w-[350px] h-fit flex flex-col rounded-md border-[1px] border-black py-[20px] px-[30px]">
                 <div className="flex flex-col justify-between items-center ">
                     <Link to="/">

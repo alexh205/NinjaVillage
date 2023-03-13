@@ -49,7 +49,7 @@ const Review = ({ review, product, user }) => {
     };
 
     return (
-        <div className="ml-4 border-b">
+        <div className="ml-4 border-b w-fit">
             {review && review.owner && productObj && (
                 <div className="flex flex-col">
                     <div className="flex flex-row items-center mt-2">

@@ -52,6 +52,7 @@ const SignUpForm = () => {
         setHasClicked(true);
 
         if (password === repeatPassword) {
+            
             await dispatch(
                 signUp(
                     username,
@@ -78,7 +79,7 @@ const SignUpForm = () => {
     }
 
     return (
-        <div className="flex flex-col items-center mt-8">
+        <div className="flex flex-col items-center h-screen mt-8">
             <div className="w-[500px] flex flex-col rounded-md border-[1px] border-gray-300 p-[30px] bg-ninja_green">
                 <div>
                     <h1 className="font-medium mb-2 text-[27px] text-white">

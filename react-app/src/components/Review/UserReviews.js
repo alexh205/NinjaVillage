@@ -49,7 +49,7 @@ const UserReviews = ({ review, productId, user }) => {
     };
 
     return (
-        <div className="ml-4 px-3 border-[2px] flex flex-col items-start justify-center">
+        <div className="ml-4 px-3 border-[2px] flex flex-col items-start justify-center h-fit">
             {review && review.owner && productObj && (
                 <div className="flex flex-col">
                     <div className="flex flex-row items-center mt-2">

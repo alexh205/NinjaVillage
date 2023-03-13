@@ -72,10 +72,9 @@ const ReviewContainer = ({ product, user }) => {
                     )}
                 </div>
                 {user &&
-                product &&
-                product.ownerId &&
-                product.productReviews &&
-                user.id === product.ownerId ? null : !user ? (
+                product?.ownerId &&
+                product?.productReviews &&
+                user.id === product?.ownerId ? null : !user ? (
                     <div className="flex flex-col border-t border-b mt-3">
                         <div className="mt-4 font-semibold text-lg">
                             Review this product
@@ -90,8 +89,7 @@ const ReviewContainer = ({ product, user }) => {
                         </button>
                     </div>
                 ) : (
-                    product &&
-                    product.productReviews && (
+                    product?.productReviews && (
                         <div
                             className={`${
                                 product.productReviews.find(
@@ -123,16 +121,14 @@ const ReviewContainer = ({ product, user }) => {
                         User reviews
                     </div>
                     <div>
-                        {product &&
-                            product.productReviews &&
-                            product.productReviews.map((review, i) => (
-                                <Review
-                                    review={review}
-                                    product={product}
-                                    user={user}
-                                    key={i}
-                                />
-                            ))}
+                        {product?.productReviews.map((review, i) => (
+                            <Review
+                                review={review}
+                                product={product}
+                                user={user}
+                                key={i}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

@@ -31,14 +31,14 @@ const Filters = () => {
             <section id="filters">
                 <Header />
             </section>
-            <div>
+            <div className='w-fit sm:mx-12 mx-6'>
                 <div className="flex flex-row items-center text-[17px] text-gray-500 m-2 ml-4 sm:ml-10">
                     <p>Category </p>
                     <MdOutlineArrowRightAlt className="mt-[2px]" />
                     <p className="ml-1">{filterId}</p>
                 </div>
 
-                <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
+                <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
                     {filteredProd?.map((product, i) => (
                         <div
                             className={`${
