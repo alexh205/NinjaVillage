@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Product from "./Product";
 import { useHistory } from "react-router-dom";
 import { GiRunningNinja } from "react-icons/gi";
+import Footer from "../Footer/Footer";
 
 const UserProducts = () => {
     const history = useHistory();
@@ -78,7 +79,7 @@ const UserProducts = () => {
             <footer>
                 <a
                     href="#header"
-                    className="flex flex-row items-center justify-center cursor-pointer my-4">
+                    className="flex flex-row items-center justify-center cursor-pointer my-4 pb-8">
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
                     <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                         Scroll to the top
@@ -86,6 +87,7 @@ const UserProducts = () => {
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2  ml-2 transform scale-x-[-1]" />
                 </a>
             </footer>
+            <Footer />
         </div>
     );
 };

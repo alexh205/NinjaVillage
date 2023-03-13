@@ -113,8 +113,8 @@ const WishListProd = ({ product, activeList }) => {
                                 disabled={buttonAction}
                                 className={`${
                                     buttonAction
-                                        ? "text-xs max-w-fit bg-gradient-to-b from-green-300 to-green-500 border-green-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600 active:from-green-600 px-4 sm:px-6 md:px-8 py-[2px] md:py-2 mb-1 whitespace-nowrap"
-                                        : "text-xs max-w-fit bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-4 sm:px-6 md:px-8 py-[2px] md:py-2 mb-1 whitespace-nowrap"
+                                        ? "text-sm max-w-fit bg-gradient-to-b from-green-300 to-green-500 border-green-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600 active:from-green-600 px-4 sm:px-6 md:px-8 py-[2px] md:py-2 mb-1 whitespace-nowrap"
+                                        : "text-sm max-w-fit bg-gradient-to-b from-amber-300 to-amber-500 border-amber-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 active:from-amber-600 px-4 sm:px-6 md:px-8 py-[2px] md:py-2 mb-1 whitespace-nowrap"
                                 }`}>
                                 Add to Cart
                             </button>
@@ -122,7 +122,7 @@ const WishListProd = ({ product, activeList }) => {
                                 {userWishLists.length > 1 ? (
                                     <div>
                                         <button
-                                            className="mr-[10px] cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                            className="mr-[10px] cursor-pointer text-sm bg-gray-500 hover:bg-gray-600
                                     active:bg-gray-400 text-white px-3 py-1 rounded-lg whitespace-nowrap "
                                             onClick={() => {
                                                 setDropDown(!dropDown);
@@ -150,7 +150,7 @@ const WishListProd = ({ product, activeList }) => {
                                 ) : (
                                     <div>
                                         <button
-                                            className="mr-[10px] cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                            className="mr-[10px] cursor-pointer text-sm bg-gray-500 hover:bg-gray-600
                                 active:bg-gray-400 text-white px-3 py-1 rounded-lg whitespace-nowrap "
                                             onClick={() => {
                                                 alert(
@@ -163,7 +163,7 @@ const WishListProd = ({ product, activeList }) => {
                                 )}
 
                                 <button
-                                    className="cursor-pointer text-xs bg-gray-500 hover:bg-gray-600
+                                    className="cursor-pointer text-sm bg-gray-500 hover:bg-gray-600
                                     active:bg-gray-400 text-white px-3 py-1 rounded-lg whitespace-nowrap "
                                     onClick={removeItemFromList}>
                                     Delete

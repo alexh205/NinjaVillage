@@ -1,10 +1,10 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Header from "./Header/Header";
-import ProductFeed from "./Product/ProductFeed";
-import Banner from "./Banner/Banner";
-import Footer from "./Footer/Footer";
-import { GiRunningNinja } from "react-icons/gi";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Header from './Header/Header';
+import ProductFeed from './Product/ProductFeed';
+import Banner from './Banner/Banner';
+import Footer from './Footer/Footer';
+import { GiRunningNinja } from 'react-icons/gi';
 
 const Home = () => {
     const products = useSelector(state => state.productStore.products);
@@ -32,7 +32,7 @@ const Home = () => {
             <div>
                 <a
                     href="#header"
-                    className="flex flex-row items-center justify-center cursor-pointer my-4">
+                    className="flex flex-row items-center justify-center cursor-pointer my-4 pb-10">
                     <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
                     <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                         Scroll to the top

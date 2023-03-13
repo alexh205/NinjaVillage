@@ -55,12 +55,12 @@ const Header = () => {
             <div className="flex items-center bg-ninja_green p-1 flex-grow py-2">
                 {/* top nav logo */}
                 <div
-                    className="flex mt-2 items-center flex-grow sm:flex-grow-0 cursor-pointer"
+                    className="flex items-center flex-grow sm:flex-grow-0 cursor-pointer"
                     onClick={() => {
                         history.push('/');
                     }}>
                     <img
-                        className="w-[140px] h-[40px] object-contain cursor-pointer mt-2"
+                        className="w-[130px] h-[50px] object-contain cursor-pointer mt-2"
                         src={
                             'https://ninjastore.s3.amazonaws.com/site_backgrounds/ninjaVillage_image.png'
                         }
@@ -144,7 +144,7 @@ const Header = () => {
                         onClick={() => {
                             history.push('/cart');
                         }}>
-                        <span className="absolute top-0 right-0 text-xs md:right-7 h-4 w-4 bg-amber-400 text-center rounded-full text-black font-bold">
+                        <span className="absolute top-0 right-0 text-[14px] md:right-7 h-5 w-5 bg-amber-400 text-center rounded-full text-black font-bold">
                             {user && cartTotal ? cartTotal : 0}
                         </span>
                         <ShoppingCartIcon className="h-10 " />
@@ -207,7 +207,7 @@ const Header = () => {
                     Health & Household
                 </p>
                 <p
-                    className="link hidden lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
+                    className="link lg:inline-flex rounded-lg shadow-md border-2 border-ninja_green-dark outline-none hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 hover:text-amber-500"
                     onClick={e => {
                         history.push(`/filters/${'Pet Supplies'}`);
                     }}>

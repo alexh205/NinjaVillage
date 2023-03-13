@@ -77,7 +77,7 @@ const EditList = ({ list, edit, userLists }) => {
     return (
         <div
             ref={editRef}
-            className="flex flex-row text-xs md:text-base justify-between items-center w-full">
+            className="flex flex-row text-sm md:text-base justify-between items-center w-full">
             <input
                 value={name}
                 disabled={name === "Wish List"}

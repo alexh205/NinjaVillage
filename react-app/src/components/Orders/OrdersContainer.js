@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { GiRunningNinja } from "react-icons/gi";
+import Footer from "../Footer/Footer";
 
 const OrdersContainer = () => {
     const history = useHistory();
@@ -79,7 +80,7 @@ const OrdersContainer = () => {
                     </section>
                 )}
                 {user && userOrders?.length ? (
-                    <div className="mt-2 flex flex-col items-center">
+                    <div className="mt-2 flex flex-col items-center ">
                         <div className=" mb-3 z-10">
                             <DatePicker
                                 onChange={update => {
@@ -88,7 +89,6 @@ const OrdersContainer = () => {
                                 showMonthDropdown
                                 showYearDropdown
                                 dropdownMode="select"
-                                // selected={startDate}
                                 showIcon={true}
                                 startDate={startDate}
                                 endDate={endDate}
@@ -126,7 +126,7 @@ const OrdersContainer = () => {
                             nextLinkClassName={"hover:text-amber-600"}
                             activeLinkClassName={"text-amber-500 font-bold "}
                         />
-                        <div className="grid grid-rows-1 gap-y-3 ">
+                        <div className="grid grid-rows-1 gap-y-3 mb-3">
                             {displayOrders}
                         </div>
                     </div>
@@ -136,10 +136,10 @@ const OrdersContainer = () => {
                     </div>
                 )}
                 {userOrders?.length > 1 && (
-                    <footer>
+                    <footer className="mb-12">
                         <a
                             href="#orders"
-                            className="flex flex-row items-center justify-center cursor-pointer my-4">
+                            className="flex flex-row items-center justify-center cursor-pointer my-2">
                             <GiRunningNinja className="h-[30px] w-[30px] mr-2 " />
                             <div className="text-blue-500 hover:text-amber-600 hover:shadow-lg transition duration-300 text-center text-lg md:text-xl font-bold ">
                                 Scroll to the top
@@ -149,6 +149,7 @@ const OrdersContainer = () => {
                     </footer>
                 )}
             </div>
+            <Footer />
         </>
     );
 };

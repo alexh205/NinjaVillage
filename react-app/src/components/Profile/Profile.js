@@ -6,6 +6,7 @@ import EditProfile from './EditProfile';
 import Product from '../Product/Product';
 import UserReviews from '../Review/UserReviews';
 import { GiRunningNinja } from 'react-icons/gi';
+import Footer from '../Footer/Footer';
 
 const Profile = () => {
     const history = useHistory();
@@ -34,7 +35,7 @@ const Profile = () => {
         <>
             <Header />
             {user && !clicked && (
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                     <div className="flex flex-col md:max-w-[600px] max-w-[440px] justify-start lg:justify-center lg:ml-[33%] ml-[15%] flex-grow mt-10 border-2 p-2 ">
                         <h1 className="flex justify-center font-bold text-2xl md:text-3xl border-b-[6px] border-double pb-2">
                             About Me
@@ -47,40 +48,40 @@ const Profile = () => {
                             <div className="flex flex-row items-center justify-center">
                                 <div className="px-2">
                                     <div className="flex flex-row items-center mb-1">
-                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
+                                        <label className="text-sm md:text-[16px] font-semibold mr-2  text-purple-700">
                                             Username:
                                         </label>
-                                        <p className="text-xs md:text-[14px] text-ninja_green">
+                                        <p className="text-sm md:text-lg text-ninja_green">
                                             {user.username}
                                         </p>
                                     </div>
                                     <div className="flex flex-row items-center mb-1">
-                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
+                                        <label className="text-sm md:text-[16px] font-semibold mr-2  text-purple-700">
                                             Email:
                                         </label>
-                                        <p className="text-xs md:text-[14px] text-ninja_green">
+                                        <p className="text-sm md:text-[16px] text-ninja_green">
                                             {user.email}
                                         </p>
                                     </div>
 
                                     <div className="flex flex-row items-center mb-2">
-                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
+                                        <label className="text-sm md:text-[16px] font-semibold mr-2  text-purple-700">
                                             Name:
                                         </label>
-                                        <p className="text-xs md:text-[14px] text-ninja_green">
+                                        <p className="text-sm md:text-[16px] text-ninja_green">
                                             {user.name}
                                         </p>
                                     </div>
 
                                     <div className="flex flex-row items-center mb-2 w-full">
-                                        <label className="text-sm md:text-lg font-semibold mr-2  text-purple-700">
+                                        <label className="text-sm md:text-[16px] font-semibold mr-2  text-purple-700">
                                             Address:
                                         </label>
                                         <div className="flex flex-col items-center">
-                                            <p className="text-xs md:text-[14px] text-ninja_green">
+                                            <p className="text-sm md:text-[16px] text-ninja_green">
                                                 {user.street_address}
                                             </p>
-                                            <p className="text-xs md:text-[14px] text-ninja_green">
+                                            <p className="text-sm md:text-[16px] text-ninja_green">
                                                 {user.city}, {user.state}{' '}
                                                 {user.zip_code}
                                             </p>
@@ -97,7 +98,7 @@ const Profile = () => {
                                         </div>
                                         {user?.ownedProducts && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
+                                                className="text-sm md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
                                                 onClick={() => {
                                                     setListingClick(
                                                         !listingClick
@@ -117,7 +118,7 @@ const Profile = () => {
                                         </div>
                                         {user?.userReviews && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600 "
+                                                className="text-sm md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600 "
                                                 onClick={() => {
                                                     setReviewClick(
                                                         !reviewClick
@@ -137,7 +138,7 @@ const Profile = () => {
                                         </div>
                                         {user?.ownedLists && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
+                                                className="text-sm md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
                                                 onClick={() =>
                                                     history.push('/wishlists')
                                                 }>
@@ -154,7 +155,7 @@ const Profile = () => {
                                         </div>
                                         {user?.ownedCarts && (
                                             <div
-                                                className="text-xs md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
+                                                className="text-sm md:text-[20px] text-blue-500 underline underline-offset-1 cursor-pointer font-semibold hover:text-amber-600"
                                                 onClick={() =>
                                                     history.push('/orders')
                                                 }>
@@ -166,7 +167,7 @@ const Profile = () => {
                                     </div>
                                     <div className="mt-2 ">
                                         {user?.username === 'Demo' ? (
-                                            <p className="text-xs whitespace-nowrap font-semibold">
+                                            <p className="text-sm whitespace-nowrap font-semibold">
                                                 "Demo user is not Editable"
                                             </p>
                                         ) : (
@@ -231,6 +232,7 @@ const Profile = () => {
             {user && clicked && (
                 <EditProfile user={user} showProfile={showProfile} />
             )}
+            <Footer />
         </>
     );
 };

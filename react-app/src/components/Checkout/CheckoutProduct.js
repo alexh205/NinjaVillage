@@ -38,15 +38,15 @@ const CheckoutProduct = ({ product }) => {
                 className="object-contain h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4 rounded-lg shadow-lg border-4 border-white hover:shadow-xl"
             />
             <div className="flex flex-col mt-5">
-                <div className="text-[12px] md:text-sm font-bold">
+                <div className="text-sm md:text-lg font-bold">
                     {product.title}
                 </div>
                 <div className="text-sm font-bold text-orange-700">
                     <p>${product.price}</p>
                 </div>
                 <div className="flex">
-                    <p className="text-xs text-gray-500">Sold by:</p>
-                    <p className="ml-1 text-xs text-gray-500">
+                    <p className="text-sm text-gray-500">Sold by:</p>
+                    <p className="ml-1 text-sm text-gray-500">
                         {product.brand}
                     </p>
                 </div>

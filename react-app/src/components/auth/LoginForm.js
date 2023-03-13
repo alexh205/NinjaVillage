@@ -61,7 +61,7 @@ const LoginForm = () => {
                             onClick={() => {
                                 demoLogin();
                             }}
-                            className="cursor-pointer p-[2px] text-xs text-blue-700 font-bold md:text-sm whitespace-nowrap rounded-lg focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 px-3 py-2 border-[1px] border-ninja_green-dark">
+                            className="cursor-pointer p-[2px] text-sm text-blue-700 font-bold md:text-sm whitespace-nowrap rounded-lg focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 px-3 py-2 border-[1px] border-ninja_green-dark">
                             Demo Login
                         </button>
                     </div>
@@ -125,7 +125,7 @@ const LoginForm = () => {
                     New to NinjaVillage?
                 </p>
                 <button
-                    className="cursor-pointer p-[5px] text-xs font-semibold md:text-sm rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[100%] border-[1px] border-ninja_green-dark"
+                    className="cursor-pointer p-[5px] text-sm font-semibold md:text-sm rounded-sm focus:outline-none focus:ring-2 bg-gradient-to-b from-slate-100 to-slate-200 focus:ring-yellow-500 active:from-slate-200 w-[100%] border-[1px] border-ninja_green-dark"
                     type="button "
                     onClick={() => {
                         history.push("/signup");

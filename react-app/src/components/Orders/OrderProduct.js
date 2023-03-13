@@ -24,10 +24,10 @@ const OrderProduct = ({ product }) => {
                 {product.category}
             </p>
             <div
-                className="cursor-pointer"
+                className="cursor-pointer flex justify-center"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 <img
-                    className="object-contain h-[150px] w-[150px] my-2 "
+                    className="object-contain h-[200px] w-[200px] md:h-[180px] md:w-[180px] my-2"
                     src={product.image}
                     alt="product"
                 />{" "}
