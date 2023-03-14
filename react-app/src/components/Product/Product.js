@@ -30,7 +30,7 @@ const Product = ({ product }) => {
     }
 
     return (
-        <div className="flex flex-col m-2 p-[10px] bg-white border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full cursor-pointer"  onClick={() => history.push(`/products/${product.id}`)}>
+        <div className="flex flex-col m-[12px] p-[10px] bg-white border-4 border-double rounded-2xl hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 w-full h-full cursor-pointer"  onClick={() => history.push(`/products/${product.id}`)}>
             <p className="flex justify-end text-sm italic text-gray-400">
                 {product.category}
             </p>

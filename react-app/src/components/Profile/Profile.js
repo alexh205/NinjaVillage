@@ -195,7 +195,7 @@ const Profile = () => {
                             <h1 className="text-3xl text-ninja_green font-bold">
                                 Products
                             </h1>
-                            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
+                            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-4 mb-16">
                                 {userProducts?.map(product => (
                                     <Product
                                         product={product}
@@ -215,7 +215,7 @@ const Profile = () => {
                             <h1 className="text-3xl text-ninja_green font-bold ">
                                 Reviews
                             </h1>
-                            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
+                            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-4 mb-16">
                                 {userReviews?.map(review => (
                                     <UserReviews
                                         review={review}
