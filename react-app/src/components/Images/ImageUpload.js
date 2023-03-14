@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Loading from "./Loading";
+// import Loading from "./Loading";
 
 const ImageUpload = ({ productId, reviewId }) => {
     const history = useHistory();
     const [image, setImage] = useState(null);
-    const [hasClicked, setHasClicked] = useState(false);
+    // const [hasClicked, setHasClicked] = useState(false);
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -14,9 +14,9 @@ const ImageUpload = ({ productId, reviewId }) => {
 
         formData.append("reviewId", reviewId);
         formData.append("productId", productId);
-        
-        // aws uploads can be a bit slow—displaying
-        setHasClicked(true);
+
+
+        // setHasClicked(true);
 
         const res = await fetch("/api/images/new", {
             method: "POST",
@@ -24,11 +24,11 @@ const ImageUpload = ({ productId, reviewId }) => {
         });
         if (res.ok) {
             await res.json();
-            setHasClicked(false);
+            console.log('res obj', res);
             history.push(`/${reviewId}`);
         } else {
-            setHasClicked(false);
-            // error handling
+
+            // server error handling
             console.log("Backend error!");
         }
     };
@@ -49,7 +49,7 @@ const ImageUpload = ({ productId, reviewId }) => {
             <button type="submit" className="button">
                 Submit
             </button>
-            {hasClicked && <Loading />}
+
         </form>
     );
 };

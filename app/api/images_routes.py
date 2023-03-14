@@ -52,17 +52,24 @@ def image_create():
 
     upload = upload_file_to_s3(image)
 
+    # print('**************************')
+    # print(upload)
+
     if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
+        # if the url key doesn't exist in the dictionary
+        # it indicates there was an error during the upload
         return upload, 400
 
     url = upload["url"]
-    # flask_login allows us to get the current user from the request
+    # print('**************************')
+    # print(request.form['reviewId'], request.form['productId'])
+    # form = ImageForm()
+    # form['csrf_token'].data = request.cookies['csrf_token']
 
-    new_image = Image(owner_id=current_user, url=url,
+    new_image = Image(owner_id=current_user.get_id(), url=url,
                       review_id=request.form['reviewId'], product_id=request.form['productId'])
+    # print('**************************')
+    # print(new_image.to_dict())
     db.session.add(new_image)
     db.session.commit()
 
