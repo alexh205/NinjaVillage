@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import User, Image, db
+from app.models import User, Image, db, Product
 from app.aws_upload import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 
@@ -19,23 +19,25 @@ def image(id):
 
 
 # * Delete Image *****************************************************
-@image_routes.route('/<int:id>', methods=['DELETE'])
+@image_routes.route('/<int:id>/<int:prodId>', methods=['DELETE'])
 @login_required
-def image_delete(id):
+def image_delete(id, prodId):
     """
     Delete an image after checking for user ownership
     """
     queried_image = Image.query.get_or_404(id)
     queried_user = User.query.get_or_404(queried_image.owner_id)
+    queried_product = Product.query.get_or_404(prodId)
 
     if queried_user.id != current_user.id:
         return auth_error
     else:
         db.session.delete(queried_image)
         db.session.commit()
-        return {'message': 'Successfully deleted'}
+        return queried_product.to_dict()
 
 # * Create Image *****************************************************
+
 
 @image_routes.route('/new', methods=['POST'])
 @login_required

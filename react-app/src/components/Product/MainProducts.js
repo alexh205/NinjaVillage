@@ -36,7 +36,7 @@ const MainProducts = ({ product }) => {
                 <div className="flex justify-center">
                     <img
                         className="object-contain h-[220px] w-[220px] md:h-[200px] md:w-[200px] my-3 "
-                        src={productImageArr[0].url}
+                        src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
                         alt="product"
                     />
                 </div>
