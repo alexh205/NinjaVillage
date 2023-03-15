@@ -36,7 +36,7 @@ const CheckoutProduct = ({ product }) => {
     return (
         <div className="flex flex-row ml-4 my-2">
             <img
-                src={productImageArr[0].url}
+                src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
                 alt="product"
                 className="object-contain h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4 rounded-lg shadow-lg border-4 border-white hover:shadow-xl"
             />

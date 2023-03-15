@@ -22,7 +22,7 @@ export const FilteredProd = ({ product }) => {
             <div className="flex items-center justify-center ">
                 <img
                     className="object-contain h-[220px] w-[220px] my-4"
-                    src={productImageArr[0].url}
+                    src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
                     alt="product"
                 />{' '}
             </div>

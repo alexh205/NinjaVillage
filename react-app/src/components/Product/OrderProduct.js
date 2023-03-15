@@ -28,7 +28,7 @@ const OrderProduct = ({product}) => {
         onClick={() => history.push(`/products/${product.id}`)}>
         <img
           className="object-contain h-[200px] w-[200px] md:h-[180px] md:w-[180px] my-2"
-          src={productImageArr[0].url}
+          src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
           alt="product"
         />{' '}
       </div>
