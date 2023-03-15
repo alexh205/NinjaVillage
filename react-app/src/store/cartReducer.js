@@ -110,9 +110,11 @@ const cartReducer = (state = initialState, action) => {
             let existed_item = currentState.addedItems.find(
                 item => action.payload.id === item.id
             );
+            // if the item is not in the cart then add it
             if (!existed_item) {
                 addedItem = action.payload;
             }
+            // if the item is already in the cart then add the quantity
             if (existed_item) {
                 existed_item.quantity += 1;
                 const cartObj = {
@@ -144,6 +146,7 @@ const cartReducer = (state = initialState, action) => {
                 item => action.payload.id !== item.id
             );
 
+            // if the qt > 1 then remove 1
             if (itemToRemove.quantity > 1) {
                 itemToRemove.quantity -= 1;
                 let newTotal = currentState.total - itemToRemove.price;
@@ -157,6 +160,7 @@ const cartReducer = (state = initialState, action) => {
 
                 return cartObj;
             }
+            // if the qt === 1 then remove the item
             if (itemToRemove.quantity === 1) {
                 let newTotal = currentState.total - itemToRemove.price;
                 const cartObj = {

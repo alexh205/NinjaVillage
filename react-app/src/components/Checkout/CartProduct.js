@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaStar } from 'react-icons/fa';
 import { addToCart, removeItem } from '../../store/cartReducer';
 import { useHistory } from 'react-router-dom';
@@ -7,11 +7,16 @@ import { BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import Loading from '../Loading';
 
-const CartProduct = ({ product }) => {
+const CartProduct = ({ productId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const product = useSelector(
+        state => state.productStore.products[productId]
+    );
     const [hasClicked, setHasClicked] = useState(false);
     const [hasClickedRemove, setHasClickedRemove] = useState(false);
+
+    const productImageArr = product.productImages;
 
     const addItemToCart = async () => {
         const item = {
@@ -50,7 +55,7 @@ const CartProduct = ({ product }) => {
                 className="cursor-pointer"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 <img
-                    src={product.image}
+                    src={productImageArr[0].url}
                     alt="product"
                     className="h-[210px] w-[210px] object-contain rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                 />

@@ -38,7 +38,7 @@ const Cart = ({ user }) => {
                         </div>
                         {cart &&
                             cart.map((product, i) => (
-                                <CartProduct key={i} product={product} />
+                                <CartProduct key={i} productId={product.id} />
                             ))}
                     </div>
                 </div>

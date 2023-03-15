@@ -68,7 +68,6 @@ export const createProductThunk =
                 description,
                 category,
                 brand,
-                image,
             }),
         });
         const response = await request.json();
@@ -90,7 +89,6 @@ export const editProductThunk =
                 description,
                 category,
                 brand,
-                image,
             }),
         });
         const response = await request.json();
