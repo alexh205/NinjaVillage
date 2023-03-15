@@ -10,6 +10,7 @@ const MainProducts = ({ product }) => {
     let ratingTotal = 0;
     let ratingAvg;
 
+    const productImageArr = product.productImages;
     if (product && product.productReviews) {
         product.productReviews.forEach(el => {
             ratingTotal += Number(el.rating);
@@ -35,7 +36,7 @@ const MainProducts = ({ product }) => {
                 <div className="flex justify-center">
                     <img
                         className="object-contain h-[220px] w-[220px] md:h-[200px] md:w-[200px] my-3 "
-                        src={product.image}
+                        src={productImageArr[0].url}
                         alt="product"
                     />
                 </div>

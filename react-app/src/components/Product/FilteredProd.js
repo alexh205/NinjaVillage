@@ -12,7 +12,7 @@ export const FilteredProd = ({ product }) => {
         });
         ratingAvg = ratingTotal / product.productReviews.length;
     }
-
+    const productImageArr = product.productImages;
     const history = useHistory();
 
     return (
@@ -22,7 +22,7 @@ export const FilteredProd = ({ product }) => {
             <div className="flex items-center justify-center ">
                 <img
                     className="object-contain h-[220px] w-[220px] my-4"
-                    src={product.image}
+                    src={productImageArr[0].url}
                     alt="product"
                 />{' '}
             </div>

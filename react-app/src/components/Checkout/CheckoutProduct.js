@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart, removeItem } from "../../store/cartReducer";
-import { BsPlus } from "react-icons/bs";
-import { BiMinus } from "react-icons/bi";
-import Loading from "../Loading";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart, removeItem } from '../../store/cartReducer';
+import { BsPlus } from 'react-icons/bs';
+import { BiMinus } from 'react-icons/bi';
+import Loading from '../Loading';
 
 const CheckoutProduct = ({ product }) => {
     const dispatch = useDispatch();
@@ -25,6 +25,9 @@ const CheckoutProduct = ({ product }) => {
         setHasClicked(false);
     };
 
+    const productImageArr = product.productImages;
+
+
     const removeItemFromCart = () => {
         setHasClickedRemove(true);
         dispatch(removeItem(product));
@@ -33,7 +36,7 @@ const CheckoutProduct = ({ product }) => {
     return (
         <div className="flex flex-row ml-4 my-2">
             <img
-                src={product.image}
+                src={productImageArr[0].url}
                 alt="product"
                 className="object-contain h-[110px] md:h-[150px] w-[90px] md:w-[140px] mr-4 rounded-lg shadow-lg border-4 border-white hover:shadow-xl"
             />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { FilteredProd } from './FilteredProd';
+import { FilteredProd } from '../Product/FilteredProd';
 import Header from '../Header/Header';
 import { GiRunningNinja } from 'react-icons/gi';
 import { MdOutlineArrowRightAlt } from 'react-icons/md';
@@ -39,7 +39,7 @@ const Filters = () => {
                     <p className="ml-1">{filterId}</p>
                 </div>
 
-                <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-7">
+                <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5 mb-12">
                     {filteredProd?.map((product, i) => (
                         <div
                             className={`${
