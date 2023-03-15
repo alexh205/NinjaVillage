@@ -2,8 +2,13 @@ import React, {useState} from 'react';
 import Header from '../Header/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {useParams, useHistory} from 'react-router-dom';
-import {getAllProductThunk, editProductThunk} from '../../store/productReducer';
+import {
+  getAllProductThunk,
+  editProductThunk,
+  deleteImageThunk,
+} from '../../store/productReducer';
 import Loading from '../Loading';
+import ImageGallery from '../Images/ImageGallery';
 
 const EditProduct = () => {
   const {productId} = useParams();
@@ -22,6 +27,11 @@ const EditProduct = () => {
   const [validateErrors, setValidateErrors] = useState([]);
 
   const product = useSelector(state => state.productStore.products[productId]);
+
+  const [imgDeletion, setImgDeletion] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([
+    ...product.productImages,
+  ]);
 
   const productImageArr = product.productImages;
 
@@ -54,17 +64,19 @@ const EditProduct = () => {
 
       if (errors.length > 0) return setValidateErrors(errors);
 
+      const updatedGalleryImages = galleryImages.filter(
+        (_, id) => !imgDeletion.includes(id)
+      );
+      setGalleryImages(updatedGalleryImages);
+      imgDeletion.map(async imageId => {
+        await dispatch(deleteImageThunk(imageId, productId));
+      });
+
+      setImgDeletion([]);
       setHasClicked(true);
 
       const updatedProduct = await dispatch(
-        editProductThunk(
-          title,
-          price,
-          description,
-          category,
-          brand,
-          productId
-        )
+        editProductThunk(title, price, description, category, brand, productId)
       );
       setTitle('');
       setPrice('');
@@ -101,7 +113,7 @@ const EditProduct = () => {
           {product && (
             <div className="flex flex-row items-center my-5">
               <img
-                src={productImageArr[0].url}
+                src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
                 alt="product"
                 className="w-[120px] h-[120px] mr-4"></img>
               <div className="sm:line-clamp-4">{product.title}</div>
@@ -181,7 +193,15 @@ const EditProduct = () => {
               value={brand}
               required={true}></input>
           </div>
-
+          <div className="flex flex-row justify-start items-center my-4">
+            <label className="font-bold text-xl my-1 mr-7">Images</label>
+            <ImageGallery
+              product={product}
+              imgDeletion={imgDeletion}
+              setImgDeletion={setImgDeletion}
+              galleryImages={galleryImages}
+            />
+          </div>
 
           <div className="flex flex-row mt-5 justify-end mb-6 mr-20">
             <button

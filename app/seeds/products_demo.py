@@ -9,7 +9,7 @@ def seed_products():
             "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
             "category": "Clothing, Shoes & Jewelry",
             "brand": "Wolf House",
-            "owner_id": 4,
+            "owner_id": 1,
         },
         {
             "title": "Mens Casual Premium Slim Fit T-Shirts ",

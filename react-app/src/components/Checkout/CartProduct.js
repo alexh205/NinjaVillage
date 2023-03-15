@@ -55,7 +55,7 @@ const CartProduct = ({ productId }) => {
                 className="cursor-pointer"
                 onClick={() => history.push(`/products/${product.id}`)}>
                 <img
-                    src={productImageArr[0].url}
+                    src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
                     alt="product"
                     className="h-[210px] w-[210px] object-contain rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110"
                 />
