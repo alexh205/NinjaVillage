@@ -22,6 +22,8 @@ const WishListProd = ({ product, activeList }) => {
 
     const showDropDown = Boolean => setDropDown(false);
 
+    const productImageArr = product.productImages;
+
     const addItemToCart = async () => {
         setButtonAction(true);
         try {
@@ -62,13 +64,13 @@ const WishListProd = ({ product, activeList }) => {
     return (
         <>
             {item ? (
-                <div className="grid grid-cols-4 gap-x-2 mb-3 m-2  bg-white px-5 border-4 border-double rounded-2xl w-fit ">
+                <div className="grid grid-cols-4 gap-x-2 mb-3 m-2  bg-white px-5 border-4 border-double rounded-2xl ">
                     <div
                         className="cursor-pointer "
                         onClick={() => history.push(`/products/${item.id}`)}>
                         <img
-                            className="object-contain m-2 h-[200px] w-[200px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 "
-                            src={item.image}
+                            className="object-contain m-2  h-[200px] w-[200px] rounded-lg shadow-lg border-4 border-white hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110 "
+                            src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
                             alt="product"
                         />
                     </div>
