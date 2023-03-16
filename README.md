@@ -91,8 +91,9 @@
 * [![.ENV][.ENV]][.ENV-url]
 * [![Git][Git]][Git-url]
 * [![Github][Github]][Github-url]
+* [![Amazon AWS][Amazon AWS]][Amazon AWS-url]
 * [![Render][Render]][Render-url]
-<!-- * ![Amazon AWS Badge](https://img.shields.io/badge/Amazon%20AWS-232F3E?logo=amazonaws&logoColor=fff&style=for-the-badge) -->
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -111,6 +112,10 @@
 ### Cart Page
 
 ![cart](https://user-images.githubusercontent.com/95322089/218265454-c1477f79-c629-426c-a0e3-1d98e25811c9.png)
+
+### Wish List Page
+
+![Screenshot 2023-03-16 at 12 32 55 PM](https://user-images.githubusercontent.com/95322089/225688979-3abb4210-c3eb-4231-9dbe-a1dbb9c71489.jpg)
 
 ### Past Orders Page
 ![orders](https://user-images.githubusercontent.com/95322089/218265429-23612be5-67b2-4775-94fa-ee7043488c1d.png)
@@ -213,17 +218,15 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Add products to shopping cart
 - [x] checkout carts
 - [x] View past orders
+- [x] Add secondary images to products
+- [x] Implement wish lists
+- [x] Implement AWS to handle media storage
 
 
 ## Goals
 
 - [ ] Add images to reviews
-- [ ] Add an image carousel to view both product and review images
-- [ ] Add secondary images to products
-- [ ] Implement wish lists
-- [ ] Implement a payment system + confirmation page
-- [ ] Multi-language Support
-- [ ] Implement AWS to handle media storage
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -333,6 +336,9 @@ Use this space to list resources you find helpful and would like to give credit 
 [Redux-url]: https://redux.js.org/
 [Tailwind CSS]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=for-the-badge
 [Tailwind CSS-url]:https://tailwindcss.com/
+[Amazon AWS]: https://img.shields.io/badge/Amazon%20AWS-232F3E?logo=amazonaws&logoColor=fff&style=for-the-badge
+[Amazon AWS-URL]:https://aws.amazon.com/
+
 
 # Flask React Project
 
