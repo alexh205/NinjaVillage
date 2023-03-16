@@ -3,6 +3,7 @@ import {FaStar} from 'react-icons/fa';
 import {useHistory} from 'react-router-dom';
 
 const OrderProduct = ({product}) => {
+  const history = useHistory();
   let ratingTotal = 0;
   let ratingAvg;
 
@@ -12,8 +13,12 @@ const OrderProduct = ({product}) => {
     });
     ratingAvg = ratingTotal / product.productReviews.length;
   }
-  const productImageArr = product.productImages;
-  const history = useHistory();
+  let productImageArr = [{url: product.image}];
+  if (product.productImages) {
+    product.productImages.forEach(image => {
+      productImageArr.push(image);
+    });
+  }
 
   if (!product) {
     history.push('/');
@@ -28,7 +33,7 @@ const OrderProduct = ({product}) => {
         onClick={() => history.push(`/products/${product.id}`)}>
         <img
           className="object-contain h-[200px] w-[200px] md:h-[180px] md:w-[180px] my-2"
-          src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
+          src={productImageArr.length > 0 ? productImageArr[0].url : 'image'}
           alt="product"
         />{' '}
       </div>

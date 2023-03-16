@@ -32,7 +32,12 @@ const ProductDetail = () => {
   const owner = useSelector(state => state.session.productOwner);
   const userWishLists = useSelector(state => state.listStore.userLists);
 
-  const productImageArr = product.productImages;
+  let productImageArr = [{url: product.image}];
+  if (product.productImages) {
+    product.productImages.forEach(image => {
+      productImageArr.push(image);
+    });
+  }
 
   if (!product) {
     history.push('/');
@@ -126,7 +131,7 @@ const ProductDetail = () => {
                 <div
                   className="text-[15px]  text-sky-600 text-bold hover:text-amber-600 hover:font-semibold"
                   onClick={() => history.push('/products')}>
-                  {owner.id === user.id ? (
+                  {owner?.id === user?.id ? (
                     <div className="flex flex-row items-center">
                       <GiStarMedal className="mr-2 h-5" />
                       <p className="cursor-pointer">

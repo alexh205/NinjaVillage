@@ -144,13 +144,16 @@ export const WishListContainer = () => {
         </div>
         <div className="grid grid-cols-3 border-[2px] p-2">
           <div className="mr-4 md:mr-7 ml-2 md:ml-3">
-            {userWishLists.map(list => (
-              <div key={list.name} className="mr-1 border-b-2">
+            {userWishLists.map((list, index) => (
+              <div
+                key={list.name}
+                className={`${
+                  userWishLists.length === index + 1
+                    ? 'mr-1'
+                    : 'mr-1 border-b-2'
+                }`}>
                 {selected === list.name ? (
-                  <div
-                    className="text-sm py-3 px-2
-                                        flex flex-row justify-between hover:text-amber-600
-                                        bg-[#f0f2f2]">
+                  <div className="text-sm py-3 px-2 flex flex-row justify-between hover:text-amber-600 bg-[#f0f2f2]">
                     <div className="font-semibold p-1 w-full">
                       {hasEdit ? (
                         <EditList

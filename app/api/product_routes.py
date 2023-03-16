@@ -62,7 +62,8 @@ def product_create():
         description=req_data['description'],
         category=req_data['category'],
         brand=req_data['brand'],
-        owner_id=current_user.id
+        owner_id=current_user.id,
+        image=req_data['image'],
     )
 
     db.session.add(new_product)
