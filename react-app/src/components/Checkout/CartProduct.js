@@ -10,7 +10,9 @@ import Loading from '../Loading';
 const CartProduct = ({productId}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const product = useSelector(state => state.productStore.products[productId]);
+  const product = useSelector(state =>
+    state.cartStore.addedItems.find(product => product.id === productId)
+  );
   const [hasClicked, setHasClicked] = useState(false);
   const [hasClickedRemove, setHasClickedRemove] = useState(false);
 
@@ -81,6 +83,7 @@ const CartProduct = ({productId}) => {
         <div className="flex flex-col justify-center items-start ml-4">
           <div className="flex flex-row items-center">
             <p className="mr-2">Quantity:</p>
+
             <p className="font-semibold text-red-700">{product.quantity}</p>
           </div>
 

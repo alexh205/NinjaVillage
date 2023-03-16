@@ -93,7 +93,7 @@ const Header = () => {
                       <div className="flex flex-row m-1">
                         <img
                           className="w-8"
-                          src={product.productImages[0].url || null}
+                          src={product.image || null}
                           alt="product"
                         />
                         <p className="ml-[10px]">{product.title}</p>
