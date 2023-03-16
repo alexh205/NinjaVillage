@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {addToCart} from '../../store/cartReducer';
 import {FaStar} from 'react-icons/fa';
+import {GiStarMedal} from 'react-icons/gi';
 import {ChevronDownIcon} from '@heroicons/react/24/solid';
 import ReviewContainer from '../Review/ReviewContainer';
 import {getUserThunk} from '../../store/sessionReducer';
@@ -86,7 +87,7 @@ const ProductDetail = () => {
                   className={`${
                     productImageArr.length < 2
                       ? 'hidden'
-                      : 'hidden lg:flex flex-col justify-center items-center min-w-[80px] min-h-[80px] lg:w-[100px] lg:h-[100px] mr-3'
+                      : 'hidden lg:flex flex-col justify-center items-center min-w-[60px] min-h-[60px] lg:w-[80px] lg:h-[80px] mr-5'
                   }`}>
                   {/* vertical image slider */}
                   {productImageArr.map((image, i) => (
@@ -105,7 +106,7 @@ const ProductDetail = () => {
                 </div>
 
                 {/* Main image container */}
-                <div className="hidden sm:flex md:min-w-[240px] md:max-w-[290px] min-w-[180px] md:min-h-[180px] md:max-h-[290px] rounded-lg shadow-lg border-4 hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110">
+                <div className="hidden sm:flex md:min-w-[240px] md:max-w-[290px] min-w-[200px] md:min-h-[200px] md:max-h-[290px] rounded-lg shadow-lg border-4 hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110">
                   <a
                     href={mainImage || productImageArr[0].url || null}
                     target="_blank"
@@ -125,7 +126,16 @@ const ProductDetail = () => {
                 <div
                   className="text-[15px]  text-sky-600 text-bold hover:text-amber-600 hover:font-semibold"
                   onClick={() => history.push('/products')}>
-                  <p className="cursor-pointer">Visit {owner.name}'s store</p>
+                  {owner.id === user.id ? (
+                    <div className="flex flex-row items-center">
+                      <GiStarMedal className="mr-2 h-5" />
+                      <p className="cursor-pointer">
+                        Visit {owner.name}'s store
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="cursor-pointer">Visit {owner.name}'s store</p>
+                  )}
                 </div>
 
                 <div className="flex flex-row items-center mb-2">
