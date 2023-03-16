@@ -120,7 +120,7 @@ export const getProductThunk = prodId => async dispatch => {
   if (request.ok) {
     const data = await request.json();
 
-    dispatch(populateProductData(data));
+    dispatch(addProduct(data));
   }
 };
 
@@ -175,6 +175,7 @@ export const deleteReviewThunk = reviewId => async dispatch => {
 export const deleteImageThunk = (imageId, productId) => async dispatch => {
   const request = await fetch(`/api/images/${imageId}/${productId}`, {
     method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
   });
 
   const response = await request.json();

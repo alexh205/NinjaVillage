@@ -14,8 +14,8 @@ def product(id):
     """
     Query for a product by id and returns that product in a dictionary
     """
-    product = Product.query.get_or_404(id)
-    return product.to_dict()
+    new_product = Product.query.get_or_404(id)
+    return new_product.to_dict()
 
 # * Get all Products *****************************************************
 

@@ -3,26 +3,26 @@ import React, {useState} from 'react';
 const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
   const [hideImage, setHideImage] = useState([]);
 
-  const handleDelete = imageId => {
-    const updateImageDeletion = [...imgDeletion, imageId];
+  const handleDelete = index => {
+    const updateImageDeletion = [...imgDeletion, index];
     setImgDeletion(updateImageDeletion);
-    setHideImage([...hideImage, imageId]);
+    setHideImage([...hideImage, index]);
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {galleryImages.map(image => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {galleryImages.map((image, index) => (
         <div
           key={image.id}
           className={`${
-            hideImage.includes(image.id)
+            hideImage.includes(index)
               ? 'hidden'
               : 'relative mx-2 border-2 border-dashed p-[2px]'
           }`}>
           <button
             onClick={e => {
               e.preventDefault();
-              handleDelete(image.id);
+              handleDelete(index);
             }}
             className={`${
               galleryImages.length === 1
@@ -34,7 +34,7 @@ const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
           <img
             src={image.url}
             alt={`Image ${image.id}`}
-            className="w-[200px] h-[200px] object-fit"
+            className="w-[180px] h-[180px] object-fit"
           />
         </div>
       ))}
