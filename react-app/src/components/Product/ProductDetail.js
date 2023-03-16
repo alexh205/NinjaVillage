@@ -87,7 +87,7 @@ const ProductDetail = () => {
                   className={`${
                     productImageArr.length < 2
                       ? 'hidden'
-                      : 'hidden lg:flex flex-col justify-center items-center min-w-[50px] min-h-[50px] lg:w-[70px] lg:h-[70px] mr-5'
+                      : 'hidden lg:flex flex-col justify-center items-center min-w-[60px] min-h-[60px] lg:w-[80px] lg:h-[80px] mr-5'
                   }`}>
                   {/* vertical image slider */}
                   {productImageArr.map((image, i) => (
@@ -106,7 +106,7 @@ const ProductDetail = () => {
                 </div>
 
                 {/* Main image container */}
-                <div className="hidden sm:flex md:min-w-[240px] md:max-w-[290px] min-w-[190px] md:min-h-[190px] md:max-h-[290px] rounded-lg shadow-lg border-4 hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110">
+                <div className="hidden sm:flex md:min-w-[240px] md:max-w-[290px] min-w-[200px] md:min-h-[200px] md:max-h-[290px] rounded-lg shadow-lg border-4 hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110">
                   <a
                     href={mainImage || productImageArr[0].url || null}
                     target="_blank"

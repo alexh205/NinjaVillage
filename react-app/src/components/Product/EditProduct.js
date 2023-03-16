@@ -63,7 +63,6 @@ const EditProduct = () => {
 
       const errors = validate();
 
-      console.log(imgDeletion);
       if (errors.length > 0) return setValidateErrors(errors);
       const updatedGalleryImages = galleryImages.filter(
         (_, index) => !imgDeletion.includes(index)
@@ -211,9 +210,9 @@ const EditProduct = () => {
               />
             </div>
             <div>
-              {productImageArr.length < 8 && (
+              {productImageArr.length < 5 ? (
                 <ImageUpload productId={productId} />
-              )}
+              ) : null}
             </div>
           </div>
           <div className="flex flex-row mt-5 justify-end mb-6 mr-4 sm:mr-20">
