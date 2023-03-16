@@ -107,12 +107,12 @@ const ProductDetail = () => {
                 {/* Main image container */}
                 <div className="hidden sm:flex md:min-w-[240px] md:max-w-[290px] min-w-[180px] md:min-h-[180px] md:max-h-[290px] rounded-lg shadow-lg border-4 hover:shadow-xl transform transition duration-300 hover:-translate-y-1 hover:scale-110">
                   <a
-                    href={productImageArr.length > 0 ? productImageArr[0].url : mainImage}
+                    href={mainImage || productImageArr[0].url || null}
                     target="_blank"
                     rel="noreferrer">
                     <img
                       className=" object-contain w-full h-full "
-                      src={productImageArr.length > 0 ? productImageArr[0].url : mainImage}
+                      src={mainImage || productImageArr[0].url || 'image'}
                       alt="product"
                     />
                   </a>

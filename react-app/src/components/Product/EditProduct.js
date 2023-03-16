@@ -9,6 +9,7 @@ import {
 } from '../../store/productReducer';
 import Loading from '../Loading';
 import ImageGallery from '../Images/ImageGallery';
+import ImageUpload from '../Images/ImageUpload';
 
 const EditProduct = () => {
   const {productId} = useParams();
@@ -62,14 +63,17 @@ const EditProduct = () => {
 
       const errors = validate();
 
+      console.log(imgDeletion);
       if (errors.length > 0) return setValidateErrors(errors);
-
       const updatedGalleryImages = galleryImages.filter(
-        (_, id) => !imgDeletion.includes(id)
+        (_, index) => !imgDeletion.includes(index)
       );
       setGalleryImages(updatedGalleryImages);
-      imgDeletion.map(async imageId => {
-        await dispatch(deleteImageThunk(imageId, productId));
+
+      imgDeletion.map(async index => {
+        const imageId = productImageArr[index].id;
+
+        await dispatch(deleteImageThunk(imageId, Number(productId)));
       });
 
       setImgDeletion([]);
@@ -113,7 +117,9 @@ const EditProduct = () => {
           {product && (
             <div className="flex flex-row items-center my-5">
               <img
-                src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
+                src={
+                  productImageArr.length > 0 ? productImageArr[0].url : 'image'
+                }
                 alt="product"
                 className="w-[120px] h-[120px] mr-4"></img>
               <div className="sm:line-clamp-4">{product.title}</div>
@@ -193,17 +199,24 @@ const EditProduct = () => {
               value={brand}
               required={true}></input>
           </div>
-          <div className="flex flex-row justify-start items-center my-4">
-            <label className="font-bold text-xl my-1 mr-7">Images</label>
-            <ImageGallery
-              product={product}
-              imgDeletion={imgDeletion}
-              setImgDeletion={setImgDeletion}
-              galleryImages={galleryImages}
-            />
-          </div>
+          <div className="flex flex-col items-center justify-center mt-2">
+            <h3 className="text-2xl font-bold">Images</h3>
 
-          <div className="flex flex-row mt-5 justify-end mb-6 mr-20">
+            <div className="flex flex-row justify-start items-center my-4">
+              <ImageGallery
+                product={product}
+                imgDeletion={imgDeletion}
+                setImgDeletion={setImgDeletion}
+                galleryImages={galleryImages}
+              />
+            </div>
+            <div>
+              {productImageArr.length < 8 && (
+                <ImageUpload productId={productId} />
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row mt-5 justify-end mb-6 mr-4 sm:mr-20">
             <button
               className="button"
               onClick={e => {

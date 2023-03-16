@@ -2,9 +2,9 @@ from app.models import db, Image, environment, SCHEMA
 
 
 def seed_images():
-    images = [{"url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg", "owner_id": 4, "product_id": 1, "review_id": None},
-              {"url": "https://media.istockphoto.com/id/503157860/photo/enjoying-the-fresh-air.jpg?s=612x612&w=0&k=20&c=7nYcClKuS-u0hr98OxS3LSBz3Pia_83RZ4XHf0wC1Uo=", "owner_id": 4, "product_id": 1, "review_id": None}, {
-                  "url": "https://media.istockphoto.com/id/501570208/photo/enjoying-a-solitary-walk.jpg?s=612x612&w=0&k=20&c=LtEGQmX1AWom4B7N9ruOqRyY7toFG4pLdJDyLizBVLA=", "owner_id": 4, "product_id": 1, "review_id": None},
+    images = [{"url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg", "owner_id": 1, "product_id": 1, "review_id": None},
+              {"url": "https://media.istockphoto.com/id/503157860/photo/enjoying-the-fresh-air.jpg?s=612x612&w=0&k=20&c=7nYcClKuS-u0hr98OxS3LSBz3Pia_83RZ4XHf0wC1Uo=", "owner_id": 1, "product_id": 1, "review_id": None}, {
+                  "url": "https://media.istockphoto.com/id/501570208/photo/enjoying-a-solitary-walk.jpg?s=612x612&w=0&k=20&c=LtEGQmX1AWom4B7N9ruOqRyY7toFG4pLdJDyLizBVLA=", "owner_id": 1, "product_id": 1, "review_id": None},
               {"url": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
                "owner_id": 3, "product_id": 2, "review_id": None},
               {"url": "https://media.istockphoto.com/id/1221635484/vector/mens-white-short-sleeve-t-shirt-design-templates-vector-illustration.jpg?s=612x612&w=0&k=20&c=Yr-4WlsM9RIKDrJws-tPSWnw2QmBsMjbjn3cV8ysksk=",
