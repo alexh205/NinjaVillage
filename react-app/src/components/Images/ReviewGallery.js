@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
+const ReviewGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
   const [hideImage, setHideImage] = useState([]);
 
   const handleDelete = index => {
@@ -31,7 +31,6 @@ const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
             }`}>
             <span>x</span>
           </button>
-          
           <img
             src={image.url}
             alt={`Image ${image.id}`}
@@ -43,4 +42,4 @@ const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
   );
 };
 
-export default ImageGallery;
+export default ReviewGallery;

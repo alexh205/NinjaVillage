@@ -27,7 +27,7 @@ def image_delete(id, prodId):
     """
 
     queried_image = Image.query.get_or_404(id)
-    queried_product = Product.query.get_or_404(queried_image.product_id)
+    queried_product = Product.query.get_or_404(prodId)
     queried_user = User.query.get_or_404(queried_image.owner_id)
 
     if queried_user.id != current_user.id:
@@ -70,7 +70,7 @@ def image_create():
 
     new_image = Image(owner_id=current_user.get_id(), url=url,
                       review_id=request.form['reviewId'], product_id=request.form['productId'])
-    
+
     db.session.add(new_image)
     db.session.commit()
 

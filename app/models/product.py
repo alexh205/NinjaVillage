@@ -3,6 +3,7 @@ from sqlalchemy.sql import func
 from .product_cart import ProductCarts
 from .product_list import ProductLists
 
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -15,17 +16,23 @@ class Product(db.Model):
     description = db.Column(db.String(1000), nullable=False)
     category = db.Column(db.String(70), nullable=False)
     brand = db.Column(db.String(70), nullable=False)
-    quantity= db.Column(db.Integer, default=0)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
-
+    image = db.Column(db.String(500), nullable=False)
+    quantity = db.Column(db.Integer, default=0)
+    owner_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    created_date = db.Column(db.DateTime(
+        timezone=True), server_default=func.now())
 
     # ! Relationships
     products_owned = db.relationship("User", back_populates="owned_products")
-    product_reviews = db.relationship("Review", back_populates="reviews_product",cascade="all,delete")
-    product_carts = db.relationship("ShoppingCart", secondary=ProductCarts, back_populates="carts_product")
-    product_lists = db.relationship("WishList", secondary=ProductLists, back_populates="lists_product")
-    product_images = db.relationship("Image", back_populates="images_product", cascade="all,delete")
+    product_reviews = db.relationship(
+        "Review", back_populates="reviews_product", cascade="all,delete")
+    product_carts = db.relationship(
+        "ShoppingCart", secondary=ProductCarts, back_populates="carts_product")
+    product_lists = db.relationship(
+        "WishList", secondary=ProductLists, back_populates="lists_product")
+    product_images = db.relationship(
+        "Image", back_populates="images_product", cascade="all,delete")
 
     # ? Methods
     def to_dict(self):
@@ -36,6 +43,7 @@ class Product(db.Model):
             'description': self.description,
             'category': self.category,
             'brand': self.brand,
+            'image': self.image,
             'quantity': self.quantity,
             'ownerId': self.owner_id,
             'productImages': [image.to_dict() for image in self.product_images],

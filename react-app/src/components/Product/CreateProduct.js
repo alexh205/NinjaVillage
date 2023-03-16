@@ -18,6 +18,7 @@ const CreateProduct = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
+  const [image, setImage] = useState('');
   const [hasClicked, setHasClicked] = useState(false);
 
   const [validateErrors, setValidateErrors] = useState([]);
@@ -30,6 +31,7 @@ const CreateProduct = () => {
     if (!description) errors.push("Please provide a 'Description'");
     if (!category) errors.push("Please select a 'Category'");
     if (!brand) errors.push("Please provide a 'Brand'");
+    if (!image) errors.push("Please provide a 'Image'");
 
     return errors;
   };
@@ -47,7 +49,7 @@ const CreateProduct = () => {
     let product;
     try {
       product = await dispatch(
-        createProductThunk(title, price, description, category, brand)
+        createProductThunk(title, price, description, category, brand, image)
       );
     } catch (error) {
       console.log(error);
@@ -57,6 +59,7 @@ const CreateProduct = () => {
       setDescription('');
       setCategory('');
       setBrand('');
+      setImage('');
       setValidateErrors([]);
 
       await dispatch(getAllProductThunk());
@@ -166,6 +169,19 @@ const CreateProduct = () => {
               onChange={e => setBrand(e.target.value)}
               value={brand}
               placeholder="The best company"
+              required={true}></input>
+          </div>
+          <div className="mt-3 flex flex-col border-b">
+            <label className="font-bold text-xl my-1">Image url</label>
+            <input
+              className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
+              type="url"
+              size="50"
+              maxLength="500"
+              name="image"
+              onChange={e => setImage(e.target.value)}
+              value={image}
+              placeholder="https://www.images.com"
               required={true}></input>
           </div>
 

@@ -22,6 +22,7 @@ const EditProduct = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
+  const [image, setImage] = useState('');
   const [valid, setValid] = useState(false);
   const [hasClicked, setHasClicked] = useState(false);
 
@@ -30,11 +31,15 @@ const EditProduct = () => {
   const product = useSelector(state => state.productStore.products[productId]);
 
   const [imgDeletion, setImgDeletion] = useState([]);
-  const [galleryImages, setGalleryImages] = useState([
-    ...product.productImages,
-  ]);
 
-  const productImageArr = product.productImages;
+  let productImageArr = [{url: product.image}];
+  if (product.productImages) {
+    product.productImages.forEach(image => {
+      productImageArr.push(image);
+    });
+  }
+
+  const [galleryImages, setGalleryImages] = useState([...productImageArr]);
 
   const validate = () => {
     const errors = [];
@@ -44,6 +49,7 @@ const EditProduct = () => {
     if (!description) errors.push("Please provide a 'Description'");
     if (!category) errors.push("Please select a 'Category'");
     if (!brand) errors.push("Please provide a 'Brand'");
+    if (!image) errors.push("Please provide a 'Image'");
 
     return errors;
   };
@@ -55,6 +61,7 @@ const EditProduct = () => {
       setDescription(product.description);
       setCategory(product.category);
       setBrand(product.brand);
+      setImage(product.image);
       setValid(true);
     }
 
@@ -64,6 +71,7 @@ const EditProduct = () => {
       const errors = validate();
 
       if (errors.length > 0) return setValidateErrors(errors);
+
       const updatedGalleryImages = galleryImages.filter(
         (_, index) => !imgDeletion.includes(index)
       );
@@ -79,13 +87,22 @@ const EditProduct = () => {
       setHasClicked(true);
 
       const updatedProduct = await dispatch(
-        editProductThunk(title, price, description, category, brand, productId)
+        editProductThunk(
+          title,
+          price,
+          description,
+          category,
+          brand,
+          image,
+          productId
+        )
       );
       setTitle('');
       setPrice('');
       setDescription('');
       setCategory('');
       setBrand('');
+      setImage('');
       setValid(false);
       setValidateErrors([]);
 
@@ -198,12 +215,24 @@ const EditProduct = () => {
               value={brand}
               required={true}></input>
           </div>
+          <div className="mt-3 flex flex-col border-b">
+            <label className="font-bold text-xl my-1">Main Image</label>
+            <input
+              className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
+              type="url"
+              size="80"
+              maxLength="300"
+              name="image"
+              onChange={e => setImage(e.target.value)}
+              value={image}
+              required={true}></input>
+          </div>
+
           <div className="flex flex-col items-center justify-center mt-2">
             <h3 className="text-2xl font-bold">Images</h3>
 
             <div className="flex flex-row justify-start items-center my-4">
               <ImageGallery
-                product={product}
                 imgDeletion={imgDeletion}
                 setImgDeletion={setImgDeletion}
                 galleryImages={galleryImages}
