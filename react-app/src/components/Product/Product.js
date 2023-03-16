@@ -13,7 +13,14 @@ const Product = ({product}) => {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user);
-  const productImageArr = product.productImages;
+
+  let productImageArr = [{url: product.image}];
+  if (product.productImages) {
+    product.productImages.forEach(image => {
+      productImageArr.push(image);
+    });
+  }
+
   let productOwner;
   if (product) {
     productOwner = product.ownerId;

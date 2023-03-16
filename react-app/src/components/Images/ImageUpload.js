@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
-// import Loading from "./Loading";
+import {useDispatch} from 'react-redux';
+import {getProductThunk} from '../../store/productReducer';
 
 const ImageUpload = ({productId, reviewId}) => {
-  const history = useHistory();
   const [image, setImage] = useState(null);
-  // const [hasClicked, setHasClicked] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', image);
 
-    formData.append('reviewId', reviewId);
-    formData.append('productId', productId);
-
-    // setHasClicked(true);
+    formData.append('reviewId', reviewId || null);
+    formData.append('productId', productId || null);
+    
+    setImage(null);
 
     const res = await fetch('/api/images/new', {
       method: 'POST',
@@ -23,8 +22,8 @@ const ImageUpload = ({productId, reviewId}) => {
     });
     if (res.ok) {
       await res.json();
-      console.log('res obj', res);
-      history.push(`/${reviewId}`);
+      alert('Image uploaded successfully!');
+      await dispatch(getProductThunk(productId));
     } else {
       // server error handling
       console.log('Backend error!');
@@ -37,12 +36,15 @@ const ImageUpload = ({productId, reviewId}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <input type="file" accept="image/*" name="image" onChange={updateImage} />
-      <button type="submit" className="button">
-        Submit
+      <button
+        type="submit"
+        className="cursor-pointer p-2 font-bold text-[13px] md-text-sm bg-gradient-to-b from-green-300 to-green-500 border-green-400 focus:ring-2 focus:ring-green-600 active:from-green-600 focus:outline-none rounded-sm"
+        onClick={handleSubmit}>
+        Upload
       </button>
-    </form>
+    </div>
   );
 };
 

@@ -9,6 +9,7 @@ import {
 } from '../../store/productReducer';
 import Loading from '../Loading';
 import ImageGallery from '../Images/ImageGallery';
+import ImageUpload from '../Images/ImageUpload';
 
 const EditProduct = () => {
   const {productId} = useParams();
@@ -21,6 +22,7 @@ const EditProduct = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
+  const [image, setImage] = useState('');
   const [valid, setValid] = useState(false);
   const [hasClicked, setHasClicked] = useState(false);
 
@@ -29,11 +31,15 @@ const EditProduct = () => {
   const product = useSelector(state => state.productStore.products[productId]);
 
   const [imgDeletion, setImgDeletion] = useState([]);
-  const [galleryImages, setGalleryImages] = useState([
-    ...product.productImages,
-  ]);
 
-  const productImageArr = product.productImages;
+  let productImageArr = [{url: product.image}];
+  if (product.productImages) {
+    product.productImages.forEach(image => {
+      productImageArr.push(image);
+    });
+  }
+
+  const [galleryImages, setGalleryImages] = useState([...productImageArr]);
 
   const validate = () => {
     const errors = [];
@@ -43,6 +49,7 @@ const EditProduct = () => {
     if (!description) errors.push("Please provide a 'Description'");
     if (!category) errors.push("Please select a 'Category'");
     if (!brand) errors.push("Please provide a 'Brand'");
+    if (!image) errors.push("Please provide a 'Image'");
 
     return errors;
   };
@@ -54,6 +61,7 @@ const EditProduct = () => {
       setDescription(product.description);
       setCategory(product.category);
       setBrand(product.brand);
+      setImage(product.image);
       setValid(true);
     }
 
@@ -65,24 +73,36 @@ const EditProduct = () => {
       if (errors.length > 0) return setValidateErrors(errors);
 
       const updatedGalleryImages = galleryImages.filter(
-        (_, id) => !imgDeletion.includes(id)
+        (_, index) => !imgDeletion.includes(index)
       );
       setGalleryImages(updatedGalleryImages);
-      imgDeletion.map(async imageId => {
-        await dispatch(deleteImageThunk(imageId, productId));
+
+      imgDeletion.map(async index => {
+        const imageId = productImageArr[index].id;
+
+        await dispatch(deleteImageThunk(imageId, Number(productId)));
       });
 
       setImgDeletion([]);
       setHasClicked(true);
 
       const updatedProduct = await dispatch(
-        editProductThunk(title, price, description, category, brand, productId)
+        editProductThunk(
+          title,
+          price,
+          description,
+          category,
+          brand,
+          image,
+          productId
+        )
       );
       setTitle('');
       setPrice('');
       setDescription('');
       setCategory('');
       setBrand('');
+      setImage('');
       setValid(false);
       setValidateErrors([]);
 
@@ -113,7 +133,9 @@ const EditProduct = () => {
           {product && (
             <div className="flex flex-row items-center my-5">
               <img
-                src={productImageArr.length > 0 ? productImageArr[0].url : "image"}
+                src={
+                  productImageArr.length > 0 ? productImageArr[0].url : 'image'
+                }
                 alt="product"
                 className="w-[120px] h-[120px] mr-4"></img>
               <div className="sm:line-clamp-4">{product.title}</div>
@@ -193,17 +215,36 @@ const EditProduct = () => {
               value={brand}
               required={true}></input>
           </div>
-          <div className="flex flex-row justify-start items-center my-4">
-            <label className="font-bold text-xl my-1 mr-7">Images</label>
-            <ImageGallery
-              product={product}
-              imgDeletion={imgDeletion}
-              setImgDeletion={setImgDeletion}
-              galleryImages={galleryImages}
-            />
+          <div className="mt-3 flex flex-col border-b">
+            <label className="font-bold text-xl my-1">Main Image</label>
+            <input
+              className="flex self-start mb-6 p-1 text-left border-[2px] rounded-sm"
+              type="url"
+              size="80"
+              maxLength="300"
+              name="image"
+              onChange={e => setImage(e.target.value)}
+              value={image}
+              required={true}></input>
           </div>
 
-          <div className="flex flex-row mt-5 justify-end mb-6 mr-20">
+          <div className="flex flex-col items-center justify-center mt-2">
+            <h3 className="text-2xl font-bold">Images</h3>
+
+            <div className="flex flex-row justify-start items-center my-4">
+              <ImageGallery
+                imgDeletion={imgDeletion}
+                setImgDeletion={setImgDeletion}
+                galleryImages={galleryImages}
+              />
+            </div>
+            <div>
+              {productImageArr.length < 5 ? (
+                <ImageUpload productId={productId} />
+              ) : null}
+            </div>
+          </div>
+          <div className="flex flex-row mt-5 justify-end mb-6 mr-4 sm:mr-20">
             <button
               className="button"
               onClick={e => {

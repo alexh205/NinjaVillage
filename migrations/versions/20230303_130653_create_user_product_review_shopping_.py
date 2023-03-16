@@ -51,6 +51,7 @@ def upgrade():
                     sa.Column('category', sa.String(
                         length=70), nullable=False),
                     sa.Column('brand', sa.String(length=70), nullable=False),
+                     sa.Column('image', sa.String(length=500), nullable=False),
                     sa.Column('quantity', sa.Integer(), nullable=True),
                     sa.Column('owner_id', sa.Integer(), nullable=False),
                     sa.Column('created_date', sa.DateTime(timezone=True),

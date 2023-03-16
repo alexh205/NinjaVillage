@@ -10,7 +10,7 @@ auth_error = "User is not authorized to complete this action"
 
 # * Get Image *****************************************************
 @image_routes.route('/<int:id>')
-def image(id):
+def image_get(id):
     """
     Query for an image by id and returns that review in a dictionary
     """
@@ -25,15 +25,17 @@ def image_delete(id, prodId):
     """
     Delete an image after checking for user ownership
     """
+
     queried_image = Image.query.get_or_404(id)
-    queried_user = User.query.get_or_404(queried_image.owner_id)
     queried_product = Product.query.get_or_404(prodId)
+    queried_user = User.query.get_or_404(queried_image.owner_id)
 
     if queried_user.id != current_user.id:
         return auth_error
     else:
         db.session.delete(queried_image)
         db.session.commit()
+
         return queried_product.to_dict()
 
 # * Create Image *****************************************************
@@ -54,8 +56,7 @@ def image_create():
 
     upload = upload_file_to_s3(image)
 
-    # print('**************************')
-    # print(upload)
+
 
     if "url" not in upload:
         # if the url key doesn't exist in the dictionary
@@ -63,15 +64,13 @@ def image_create():
         return upload, 400
 
     url = upload["url"]
-    # print('**************************')
-    # print(request.form['reviewId'], request.form['productId'])
+
     # form = ImageForm()
     # form['csrf_token'].data = request.cookies['csrf_token']
 
     new_image = Image(owner_id=current_user.get_id(), url=url,
                       review_id=request.form['reviewId'], product_id=request.form['productId'])
-    # print('**************************')
-    # print(new_image.to_dict())
+
     db.session.add(new_image)
     db.session.commit()
 

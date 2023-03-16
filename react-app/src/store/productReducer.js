@@ -58,7 +58,7 @@ export const clearProduct = () => {
 
 // ************************* Product *****************************
 export const createProductThunk =
-  (title, price, description, category, brand) => async dispatch => {
+  (title, price, description, category, brand, image) => async dispatch => {
     const request = await fetch('/api/products/new', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -68,6 +68,7 @@ export const createProductThunk =
         description,
         category,
         brand,
+        image,
       }),
     });
     const response = await request.json();
@@ -78,7 +79,8 @@ export const createProductThunk =
   };
 
 export const editProductThunk =
-  (title, price, description, category, brand, productId) => async dispatch => {
+  (title, price, description, category, brand, image, productId) =>
+  async dispatch => {
     const request = await fetch(`/api/products/${productId}`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
@@ -88,6 +90,7 @@ export const editProductThunk =
         description,
         category,
         brand,
+        image,
       }),
     });
     const response = await request.json();
@@ -120,7 +123,7 @@ export const getProductThunk = prodId => async dispatch => {
   if (request.ok) {
     const data = await request.json();
 
-    dispatch(populateProductData(data));
+    dispatch(addProduct(data));
   }
 };
 
@@ -175,8 +178,9 @@ export const deleteReviewThunk = reviewId => async dispatch => {
 export const deleteImageThunk = (imageId, productId) => async dispatch => {
   const request = await fetch(`/api/images/${imageId}/${productId}`, {
     method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
   });
-
+  console.log('request', request);
   const response = await request.json();
   dispatch(addProduct(response));
 };
