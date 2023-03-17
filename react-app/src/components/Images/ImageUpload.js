@@ -13,7 +13,7 @@ const ImageUpload = ({productId, reviewId}) => {
 
     formData.append('reviewId', reviewId || null);
     formData.append('productId', productId || null);
-    
+
     setImage(null);
 
     const res = await fetch('/api/images/new', {

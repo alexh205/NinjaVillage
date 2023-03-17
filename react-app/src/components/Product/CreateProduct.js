@@ -92,10 +92,7 @@ const CreateProduct = () => {
             </div>
           )}
         </div>
-        <form
-          className="mt-4 mx-10"
-          // onKeyDown={handleKeyPress}
-        >
+        <form className="mt-4 mx-10">
           <div className="mt-3 flex flex-col border-b">
             <label className="font-bold text-xl my-1">Title</label>
             <input

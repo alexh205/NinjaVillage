@@ -56,8 +56,6 @@ def image_create():
 
     upload = upload_file_to_s3(image)
 
-
-
     if "url" not in upload:
         # if the url key doesn't exist in the dictionary
         # it indicates there was an error during the upload
