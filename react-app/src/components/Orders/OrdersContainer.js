@@ -12,7 +12,7 @@ import Footer from "../Footer/Footer";
 const OrdersContainer = () => {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
-ƒ
+
     let userOrders;
     if (user) {
         userOrders = user.ownedCarts.filter(cart => cart.checkedOut === true);
