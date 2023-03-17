@@ -19,6 +19,7 @@ def user(id):
 
 # * Delete User *****************************************************
 
+
 @user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def user_delete(id):

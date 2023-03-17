@@ -189,7 +189,7 @@ def seed_products():
             "description": "Tender Green Asparagus Spears Thin Little Gourmet Salad Toppers Spicy Bloody Mary Recipe Ingredients Healthy Snacks",
             "category": "Groceries",
             "brand": "Lettuce Brand",
-            "image": "https://m.media-amazon.com/images/I/81Yff31G6oS._SL1500_.jpg",
+            "image": "https://images.unsplash.com/photo-1519897831810-a9a01aceccd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2831&q=80",
             "owner_id": 2,
         },
         {
@@ -225,7 +225,7 @@ def seed_products():
             "description": "French Vanilla Cappuccino Mix is a consistent high quality, convenient powder format with a rich, sweet, frothy flavor. Treat yourself to a sweet, aromatic vanilla blended cappuccino blended with rich coffee flavors to create a delectable drink. gives you great flavor, consistent quality, zero waste, less labor and friendly, responsive service.",
             "category": "Groceries",
             "brand": "Cappuccino Company",
-            "image": "https://m.media-amazon.com/images/I/81jRbldvVbL._SL1500_.jp",
+            "image": "https://images.unsplash.com/photo-1516036018940-b0159d2ab461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=999&q=80",
             "owner_id": 3,
         },
         {

@@ -56,7 +56,7 @@ const CheckoutProduct = ({product}) => {
         <div className="flex flex-col mt-2">
           <div className="flex flex-row items-center text-sm ml-1">
             <p className="mr-2">Quantity:</p>
-            
+
             <p className="font-bold text-orange-700">{product.quantity}</p>
           </div>
           <div className="flex flex-row">

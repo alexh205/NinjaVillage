@@ -23,6 +23,7 @@ const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
             onClick={e => {
               e.preventDefault();
               handleDelete(index);
+              alert('Be sure to click submit to save changes!');
             }}
             className={`${
               galleryImages.length === 1
@@ -31,10 +32,10 @@ const ImageGallery = ({galleryImages, imgDeletion, setImgDeletion}) => {
             }`}>
             <span>x</span>
           </button>
-          
+
           <img
             src={image.url}
-            alt={`Image ${image.id}`}
+            alt={`${image.id}`}
             className="w-[180px] h-[180px] object-fit"
           />
         </div>

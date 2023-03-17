@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from '../Header/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {useParams, useHistory} from 'react-router-dom';
@@ -13,7 +13,6 @@ import ImageUpload from '../Images/ImageUpload';
 
 const EditProduct = () => {
   const {productId} = useParams();
-
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -33,13 +32,17 @@ const EditProduct = () => {
   const [imgDeletion, setImgDeletion] = useState([]);
 
   let productImageArr = [{url: product.image}];
+
   if (product.productImages) {
     product.productImages.forEach(image => {
       productImageArr.push(image);
     });
   }
-
   const [galleryImages, setGalleryImages] = useState([...productImageArr]);
+
+  useEffect(() => {
+    setGalleryImages([...productImageArr]);
+  }, [product]);
 
   const validate = () => {
     const errors = [];

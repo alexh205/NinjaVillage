@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
 
+
 class Review(db.Model):
     __tablename__ = 'reviews'
 
@@ -9,19 +10,23 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
-    review= db.Column(db.String(400), nullable=False)
-    rating= db.Column(db.Integer, nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
-    created_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
-
+    review = db.Column(db.String(400), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    created_date = db.Column(db.DateTime(
+        timezone=True), server_default=func.now())
 
     #! Relationships
     reviews_owned = db.relationship("User", back_populates="owned_reviews")
-    reviews_product = db.relationship("Product", back_populates="product_reviews")
-    review_images = db.relationship("Image", back_populates="images_review", cascade="all,delete")
+    reviews_product = db.relationship(
+        "Product", back_populates="product_reviews")
+    review_images = db.relationship(
+        "Image", back_populates="images_review", cascade="all,delete")
 
-    #? Methods
+    # ? Methods
     def to_dict(self):
         return {
             'id': self.id,
