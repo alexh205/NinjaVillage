@@ -323,7 +323,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Yarn]: https://img.shields.io/badge/Yarn-2C8EBB?logo=yarn&logoColor=fff&style=for-the-badge
-[Yarn-url]: https://reactjs.org/](https://yarnpkg.com/
+[Yarn-url]: https://yarnpkg.com/
 [React Router]:https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=fff&style=for-the-badge
 [React Router-url]: https://reactrouter.com/en/main
 [Sequelize]:https://img.shields.io/badge/Sequelize-52B0E7?logo=sequelize&logoColor=fff&style=for-the-badge
