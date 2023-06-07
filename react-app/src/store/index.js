@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './sessionReducer';
 import productReducer from './productReducer';
@@ -12,8 +12,6 @@ const rootReducer = combineReducers({
   cartStore: cartReducer,
   listStore: wishListReducer,
 });
-
-// export const cartTotal = (state) => state.session.activeCart.cartProducts.reduce((total, item) => total + item.price, 0)
 
 let enhancer;
 

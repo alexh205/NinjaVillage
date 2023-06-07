@@ -1,14 +1,14 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {FilteredProd} from '../Product/FilteredProd';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { FilteredProd } from '../Product/FilteredProd';
 import Header from '../Header/Header';
-import {GiRunningNinja} from 'react-icons/gi';
-import {MdOutlineArrowRightAlt} from 'react-icons/md';
+import { GiRunningNinja } from 'react-icons/gi';
+import { MdOutlineArrowRightAlt } from 'react-icons/md';
 import Footer from '../Footer/Footer';
 
 const Filters = () => {
-  const {filterId} = useParams();
+  const { filterId } = useParams();
 
   const products = useSelector(state => state.productStore.products);
 
@@ -25,7 +25,6 @@ const Filters = () => {
     }
     return null;
   });
-  // const randomizedProducts = filteredProd.sort(() => Math.random() - 0.5)
 
   return (
     <>
@@ -42,13 +41,12 @@ const Filters = () => {
         <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5 mb-12">
           {filteredProd?.map((product, i) => (
             <div
-              className={`${
-                !user
+              className={`${!user
                   ? 'w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]'
                   : user.id === product.ownerId
-                  ? 'hidden'
-                  : 'w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]'
-              }`}
+                    ? 'hidden'
+                    : 'w-max-[8vw] h-max-[9vh] w-min-[8vw] h-min-[9vh]'
+                }`}
               key={i}>
               <FilteredProd product={product} user={user} userCart={userCart} />
             </div>
