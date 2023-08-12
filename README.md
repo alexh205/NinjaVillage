@@ -87,7 +87,6 @@
 * [![Yarn Badge][Yarn]][Yarn-url]
 * [![Python][Python]][Python-url]
 * [![Flask][Flask]][Flask-url]
-* [![Sequelize][Sequelize]][Sequelize-url]
 * [![.ENV][.ENV]][.ENV-url]
 * [![Git][Git]][Git-url]
 * [![Github][Github]][Github-url]
