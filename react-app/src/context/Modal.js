@@ -1,9 +1,9 @@
-import React, {useEffect, useContext, createContext, useCallback} from 'react';
-import {useSpring, animated, useTransition} from '@react-spring/web';
+import React, { useEffect, useContext, createContext, useCallback } from 'react';
+import { useSpring, animated, useTransition } from '@react-spring/web';
 
 const ModalContext = createContext();
 
-const Modal = ({children, isOpen, onClose}) => {
+const Modal = ({ children, isOpen, onClose }) => {
   const handleEscape = useCallback(
     e => {
       if (e.keyCode === 27) {
@@ -20,9 +20,9 @@ const Modal = ({children, isOpen, onClose}) => {
   }, [handleEscape]);
 
   const modalTransition = useTransition(isOpen, {
-    from: {opacity: 0},
-    enter: {opacity: 1},
-    leave: {opacity: 1},
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 1 },
     config: {
       duration: 300,
     },
@@ -48,7 +48,7 @@ const Modal = ({children, isOpen, onClose}) => {
               className=""
               onClick={e => e.stopPropagation()}>
               <div className="relative flex flex-col border-solid border-[1px] rounded-md bg-clip-padding p-[0.6rem] bg-white">
-                <ModalContext.Provider value={{onClose}}>
+                <ModalContext.Provider value={{ onClose }}>
                   {children}
                 </ModalContext.Provider>
               </div>
@@ -59,8 +59,8 @@ const Modal = ({children, isOpen, onClose}) => {
   );
 };
 
-const DismissButton = ({children, className}) => {
-  const {onClose} = useContext(ModalContext);
+const DismissButton = ({ children, className }) => {
+  const { onClose } = useContext(ModalContext);
 
   return (
     <button type="button" className={className} onClick={() => onClose()}>
@@ -69,7 +69,7 @@ const DismissButton = ({children, className}) => {
   );
 };
 
-const ModalHeader = ({children}) => {
+const ModalHeader = ({ children }) => {
   return (
     <div className="p-[0.35rem] flex items-center justify-between border-b-[1px] bg-[#f0f2f2]">
       <div className="text-[1.1rem] leading-6">{children}</div>
@@ -80,23 +80,17 @@ const ModalHeader = ({children}) => {
   );
 };
 
-const ModalBody = ({children}) => {
+const ModalBody = ({ children }) => {
   return (
     <div className="p-p-[0.35rem]">
       <div className="">{children}</div>
     </div>
   );
 };
-// const ModalFooter = ({ children }) => {
-//     return (
-//         <div className="p-p-[0.35rem] flex justify-end ">
-//             <div className="">{children}</div>
-//         </div>
-//     );
-// };
+
 Modal.Header = ModalHeader;
 Modal.Body = ModalBody;
-// Modal.Footer = ModalFooter;
+
 Modal.DismissButton = DismissButton;
 
 export default Modal;

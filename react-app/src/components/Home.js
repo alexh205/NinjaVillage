@@ -1,17 +1,15 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import Header from './Header/Header';
 import ProductFeed from './Product/ProductFeed';
 import Banner from './Banner/Banner';
 import Footer from './Footer/Footer';
-import {GiRunningNinja} from 'react-icons/gi';
+import { GiRunningNinja } from 'react-icons/gi';
 
 const Home = () => {
   const products = useSelector(state => state.productStore.products);
   const currentUser = useSelector(state => state.session.user);
   const cartArr = useSelector(state => state.cartStore.addedItems);
-
-  // const randomizedProducts = Object.values(products).sort(() => Math.random() - 0.5).slice(0, 15)
 
   return (
     <div>
